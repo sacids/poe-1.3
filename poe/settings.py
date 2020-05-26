@@ -40,13 +40,13 @@ INSTALLED_APPS = [
 
 
 
-    #custom apps
-    'config',
-    'dashboard',
-    'screening',
-    'secondary_screening',
-    'travellers',
-    'user_management'
+    # custom apps
+    'modules.config',
+    'modules.dashboard',
+    'modules.screening',
+    'modules.secondary_screening',
+    'modules.travellers',
+    'modules.user_management'
 ]
 
 MIDDLEWARE = [

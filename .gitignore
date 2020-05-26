@@ -119,3 +119,6 @@ dmypy.json
 .idea
 .vscode
 
+makemigrations
+migrate
+run

@@ -1,3 +1,5 @@
 {% for module in modules %}
     <p> Sample </p>
 {% endfor %}
+
+<p>User: {{ request.user.is_authenticated }}</p>

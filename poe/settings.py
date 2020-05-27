@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     #installed libraries
     'crispy_forms',
     'phone_field',
-    'formtools'
+    #'formtools'
 
     # custom apps
     'modules.config',
@@ -50,7 +50,8 @@ INSTALLED_APPS = [
     'modules.screening',
     'modules.secondary_screening',
     'modules.travellers',
-    'modules.user_management'
+    'modules.user_management',
+    'modules.common'
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'

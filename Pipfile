@@ -13,6 +13,8 @@ python-decouple = "*"
 psycopg2-binary = "*"
 django-formtools = "*"
 django-inplaceedit = "*"
+django-crispy-forms = "*"
+django-phone-field = "*"
 
 [requires]
 python_version = "3.8"

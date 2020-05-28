@@ -1,10 +1,14 @@
 from django.shortcuts import render
-from modules.common.views import ModulesView
+from django.core import serializers
+from modules.common.models import Module_Link, Module
+from modules.common.views import *
 
 
 def dashboard(request):
-    ModulesView
+
+
     ctx = {
-        "name": "Lawrance"
+        "modules"        : get_sidebar()
     }
+
     return render(request, 'dashboard.html', ctx)

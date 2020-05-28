@@ -1,5 +1,18 @@
+
 {% for module in modules %}
-    <p> Sample </p>
+    <div class="item text-center" sid="m_{{module.id}}">
+        {% if module.child == 0 %}
+        <a class="" href="{{module.link}}">
+            <i class="material-icons">{{module.icon}}</i><br>
+            <span>{{module.title}}</span>
+        </a>
+        {% else %}
+        <span class="" u="{{module.link}}">
+            <i class="material-icons">{{module.icon}}</i><br>
+            <span>{{module.title}}</span>
+        </span>
+        {% endif %}
+    </div>
 {% endfor %}
 
-<p>User: {{ request.user.is_authenticated }}</p>
+

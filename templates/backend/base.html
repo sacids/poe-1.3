@@ -11,8 +11,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" rel="stylesheet">
 
-    <link rel="stylesheet" href="http://poe.local/assets/db_exp/css/db_exp.css" >
-    <link rel="stylesheet" href="http://poe.local/assets/admin/css/admin.css" >
+    <link rel="stylesheet" href="{% static 'css/admin.css' %}" >
     <title>Ministry of Health - Point of Entries {% block title %}{% endblock %}</title>
 
     <!-- Favicon -->
@@ -30,7 +29,7 @@
     <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" ></script>
 
     
-    <script src="{% static 'js/admin.js' }%" ></script>
+    <script src="{% static 'js/admin.js' %}" ></script>
     <!--highcharts -->
     {% block highcharts_js %}{% endblock %}
 
@@ -40,18 +39,14 @@
     <div class="logo text-center">
         <img src="{% static 'img/logo.png' %}" class="court" style="width: 55px;">
     </div>
-    <div class="item text-center" sid="m_0">
-        <a class="link" u="admin/dashboard">
-            <i class="material-icons">dashboard</i><br>
-            <span>Dashboard</span>
-        </a>
-    </div>
     {% include 'backend/sidebar.html' %}
 </div>
+{% include 'backend/sidemenu.html' %}
 
-<div class="subMenu" id="m_1">
+
+<!-- Sub menu block -->
     {% block sub_menu %}{% endblock %}
-</div>
+<!-- /Sub menu block-->
 
 
 <div class="mobile-menu">
@@ -86,7 +81,7 @@
 </div>
 
 <!-- Footer -->
-<footer class="page-footer font-small blue pt-4 border-top bottom-0">
+<footer class="page-footer font-small blue border-top bottom-0">
   <!-- Copyright -->
   <div class="footer-copyright text-center py-3">Acknowledgment:
     <a href="https://www.moh.or.tz"> www.moh.or.tz</a> |

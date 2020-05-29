@@ -1,18 +1,39 @@
-
-{% for module in modules %}
-    <div class="item text-center" sid="m_{{module.id}}">
-        {% if module.child == 0 %}
-        <a class="" href="{{module.link}}">
-            <i class="material-icons">{{module.icon}}</i><br>
-            <span>{{module.title}}</span>
-        </a>
-        {% else %}
-        <span class="" u="{{module.link}}">
-            <i class="material-icons">{{module.icon}}</i><br>
-            <span>{{module.title}}</span>
-        </span>
-        {% endif %}
+{% load static %}
+<div class="sidebar">
+    <div class="logo text-center">
+        <img src="{% static 'img/logo.png' %}" class="court" style="width: 55px;">
     </div>
-{% endfor %}
+    {% for module in modules %}
+        <div class="item text-center" sid="m_{{module.id}}">
+            {% if module.child == 0 %}
+            <a class="" href="{{module.link}}">
+                <i class="material-icons">{{module.icon}}</i><br>
+                <span>{{module.title}}</span>
+            </a>
+            {% else %}
+            <span class="" u="{{module.link}}">
+                <i class="material-icons">{{module.icon}}</i><br>
+                <span>{{module.title}}</span>
+            </span>
+            {% endif %}
+        </div>
+    {% endfor %}
+</div>
+<div>
+    {% for module in modules %}
+        {% if module.child != 0 %}
+        <div class="subMenu" id="m_{{module.id}}" >
+            <div>
+                <strong class="subMenu-title">{{module.title}}</strong> 
+                <i class="material-icons closeSM">close</i>
+            </div>
+            {% for v in module.child %}
+                <div class="link" u="{{v.link}}"> {{v.title}}</div>
+            {% endfor %}
+        </div>
+        {% endif %}
+    {% endfor %}
+</div>
+
 
 

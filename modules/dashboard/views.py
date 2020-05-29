@@ -8,7 +8,8 @@ def dashboard(request):
 
 
     ctx = {
-        "modules"        : get_sidebar()
+        "modules"       : get_sidebar(),
+        "sidebar"       : True        
     }
 
     return render(request, 'dashboard.html', ctx)

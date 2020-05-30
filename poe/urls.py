@@ -15,8 +15,18 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include("modules.dashboard.urls")),
+    path('dashboard/', include("modules.dashboard.urls")),
+    path('', include("modules.travellers.urls")),
 ]
+
+urlpatterns += staticfiles_urlpatterns()
+
+admin.site.site_header = 'Point of Entries Admin'
+admin.site.site_title = 'Point of Entries Admin'
+admin.site.index_title = 'Welcome to POE Admin Panel'
+

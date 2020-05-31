@@ -54,6 +54,7 @@
         let age = document.getElementById("age").value;
         let sex = document.getElementById("sex").value;
         let nationality = document.getElementById("nationality").value;
+        let passportNo = document.getElementById("passport_number").value;
         let transportMeans = document.getElementById("transport_means").value;
         let transport_name = document.getElementById("transport_name").value;
         let arrivalDate = document.getElementById("arrival_date").value;
@@ -71,13 +72,6 @@
 
         let symptoms = document.getElementsByName("symptoms[]");
 
-        //check for different form_type
-        if (form_type === 'INTERNATIONAL') {
-            let passportNo = document.getElementById("passport_number").value;
-        } else if (form_type === 'DOMESTIC') {
-            let idType = document.getElementById("id_type").value;
-            let identificationNo = document.getElementById("identification_number").value;
-        }
         //validate per current tab
         //tab 1 validation
         if (currentTab === 0) {

@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "4d312505c41f10e6bf5d23deb1fc8a2144195b5e26c8274a62d2dd56b997c0df"
+            "sha256": "5b0b70d873b15dc28b991bb1899750c2e7e979ceb34676974ae02f45770dd924"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -53,14 +53,6 @@
                 "sha256:864ba614fa42a749fde0079eee1a31525ed68ffa82d683fd933d179e71b12f6d"
             ],
             "version": "==3.0.2"
-        },
-        "django-formtools": {
-            "hashes": [
-                "sha256:304fa777b8ef9e0693ce7833f885cb89ba46b0e46fc23b01176900a93f46742f",
-                "sha256:c5272c03c1cd51b2375abf7397a199a3148a9fbbf2f100e186467a84025d13b2"
-            ],
-            "index": "pypi",
-            "version": "==2.2"
         },
         "django-inplaceedit": {
             "hashes": [

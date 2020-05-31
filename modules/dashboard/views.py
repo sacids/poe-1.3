@@ -5,11 +5,9 @@ from modules.common.views import *
 
 
 def dashboard(request):
-
-
     ctx = {
-        "modules"       : get_sidebar(),
-        "sidebar"       : True        
+        "modules": get_sidebar(),
+        "sidebar": True
     }
 
     return render(request, 'dashboard.html', ctx)

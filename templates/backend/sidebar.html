@@ -4,16 +4,16 @@
         <img src="{% static 'img/logo.png' %}" class="court" style="width: 55px;">
     </div>
     {% for module in modules %}
-        <div class="item text-center" sid="m_{{module.id}}">
+        <div class="item text-center" sid="m_{{ module.id }}">
             {% if module.child == 0 %}
-            <a class="" href="{{module.link}}">
-                <i class="material-icons">{{module.icon}}</i><br>
-                <span>{{module.title}}</span>
-            </a>
+                <a class="" href="{{ module.link }}">
+                    <i class="material-icons">{{ module.icon }}</i><br>
+                    <span>{{ module.title }}</span>
+                </a>
             {% else %}
-            <span class="" u="{{module.link}}">
-                <i class="material-icons">{{module.icon}}</i><br>
-                <span>{{module.title}}</span>
+                <span class="" u="{{ module.link }}">
+                <i class="material-icons">{{ module.icon }}</i><br>
+                <span>{{ module.title }}</span>
             </span>
             {% endif %}
         </div>
@@ -22,15 +22,15 @@
 <div>
     {% for module in modules %}
         {% if module.child != 0 %}
-        <div class="subMenu" id="m_{{module.id}}" >
-            <div>
-                <strong class="subMenu-title">{{module.title}}</strong> 
-                <i class="material-icons closeSM">close</i>
+            <div class="subMenu" id="m_{{ module.id }}">
+                <div>
+                    <strong class="subMenu-title">{{ module.title }}</strong>
+                    <i class="material-icons closeSM">close</i>
+                </div>
+                {% for v in module.child %}
+                    <div class="link" u="{{ v.link }}"> {{ v.title }}</div>
+                {% endfor %}
             </div>
-            {% for v in module.child %}
-                <div class="link" u="{{v.link}}"> {{v.title}}</div>
-            {% endfor %}
-        </div>
         {% endif %}
     {% endfor %}
 </div>

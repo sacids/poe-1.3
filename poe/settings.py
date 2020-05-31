@@ -42,7 +42,6 @@ INSTALLED_APPS = [
     #installed libraries
     'crispy_forms',
     'phone_field',
-    #'formtools'
 
     # custom apps
     'modules.config',

@@ -2,7 +2,7 @@ from django.shortcuts import render
 
 
 # Create your views here.
-def index(request):
+def default(request):
     return render(request, 'travellers/home.html', {})
 
 

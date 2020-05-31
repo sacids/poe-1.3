@@ -31,3 +31,5 @@ class Module_Link(models.Model):
     @staticmethod
     def get_links(id):
         return Module_Link.objects.filter(module_id=id)
+
+    #travellers models

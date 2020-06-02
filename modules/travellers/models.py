@@ -49,9 +49,6 @@ class Disease(models.Model):
     class Meta:
         db_table = "et_diseases"
 
-    def __str__(self):
-        return self.title
-
 
 # symptoms
 class Symptom(models.Model):
@@ -60,9 +57,6 @@ class Symptom(models.Model):
 
     class Meta:
         db_table = "et_symptoms"
-
-    def __str__(self):
-        return self.title
 
 
 class DiseaseSymptom(models.Model):
@@ -82,9 +76,6 @@ class Location(models.Model):
 
     class Meta:
         db_table = "et_locations"
-
-    def __str__(self):
-        return self.title
 
 
 class LocationDisease(models.Model):
@@ -106,9 +97,6 @@ class PointOfEntry(models.Model):
     class Meta:
         db_table = "et_point_of_entries"
 
-    def __str__(self):
-        return self.title
-
 
 # travellers
 class Traveller(BaseModel):
@@ -120,12 +108,10 @@ class Traveller(BaseModel):
     id_number = models.CharField(max_length=50)
     employment = models.CharField(choices=EMPLOYMENT, max_length=45, default='none')
     other_employment = models.CharField(max_length=255)
+    created_at = models.DateTimeField('created_date')
 
-    class Meta(BaseModel):
+    class Meta:
         db_table = "et_travellers"
-
-    def __str__(self):
-        return self.full_name
 
 
 # traveller POE

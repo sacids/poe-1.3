@@ -108,56 +108,39 @@ class Traveller(BaseModel):
     id_number = models.CharField(max_length=50)
     employment = models.CharField(choices=EMPLOYMENT, max_length=45, default='none')
     other_employment = models.CharField(max_length=255)
-    created_at = models.DateTimeField('created_date')
 
-    class Meta:
-        db_table = "et_travellers"
-
-
-# traveller POE
-class TravellerEntry(models.Model):
-    traveller_id = models.ForeignKey(Traveller, on_delete=models.CASCADE)
     mode_of_transport = models.CharField(choices=TRANSPORT_MODE, max_length=30, default='none')
     name_of_transport = models.CharField(max_length=30)
     seat_no = models.CharField(max_length=30)
     arrival_date = models.DateField(verbose_name="Arrival Date")
     point_of_entry = models.ForeignKey(PointOfEntry, on_delete=models.DO_NOTHING)
 
-    class Meta:
-        db_table = "et_traveller_entries"
-
-
-# Traveller visiting purpose
-class TravellerVisitingPurpose(models.Model):
-    traveller_id = models.ForeignKey(Traveller, on_delete=models.CASCADE)
-    purpose = models.CharField(choices=PURPOSE, max_length=45, default='none')  # to look around
-    other = models.TextField()
+    visiting_purpose = models.CharField(choices=PURPOSE, max_length=45, default='none')  # to look around
+    other_purpose = models.TextField()
     duration_of_stay = models.PositiveIntegerField()
     location_origin = models.ForeignKey(Location, on_delete=models.DO_NOTHING)
 
-    class Meta:
-        db_table = "et_traveller_visiting_purposes"
-
-
-# Travellers Contacts
-class TravellerContact(models.Model):
-    traveller_id = models.ForeignKey(Traveller, on_delete=models.CASCADE)
     physical_address = models.TextField()
     hotel_name = models.CharField(max_length=255)
-    region_id = models.PositiveIntegerField()  # to look around
+    region_id = models.PositiveIntegerField  # to look around
     district_id = models.PositiveIntegerField  # to look around
     street_or_ward = models.CharField(max_length=255)  # to look around
-    phone_number = PhoneField(null=True, help_text='Contact Phone Number')
-    email_address = models.EmailField(max_length=255)
+    phone = PhoneField(null=True, help_text='Contact Phone Number')
+    email = models.EmailField(max_length=255)
+
+    temp = models.IntegerField()
+    score = models.PositiveIntegerField
+    action_taken = models.CharField(max_length=50)
+    created_at = models.DateTimeField('created_date')
 
     class Meta:
-        db_table = "et_traveller_contacts"
+        db_table = "et_travellers"
 
 
 # Traveller visited area
 class TravellerVisitedArea(models.Model):
-    traveller_id = models.ForeignKey(Traveller, on_delete=models.CASCADE)
-    location_id = models.ForeignKey(Location, on_delete=models.DO_NOTHING)  # to look around
+    traveller = models.ForeignKey(Traveller, on_delete=models.CASCADE)
+    location = models.ForeignKey(Location, on_delete=models.DO_NOTHING)  # to look around
     location_visited = models.CharField(max_length=250)
     date = models.DateField(verbose_name="Date")
     days = models.PositiveIntegerField()
@@ -168,24 +151,12 @@ class TravellerVisitedArea(models.Model):
 
 # Traveller symptoms
 class TravellerSymptoms(models.Model):
-    traveller_id = models.ForeignKey(Traveller, on_delete=models.CASCADE)
-    symptoms = models.CharField(max_length=50)
-    other = models.TextField()
+    traveller = models.ForeignKey(Traveller, on_delete=models.CASCADE)
+    symptom = models.CharField(max_length=50)
 
     class Meta:
         db_table = "et_traveller_symptoms"
 
-
-# Traveller scores
-class TravellerScore(models.Model):
-    traveller_id = models.ForeignKey(Traveller, on_delete=models.CASCADE)
-    before_temp = models.PositiveIntegerField()
-    temp = models.IntegerField()
-    after_temp = models.PositiveIntegerField
-    action_taken = models.CharField(max_length=50)
-
-    class Meta:
-        db_table = "et_traveller_scores"
 
 # todo:secondary screening
 

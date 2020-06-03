@@ -1,13 +1,13 @@
 from django.contrib import admin
-# from .models import InternationalTraveller, InternationalTravellerExt, TravellerSymptomI
-#
-#
-# @admin.register(InternationalTraveller)
-# class TravellerAdmin(admin.ModelAdmin):
-#     list_display = ('full_name', 'passport_no', 'vehicle_flight_vehicle', 'nationality', 'point_of_entry')
-#     search_fields = ('full_name', 'passport_no')
-#
-#
+from .models import Traveller
+
+
+@admin.register(Traveller)
+class TravellerAdmin(admin.ModelAdmin):
+    list_display = ('full_name', 'type', 'sex')
+    search_fields = ('full_name', 'passport_no')
+
+
 # @admin.register(InternationalTravellerExt)
 # class TravellerExtAdmin(admin.ModelAdmin):
 #     list_display = ('international_traveller', 'country', 'location_visited', 'date', 'days')

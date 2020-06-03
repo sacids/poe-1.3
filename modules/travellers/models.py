@@ -147,7 +147,7 @@ class TravellerContact(models.Model):
     email_address = models.EmailField(max_length=255)
 
     class Meta:
-        db_table = "et_travellers"
+        db_table = "et_traveller_contacts"
 
 
 # Traveller visited area

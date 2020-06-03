@@ -43,9 +43,6 @@ class Disease(models.Model):
     class Meta:
         db_table = "et_diseases"
 
-    def __str__(self):
-        return self.title
-
 
 # symptoms
 class Symptom(models.Model):
@@ -54,9 +51,6 @@ class Symptom(models.Model):
 
     class Meta:
         db_table = "et_symptoms"
-
-    def __str__(self):
-        return self.title
 
 
 class DiseaseSymptom(models.Model):
@@ -77,9 +71,6 @@ class Location(models.Model):
     class Meta:
         db_table = "et_locations"
 
-    def __str__(self):
-        return self.title
-
 
 class LocationDisease(models.Model):
     location_id = models.ForeignKey(Location, on_delete=models.PROTECT)
@@ -99,9 +90,6 @@ class PointOfEntry(models.Model):
 
     class Meta:
         db_table = "et_point_of_entries"
-
-    def __str__(self):
-        return self.title
 
 
 # travellers
@@ -159,7 +147,7 @@ class TravellerContact(models.Model):
     email_address = models.EmailField(max_length=255)
 
     class Meta:
-        db_table = "et_traveller_contacts"
+        db_table = "et_travellers"
 
 
 # Traveller visited area

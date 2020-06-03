@@ -14,6 +14,7 @@ psycopg2-binary = "*"
 django-inplaceedit = "*"
 django-crispy-forms = "*"
 django-phone-field = "*"
+django-formtools = "*"
 
 [requires]
 python_version = "3.8"

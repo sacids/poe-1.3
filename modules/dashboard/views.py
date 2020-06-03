@@ -1,7 +1,5 @@
 from django.shortcuts import render
-from django.core import serializers
-from modules.common.models import Module_Link, Module
-from modules.common.views import *
+from modules.common.views import get_sidebar, get_module_links
 
 
 def dashboard(request):

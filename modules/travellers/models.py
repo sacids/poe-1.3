@@ -10,6 +10,10 @@ SEX = (
     ('male', "MALE"),
     ('female', "FEMALE"),
 )
+ACTIVE = (
+    ('True', "1"),
+    ('False', "0"),
+)
 ID_TYPE = (
     ('passport-number', "PASSPORT NUMBER"),
     ('national-id', "NATIONAL ID"),
@@ -71,6 +75,16 @@ class Location(models.Model):
     class Meta:
         db_table = "et_locations"
 
+class ScreenCriteria(models.Model):
+    disease     = models.ForeignKey(Disease,on_delete=models.PROTECT)
+    countries   = models.CharField(max_length=250)
+    symptoms    = models.CharField(max_length=250)
+    temp        = models.CharField(max_length=250)
+    active      = models.CharField(choices=ACTIVE, max_length=1, default='0')
+
+    class Meta:
+        db_table = "et_ss_criteria"
+
 
 class LocationDisease(models.Model):
     location = models.ForeignKey(Location, on_delete=models.PROTECT)
@@ -121,8 +135,8 @@ class Traveller(BaseModel):
     phone = PhoneField(null=True, help_text='Contact Phone Number')
     email = models.EmailField(max_length=255)
 
-    temp = models.IntegerField()
-    score = models.FloatField
+    temp = models.FloatField()
+    disease_to_screen = models.CharField(max_length=150, default='0')
     action_taken = models.CharField(max_length=100)
     updated_at = models.DateTimeField("Updated At Date")
 
@@ -131,6 +145,9 @@ class Traveller(BaseModel):
 
     def __str__(self):
         return self.full_name
+    
+    def natural_key(self):
+        return self.my_natural_key
 
 
 # Traveller visited area

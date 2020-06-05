@@ -1,0 +1,30 @@
+{% extends 'backend/base.html' %}
+
+{% block content %}
+    <table id="example" class="display" style="width:100%">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>ID Number</th>
+                <th>Flight Number</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for traveller in travellers %}
+            <tr>
+                <td>{{traveller.full_name}}</td>
+                <td>{{traveller.id_number}}</td>
+                <td>{{traveller.name_of_transport}}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+
+<script type="text/javascript" language="javascript" class="init">
+    $(document).ready(function() {
+        $('#example').DataTable();
+    } );
+ </script>
+{% endblock %}

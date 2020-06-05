@@ -6,7 +6,7 @@ class Module(models.Model):
     title = models.CharField(max_length=100)
     icon = models.CharField(max_length=30)
     link = models.CharField(max_length=150)
-    perms = models.TextField(default='')
+    #perms = models.TextField(default='')
 
     class Meta:
         db_table = "et_modules"
@@ -21,7 +21,7 @@ class Module_Link(models.Model):
     title = models.CharField(max_length=100)
     icon = models.CharField(max_length=30)
     link = models.CharField(max_length=150)
-    perms = models.TextField(default='')
+    #perms = models.TextField(default='')
 
     class Meta:
         db_table = "et_module_links"

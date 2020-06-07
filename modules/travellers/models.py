@@ -11,8 +11,8 @@ SEX = (
     ('female', "FEMALE"),
 )
 ACTIVE = (
-    ('True', "1"),
-    ('False', "0"),
+    ('1', "1"),
+    ('0', "0"),
 )
 ID_TYPE = (
     ('passport-number', "PASSPORT NUMBER"),
@@ -46,6 +46,10 @@ class Disease(models.Model):
 
     class Meta:
         db_table = "et_diseases"
+    
+
+    def __str__(self):
+        return self.title
 
 
 # symptoms
@@ -55,6 +59,9 @@ class Symptom(models.Model):
 
     class Meta:
         db_table = "et_symptoms"
+    
+    def __str__(self):
+        return self.title
 
 
 class DiseaseSymptom(models.Model):
@@ -74,6 +81,9 @@ class Location(models.Model):
 
     class Meta:
         db_table = "et_locations"
+
+    def __str__(self):
+        return self.title
 
 class ScreenCriteria(models.Model):
     disease     = models.ForeignKey(Disease,on_delete=models.PROTECT)
@@ -103,6 +113,9 @@ class PointOfEntry(models.Model):
 
     class Meta:
         db_table = "et_point_of_entries"
+
+    def __str__(self):
+        return self.title
 
 
 # travellers
@@ -159,6 +172,10 @@ class TravellerVisitedArea(models.Model):
 
     class Meta:
         db_table = "et_traveller_visited_areas"
+    
+
+    def __str__(self):
+        return self.location
 
 
 # Traveller symptoms

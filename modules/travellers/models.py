@@ -146,13 +146,12 @@ class Traveller(BaseModel):
     def __str__(self):
         return self.full_name
     
-    def natural_key(self):
-        return self.my_natural_key
+    
 
 
 # Traveller visited area
 class TravellerVisitedArea(models.Model):
-    traveller = models.ForeignKey(Traveller, on_delete=models.PROTECT)
+    traveller = models.ForeignKey(Traveller, on_delete=models.PROTECT, related_name="traveller_visits")
     location = models.ForeignKey(Location, on_delete=models.DO_NOTHING)
     location_visited = models.CharField(max_length=250)
     date = models.DateField(verbose_name="Date")
@@ -164,7 +163,7 @@ class TravellerVisitedArea(models.Model):
 
 # Traveller symptoms
 class TravellerSymptoms(models.Model):
-    traveller = models.ForeignKey(Traveller, on_delete=models.PROTECT)
+    traveller = models.ForeignKey(Traveller, on_delete=models.PROTECT, related_name="travellers_symptoms")
     symptom = models.ForeignKey(Symptom, on_delete=models.DO_NOTHING)
 
     class Meta:

@@ -4,5 +4,5 @@ from .views import *
 
 urlpatterns = [
     path('', screen, name='screen'),
-    re_path(r'^$', travellers_asJson, name='ajax_url')
+    path('set_temp', set_temp, name='set_temp')
 ]

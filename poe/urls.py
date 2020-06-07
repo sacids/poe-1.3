@@ -22,6 +22,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('dashboard/', include("modules.dashboard.urls")),
     path('screen/', include("modules.screening.urls")),
+    path('screen/', include("modules.screening.urls")),
     path('', include("modules.travellers.urls")),
 ]
 

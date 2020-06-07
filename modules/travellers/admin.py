@@ -1,9 +1,11 @@
 from django.contrib import admin
-from .models import Traveller, Location, PointOfEntry
+from .models import Traveller, Location, PointOfEntry, TravellerVisitedArea, TravellerSymptoms
 
 
 admin.site.register(Location)
 admin.site.register(PointOfEntry)
+admin.site.register(TravellerVisitedArea)
+admin.site.register(TravellerSymptoms)
 
 @admin.register(Traveller)
 class TravellerAdmin(admin.ModelAdmin):

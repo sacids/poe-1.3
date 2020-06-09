@@ -86,8 +86,15 @@
 
             $('#full_name').html($('#'+row_id+' .full_name').html());
             $('#id_number').html($('#'+row_id+' .id_number').html());
-            $('#location_origin_title').html($('#'+row_id+' .location_origin_title').html());
-            $('#name_of_transport').html($('#'+row_id+' .name_of_transport').html());
+            $('#location_origin_title').html($('#'+row_id+' .location_origin_title').text());
+            $('#name_of_transport').html($('#'+row_id+' .name_of_transport').text());
+
+            var l   = $('#'+row_id+' .location_origin_title').clone();
+            l.show();
+            var l_text  = l.html();
+            l.remove();
+            $('#location_origin_title').html(l_text);
+            
 
             // set temperature
             var temp    = $('#'+row_id+' .temp').html();

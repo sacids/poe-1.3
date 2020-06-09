@@ -8,6 +8,10 @@ ANSWER = (
     ('unknown', "Unknown"),
 )
 
+QN_CAT = (
+    ('MC',"Multiple Choice"),
+    ('FF',"Free Form"),
+)
 
 # decisions
 class Decision(models.Model):
@@ -72,3 +76,26 @@ class TravellerRiskFactor(models.Model):
 
     class Meta:
         db_table = "ss_traveller_risk_factors"
+
+class DiseaseSurveyQns(models.Model):
+    disease         = models.ForeignKey(Disease, on_delete=models.CASCADE)
+    title           = models.TextField()
+    category        = models.CharField(choices=QN_CAT, max_length=50, default='MC')
+
+    class Meta:
+        db_table = "ss_disease_survey_qns"
+
+    def __str__(self):
+        return self.title
+
+class DiseaseSurveyAns(models.Model):
+    disease         = models.ForeignKey(Disease, on_delete=models.CASCADE)
+    traveller       = models.ForeignKey(Traveller, on_delete=models.CASCADE)
+    question        = models.ForeignKey(DiseaseSurveyQns, on_delete=models.CASCADE)
+    title           = models.TextField()
+
+    class Meta:
+        db_table = "ss_disease_survey_ans"
+
+    def __str__(self):
+        return self.title

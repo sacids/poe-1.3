@@ -1,490 +1,156 @@
-body {
-    margin: 0;
-    font-family: "Open Sans", sans-serif;
-    background-color: #fbfbfb;
-    font-size: 0.85em;
-}
+/* Style the navbar */
+  #navbar {
+    overflow: hidden;
+    position: relative;
+    z-index: 3;
+  }
+  #topbar{
+      font-size: 0.8em;
+      padding: 3px 0 3px 20px;
+      color: #999;
+  }
 
-.logo {
-    margin-bottom: 10px;
-}
+  #openNav{
+      font-size: 2em;
+      padding: 20px 30px 20px 30px;
+  }
+  #openNav span{
+      cursor: pointer;
+  }
+  .nav-icons{
+      font-size: 1.1em;
+      display: inline-block;
+      border-radius: 60px;
+      box-shadow: 0px 0px 2px #888;
+      padding: 0.4em 0.7em;
+      margin-right: 10px;
+      color: #999;
+  }
 
-/*=====================================
-Sidebar
-==================================== */
-.sidebar {
-    margin: 0;
-    padding: 10px 0px 10px 0px;
-    width: 88px;
-    background-color: rgb(30, 61, 42);
-    position: fixed;
-    height: 100%;
-    overflow: auto;
-    z-index: 100000;
-    font-size: 0.75rem;
-    letter-spacing: .025em;
-    line-height: 1.3;
-    color: antiquewhite;
-}
-
-.subMenu {
-    width: 250px;
-    height: calc(100vh - 110px);
-    background-color: #28362f;
-    position: fixed;
-    margin-left: -250px;
-    z-index: 90000;
-
-    font-size: 0.85rem;
-    letter-spacing: .025em;
-    color: #fff;
-}
-
-.subMenu-title {
-    color: #fff;
+  /* Navbar links */
+  #navbar a {
+    float: left;
     display: block;
-    font-size: 1.5rem;
-    font-weight: 600;
-    padding: 20px 0px 10px 15px;
-}
+    text-align: center;
+    text-decoration: none;
+  }
 
-.subMenu .link {
-    cursor: pointer;
-    padding: 5px 15px;
-}
+  /* Page content */
+  .content {
+    padding: 16px;
+    height: 130vh;
+  }
 
-.closeSM {
-    padding: 30px 20px;
-    position: absolute;
-    right: 0;
+  /* The sticky class is added to the navbar with JS when it reaches its scroll position */
+  .sticky {
+    position: fixed !important;
     top: 0;
-}
+    width: 100%;
+    -webkit-box-shadow: 0 3px 25px 0 rgba(47, 56, 68, 0.22);
+      -moz-box-shadow: 0 3px 25px 0 rgba(47, 56, 68, 0.22);
+      box-shadow: 0 3px 25px 0 rgba(47, 56, 68, 0.22);
+  }
 
-.sidebar .item {
-    display: block;
-    color: #cacaca;
-    padding: 12px;
+  /* Add some top padding to the page content to prevent sudden quick movement (as the navigation bar gets a new position at the top of the page (position:fixed and top:0) */
+  .sticky + .content {
+    padding-top: 60px;
+  }
+
+  .site-search {
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100px;
+      transition: .3s;
+      background-color: #fff;
+      opacity: 0;
+      visibility: hidden;
+      z-index: 10;
+  }
+  .site-search.search-visible {
+      opacity: 1;
+      visibility: visible;
+  }
+  .site-search > input {
+      display: block;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      padding-right: 120px;
+      padding-left: 30px;
+      border: 0;
+      background-color: #fff;
+      color: #606975;
+      font-size: 16px;
+  }
+  .site-search .search-tools {
+      position: absolute;
+      top: 50%;
+      right: 30px;
+      margin-top: -20px;
+      z-index: 5;
+  }
+
+  .dataTables_filter, .dataTables_info { 
+    display: none; 
+  }
+
+
+
+
+
+  /* The side navigation menu */
+  .sidenav {
+    height: 100%; /* 100% Full-height */
+    width: 0; /* 0 width - change this with JavaScript */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Stay on top */
+    top: 0; /* Stay at the top */
+    left: 0;
+    background-color: #203B25;/* green*/
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 60px; /* Place content 60px from the top */
+    transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+  }
+
+  .sidenav > div{
+      border-bottom: 1px solid #3C5E42;
+  }
+
+  /* The navigation menu links */
+  .sidenav a {
+    padding: 15px 15px 15px 32px;
     text-decoration: none;
-    cursor: pointer;
-}
-
-.sidebar .item:hover {
-    background-color: #374c42;
-}
-
-.item a, .item a:link, .item a:visited, .item a:hover, .item a:active {
-    color: #cacaca;
-    text-decoration: none;
-}
-
-.subMenu .link:hover {
-    background-color: #374c42;
-}
-
-.sidebar .item .active {
-    background-color: #4CAF50;
-    color: #fbfbfb;
-}
-
-/*Mobile Menu*/
-.mobile-menu,
-.mobile-nav-menu {
-    display: none;
-}
-
-@media (max-width: 991px) {
-    .sidebar {
-        display: none;
-    }
-
-    .mobile-menu {
-        display: block;
-        padding-right: 0;
-        width: 100%;
-        background: #088c4a;
-    }
-}
-
-div.content {
-    margin-left: 88px;
-    padding: 1px 16px;
-    min-height: calc(100vh - 53px);
-}
-
-footerx {
-    margin-left: 88px;
-}
-
-.header {
-    margin-left: 88px;
-    height: 65px;
-    padding: 1px 16px;
-}
-
-@media screen and (max-width: 700px) {
-    .sidebar {
-        width: 100%;
-        height: auto;
-        position: relative;
-    }
-
-    .sidebar .item {
-        float: left;
-    }
-
-    div.content {
-        margin-left: 0;
-    }
-}
-
-@media screen and (max-width: 400px) {
-    .sidebar .item {
-        text-align: center;
-        float: none;
-    }
-}
-
-.dbx_wrapper {
-    margin-bottom: 1.5rem;
-}
-
-.item_manage .tab-item {
-    margin-left: 18px;
-    border-right: 1px solid #ccc;
-    cursor: pointer;
-}
-
-.item_manage .tab-item-f {
-    border-right: 1px solid #ccc;
-}
-
-.item_manage .tab-item:hover {
-    background-color: #c4c2c2;
-}
-
-.item_manage_tabs .active {
-    background-color: #fbfbfb;
-    border-top: 1px solid #ccc;
-    border-bottom: 1px solid #ccc;
-    border-left: 1px solid #ccc;
-    border-right: 1px solid #fbfbfb;
-}
-
-.item_manage_tabs .title {
-    border-right: 1px solid #ccc;
-    border-bottom: 1px solid #ccc;
-}
-
-.item_manage .item_manage_tabs {
-
-    background-color: #f5f5f5;
-    border-top: 1px solid #ccc;
-    border-bottom: 1px solid #ccc;
-    border-left: 1px solid #ccc;
-}
-
-table.dataTable thead {
-    background-color: #283d33;
-    letter-spacing: .025em;
-    color: #fff;
-}
-
-.dataTables_wrapper .dataTables_filter input {
-    border: 1px solid #ccc;
-}
-
-.table.dataTable tbody td {
-    border-right: 1px dashed #dddddd;
-    border-top: 0px dashed #dddddd;
-}
-
-.table.dataTable tbody td:first-child {
-    border-left: 1px solid #dddddd;
-}
-
-.table.dataTable tbody td:last-child {
-    border-right: 1px solid #dddddd;
-}
-
-.dashboard span {
+    font-size: 1.1em;
+    color: #818181;
     display: block;
-    color: white;
-    font-size: 1.5em;
-    text-align: center;
-}
-
-footer {
-    background-color: #f5f5f5;
-}
-
-footer a:link {
-    color: rgb(30, 61, 42);
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*text*/
-.text-large {
-    font-size: 20px;
-    font-weight: 600;
-}
-
-.text-medium {
-    font-size: 16px;
-    font-weight: 500;
-}
-
-.text-small {
-    font-size: 14px;
-    font-weight: 500;
-}
-
-.text-left {
-    text-align: left;
-}
-
-.text-right {
-    text-align: right;
-}
-
-.text-center {
-    text-align: center;
-}
-
-.text-justify {
-    text-align: justify;
-}
-
-
-
-
-
-
-
-/*===============================================
-card
-===============================================*/
-.card {
-    border-radius: 0 !important;
-}
-
-/*Info class */
-.info p {
-    font-size: 14px !important;
-}
-
-.info p span {
-    display: block;
-    font-weight: 600;
-}
-
-/*===============================================
-background colors
-===============================================*/
-.bg-graph {
-    background-color: #fafafa;
-}
-
-.bg-primary-200 {
-    background-color: rgb(30, 61, 42);
-    color: #ffffff;
-}
-
-.bg-secondary-200 {
-    background-color: #1565c0;
-    color: #ffffff;
-}
-
-.bg-success {
-    background-color: #5cb85c;
-    color: #ffffff;
-}
-
-.bg-yellow {
-    background-color: #FCC649;
-    color: #ffffff;
-}
-
-.bg-info {
-    background-color: #5bc0de;
-    color: #ffffff;
-}
-
-.bg-warning {
-    background-color: #f0ad4e;
-    color: #ffffff;
-}
-
-.bg-danger {
-    background-color: #D32F2F;
-    color: #ffffff;
-}
-
-.bg-danger-100 {
-    background-color: #d9534f;
-    color: #ffffff;
-}
-
-.bg-dark-200 {
-    background-color: #2f4050;
-    color: #ffffff;
-}
-
-.bg-dark-100 {
-    background-color: #293846;
-    color: #ffffff;
-}
-
-.bg-dark-50 {
-    background-color: #556270;
-    color: #ffffff;
-}
-
-.bg-white {
-    background-color: #ffffff;
-}
-
-.bg-grey {
-    background-color: #eeeeee;
-}
-
-.bg-light-grey {
-    background-color: #fafafa;
-}
-
-/*=============================================
-BTN
-============================================*/
-.btn {
-    border-radius: 0 !important;
-}
-
-/*=============================================
-Icons
-============================================*/
-i.fa-reg-users {
-    content: "";
-    background-image: url("../icons/passenger.png");
-    width: 64px;
-    height: 64px;
-    display: inline-block;
-    background-size: cover;
-}
-
-i.fa-couple-users {
-    content: "";
-    background-image: url("../icons/male_female.png");
-    width: 64px;
-    height: 64px;
-    display: inline-block;
-    background-size: cover;
-}
-
-i.fa-active-users {
-    content: "";
-    background-image: url("../icons/active_users.png");
-    width: 64px;
-    height: 64px;
-    display: inline-block;
-    background-size: cover;
-}
-
-i.fa-above-temp {
-    content: "";
-    background-image: url("../icons/fever.png");
-    width: 64px;
-    height: 64px;
-    display: inline-block;
-    background-size: cover;
-}
-
-i.fa-normal-temp {
-    content: "";
-    background-image: url("../icons/normal_users.png");
-    width: 64px;
-    height: 64px;
-    display: inline-block;
-    background-size: cover;
-}
-
-/*form style*/
-.pure-form {
-    width: 100%;
-    margin: 10px 0 10px 0;
-    padding: 10px;
-    background: #ffffff;
-    border-radius: 0;
-    border: 1px solid #eeeeee;
-}
-
-.search-form {
-    width: 100%;
-    margin-bottom: 10px;
-    padding-top: 10px;
-    padding-left: 10px;
-    background: #F5F5F5;
-    border: 1px solid #eeeeee;
-}
-
-.form-group {
-    border-radius: 0 !important;
-}
-
-.form-group label {
-    font-weight: 700;
-    font-size: 13px;
-}
-
-.form-group span.red {
-    color: #CC0000;
-}
-
-.form-group input[type=text], input[type=email], input[type=password], textarea {
-    width: 100%;
-    border: 1px solid #cacaca;
-    border-radius: 0 !important;
-    line-height: 1;
-    font-size: 13px;
-}
-
-.form-group input[type=text]:focus, input[type=email]:focus, input[type=password]:focus, textarea:focus {
-    border-color: #c0c0c0 !important;
-    -webkit-box-shadow: none !important;
-    -moz-box-shadow: none !important;
-    box-shadow: none !important;
-}
-
-.form-group select {
-    width: 100%;
-    border: 1px solid #cacaca;
-    border-radius: 0 !important;
-    line-height: 1;
-    background: #ffffff;
-    font-size: 13px;
-}
-
-.form-group select:focus {
-    border-color: #c0c0c0 !important;
-    border-radius: 0 !important;
-    background: #ffffff;
-}
-
-
-
-
-
-
-
-.screen{
-    background-color: lightcoral !important;
-}
+    transition: 0.3s;
+  }
+
+  /* When you mouse over the navigation links, change their color */
+  .sidenav a:hover {
+    color: #f1f1f1;
+  }
+
+  /* Position and style the close button (top right corner) */
+  .sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+  }
+
+  /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
+  #main {
+    transition: margin-left .5s;
+    padding: 0px;
+  }
+
+  /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+  @media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+  }

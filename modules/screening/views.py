@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.core import serializers
 from datetime import datetime, date
+from modules.common.models import Module
 from modules.travellers.models import Traveller, TravellerSymptoms, TravellerVisitedArea, TravellerSymptoms, ScreenCriteria
 
 # Create your views here.
@@ -11,17 +12,17 @@ def screen(request):
     #travellers  = Traveller.objects.raw("SELECT id,full_name, id_number, name_of_transport, disease_to_screen FROM et_travellers WHERE arrival_date = '"+str(datetime.today().strftime('%Y-%m-%d')+"'"))
     travellers  =   (Traveller.objects
                             .select_related('location_origin')
-                            .filter(arrival_date=date.today())
+                            #.filter(arrival_date=date.today())
                             .values('id','full_name', 'id_number','temp', 'name_of_transport', 'disease_to_screen','location_origin__title')
                     )
     temp_a       = range(34,41)
     temp_b       = range(1,10)
 
     context = {
-        "sidebar": False,
         "travellers": travellers,
         "temp_a": temp_a,
         "temp_b": temp_b,
+        "modules": Module.objects.all(),
     }
     return render(request, 'screen.html', context)
 

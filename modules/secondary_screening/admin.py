@@ -5,3 +5,4 @@ from .models import *
 
 admin.site.register(DiseaseSurveyAns)
 admin.site.register(DiseaseSurveyQns)
+admin.site.register(RiskAssessment)

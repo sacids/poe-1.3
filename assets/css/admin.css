@@ -97,6 +97,10 @@
     display: none; 
   }
 
+  .screen td{
+    background-color:#17a2b8 !important;
+    color: white;
+  }
 
 
 

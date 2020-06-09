@@ -10,19 +10,21 @@ from .forms import RiskAssessmentForm
 def risk_assessment(request, travellers_id): 
     # create object of form 
     instance    = RiskAssessment.objects.filter(traveller_id=travellers_id).first()
-    form        = RiskAssessmentForm(request.POST, instance=instance) 
 
     travellers          = Traveller.objects.select_related('location_origin').get(pk=travellers_id)
     disease_to_screen   = travellers.disease_to_screen.split(",")
     diseases            = Disease.objects.filter(pk__in=disease_to_screen).values()
-      
-    # check if form data is valid 
-    if form.is_valid(): 
-        action              = form.save(commit=False)
-        action.traveller_id = travellers_id
-        action.user_id      = 1
-        action.save() 
-  
+    
+    if request.method   == "POST":
+        form        = RiskAssessmentForm(request.POST, instance=instance) 
+        if form.is_valid(): 
+            action              = form.save(commit=False)
+            action.traveller_id = travellers_id
+            action.user_id      = 1
+            action.save() 
+    else:
+        form        = RiskAssessmentForm(instance=instance)
+    
     context = {
         "modules"   : Module.objects.all(),
         "form"      : form,

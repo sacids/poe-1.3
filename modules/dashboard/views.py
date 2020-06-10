@@ -8,7 +8,7 @@ def dashboard(request):
     poe_series_data = list()
     passengers_series_data = list()
     symptom_series_data = list()
-    symptom_occurence_data = list()
+    symptom_occurrence_data = list()
 
     # all queries
     # number of passenger per poe
@@ -124,7 +124,7 @@ def dashboard(request):
         # reported symptoms
         for value in symptoms:
             symptom_series_data.append(value.title)
-            symptom_occurence_data.append(
+            symptom_occurrence_data.append(
                 TravellerSymptom.objects.filter(symptom_id=value.id).count())
 
     else:
@@ -154,7 +154,7 @@ def dashboard(request):
         # reported symptoms
         for value in symptoms:
             symptom_series_data.append(value.title)
-            symptom_occurence_data.append(TravellerSymptom.objects.filter(symptom_id=value.id).count())
+            symptom_occurrence_data.append(TravellerSymptom.objects.filter(symptom_id=value.id).count())
 
     # male percentage
     male_percent = calc_percentage(
@@ -181,7 +181,7 @@ def dashboard(request):
         'poe_data': json.dumps(poe_series_data),
         'passengers_data': passengers_series_data,
         'symptom_data': symptom_series_data,
-        'symptom_occurrence_data': symptom_occurence_data
+        'symptom_occurrence_data': symptom_occurrence_data
     }
 
     return render(request, 'dashboard.html', ctx)

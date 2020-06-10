@@ -75,7 +75,7 @@ def international(request):
                 visited_area.save()
 
             # insert into traveller symptoms
-            symptoms = request.POST.getlist('symptom')
+            symptoms = request.POST.getlist('symptoms')
 
             for symptom_id in symptoms:
                 traveller_symptom = TravellerSymptom()  # traveller symptom object

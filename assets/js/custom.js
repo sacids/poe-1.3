@@ -6,39 +6,48 @@
  *
  * ---------------------------------------------------------------------------- */
 
+function get_districts() {
+    const data = { "region_id": $('#region_id') };
+    $.ajax({
+        url: window.location.origin + "/districts/",
+        type: 'post',
+        data: data,
+        success: function (result) {
+            var e = $('#district_id')
+            if (result.responseText)
+                e.update(result.responseText)
+        },
+        error: function (error) {
+            console.log('Error ${error}')
+        }
+    });
+}
+
+
 //suggest districts
 function suggest_districts() {
     let region_id = document.getElementById('region_id').value;
 
     // Set te random number to add to URL request
-    let base_url = document.getElementById('base_url').value;
+    let base_url = window.location.origin;
     nocache = Math.random();
-
-    // pre-fill FormData from the form
-    let formData = new FormData();
-
-    // add one more field
-    formData.append("region_id", region_id);
 
     //XMLhttpRequest Object
     let xhr = new XMLHttpRequest(),
         method = "POST",
-        url = base_url + 'welcome/get_districts/' + region_id;
+        url = base_url + '/auto_districts/';
+
+    console.log("url => " + url)
 
     xhr.open(method, url, true);
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
-            let response = xhr.responseText;
-            e = document.getElementById('district_id');
-            if (response !== "") {
-                e.innerHTML = response;
-                e.style.display = "block";
-            } else {
-                e.style.display = "none";
-            }
+            let e = document.getElementById('district_id');
+            if (xhr.responseText != "")
+                e.innerHTML = xhr.responseText
         }
     };
-    xhr.send();
+    xhr.send('region_id=' + region_id);
 }
 
 //suggest poe

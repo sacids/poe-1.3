@@ -26,7 +26,7 @@
         let x = document.getElementsByClassName("tab");
 
         // Exit the function if any field in the current tab is invalid:
-        if (n === 1 && !validateForm()) return false;
+        //if (n === 1 && !validateForm()) return false;
         // Hide the current tab:
         x[currentTab].style.display = "none";
         // Increase or decrease the current tab by 1:
@@ -49,41 +49,41 @@
     // Defining a function to validate form
     function validateForm() {
         // Retrieving the values of form elements
-        let form_type = document.getElementById("form_type").value;
-        let name = document.getElementById("name").value;
+        //let form_type = document.getElementById("form_type").value;
+        let name = document.getElementById("full_name").value;
         let age = document.getElementById("age").value;
         let sex = document.getElementById("sex").value;
         let nationality = document.getElementById("nationality").value;
-        let passportNo = document.getElementById("passport_number").value;
-        let transportMeans = document.getElementById("transport_means").value;
-        let transport_name = document.getElementById("transport_name").value;
+        let idNumber = document.getElementById("id_number").value;
+        let modeOfTransport = document.getElementById("mode_of_transport").value;
+        let nameOfTransport = document.getElementById("name_of_transport").value;
         let arrivalDate = document.getElementById("arrival_date").value;
         let pointOfEntry = document.getElementById("point_of_entry").value;
-        let stayDuration = document.getElementById("duration_of_stay").value;
+        let durationOfStay = document.getElementById("duration_of_stay").value;
         let employment = document.getElementById("employment").value;
-        let countryOrigin = document.getElementById("location_origin").value;
+        let locationOrigin = document.getElementById("location_origin").value;
 
-        let region = document.getElementById("region_id").value;
-        let mobile = document.getElementById("mobile").value;
+        let regionId = document.getElementById("region_id").value;
+        let mobile = document.getElementById("phone").value;
         let email = document.getElementById("email").value;
 
-        let date = document.getElementsByName("date[]");
-        let days = document.getElementsByName("days[]");
+        let date = document.getElementById("date");
+        let days = document.getElementById("days");
 
-        let symptoms = document.getElementsByName("symptoms[]");
+        let symptoms = document.getElementsByName("symptoms");
 
         //validate per current tab
         //tab 1 validation
         if (currentTab === 0) {
-            let errorName = errorAge = errorSex = errorNationality = errorPassportNo = errorTransportMeans = errorTransportName = errorArrivalDate = errorPointOfEntry = true;
+            let errorName = errorAge = errorSex = errorNationality = errorIdNumber = errorModeOfTransport = errorNameOfTransport = errorArrivalDate = errorPointOfEntry = true;
 
             // Validate name
             if (name === "") {
-                printError("errorName", "Name is required");
+                printError("errorName", "Traveller name is required");
             } else {
                 let regex = /^[a-zA-Z\s]+$/;
                 if (regex.test(name) === false) {
-                    printError("errorName", "Invalid name");
+                    printError("errorName", "Invalid traveller name");
                 } else {
                     printError("errorName", "");
                     errorName = false;
@@ -119,27 +119,27 @@
             }
 
             //validate passport
-            if (passportNo === "") {
-                printError("errorPassportNo", "Passport is required")
+            if (idNumber === "") {
+                printError("errorIdNumber", "Passport number is required")
             } else {
-                printError("errorPassportNo", "");
-                errorPassportNo = false;
+                printError("errorIdNumber", "");
+                errorIdNumber = false;
             }
 
-            //validate transport means
-            if (transportMeans === "") {
-                printError("errorTransportMeans", "Transport means is required")
+            //validate mode of transport
+            if (modeOfTransport === "") {
+                printError("errorModeOfTransport", "Mode of transport is required")
             } else {
-                printError("errorTransportMeans", "");
-                errorTransportMeans = false;
+                printError("errorModeOfTransport", "");
+                errorModeOfTransport = false;
             }
 
-            //validate transport name
-            if (transport_name === "") {
-                printError("errorTransportName", "Transport name is required")
+            //validate name of transport
+            if (nameOfTransport === "") {
+                printError("errorNameOfTransport", "Vessel/Flight/Vehicle name is required")
             } else {
-                printError("errorTransportName", "");
-                errorTransportName = false;
+                printError("errorNameOfTransport", "");
+                errorNameOfTransport = false;
             }
 
             //validate arrivalDate
@@ -176,38 +176,38 @@
             }
 
             //check all data in tab one
-            return (errorName || errorAge || errorSex || errorNationality || errorPassportNo || errorTransportMeans || errorTransportName || errorArrivalDate || errorPointOfEntry) !== true;
+            return (errorName || errorAge || errorSex || errorNationality || errorIdNumber || errorModeOfTransport|| errorNameOfTransport || errorArrivalDate || errorPointOfEntry) !== true;
 
             //tab 2 validation
         } else if (currentTab === 1) {
-            let errorEmployment = errorStayDuration = true;
+            let errorEmployment = errorDurationOfStay = true;
 
-            //validate duration stay
-            if (nationality === 'TZ') {
-                printError("errorStayDuration", "");
-                errorStayDuration = false;
+            //validate duration of stay
+            if (nationality === 2) {
+                printError("errorDurationOfStay", "");
+                errorDurationOfStay = false;
             } else {
-                if (stayDuration === "") {
-                    printError("errorStayDuration", "duration of stay required")
+                if (durationOfStay === "") {
+                    printError("errorDurationOfStay", "duration of stay required")
                 } else {
-                    if (stayDuration <= 0) {
-                        printError("errorStayDuration", "Invalid duration of stay")
+                    if (durationOfStay <= 0) {
+                        printError("errorDurationOfStay", "Invalid duration of stay")
                     } else {
-                        printError("errorStayDuration", "");
-                        errorStayDuration = false;
+                        printError("errorDurationOfStay", "");
+                        errorDurationOfStay = false;
                     }
                 }
             }
 
             //check all data in tab one
-            return (errorStayDuration) !== true;
+            return (errorDurationOfStay) !== true;
 
             //tab 3 validation
         } else if (currentTab === 2) {
             let errorRegion = errorMobile = errorEmail = true;
 
             //validate region
-            if (region === "") {
+            if (regionId === "") {
                 printError("errorRegion", "Region is required");
             } else {
                 printError("errorRegion", "");
@@ -245,13 +245,13 @@
 
             //tab 3 validation
         } else if (currentTab === 3) {
-            let errorCountryOrigin = errorDate = errorDays = true;
+            let errorLocationOrigin = errorDate = errorDays = true;
 
-            if (countryOrigin === "") {
-                printError("errorCountryOrigin", "Country journey started is required");
+            if (locationOrigin === "") {
+                printError("locationOrigin", "Country journey started is required");
             } else {
-                printError("errorCountryOrigin", "");
-                errorCountryOrigin = false;
+                printError("locationOrigin", "");
+                locationOrigin = false;
             }
 
             //date

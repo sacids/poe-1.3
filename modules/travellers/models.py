@@ -1,5 +1,5 @@
 from django.db import models
-from phone_field import PhoneField
+#from phone_field import PhoneField
 from modules.common.models import BaseModel
 
 FORM_TYPE = (
@@ -7,8 +7,9 @@ FORM_TYPE = (
     ('domestic', "DOMESTIC"),
 )
 SEX = (
-    ('male', "MALE"),
-    ('female', "FEMALE"),
+    ('', "-- Select --"),
+    ('M', "Male"),
+    ('F', "Female"),
 )
 ID_TYPE = (
     ('passport-number', "PASSPORT NUMBER"),
@@ -16,23 +17,27 @@ ID_TYPE = (
     ('voter-id', "VOTER ID"),
 )
 TRANSPORT_MODE = (
-    ('flight', 'FLIGHT'),
-    ('vehicle', 'VEHICLE'),
-    ('vessel', 'VESSEL'),
+    ('', "-- Select --"),
+    ('flight', 'Flight'),
+    ('vehicle', 'Vehicle'),
+    ('vessel', 'Vessel'),
 )
 PURPOSE = (
-    ('resident', 'RESIDENT'),
-    ('tourist', 'TOURIST'),
-    ('transit', 'TRANSIT'),
-    ('business', 'BUSINESS'),
+    ('', "-- Select --"),
+    ('resident', 'Resident'),
+    ('tourist', 'Tourist'),
+    ('transit', 'Transit'),
+    ('business', 'Business'),
 )
 EMPLOYMENT = (
-    ('government', 'GOVERNMENT'),
-    ('non-government', 'NON-GOVERNMENT'),
-    ('non-profit', 'NON-PROFIT'),
-    ('student', 'STUDENT'),
-    ('business', 'BUSINESS'),
-    ('religious', 'RELIGIOUS'),
+    ('', "-- Select --"),
+    ('government', 'Government'),
+    ('non-government', 'Non-Government'),
+    ('non-profit', 'Non-Profit'),
+    ('student', 'Student'),
+    ('business', 'Business'),
+    ('religious', 'Religious'),
+    ('farmers', 'Farmer'),
 )
 
 
@@ -51,6 +56,9 @@ class Symptom(models.Model):
 
     class Meta:
         db_table = "et_symptoms"
+
+    def __str__(self):
+        return self.title
 
 
 class DiseaseSymptom(models.Model):
@@ -71,6 +79,9 @@ class Location(models.Model):
     class Meta:
         db_table = "et_locations"
 
+    def __str__(self):
+        return self.title
+
 
 class LocationDisease(models.Model):
     location = models.ForeignKey(Location, on_delete=models.PROTECT)
@@ -90,6 +101,9 @@ class PointOfEntry(models.Model):
     class Meta:
         db_table = "et_point_of_entries"
 
+    def __str__(self):
+        return self.title
+
 
 # travellers
 class Traveller(BaseModel):
@@ -97,6 +111,7 @@ class Traveller(BaseModel):
     type = models.CharField(choices=FORM_TYPE, max_length=25, default='none')
     sex = models.CharField(choices=SEX, max_length=15, default='none')
     age = models.PositiveIntegerField()
+    nationality = models.PositiveIntegerField()
     id_type = models.CharField(choices=ID_TYPE, max_length=50, default='none')
     id_number = models.CharField(max_length=50)
     employment = models.CharField(choices=EMPLOYMENT, max_length=45, default='none')
@@ -110,19 +125,19 @@ class Traveller(BaseModel):
 
     visiting_purpose = models.CharField(choices=PURPOSE, max_length=45, default='none')  # to look around
     other_purpose = models.TextField()
-    duration_of_stay = models.PositiveIntegerField
+    duration_of_stay = models.PositiveIntegerField()
     location_origin = models.ForeignKey(Location, on_delete=models.DO_NOTHING)
 
     physical_address = models.TextField()
     hotel_name = models.CharField(max_length=255)
-    region_id = models.PositiveIntegerField  # to look around
-    district_id = models.PositiveIntegerField  # to look around
+    region_id = models.PositiveIntegerField()  # to look around
+    district_id = models.PositiveIntegerField()  # to look around
     street_or_ward = models.CharField(max_length=100)  # to look around
-    phone = PhoneField(null=True, help_text='Contact Phone Number')
+    phone = models.CharField(max_length=25)
     email = models.EmailField(max_length=255)
 
-    temp = models.IntegerField()
-    score = models.FloatField
+    temp = models.FloatField()
+    score = models.FloatField()
     action_taken = models.CharField(max_length=100)
     updated_at = models.DateTimeField("Updated At Date")
 
@@ -146,7 +161,7 @@ class TravellerVisitedArea(models.Model):
 
 
 # Traveller symptoms
-class TravellerSymptoms(models.Model):
+class TravellerSymptom(models.Model):
     traveller = models.ForeignKey(Traveller, on_delete=models.PROTECT)
     symptom = models.ForeignKey(Symptom, on_delete=models.DO_NOTHING)
 

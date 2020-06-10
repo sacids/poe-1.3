@@ -364,8 +364,27 @@ Forms
     font-size: 13px;
 }
 
+.form-group ul{
+    list-style: none;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.form-group ul li{
+    list-style: none;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
 .form-group span.red {
     color: #CC0000;
+}
+
+.asteriskField {
+    color: #CC0000;
+    padding-left: 5px;
 }
 
 .form-group input[type=text], input[type=email], input[type=password], input[type=number], input[type=date], textarea {

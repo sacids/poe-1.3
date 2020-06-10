@@ -1,6 +1,7 @@
 {% load static %}
 <!doctype html>
 <html lang="en">
+
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -8,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" rel="stylesheet">
 
@@ -16,85 +17,89 @@
     <title>Ministry of Health - Point of Entries {% block title %}{% endblock %}</title>
 
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="{% static 'img/favicon.ico' %}">
+    <link rel="icon" type="image/png" href="{% static 'img/favicon.png' %}">
 
     <!-- Global stylesheets -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,100,500,700,900" rel="stylesheet"
-          type="text/css">
+        type="text/css">
 
 
     <script src="https://code.jquery.com/jquery-3.5.0.min.js"
-            integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
+        integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
     <!-- <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-            crossorigin="anonymous"></script>
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-            crossorigin="anonymous"></script>
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
     <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
 
-
+    <!--admin -->
     <script src="{% static 'js/admin.js' %}"></script>
+
     <!--highcharts -->
-    {% block highcharts_js %}{% endblock %}
+    <script src="{% static 'js/highcharts.js' %}"></script>
 
 </head>
+
 <body>
 
-{% if sidebar %}
+    {% if sidebar %}
     <!-- Side bar block -->
     {% include 'backend/sidebar.html' %}
     <!-- /Side bar block-->
-{% endif %}
+    {% endif %}
 
 
-<div class="mobile-menu">
-    <nav class="navbar navbar-expand-lg navbar-light bg-green-800">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+    <div class="mobile-menu">
+        <nav class="navbar navbar-expand-lg navbar-light bg-green-800">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon">
                     <i class="fa fa-navicon" style="color:#fff; font-size:28px;"></i>
                 </span>
-        </button>
+            </button>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="menu-item">
-                    <a href="http://poe.local/">Home</a>
-                </li>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="menu-item">
+                        <a href="http://poe.local/">Home</a>
+                    </li>
 
-                <li class="menu-item menu-item-has-children">
-                    <a href="#">About Us</a>
-                </li>
+                    <li class="menu-item menu-item-has-children">
+                        <a href="#">About Us</a>
+                    </li>
 
-                <li class="menu-item">
-                    <a href="#"> Contacts</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
-</div><!--./mobile-menu -->
-
-
-<div class="content" id="content">
-    {% block content %}{% endblock %}
-</div>
-
-<!-- Footer -->
-<footer class="page-footer font-small blue border-top bottom-0">
-    <!-- Copyright -->
-    <div class="footer-copyright text-center py-3">Acknowledgment:
-        <a href="https://www.moh.or.tz"> www.moh.or.tz</a> |
-        <a href="https://www.nimr.or.tz"> www.nimr.or.tz</a> |
-        <a href="https://www.sua.ac.tz"> www.sua.ac.tz</a> |
-        <a href="https://www.sacids.org"> www.sacids.org</a> |
-        <a href="https://www.sacids.org"> www.skoll.org</a>
+                    <li class="menu-item">
+                        <a href="#"> Contacts</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
     </div>
-    <!-- Copyright -->
+    <!--./mobile-menu -->
 
-</footer>
-<!-- Footer -->
+
+    <div class="content" id="content">
+        {% block content %}{% endblock %}
+    </div>
+
+    <!-- Footer -->
+    <footer class="page-footer font-small blue border-top bottom-0">
+        <!-- Copyright -->
+        <div class="footer-copyright text-center py-3">Acknowledgment:
+            <a href="https://www.moh.or.tz"> www.moh.or.tz</a> |
+            <a href="https://www.nimr.or.tz"> www.nimr.or.tz</a> |
+            <a href="https://www.sua.ac.tz"> www.sua.ac.tz</a> |
+            <a href="https://www.sacids.org"> www.sacids.org</a> |
+            <a href="https://www.sacids.org"> www.skoll.org</a>
+        </div>
+        <!-- Copyright -->
+
+    </footer>
+    <!-- Footer -->
 
 </body>
+
 </html>

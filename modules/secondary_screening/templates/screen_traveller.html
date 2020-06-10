@@ -1,0 +1,22 @@
+{% extends 'backend/base.html' %}
+
+{% block navarea %}
+    <div class="navarea clearfix">
+        <div class="float-left p-3"><a href="{% url 'screen_traveller' travellers.id %}">General</a></div>
+        {% for disease in diseases %}
+        <div class="float-left p-3"><a href="{% url 'survey' travellers.id disease.id %}">{{ disease.title }}</a></div>
+        {% endfor %}
+        <div class="float-left p-3"><a href="{% url 'screen_traveller' travellers.id %}action">Action</a></div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    
+    <section class="survey">
+    {% if not form_submitted %}
+        {% include 'survey.html' %}
+    {% else %}
+        <span>Data Received</div>
+    {% endif %}
+    </section>
+{% endblock %}

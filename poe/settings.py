@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'phone_field',
     'formtools',
+    'active_link',
 
     # custom apps
     'modules.config',
@@ -81,6 +82,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'modules.common.context_processors.poe_defaults',
             ],
         },
     },

@@ -1,5 +1,5 @@
 from django.db import models
-#from phone_field import PhoneField
+from phone_field import PhoneField
 from modules.common.models import BaseModel
 
 FORM_TYPE = (
@@ -10,6 +10,10 @@ SEX = (
     ('', "-- Select --"),
     ('M', "Male"),
     ('F', "Female"),
+)
+ACTIVE = (
+    ('1', "1"),
+    ('0', "0"),
 )
 ID_TYPE = (
     ('passport-number', "PASSPORT NUMBER"),
@@ -49,6 +53,10 @@ class Disease(models.Model):
         db_table = "et_diseases"
 
 
+    def __str__(self):
+        return self.title
+
+
 # symptoms
 class Symptom(models.Model):
     title = models.CharField(max_length=100)
@@ -81,6 +89,17 @@ class Location(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class ScreenCriteria(models.Model):
+    disease     = models.ForeignKey(Disease,on_delete=models.PROTECT)
+    countries   = models.CharField(max_length=250)
+    symptoms    = models.CharField(max_length=250)
+    temp        = models.CharField(max_length=250)
+    active      = models.CharField(choices=ACTIVE, max_length=1, default='0')
+
+    class Meta:
+        db_table = "et_ss_criteria"
 
 
 class LocationDisease(models.Model):
@@ -137,7 +156,7 @@ class Traveller(BaseModel):
     email = models.EmailField(max_length=255)
 
     temp = models.FloatField()
-    score = models.FloatField()
+    disease_to_screen = models.CharField(max_length=150, default='0')
     action_taken = models.CharField(max_length=100)
     updated_at = models.DateTimeField("Updated At Date")
 
@@ -158,6 +177,9 @@ class TravellerVisitedArea(models.Model):
 
     class Meta:
         db_table = "et_traveller_visited_areas"
+
+    def __str__(self):
+        return self.location
 
 
 # Traveller symptoms

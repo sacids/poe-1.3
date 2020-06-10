@@ -1,0 +1,25 @@
+{% extends 'backend/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block navarea %}
+    <div class="navarea clearfix">
+        <div class="float-left p-3"><a href="{% url 'screen_traveller' travellers.id %}">General</a></div>
+        {% for disease in diseases %}
+        <div class="float-left p-3"><a href="{% url 'survey' travellers.id disease.id %}">{{ disease.title }}</a></div>
+        {% endfor %}
+        <div class="float-left p-3"><a href="{% url 'screen_traveller' travellers.id %}action">Action</a></div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <form method="post" action="">
+    {% csrf_token %}
+    
+    <div class="row">
+        <div class="col-lg-6">
+        {{form|crispy }}
+        <input type="submit" value="Submit Form"/>
+        </div>
+    </div>
+    </form>
+{% endblock %}

@@ -1,0 +1,58 @@
+{% extends 'backend/base.html' %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-12">
+            <table id="travellers_table" class="display" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>ID Number</th>
+                        <th>Flight Number</th>
+                        <th>Temp</th>
+                        <th>Origin</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for traveller in travellers %}
+                    <tr id="row_{{traveller.id}}">
+                        <td class="full_name">{{traveller.full_name}}</td>
+                        <td class="id_number">{{traveller.id_number}}</td>
+                        <td class="name_of_transport">{{traveller.name_of_transport}}</td>
+                        <td class="temp">{{traveller.temp}}</td>
+                        <td class="location_origin_title">{{traveller.location_origin__title}}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+
+<script type="text/javascript" language="javascript" class="init">
+    $(document).ready(function() {
+         oTable = $('#travellers_table').DataTable( {
+            "columnDefs": [
+                {
+                    "targets": [ 4 ],
+                    "visible": false,
+                    "searchable": false
+                }
+            ],
+            "paging":   false,
+            "info":     false,
+        } );
+
+        $('#site_search').keyup(function(){
+            oTable.search($(this).val()).draw() ;
+        })
+
+        $('#travellers_table').on( 'click', 'tr', function () {
+            var id = oTable.row( this ).id().substring(4);
+            window.location.href = window.location.origin+'/sec_screen/'+id;
+        } );
+
+    } );
+ </script>
+{% endblock %}

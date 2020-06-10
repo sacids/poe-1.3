@@ -1,0 +1,39 @@
+{% if questions|length > 0 %}
+    <form action="" method="post">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-lg-6">
+                {% for question in questions %}
+                    <div id="qn_{{ question.id }}" class="form-group">
+                        <label for="label_{{ question.id }}">
+                            {{ question.title }}
+                        </label>
+                        <div class="">            
+                            {% if question.category == "MC" %}
+                                <select name="{{ question.id }}" class="select form-control" id="qn_{{ question.id }}">
+                                    <option value="No" selected>No</option>
+                                    <option value="Yes">Yes</option>
+                                    <option value="Unknown">Unknown</option>
+                                    <option value="NA">Not Applicable</option>
+                                </select>
+                            {% elif question.category == "CN" %}
+                                <input type="checkbox" name="{{ question.id }}" value="a">a<br>
+                                <input type="checkbox" name="{{ question.id }}" value="b">b<br>
+                            {% elif question.category == "FF" %}
+                                <textarea   rows="4" 
+                                            cols="40" 
+                                            name="{{ question.id }}" 
+                                            class="textarea form-control" 
+                                            id="qn_{{ question.id }}">
+                                </textarea>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endfor %}    
+                <input type="submit" value="Send" />
+            </div>
+        </div>
+    </form>                 
+{% else %}
+<span>No questions</span>
+{% endif %} 

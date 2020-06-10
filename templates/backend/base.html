@@ -66,6 +66,19 @@
             {% block content %}{% endblock %}
         </div>
 
+        <footer class="footer bg-light text-black border-top">
+            <div class="d-flex flex-row">
+                <div class="">
+                    <img src="{% static 'img/logo.png' %}" class="court" style="height: 110px;">
+                </div>
+                <div class="">
+                    link A 
+                    Link B 
+                    Link C
+                </div>
+            </div>
+        </footer>      
     </div>
+    {% block script %}{% endblock %}
 </body>
 </html>

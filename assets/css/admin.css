@@ -37,8 +37,13 @@
 
   /* Page content */
   .content {
-    padding: 16px;
-    height: 130vh;
+    padding: 15px;
+    min-height: calc(100vh - 255px);
+  }
+
+  .footer{
+    padding: 15px;
+    height: 140px;
   }
 
   /* The sticky class is added to the navbar with JS when it reaches its scroll position */

@@ -1,9 +1,6 @@
 {% load static %}
 <div id="mySidenav" class="sidenav">
     <div><a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a></div>
-    <div class="logo text-left">
-        <img src="{% static 'img/logo.png' %}" class="court" style="width: 55px;">
-    </div>
     {% for module in modules %}
         <div class="item text-left">
             <a class="" href="{% url module.link %}">

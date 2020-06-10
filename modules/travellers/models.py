@@ -52,7 +52,6 @@ class Disease(models.Model):
     class Meta:
         db_table = "et_diseases"
 
-
     def __str__(self):
         return self.title
 
@@ -92,11 +91,11 @@ class Location(models.Model):
 
 
 class ScreenCriteria(models.Model):
-    disease     = models.ForeignKey(Disease,on_delete=models.PROTECT)
-    countries   = models.CharField(max_length=250)
-    symptoms    = models.CharField(max_length=250)
-    temp        = models.CharField(max_length=250)
-    active      = models.CharField(choices=ACTIVE, max_length=1, default='0')
+    disease = models.ForeignKey(Disease, on_delete=models.PROTECT)
+    countries = models.CharField(max_length=250)
+    symptoms = models.CharField(max_length=250)
+    temp = models.CharField(max_length=250)
+    active = models.CharField(choices=ACTIVE, max_length=1, default='0')
 
     class Meta:
         db_table = "et_ss_criteria"
@@ -130,7 +129,7 @@ class Traveller(BaseModel):
     type = models.CharField(choices=FORM_TYPE, max_length=25, default='none')
     sex = models.CharField(choices=SEX, max_length=15, default='none')
     age = models.PositiveIntegerField()
-    nationality = models.PositiveIntegerField()
+    nationality = models.IntegerField(default=-1)
     id_type = models.CharField(choices=ID_TYPE, max_length=50, default='none')
     id_number = models.CharField(max_length=50)
     employment = models.CharField(choices=EMPLOYMENT, max_length=45, default='none')
@@ -144,20 +143,20 @@ class Traveller(BaseModel):
 
     visiting_purpose = models.CharField(choices=PURPOSE, max_length=45, default='none')  # to look around
     other_purpose = models.TextField()
-    duration_of_stay = models.PositiveIntegerField()
+    duration_of_stay = models.PositiveIntegerField(default=0)
     location_origin = models.ForeignKey(Location, on_delete=models.DO_NOTHING)
 
     physical_address = models.TextField()
     hotel_name = models.CharField(max_length=255)
-    region_id = models.PositiveIntegerField()  # to look around
-    district_id = models.PositiveIntegerField()  # to look around
+    region_id = models.IntegerField(default=-1)  # to look around
+    district_id = models.IntegerField(default=-1)  # to look around
     street_or_ward = models.CharField(max_length=100)  # to look around
-    phone = models.CharField(max_length=25)
-    email = models.EmailField(max_length=255)
+    phone = models.CharField(max_length=25, default='None')
+    email = models.EmailField(max_length=255, default='None')
 
     temp = models.FloatField()
     disease_to_screen = models.CharField(max_length=150, default='0')
-    action_taken = models.CharField(max_length=100)
+    action_taken = models.CharField(max_length=100, default='None')
     updated_at = models.DateTimeField("Updated At Date")
 
     class Meta(BaseModel.Meta):

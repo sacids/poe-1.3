@@ -1,0 +1,52 @@
+<script type="text/javascript">
+    $(document).ready(function () {
+        let maxField = 10; //Input fields increment limitation
+        let addButton = $('.add_button'); //Add button selector
+        let wrapper = $('.field_wrapper'); //Input field wrapper
+        let fieldHTML = '<div class="col-lg-6 col-md-6 col-sm-6 col-12">' +
+            '<div class="form-group">' +
+            '<label>Country</label>' +
+            '<select name="location" id="location" class="form-control">' +
+            '<option value="">-- Select --</option>' +
+            '</select>' +
+            '</div>' +
+            '</div>' +
+            '<div class="col-lg-6 col-md-6 col-sm-6 col-12">' +
+            '<div class="form-group">' +
+            '<label>Location Visited</label>' +
+            '<input type="text" name="location_visited" id="location_visited" class="form-control" placeholder="Write a location/provice visited..." />' +
+            '</div>' +
+            '</div>' +
+            '<div class="col-lg-6 col-md-6 col-sm-6 col-12">' +
+            '<div class="form-group">' +
+            '<label>Date</label>' +
+            '<input type="date" name="date" id="datepicker" class="form-control" placeholder="Pick date..."/>' +
+            '<span id="errorDate" style="color: red;"></span>' +
+            '</div>' +
+            '</div>' +
+            '<div class="col-lg-6 col-md-6 col-sm-6 col-12">' +
+            '<div class="form-group">' +
+            '<label>Number of Days</label>' +
+            '<input type="number" min="1" name="days" id="days" class="form-control" placeholder="Write number of days..." />' +
+            '<span id="errorDays" style="color: red;"></span>' +
+            '</div>' +
+            '</div>';
+
+        let x = 1; //Initial field counter is 1
+        //Once add button is clicked
+        $(addButton).click(function () {
+            //Check maximum number of input fields
+            if (x < maxField) {
+                x++; //Increment field counter
+                $(wrapper).append(fieldHTML); //Add field html
+            }
+        });
+
+        //Once remove button is clicked
+        $(wrapper).on('click', '.remove_button', function (e) {
+            e.preventDefault();
+            $(this).parent('div').remove(); //Remove field html
+            x--; //Decrement field counter
+        });
+    });
+</script>

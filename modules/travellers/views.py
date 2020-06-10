@@ -9,16 +9,16 @@ def default(request):
 
 
 def international(request):
-    #countries
+    # countries
     countries = Location.objects.filter(parent=0)
 
-    #if POST
+    # if POST
     if request.method == "POST":
         form = TravellerForm(request.POST)
 
-        #attributes
+        # attributes
         attr = {'form': form, 'countries': countries}
-        
+
         if form.is_valid():
             # process form data
             traveller = Traveller()  # gets new object
@@ -51,41 +51,47 @@ def international(request):
 
             traveller.location_origin_id = request.POST.get('location_origin')
 
-            #finally save the traveller in db
+            # finally save the traveller in db
             traveller.save()
 
-            #insert into traveller visited sites
+            # insert into traveller visited sites
             location = request.POST.getlist('location')
             location_visited = request.POST.getlist('location_visited')
             date = request.POST.getlist('date')
             days = request.POST.getlist('days')
 
-            #zipped
+            # zipped
             zipped = zip(location, location_visited, date, days)
 
-            for location,location_visited,date,days in zipped:
-                visited_area = TravellerVisitedArea() # traveller visited area object
+            for location, location_visited, date, days in zipped:
+                visited_area = TravellerVisitedArea()  # traveller visited area object
                 visited_area.traveller_id = traveller.id
                 visited_area.location_id = location
                 visited_area.location_visited = location_visited
                 visited_area.date = date
                 visited_area.days = days
 
-                #finally save traveller visited areas
+                # finally save traveller visited areas
                 visited_area.save()
 
-            #insert into traveller symptoms
+            # insert into traveller symptoms
             symptoms = request.POST.getlist('symptoms')
 
             for symptom in symptoms:
-                traveller_symptom = TravellerSymptom() #traveller symptom object
+                traveller_symptom = TravellerSymptom()  # traveller symptom object
                 traveller_symptom.traveller_id = traveller.id
                 traveller_symptom.symptom_id = symptom
 
-                #finally save traveller symptoms
+                # finally save traveller symptoms
                 traveller_symptom.save()
 
-                #todo: call function to calculate score
+                # todo: call function to calculate score
+                score = calculate_score(traveller.id)
+
+                # update traveller
+                traveller_up = Traveller
+                traveller_up.disease_to_screen = score
+                traveller_up.save()
 
             messages.add_message(request, messages.SUCCESS, 'Success! Saved Successfully!')
         else:
@@ -100,6 +106,48 @@ def international(request):
 
 def domestic(request):
     return render(request, 'travellers/domestic.html', {})
+
+
+def calculate_score(traveller_id):
+    from django.db import connection
+    cur = connection.cursor()
+
+    criteria = build_criteria_query(get_travellers_countries(traveller_id), get_travellers_symptoms(traveller_id))
+    query = "SELECT id,disease_id FROM et_ss_criteria WHERE active = '1' AND ( " + criteria + " )"
+
+    cur.execute(query)
+    connection.commit()
+    records = cur.fetchall()
+    s = [0]
+    for row in records:
+        s.append(row[1])
+
+    cur.close()
+    connection.close()
+    score = ','.join(str(x) for x in s)
+    return score
+
+
+def build_criteria_query(countries, symptoms):
+    q = []
+    if len(list(symptoms)) != 0:
+        s = "( symptoms LIKE '%S" + "S%' OR symptoms LIKE '%S".join(str(x.id) for x in symptoms) + "S%')"
+        q.append(s)
+    if len(list(countries)) != 0:
+        c = "( countries LIKE '%C" + "C%' OR countries LIKE '%C".join(str(x.id) for x in countries) + "C%')"
+        q.append(c)
+
+    return ' AND '.join(q)
+
+
+def get_travellers_countries(tv_id):
+    countries = TravellerVisitedArea.objects.filter(traveller_id=tv_id)
+    return countries
+
+
+def get_travellers_symptoms(tv_id):
+    symptoms = TravellerSymptom.objects.filter(traveller_id=tv_id)
+    return symptoms
 
 
 def auto_districts(request):

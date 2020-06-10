@@ -1,14 +1,4 @@
 
-function checkScore(){
-
-    $("tr").filter(function() {
-        return parseInt($(this).children("td.score").text(), 10) > 0;
-    }).css("background-color","#00CCFF");
-
-    $("tr").filter(function() {
-        return parseInt($(this).children("td.score").text(), 10) > 29;
-    }).css("background-color","#FF3300");
-}
 
 /* Set the width of the side navigation to 250px and the left margin of the page content to 250px and add a black background color to body */
 function openNav() {
@@ -38,8 +28,6 @@ $(document).ready(function(){
         navbar.classList.remove("sticky");
         }
     }
-    
-
     
     $('.fa-search').on('click', function(){
         $(".site-search").addClass('search-visible');

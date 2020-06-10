@@ -22,7 +22,6 @@ def screen(request):
         "travellers": travellers,
         "temp_a": temp_a,
         "temp_b": temp_b,
-        "modules": Module.objects.all(),
     }
     return render(request, 'screen.html', context)
 
@@ -34,9 +33,6 @@ def travellers_asJson(request):
 
 def set_temp(request):
     if request.method == 'GET':
-        print(request.GET.get("id"))
-        print(request.GET.get('temp'))
-
         Trav       = Traveller.objects.get(pk = request.GET.get("id"))
         Trav.temp  = request.GET.get('temp')
         Trav.save()

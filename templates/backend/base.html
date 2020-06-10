@@ -57,8 +57,15 @@
                 {% block navarea %}{% endblock %}
             </div>
 
+            <!-- Show search option if flag set in context -->
+            {% if search %}
             <div class="ml-auto nav-icons search-d"><i class="fa fa-search"></i></div>
-            <div class="nav-icons"><i class="fa fa-power-off"></i></div>
+            {% endif %}
+
+            <!-- Show login option if flag set in context -->
+            {% if login %}
+            <div class="nav-icons"><i class="fa fa-power-off"></i></div> 
+            {% endif %}
 
         </div>
 

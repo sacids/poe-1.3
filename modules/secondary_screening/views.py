@@ -1,7 +1,6 @@
 from django.shortcuts import render
 from .models import *
 from modules.travellers.models import Traveller, Disease
-from modules.common.models import *
 from django.db.models import Q
 from .forms import RiskAssessmentForm
 
@@ -26,7 +25,6 @@ def risk_assessment(request, travellers_id):
         form        = RiskAssessmentForm(instance=instance)
     
     context = {
-        "modules"   : Module.objects.all(),
         "form"      : form,
         "travellers": travellers,
         "diseases"  : diseases
@@ -42,7 +40,6 @@ def screen_list(request):
                     )
     
     context = {
-        "modules": Module.objects.all(),
         "travellers": travellers
     }
     return render(request, 'screen_list.html', context)
@@ -54,7 +51,6 @@ def screen_traveller(request, travellers_id):
     diseases            = Disease.objects.filter(pk__in=disease_to_screen).values()
 
     context = {
-        "modules": Module.objects.all(),
         "travellers": travellers,
         "diseases": diseases
     }
@@ -85,7 +81,6 @@ def survey(request, travellers_id, disease_id):
     diseases            = Disease.objects.filter(pk__in=disease_to_screen).values()
 
     context = {
-        "modules"       : Module.objects.all(),
         "travellers"    : travellers,
         "diseases"      : diseases,
         'questions'     : questions,

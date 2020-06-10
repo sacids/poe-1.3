@@ -98,14 +98,47 @@
       z-index: 5;
   }
 
-  .dataTables_filter, .dataTables_info { 
-    display: none; 
-  }
+  
 
   .screen td{
     background-color:#17a2b8 !important;
     color: white;
   }
+
+
+
+
+  /* data table css styling data tables */
+
+  /* hiding filter and info */
+  .dataTables_filter, .dataTables_info { 
+    display: none; 
+  }
+
+  .dataTable thead {
+    background-color: #283d33;
+    letter-spacing: .025em;
+    color: #fff;
+  }
+
+  .dataTable tbody td {
+    border-right: 1px dashed #dddddd;
+    border-top: 0px dashed #dddddd;
+    cursor: pointer;
+  }
+
+  .dataTable tbody td:first-child {
+    border-left: 1px solid #dddddd;
+  }
+
+  .dataTable tbody td:last-child {
+    border-right: 1px solid #dddddd;
+  }
+
+
+
+
+
 
 
 

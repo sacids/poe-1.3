@@ -10,18 +10,18 @@ def dashboard(request):
     symptom_series_data = list()
     symptom_occurence_data = list()
 
-    #all queries
+    # all queries
     # number of passenger per poe
     point_of_entries = PointOfEntry.objects.all()
 
     # reported symptoms
     symptoms = Symptom.objects.all()
 
-    #traveller objects
+    # traveller objects
     traveller = Traveller.objects
     traveller_symptoms = TravellerSymptom.objects
 
-    # total passangers
+    # total passengers
     total_passengers = Traveller.objects
 
     # total passenger with normal temp
@@ -36,27 +36,29 @@ def dashboard(request):
     # male passengers with above temperature
     male_passenger_with_above_normal_temp = Traveller.objects.filter(sex='M', temp__gte=38)
 
-    # female passangers with above temperature
+    # female passengers with above temperature
     female_passenger_with_above_normal_temp = Traveller.objects.filter(sex='F', temp__gte=38)
 
-    #filter
+    # filter
     if request.method == 'POST':
         day = request.POST.get('day')
-        
-        #todo: improve queries in future
+
+        # todo: improve queries in future
         today = datetime.datetime.now()
-        if(day == 'today'):
-            #queries
+        if day == 'today':
+            # queries
             total_passengers = total_passengers.filter(arrival_date=today).count()
             passenger_with_normal_temp = passenger_with_normal_temp.filter(arrival_date=today).count()
             passenger_with_below_normal_temp = passenger_with_below_normal_temp.filter(arrival_date=today).count()
             passenger_with_above_normal_temp = passenger_with_above_normal_temp.filter(arrival_date=today).count()
-            male_passenger_with_above_normal_temp = male_passenger_with_above_normal_temp.filter(arrival_date=today).count()
-            female_passenger_with_above_normal_temp = female_passenger_with_above_normal_temp.filter(arrival_date=today).count()
-        elif(day == 'yesterday'):
+            male_passenger_with_above_normal_temp = male_passenger_with_above_normal_temp.filter(
+                arrival_date=today).count()
+            female_passenger_with_above_normal_temp = female_passenger_with_above_normal_temp.filter(
+                arrival_date=today).count()
+        elif day == 'yesterday':
             yesterday = datetime.date.today() - datetime.timedelta(days=1)
 
-            #queries
+            # queries
             total_passengers = total_passengers.filter(
                 arrival_date=yesterday).count()
             passenger_with_normal_temp = passenger_with_normal_temp.filter(
@@ -69,11 +71,11 @@ def dashboard(request):
                 arrival_date=yesterday).count()
             female_passenger_with_above_normal_temp = female_passenger_with_above_normal_temp.filter(
                 arrival_date=yesterday).count()
-        elif(day == 'last_week'):
+        elif day == 'last_week':
             start_at = datetime.date.today() - datetime.timedelta(days=6)
             end_at = datetime.date.today() - datetime.timedelta(days=1)
 
-            #queries
+            # queries
             total_passengers = total_passengers.filter(
                 arrival_date__range=[start_at, end_at]).count()
             passenger_with_normal_temp = passenger_with_normal_temp.filter(
@@ -86,12 +88,12 @@ def dashboard(request):
                 arrival_date__range=[start_at, end_at]).count()
             female_passenger_with_above_normal_temp = female_passenger_with_above_normal_temp.filter(
                 arrival_date__range=[start_at, end_at]).count()
-          
-        elif(day == 'last_month'):
+
+        elif day == 'last_month':
             this_year = today.year
             last_month = today.month - 1
 
-            #queries
+            # queries
             total_passengers = total_passengers.filter(
                 arrival_date__month=last_month, arrival_date__year=this_year).count()
             passenger_with_normal_temp = passenger_with_normal_temp.filter(
@@ -104,8 +106,8 @@ def dashboard(request):
                 arrival_date__month=last_month, arrival_date__year=this_year).count()
             female_passenger_with_above_normal_temp = female_passenger_with_above_normal_temp.filter(
                 arrival_date__month=last_month, arrival_date__year=this_year).count()
-            
-        elif(day == 'overall'):
+
+        elif day == 'overall':
             total_passengers = total_passengers.count()
             passenger_with_normal_temp = passenger_with_normal_temp.count()
             passenger_with_below_normal_temp = passenger_with_below_normal_temp.count()
@@ -113,21 +115,20 @@ def dashboard(request):
             male_passenger_with_above_normal_temp = male_passenger_with_above_normal_temp.count()
             female_passenger_with_above_normal_temp = female_passenger_with_above_normal_temp.count()
 
-    #point of entries
+        # point of entries
         for val in point_of_entries:
             poe_series_data.append(val.title)
             passengers_series_data.append(
                 Traveller.objects.filter(point_of_entry_id=val.id).count())
 
-        #reported symptoms
+        # reported symptoms
         for value in symptoms:
             symptom_series_data.append(value.title)
             symptom_occurence_data.append(
                 TravellerSymptom.objects.filter(symptom_id=value.id).count())
 
-
     else:
-        # total passangers
+        # total passengers
         total_passengers = total_passengers.count()
 
         # total passenger with normal temp
@@ -142,26 +143,24 @@ def dashboard(request):
         # male passengers with above temperature
         male_passenger_with_above_normal_temp = male_passenger_with_above_normal_temp.count()
 
-        # female passangers with above temperature
+        # female passengers with above temperature
         female_passenger_with_above_normal_temp = female_passenger_with_above_normal_temp.count()
 
-        #point of entries
+        # point of entries
         for val in point_of_entries:
             poe_series_data.append(val.title)
             passengers_series_data.append(Traveller.objects.filter(point_of_entry_id=val.id).count())
 
-       
-        #reported symptoms
+        # reported symptoms
         for value in symptoms:
             symptom_series_data.append(value.title)
             symptom_occurence_data.append(TravellerSymptom.objects.filter(symptom_id=value.id).count())
 
-
-    #male percentage
+    # male percentage
     male_percent = calc_percentage(
         male_passenger_with_above_normal_temp, passenger_with_above_normal_temp)
 
-    #female percentage    
+    # female percentage
     female_percent = calc_percentage(
         female_passenger_with_above_normal_temp, passenger_with_above_normal_temp)
 
@@ -173,7 +172,7 @@ def dashboard(request):
         'passenger_with_normal_temp': passenger_with_normal_temp,
         'passenger_with_below_normal_temp': passenger_with_below_normal_temp,
         'passenger_with_above_normal_temp': passenger_with_above_normal_temp,
-        'male_passenger_with_above_normal_temp':  male_passenger_with_above_normal_temp,
+        'male_passenger_with_above_normal_temp': male_passenger_with_above_normal_temp,
         'female_passenger_with_above_normal_temp': female_passenger_with_above_normal_temp,
         'male_percent': male_percent,
         'female_percent': female_percent,
@@ -182,20 +181,21 @@ def dashboard(request):
         'poe_data': json.dumps(poe_series_data),
         'passengers_data': passengers_series_data,
         'symptom_data': symptom_series_data,
-        'symptom_occurence_data': symptom_occurence_data
+        'symptom_occurrence_data': symptom_occurence_data
     }
 
     return render(request, 'dashboard.html', ctx)
 
 
+# calculate score
 def calc_percentage(num, total):
     percent = 0
 
-    if(total > 0):
-        percent = (num/total)*100
+    if total > 0:
+        percent = (num / total) * 100
 
-        if(percent > 0):
-            if(percent > 100):
+        if percent > 0:
+            if percent > 100:
                 return 100
             else:
                 return percent

@@ -168,6 +168,7 @@ def dashboard(request):
     ctx = {
         "modules": get_sidebar(),
         "sidebar": True,
+        "search": False,
         "total_passengers": total_passengers,
         'passenger_with_normal_temp': passenger_with_normal_temp,
         'passenger_with_below_normal_temp': passenger_with_below_normal_temp,

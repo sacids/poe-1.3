@@ -191,60 +191,6 @@ navigation menu
 }
 
 /*===========================================
-Cards
-=============================================*/
-.card {
-    border: 0;
-    padding: 10px;
-}
-
-.card .card-header {
-    width: 100%;
-    border: 0;
-    margin: 0;
-    padding: 0;
-    background-color: #ffffff;
-}
-
-.card .card-body {
-    margin: 0;
-    padding: 0;
-    border: 0;
-}
-
-.card .card-footer {
-    border-radius: 0 !important;
-    margin: 0;
-    padding: 0;
-    background-color: #ffffff;
-    border: 0;
-}
-
-@media (max-width: 480px) {
-    .card {
-        border-radius: 0 !important;
-        box-shadow: none !important;
-        padding: 0 8px 0 8px;
-        margin: 0;
-    }
-
-    .card-header {
-        padding: 0;
-        margin: 0;
-    }
-
-    .card-header h5.card-title {
-        padding: 0;
-        font-weight: 600;
-        text-transform: uppercase;
-    }
-
-    .card-body {
-        padding: 0;
-    }
-}
-
-/*===========================================
 Text sizes and colors
 =============================================*/
 .text-primary {
@@ -366,14 +312,12 @@ Forms
 
 .form-group ul{
     list-style: none;
-    list-style-type: none;
     margin: 0;
     padding: 0;
 }
 
 .form-group ul li{
     list-style: none;
-    list-style-type: none;
     margin: 0;
     padding: 0;
 }

@@ -26,7 +26,7 @@
         let x = document.getElementsByClassName("tab");
 
         // Exit the function if any field in the current tab is invalid:
-        if (n === 1 && !validateForm()) return false;
+        //if (n === 1 && !validateForm()) return false;
         // Hide the current tab:
         x[currentTab].style.display = "none";
         // Increase or decrease the current tab by 1:
@@ -71,6 +71,8 @@
         let days = document.getElementById("days");
 
         let symptoms = document.getElementsByName("symptoms");
+
+        let accept = document.getElementById("accept");
 
         //validate per current tab
         //tab 1 validation
@@ -176,7 +178,7 @@
             }
 
             //check all data in tab one
-            return (errorName || errorAge || errorSex || errorNationality || errorIdNumber || errorModeOfTransport|| errorNameOfTransport || errorArrivalDate || errorPointOfEntry) !== true;
+            return (errorName || errorAge || errorSex || errorNationality || errorIdNumber || errorModeOfTransport || errorNameOfTransport || errorArrivalDate || errorPointOfEntry) !== true;
 
             //tab 2 validation
         } else if (currentTab === 1) {
@@ -311,6 +313,17 @@
             //check all data in tab 3
             return (errorSymptoms) !== true;
 
+        } else if (currentTab === 5) {
+            let errorAccept = true;
+
+            if (accept.type === 'checkbox') {
+                if (accept.checked) {
+                    printError("errorAccept", "");
+                    errorAccept = false;
+                } else {
+                    printError("errorSymptoms", "Tick the declaration to save");
+                }
+            }
         }
         return true;
     }

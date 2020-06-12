@@ -80,7 +80,7 @@ class DiseaseSymptom(models.Model):
 # locations
 class Location(models.Model):
     title = models.CharField(max_length=50)
-    code = models.CharField(max_length=5)
+    code = models.CharField(max_length=5, null=True)
     parent = models.PositiveIntegerField()
 
     class Meta:
@@ -113,8 +113,7 @@ class LocationDisease(models.Model):
 # point of entries
 class PointOfEntry(models.Model):
     title = models.CharField(max_length=255)
-    region_id = models.ForeignKey(Location, on_delete=models.PROTECT)
-    mode_of_transport = models.CharField(max_length=50)
+    mode_of_transport = models.CharField(max_length=50, null=True)
 
     class Meta:
         db_table = "et_point_of_entries"
@@ -128,8 +127,8 @@ class Traveller(BaseModel):
     full_name = models.CharField(max_length=250)
     type = models.CharField(choices=FORM_TYPE, max_length=25, default='none')
     sex = models.CharField(choices=SEX, max_length=15, default='none')
-    age = models.PositiveIntegerField()
-    nationality = models.IntegerField(default=-1)
+    age = models.IntegerField(null=True)
+    nationality = models.IntegerField(default=-1, null=True)
     id_type = models.CharField(choices=ID_TYPE, max_length=50, default='none')
     id_number = models.CharField(max_length=50)
     employment = models.CharField(choices=EMPLOYMENT, max_length=45, default='none')
@@ -137,42 +136,42 @@ class Traveller(BaseModel):
 
     mode_of_transport = models.CharField(choices=TRANSPORT_MODE, max_length=30, default='none')
     name_of_transport = models.CharField(max_length=30)
-    seat_no = models.CharField(max_length=30)
+    seat_no = models.CharField(max_length=30, null=True)
     arrival_date = models.DateField(verbose_name="Arrival Date")
     point_of_entry = models.ForeignKey(PointOfEntry, on_delete=models.DO_NOTHING)
 
     visiting_purpose = models.CharField(choices=PURPOSE, max_length=45, default='none')  # to look around
-    other_purpose = models.TextField()
+    other_purpose = models.TextField(null=True)
     duration_of_stay = models.PositiveIntegerField(default=0)
     location_origin = models.ForeignKey(Location, on_delete=models.DO_NOTHING)
 
-    physical_address = models.TextField()
-    hotel_name = models.CharField(max_length=255)
-    region_id = models.IntegerField(default=-1)  # to look around
-    district_id = models.IntegerField(default=-1)  # to look around
-    street_or_ward = models.CharField(max_length=100)  # to look around
+    physical_address = models.TextField(null=True)
+    hotel_name = models.CharField(max_length=255, null=True)
+    region_id = models.IntegerField(default=-1, null=True)  # to look around
+    district_id = models.IntegerField(default=-1, null=True)  # to look around
+    street_or_ward = models.CharField(max_length=100, null=True)  # to look around
     phone = models.CharField(max_length=25, default='None')
     email = models.EmailField(max_length=255, default='None')
 
-    temp = models.FloatField()
+    temp = models.FloatField(null=True)
     disease_to_screen = models.CharField(max_length=150, default='0')
     action_taken = models.CharField(max_length=100, default='None')
-    updated_at = models.DateTimeField("Updated At Date")
+    updated_at = models.DateTimeField("Updated At Date", null=True)
 
     class Meta(BaseModel.Meta):
         db_table = "et_travellers"
 
     def __str__(self):
-        return self.full_name
+        return self.id
 
 
 # Traveller visited area
 class TravellerVisitedArea(models.Model):
     traveller = models.ForeignKey(Traveller, on_delete=models.PROTECT)
     location = models.ForeignKey(Location, on_delete=models.DO_NOTHING)
-    location_visited = models.CharField(max_length=250)
-    date = models.DateField(verbose_name="Date")
-    days = models.PositiveIntegerField()
+    location_visited = models.CharField(max_length=250, null=True)
+    date = models.DateField(verbose_name="Date", null=True)
+    days = models.PositiveIntegerField(null=True)
 
     class Meta:
         db_table = "et_traveller_visited_areas"
@@ -188,5 +187,3 @@ class TravellerSymptom(models.Model):
 
     class Meta:
         db_table = "et_traveller_symptoms"
-
-# todo:secondary screening

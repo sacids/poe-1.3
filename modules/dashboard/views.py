@@ -2,8 +2,10 @@ import json
 import datetime
 from django.shortcuts import render
 from modules.travellers.models import PointOfEntry, Symptom, Traveller, TravellerSymptom
+from django.contrib.auth.decorators import login_required
 
 
+@login_required
 def dashboard(request):
     poe_series_data = list()
     passengers_series_data = list()

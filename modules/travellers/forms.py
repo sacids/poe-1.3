@@ -149,10 +149,5 @@ class TravellerForm(forms.Form):
                'type': 'number', 'min': 1, 'max': 21}), required=False)
 
     # tab 5
-<<<<<<< HEAD
-    #symptoms = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple(
-    #   attrs={'id': 'symptoms'}), choices=Symptom.objects.all().values_list("id", "title"))
-=======
     symptoms = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple(
         attrs={'id': 'symptoms'}), choices=Symptom.objects.all().values_list("id", "title"))
->>>>>>> eb2b91b2d1268fee08255d83549ac230af989c62

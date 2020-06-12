@@ -3,9 +3,11 @@ from .models import *
 from modules.travellers.models import Traveller, Disease
 from django.db.models import Q
 from .forms import RiskAssessmentForm
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
+@login_required
 def risk_assessment(request, travellers_id): 
     # create object of form 
     instance    = RiskAssessment.objects.filter(traveller_id=travellers_id).first()
@@ -32,6 +34,7 @@ def risk_assessment(request, travellers_id):
     return render(request, "risk_assessment.html", context)
 
 
+@login_required
 def screen_list(request):
     travellers  =   (Traveller.objects
                             .select_related('location_origin')
@@ -44,6 +47,10 @@ def screen_list(request):
     }
     return render(request, 'screen_list.html', context)
 
+
+
+
+@login_required
 def screen_traveller(request, travellers_id):
 
     travellers          = Traveller.objects.select_related('location_origin').get(pk=travellers_id)
@@ -58,7 +65,7 @@ def screen_traveller(request, travellers_id):
     return render(request, 'screen_traveller.html', context)
 
 
-
+@login_required
 def survey(request, travellers_id, disease_id):
 
     if request.method == "POST":

@@ -1,6 +1,6 @@
 from django import template
 import datetime
-from django.shortcuts import render, render_to_response, HttpResponse
+from django.shortcuts import render, render_to_response, redirect
 from .models import Traveller, TravellerVisitedArea, TravellerSymptom, Location, PointOfEntry
 from .forms import TravellerForm
 from django.contrib import messages
@@ -46,7 +46,7 @@ def international(request):
             traveller.physical_address = form.cleaned_data['physical_address']
             traveller.hotel_name = form.cleaned_data['hotel_name']
             traveller.region_id = request.POST.get('region_id')
-            #traveller.district_id = request.POST.get('district_id')
+            # traveller.district_id = request.POST.get('district_id')
             traveller.street_or_ward = form.cleaned_data['street_or_ward']
             traveller.phone = form.cleaned_data['phone']
             traveller.email = form.cleaned_data['email']
@@ -97,6 +97,7 @@ def international(request):
                 traveller_up.save()
 
             messages.add_message(request, messages.SUCCESS, 'Success! Saved Successfully!')
+            return redirect('/success')
         else:
             messages.add_message(request, messages.WARNING, 'Warning! Please check all the fields!')
 
@@ -109,6 +110,10 @@ def international(request):
 
 def domestic(request):
     return render(request, 'travellers/domestic.html', {})
+
+
+def success(request):
+    return render(request, 'travellers/success.html', {})
 
 
 def calculate_score(traveller_id):

@@ -86,7 +86,7 @@ class TravellerForm(forms.Form):
 
     duration_of_stay = forms.CharField(label='Duration of stay (In days)', widget=forms.TextInput(
         attrs={'class': 'form-control', 'id': 'duration_of_stay', 'type': 'number', 'min': 1,
-               'placeholder': 'Write duration of stay...'}))
+               'placeholder': 'Write duration of stay...'}), required=False)
 
     employment = forms.ChoiceField(label='Employment/Occupation', choices=EMPLOYMENT,
                                    widget=forms.Select(attrs={'class': 'form-control', 'id': 'employment'}),

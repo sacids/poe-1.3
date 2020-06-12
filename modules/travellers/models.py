@@ -142,7 +142,7 @@ class Traveller(BaseModel):
 
     visiting_purpose = models.CharField(choices=PURPOSE, max_length=45, default='none')  # to look around
     other_purpose = models.TextField(null=True)
-    duration_of_stay = models.PositiveIntegerField(default=0)
+    duration_of_stay = models.PositiveIntegerField(default=0, null=True)
     location_origin = models.ForeignKey(Location, on_delete=models.DO_NOTHING)
 
     physical_address = models.TextField(null=True)

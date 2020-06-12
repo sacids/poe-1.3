@@ -6,24 +6,6 @@
  *
  * ---------------------------------------------------------------------------- */
 
-function get_districts() {
-    const data = { "region_id": $('#region_id') };
-    $.ajax({
-        url: window.location.origin + "/districts/",
-        type: 'post',
-        data: data,
-        success: function (result) {
-            var e = $('#district_id')
-            if (result.responseText)
-                e.update(result.responseText)
-        },
-        error: function (error) {
-            console.log('Error ${error}')
-        }
-    });
-}
-
-
 //suggest districts
 function suggest_districts() {
     let region_id = document.getElementById('region_id').value;
@@ -32,36 +14,38 @@ function suggest_districts() {
     let base_url = window.location.origin;
     nocache = Math.random();
 
-    //XMLhttpRequest Object
+    //XMLHttpRequest Object
     let xhr = new XMLHttpRequest(),
-        method = "POST",
-        url = base_url + '/auto_districts/';
-
-    console.log("url => " + url)
+        method = "GET",
+        url = base_url + '/auto_districts/?region_id=' + region_id;
 
     xhr.open(method, url, true);
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
             let e = document.getElementById('district_id');
-            if (xhr.responseText != "")
-                e.innerHTML = xhr.responseText
+            if (xhr.responseText !== "") {
+                e.innerHTML = xhr.responseText;
+                e.style.display = "block";
+            } else {
+                e.style.display = "none";
+            }
         }
     };
-    xhr.send('region_id=' + region_id);
+    xhr.send();
 }
 
-//suggest poe
-function suggest_poe() {
-    let transport_means = document.getElementById('transport_means').value;
+//suggest point_of_entries
+function suggest_point_of_entries() {
+    let mode_of_transport = document.getElementById('mode_of_transport').value;
 
-    // Set te random number to add to URL request
-    let base_url = document.getElementById('base_url').value;
+     // Set te random number to add to URL request
+    let base_url = window.location.origin;
     nocache = Math.random();
 
-    //XMLhttpRequest Object
+    //XMLHttpRequest Object
     let xhr = new XMLHttpRequest(),
-        method = "POST",
-        url = base_url + 'welcome/get_poe/' + transport_means;
+        method = "GET",
+        url = base_url + '/auto_point_of_entries/?mode_of_transport=' + mode_of_transport;
 
     xhr.open(method, url, true);
     xhr.onreadystatechange = function () {

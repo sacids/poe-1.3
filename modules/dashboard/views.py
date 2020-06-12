@@ -1,4 +1,5 @@
-import json, datetime
+import json
+import datetime
 from django.shortcuts import render
 from modules.travellers.models import PointOfEntry, Symptom, Traveller, TravellerSymptom
 

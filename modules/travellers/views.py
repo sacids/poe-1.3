@@ -1,5 +1,7 @@
-from django.shortcuts import render, render_to_response, HttpResponse
-from .models import Traveller, TravellerVisitedArea, TravellerSymptom, Location
+from django import template
+import datetime
+from django.shortcuts import render, render_to_response, redirect
+from .models import Traveller, TravellerVisitedArea, TravellerSymptom, Location, PointOfEntry
 from .forms import TravellerForm
 from django.contrib import messages
 
@@ -44,7 +46,7 @@ def international(request):
             traveller.physical_address = form.cleaned_data['physical_address']
             traveller.hotel_name = form.cleaned_data['hotel_name']
             traveller.region_id = request.POST.get('region_id')
-            traveller.district_id = request.POST.get('district_id')
+            # traveller.district_id = request.POST.get('district_id')
             traveller.street_or_ward = form.cleaned_data['street_or_ward']
             traveller.phone = form.cleaned_data['phone']
             traveller.email = form.cleaned_data['email']
@@ -55,24 +57,25 @@ def international(request):
             traveller.save()
 
             # insert into traveller visited sites
-            location = request.POST.getlist('location')
-            location_visited = request.POST.getlist('location_visited')
-            date = request.POST.getlist('date')
-            days = request.POST.getlist('days')
+            if request.POST.get('location'):
+                location = request.POST.getlist('location', '')
+                location_visited = request.POST.getlist('location_visited', '')
+                date = request.POST.getlist('date', '')
+                days = request.POST.getlist('days', '')
 
-            # zipped
-            zipped = zip(location, location_visited, date, days)
+                # zipped
+                zipped = zip(location, location_visited, date, days)
 
-            for location, location_visited, date, days in zipped:
-                visited_area = TravellerVisitedArea()  # traveller visited area object
-                visited_area.traveller_id = traveller.id
-                visited_area.location_id = location
-                visited_area.location_visited = location_visited
-                visited_area.date = date
-                visited_area.days = days
+                for location, location_visited, date, days in zipped:
+                    visited_area = TravellerVisitedArea()  # traveller visited area object
+                    visited_area.traveller_id = traveller.id
+                    visited_area.location_id = location
+                    visited_area.location_visited = location_visited
+                    visited_area.date = date
+                    visited_area.days = days
 
-                # finally save traveller visited areas
-                visited_area.save()
+                    # finally save traveller visited areas
+                    visited_area.save()
 
             # insert into traveller symptoms
             symptoms = request.POST.getlist('symptoms')
@@ -89,11 +92,12 @@ def international(request):
                 score = calculate_score(traveller.id)
 
                 # update traveller
-                traveller_up = Traveller
+                traveller_up = Traveller.objects.get(pk=traveller.id)
                 traveller_up.disease_to_screen = score
                 traveller_up.save()
 
             messages.add_message(request, messages.SUCCESS, 'Success! Saved Successfully!')
+            return redirect('/success')
         else:
             messages.add_message(request, messages.WARNING, 'Warning! Please check all the fields!')
 
@@ -106,6 +110,10 @@ def international(request):
 
 def domestic(request):
     return render(request, 'travellers/domestic.html', {})
+
+
+def success(request):
+    return render(request, 'travellers/success.html', {})
 
 
 def calculate_score(traveller_id):
@@ -151,12 +159,18 @@ def get_travellers_symptoms(tv_id):
 
 
 def auto_districts(request):
-    # if request post
-    if request.method == 'POST':
-        region_id = request.POST.get('region_id')
+    if request.method == 'GET':
+        region_id = request.GET.get('region_id')
         districts = Location.objects.filter(parent=region_id)
 
-        print(districts)
-
         # return response.
-        return render_to_response('travellers/districts_request.html', {'districts': districts})
+        return render_to_response('travellers/auto_districts.html', {'districts': districts})
+
+
+def auto_point_of_entries(request):
+    if request.method == 'GET':
+        mode_of_transport = request.GET.get('mode_of_transport')
+        point_of_entries = PointOfEntry.objects.filter(mode_of_transport=mode_of_transport)
+
+        # return response
+        return render_to_response('travellers/auto_point_of_entries.html', {'point_of_entries': point_of_entries})

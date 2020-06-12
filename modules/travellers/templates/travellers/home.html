@@ -3,69 +3,88 @@
 {% block title %}Travellers Surveillance{% endblock %}
 
 {% block content %}
-    <!-- Page content -->
-    <div class="page-content bg-white">
-        <!-- Main content -->
-        <div class="content-wrapper">
-            <!-- Page header -->
-            <div class="page-header">
-                <div class="container-fluid">
-                    <div class="page-header-content">
-                        <div class="page-title d-flex">
-                            <div class="img">
-                                <img src="{% static 'img/CoatofArms_Lg.png' %}" alt=""/>
-                            </div><!--./img -->
+<!-- Page content -->
+<div class="page-content bg-white">
+    <!-- Main content -->
+    <div class="content-wrapper">
+        <!-- Page header -->
+        <div class="page-header">
+            <div class="container-fluid">
+                <div class="page-header-content">
+                    <div class="page-title d-flex">
+                        <div class="img">
+                            <img src="{% static 'img/CoatofArms_Lg.png' %}" alt="" />
+                        </div>
+                        <!--./img -->
 
-                            <div id="content">
-                                <h1>The United Republic of Tanzania</h1>
-                                <h3 class="d-none d-md-block">Ministry of Health, Community Development, Gender, Elderly and Children</h3>
-                                <h4 class="d-block d-sm-none">MoHCDGEC</h4>
-                            </div><!--./content -->
-                        </div><!--./page-title -->
-                    </div><!--./page-header-content -->
-                </div><!--./container-fluid -->
-            </div><!-- /page header -->
+                        <div id="content">
+                            <h1>The United Republic of Tanzania</h1>
+                            <h3 class="d-none d-md-block">Ministry of Health, Community Development, Gender, Elderly and
+                                Children</h3>
+                            <h4 class="d-block d-sm-none">MoHCDGEC</h4>
+                        </div>
+                        <!--./content -->
+                    </div>
+                    <!--./page-title -->
+                </div>
+                <!--./page-header-content -->
+            </div>
+            <!--./container-fluid -->
+        </div><!-- /page header -->
 
-            <!-- Content area -->
-            <div class="content">
-                <!-- Basic card -->
-                <div class="card">
-                    <div class="card-header">
-                        <h5 class="card-title text-uppercase text-center">Travellers Surveillance Form</h5>
-                    </div><!--./card-header -->
+        <!-- Content area -->
+        <div class="content">
+            <!-- Basic card -->
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title text-uppercase text-center">Travellers Surveillance</h5>
+                </div>
+                <!--./card-header -->
 
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-lg-12 text-center">
-                                <div class="mt-4"></div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="text-intro">
+                                <p><b>Travellers Surveillance</b> an online web based system to help capturing and managing traveller’s health details
+                                    during fighting against pandemic
+                                    diseases such as COVID-19 and Ebola.</p>
+                            </div>
+                            <!--./text-intro-->
+
+                            <div class="text-center">
                                 <div class="dropdown">
                                     <button style="width: 200px;" class="btn btn-outline-primary dropdown-toggle"
-                                            type="button"
-                                            id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
-                                            aria-expanded="false">
+                                        type="button" id="dropdownMenuButton" data-toggle="dropdown"
+                                        aria-haspopup="true" aria-expanded="false">
                                         Change Language
                                     </button>
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                        <a class="dropdown-item"
-                                           href="/"><img width="32" src="{% static 'img/usa_flag.png' %}" alt=""/> ENG
+                                        <a class="dropdown-item" href="/"><img width="32"
+                                                src="{% static 'img/usa_flag.png' %}" alt="" /> ENG
                                         </a>
-                                        <a class="dropdown-item"
-                                           href="/"><img width="32" src="{% static 'img/tz_flag.png' %}" alt=""/> SWA
+                                        <a class="dropdown-item" href="/"><img width="32"
+                                                src="{% static 'img/tz_flag.png' %}" alt="" /> SWA
                                         </a>
                                     </div>
-                                </div><!--./dropdown -->
+                                </div>
+                                <!--./dropdown -->
                                 <div class="mt-4"></div>
 
                                 <a style="width: 200px;" href="{% url 'travellers:international' %}"
-                                   class="btn btn-primary btn-sm text-uppercase">International</a>
+                                    class="btn btn-primary btn-sm text-uppercase">International</a>
                                 <div class="mt-4"></div>
-                                <a style="width: 200px;" href="{% url 'travellers:domestic' %}"
-                                   class="btn btn-secondary btn-sm text-uppercase">Domestic</a>
-                            </div><!--./col-lg-12-->
-                        </div><!--./row -->
-                    </div><!--./card-body -->
-                </div><!-- /basic card -->
-            </div><!-- /content area -->
-        </div><!-- /main content -->
-    </div><!-- /page content -->
+                                <!-- <a style="width: 200px;" href="{% url 'travellers:domestic' %}"
+                                    class="btn btn-secondary btn-sm text-uppercase">Domestic</a> -->
+                            </div>
+                            <!--./text-center-->
+                        </div>
+                        <!--./col-lg-12-->
+                    </div>
+                    <!--./row -->
+                </div>
+                <!--./card-body -->
+            </div><!-- /basic card -->
+        </div><!-- /content area -->
+    </div><!-- /main content -->
+</div><!-- /page content -->
 {% endblock %}

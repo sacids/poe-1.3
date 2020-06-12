@@ -1,0 +1,6 @@
+<select name="district_id" id="district_id">
+    <option value="">-- Select --</option>
+    {% for district in districts %}
+        <option value="{{ district.id }}">{{ district.title }}</option>
+    {% endfor %}
+</select>

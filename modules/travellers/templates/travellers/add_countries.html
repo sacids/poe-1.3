@@ -8,6 +8,9 @@
             '<label>Country</label>' +
             '<select name="location" id="location" class="form-control">' +
             '<option value="">-- Select --</option>' +
+            "{% for country in countries %}" +
+                "<option value='{{ country.id }}'>{{ country.title }}</option>" +
+                "{% endfor %}" +
             '</select>' +
             '</div>' +
             '</div>' +
@@ -20,7 +23,7 @@
             '<div class="col-lg-6 col-md-6 col-sm-6 col-12">' +
             '<div class="form-group">' +
             '<label>Date</label>' +
-            '<input type="date" name="date" id="datepicker" class="form-control" placeholder="Pick date..."/>' +
+            '<input type="date" name="date" min=" " max="{% now "Y-m-d" %}" id="datepicker" class="form-control dateinput" placeholder="Pick date..."/>' +
             '<span id="errorDate" style="color: red;"></span>' +
             '</div>' +
             '</div>' +

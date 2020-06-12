@@ -64,13 +64,15 @@
         let locationOrigin = document.getElementById("location_origin").value;
 
         let regionId = document.getElementById("region_id").value;
-        let mobile = document.getElementById("phone").value;
+        let phone = document.getElementById("phone").value;
         let email = document.getElementById("email").value;
 
         let date = document.getElementById("date");
         let days = document.getElementById("days");
 
         let symptoms = document.getElementsByName("symptoms");
+
+        let accept = document.getElementById("accept");
 
         //validate per current tab
         //tab 1 validation
@@ -176,7 +178,7 @@
             }
 
             //check all data in tab one
-            return (errorName || errorAge || errorSex || errorNationality || errorIdNumber || errorModeOfTransport|| errorNameOfTransport || errorArrivalDate || errorPointOfEntry) !== true;
+            return (errorName || errorAge || errorSex || errorNationality || errorIdNumber || errorModeOfTransport || errorNameOfTransport || errorArrivalDate || errorPointOfEntry) !== true;
 
             //tab 2 validation
         } else if (currentTab === 1) {
@@ -204,7 +206,7 @@
 
             //tab 3 validation
         } else if (currentTab === 2) {
-            let errorRegion = errorMobile = errorEmail = true;
+            let errorRegion = errorPhone = errorEmail = true;
 
             //validate region
             if (regionId === "") {
@@ -215,15 +217,15 @@
             }
 
             //validate mobile
-            if (mobile === "") {
-                printError("errorMobile", "Mobile is required");
+            if (phone === "") {
+                printError("errorPhone", "Phone is required");
             } else {
                 let regex = /^\d{10}$/;
-                if (regex.test(mobile) === false) {
-                    printError("errorMobile", "Invalid mobile");
+                if (regex.test(phone) === false) {
+                    printError("errorPhone", "Invalid phone");
                 } else {
-                    printError("errorMobile", "");
-                    errorMobile = false;
+                    printError("errorPhone", "");
+                    errorPhone = false;
                 }
             }
 
@@ -241,58 +243,21 @@
             }
 
             //check all data in tab one
-            return (errorRegion || errorMobile || errorEmail) !== true;
+            return (errorRegion || errorPhone || errorEmail) !== true;
 
             //tab 3 validation
         } else if (currentTab === 3) {
             let errorLocationOrigin = errorDate = errorDays = true;
 
             if (locationOrigin === "") {
-                printError("locationOrigin", "Country journey started is required");
+                printError("errorLocationOrigin", "Country journey started is required");
             } else {
-                printError("locationOrigin", "");
-                locationOrigin = false;
-            }
-
-            //date
-            if (date.length > 0) {
-                let today = new Date();
-                //date
-                let day = today.getDate();
-                day = (day < 10) ? '0' + day : day;
-
-                //month
-                let month = today.getMonth() + 1;
-                month = (month < 10) ? '0' + month : month;
-
-                //year
-                let year = today.getFullYear();
-                let currentDate = year + '-' + month + '-' + day;
-
-                for (let i = 0; i < date.length; i++) {
-                    if (date[i].value > currentDate) {
-                        printError("errorDate", "Invalid date");
-                    } else {
-                        printError("errorDate", "");
-                        errorDate = false;
-                    }
-                }
-            }
-
-            //no of days
-            if (days.length > 0) {
-                for (let i = 0; i < days.length; i++) {
-                    if (days[i].value > 21) {
-                        printError("errorDays", "Invalid number of days");
-                    } else {
-                        printError("errorDays", "");
-                        errorDays = false;
-                    }
-                }
+                printError("errorLocationOrigin", "");
+                errorLocationOrigin = false;
             }
 
             //check all data in tab 3
-            return (errorCountryOrigin || errorDate || errorDays) !== true;
+            return errorLocationOrigin !== true;
 
         } else if (currentTab === 4) {
             let errorSymptoms = true;
@@ -311,6 +276,17 @@
             //check all data in tab 3
             return (errorSymptoms) !== true;
 
+        } else if (currentTab === 5) {
+            let errorAccept = true;
+
+            if (accept.type === 'checkbox') {
+                if (accept.checked) {
+                    printError("errorAccept", "");
+                    errorAccept = false;
+                } else {
+                    printError("errorAccept", "Tick the declaration to save");
+                }
+            }
         }
         return true;
     }

@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Travellers Surveillance{% endblock %}
+
+{% block content %}
+    <!-- Page content -->
+    <div class="page-content bg-white">
+        <!-- Main content -->
+        <div class="content-wrapper">
+            <!-- Page header -->
+            <div class="page-header">
+                <div class="container-fluid">
+                    <div class="page-header-content">
+                        <div class="page-title d-flex">
+                            <div class="img">
+                                <img src="{% static 'img/CoatofArms_Lg.png' %}" alt=""/>
+                            </div>
+                            <!--./img -->
+
+                            <div id="content">
+                                <h1>The United Republic of Tanzania</h1>
+                                <h3 class="d-none d-md-block">Ministry of Health, Community Development, Gender, Elderly
+                                    and
+                                    Children</h3>
+                                <h4 class="d-block d-sm-none">MoHCDGEC</h4>
+                            </div>
+                            <!--./content -->
+                        </div>
+                        <!--./page-title -->
+                    </div>
+                    <!--./page-header-content -->
+                </div>
+                <!--./container-fluid -->
+            </div><!-- /page header -->
+
+            <!-- Content area -->
+            <div class="content">
+                <!-- Basic card -->
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title text-uppercase text-center">Travellers Surveillance</h5>
+                    </div>
+                    <!--./card-header -->
+
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="alert alert-success">
+                                            Information registered successfully.
+                                        </div>
+
+                                        <p class="text-center">Do you want to fill another form</p>
+
+                                        <div class="mt-2"></div>
+
+                                        <a href="/international"
+                                           class="btn btn-success btn-block">Yes</a>
+                                        <div class="mt-3"></div>
+                                        <a href="/"
+                                           class="btn btn-danger btn-block">No</a>
+                                    </div>
+                                </div><!--./card -->
+                            </div><!--./col-lg-12-->
+                        </div><!--./row -->
+                    </div><!--./card-body -->
+                </div><!-- /basic card -->
+            </div><!-- /content area -->
+        </div><!-- /main content -->
+    </div><!-- /page content -->
+{% endblock %}

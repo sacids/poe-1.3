@@ -190,6 +190,76 @@ navigation menu
     }
 }
 
+.text-intro{
+  margin: 0 0 20px 0;
+}
+
+.text-intro p{
+    font-size: 18px;
+    font-weight: 500;
+}
+
+
+/*===========================================
+Cards
+=============================================*/
+.card {
+    border: 0;
+    padding: 10px;
+}
+
+.card .card-header {
+    width: 100%;
+    border: 0;
+    margin: 0;
+    padding: 0;
+    background-color: #ffffff;
+}
+
+    .card-header h5.card-title {
+        padding: 0;
+        font-weight: 600;
+        text-transform: uppercase;
+    }
+
+.card .card-body {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+.card .card-footer {
+    border-radius: 0 !important;
+    margin: 0;
+    padding: 0;
+    background-color: #ffffff;
+    border: 0;
+}
+
+@media (max-width: 480px) {
+    .card {
+        border-radius: 0 !important;
+        box-shadow: none !important;
+        padding: 0 8px 0 8px;
+        margin: 0;
+    }
+
+    .card-header {
+        padding: 0;
+        margin: 0;
+    }
+
+    .card-header h5.card-title {
+        padding: 0;
+        font-weight: 600;
+        text-transform: uppercase;
+    }
+
+    .card-body {
+        padding: 0;
+    }
+}
+
 /*===========================================
 Text sizes and colors
 =============================================*/
@@ -329,20 +399,6 @@ Forms
 .asteriskField {
     color: #CC0000;
     padding-left: 5px;
-}
-
-.form-group input[type=text], input[type=email], input[type=password], input[type=number], input[type=date], textarea {
-    width: 100%;
-    font-size: 13px;
-}
-
-.form-group select {
-    width: 100%;
-    font-size: 13px;
-}
-
-.form-group select:focus {
-    background: #ffffff;
 }
 
 /*===============================================

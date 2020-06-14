@@ -84,6 +84,10 @@
 
         $(document).on('click','#travellers_table tr',function(event){
 
+            // hide search
+            $(".site-search").removeClass('search-visible');
+
+
             var row_id = $(this).attr('id');
             var id      = row_id.substring(4);
 

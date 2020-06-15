@@ -7,3 +7,4 @@ class RiskAssessmentForm(forms.ModelForm):
     class Meta:
         model       = RiskAssessment
         fields      = ['decision','reason','other_reason']
+    

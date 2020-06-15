@@ -2,6 +2,7 @@ from django.db import models
 from modules.travellers.models import Disease, Symptom, Traveller
 from django.contrib.auth.models import User
 from django.forms import ModelForm
+from multiselectfield import MultiSelectField
 
 # Create your models here.
 ANSWER = (
@@ -11,8 +12,9 @@ ANSWER = (
 )
 
 QN_CAT = (
-    ('MC',"Multiple Choice"),
-    ('FF',"Free Form"),
+    ('SELECT',"Multiple Choice"),
+    ('TEXTAREA',"Free Form"),
+    ('CHECKBOX',"Check Box"),
 )
 
 DECISION    = {
@@ -120,15 +122,15 @@ class DiseaseSurveyAns(models.Model):
 
 class RiskAssessment(models.Model):
     traveller       = models.ForeignKey(Traveller, on_delete=models.CASCADE)
-    decision        = models.CharField(choices=DECISION, max_length=50, default='MC')
-    reason          = models.CharField(choices=REASON, max_length=50, default='MC')
-    other_reason    = models.TextField()
+    decision        = models.CharField(choices=DECISION, max_length=50, default='Denied')
+    reason          = MultiSelectField(choices=REASON)
+    other_reason    = models.TextField(blank=True)
     user            = models.ForeignKey(User, on_delete=models.PROTECT)
 
     class Meta:
         db_table = "ss_risk_assessment"
 
-    #def __str__(self):
-     #   return self.traveller
+    def __str__(self):
+        return self.decision
 
 

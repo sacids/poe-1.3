@@ -12,7 +12,7 @@ def screen(request):
     # travellers  = Traveller.objects.raw("SELECT id,full_name, id_number, name_of_transport, disease_to_screen FROM et_travellers WHERE arrival_date = '"+str(datetime.today().strftime('%Y-%m-%d')+"'"))
     travellers = (Traveller.objects
                   .select_related('location_origin')
-                  # .filter(arrival_date=date.today())
+                  .filter(arrival_date=date.today())
                   .values('id', 'full_name', 'id_number', 'temp', 'name_of_transport', 'disease_to_screen',
                           'location_origin__title')
                   )

@@ -1,0 +1,31 @@
+{% extends 'backend/base.html' %}
+
+
+{% block navarea %}
+    <div class="navarea clearfix">
+        <div class="float-left p-3"><a href="{% url 'screen_traveller' traveller.id %}info">General</a></div>
+        {% for disease in diseases %}
+        <div class="float-left p-3"><a href="{% url 'survey' traveller.id disease.id %}">{{ disease.title }}</a></div>
+        {% endfor %}
+        <div class="float-left p-3"><a href="{% url 'screen_traveller' traveller.id %}action">Action</a></div>
+    </div>
+{% endblock %}
+{% block content %}
+    <div class=" ">
+        <div><h1 class="text-info text-bold">{{ traveller.full_name }} </h1></div>
+        <div> {% for symptom in symptoms %}{{ symptom.symptom__title }}, {% endfor %} </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            {{ traveller.location_origin__title}}
+            <table>
+            {% for k,v in traveller.items %}
+                {% if k != "_state" %}
+                    <tr><td>{{ k }}</td><td> : {{ v }} </td></tr>
+                {% endif %}
+            {% endfor %}
+            </table>
+        </div>
+    </div>
+{% endblock %}
+

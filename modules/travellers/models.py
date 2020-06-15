@@ -156,6 +156,7 @@ class Traveller(BaseModel):
     temp = models.FloatField(null=True)
     disease_to_screen = models.CharField(max_length=150, default='0')
     action_taken = models.CharField(max_length=100, default='None')
+    other_symptoms = models.TextField(null=True)
     updated_at = models.DateTimeField("Updated At Date", null=True)
 
     class Meta(BaseModel.Meta):

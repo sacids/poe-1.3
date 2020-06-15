@@ -1,5 +1,5 @@
 from django import forms
-from .models import Traveller, TravellerVisitedArea, TravellerSymptom, Location, PointOfEntry, Symptom
+from .models import Location, PointOfEntry, Symptom
 
 BLANK_CHOICE = ((0, '-- Select --'),)
 
@@ -105,7 +105,7 @@ class TravellerForm(forms.Form):
         attrs={'class': 'form-control', 'id': 'hotel_name', 'placeholder': 'Write hotel name...'}), required=False)
 
     region_id = forms.ModelChoiceField(label='Region',
-                                       queryset=Location.objects.filter(code="TZ-R"), empty_label='-- Select --',
+                                       queryset=Location.objects.filter(code="TZR"), empty_label='-- Select --',
                                        widget=forms.Select(
                                            attrs={'class': 'form-control', 'id': 'region_id',
                                                   'onChange': 'suggest_districts()'}))
@@ -151,3 +151,7 @@ class TravellerForm(forms.Form):
     # tab 5
     symptoms = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple(
         attrs={'id': 'symptoms'}), choices=Symptom.objects.all().values_list("id", "title"))
+
+    other_symptoms = forms.CharField(label='Other Symptoms (comma separated)', widget=forms.Textarea(
+        attrs={'class': 'form-control', 'id': 'other_symptoms', 'rows': 3,
+               'placeholder': 'Write other symptoms...'}), required=False)

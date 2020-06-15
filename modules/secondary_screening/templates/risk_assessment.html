@@ -3,7 +3,7 @@
 
 {% block navarea %}
     <div class="navarea clearfix">
-        <div class="float-left p-3"><a href="{% url 'screen_traveller' travellers.id %}">General</a></div>
+        <div class="float-left p-3"><a href="{% url 'screen_traveller' travellers.id %}info">General</a></div>
         {% for disease in diseases %}
         <div class="float-left p-3"><a href="{% url 'survey' travellers.id disease.id %}">{{ disease.title }}</a></div>
         {% endfor %}

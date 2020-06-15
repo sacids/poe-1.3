@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .models import *
-from modules.travellers.models import Traveller, Disease
+from modules.travellers.models import Traveller, Disease, TravellerSymptom
 from django.db.models import Q
 from .forms import RiskAssessmentForm
 from django.contrib.auth.decorators import login_required
@@ -32,6 +32,27 @@ def risk_assessment(request, travellers_id):
         "diseases"  : diseases
     }
     return render(request, "risk_assessment.html", context)
+
+
+@login_required
+def traveller_info(request, travellers_id): 
+
+    traveller           = Traveller.objects.select_related('location_origin').get(pk=travellers_id)
+    disease_to_screen   = traveller.disease_to_screen.split(",")
+    diseases            = Disease.objects.filter(pk__in=disease_to_screen).values()
+    symptoms            = TravellerSymptom.objects.select_related('symptom').filter(traveller_id=travellers_id).values("symptom__title")
+
+    fields              = traveller.__dict__
+
+    print(symptoms)
+
+    context = {
+        "traveller" : fields,
+        "diseases"  : diseases,
+        "symptoms"  : symptoms,
+        "search"    : False,
+    }
+    return render(request, "travellers_info.html", context)
 
 
 @login_required

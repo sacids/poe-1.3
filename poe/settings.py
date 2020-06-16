@@ -29,6 +29,7 @@ SECRET_KEY = config('SECRET_KEY')
 DEBUG = config('DEBUG', cast=bool)
 
 ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=lambda v: [s.strip() for s in v.split(',')])
+ALLOWED_HOSTS = ['127.0.0.1','localhost','poe.sacids.org',]
 
 
 # Application definition
@@ -45,6 +46,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'phone_field',
     'formtools',
+    'multiselectfield',
 
     # custom apps
     'modules.config',
@@ -158,3 +160,5 @@ MESSAGE_TAGS = {
 }
 
 # SWEETIFY_SWEETALERT_LIBRARY = 'sweetalert2'
+# Redirect to home URL after login (Default redirects to /accounts/profile/)
+LOGIN_REDIRECT_URL = '/dashboard/'

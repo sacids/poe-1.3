@@ -1,10 +1,11 @@
 import json
 import datetime
 from django.shortcuts import render
-from modules.common.views import get_sidebar, get_module_links
 from modules.travellers.models import PointOfEntry, Symptom, Traveller, TravellerSymptom
+from django.contrib.auth.decorators import login_required
 
 
+@login_required
 def dashboard(request):
     poe_series_data = list()
     passengers_series_data = list()
@@ -167,7 +168,6 @@ def dashboard(request):
 
     # attributes
     ctx = {
-        "modules": get_sidebar(),
         "sidebar": True,
         "search": False,
         "total_passengers": total_passengers,

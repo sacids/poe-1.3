@@ -9,17 +9,17 @@
                             {{ question.title }}
                         </label>
                         <div class="">            
-                            {% if question.category == "MC" %}
+                            {% if question.category == "SELECT" %}
                                 <select name="{{ question.id }}" class="select form-control" id="qn_{{ question.id }}">
                                     <option value="No" selected>No</option>
                                     <option value="Yes">Yes</option>
                                     <option value="Unknown">Unknown</option>
                                     <option value="NA">Not Applicable</option>
                                 </select>
-                            {% elif question.category == "CN" %}
+                            {% elif question.category == "CHECKBOX" %}
                                 <input type="checkbox" name="{{ question.id }}" value="a">a<br>
                                 <input type="checkbox" name="{{ question.id }}" value="b">b<br>
-                            {% elif question.category == "FF" %}
+                            {% elif question.category == "TEXTAREA" %}
                                 <textarea   rows="4" 
                                             cols="40" 
                                             name="{{ question.id }}" 

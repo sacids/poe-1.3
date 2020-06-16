@@ -67,7 +67,13 @@
 
             <!-- Show login option if flag set in context -->
             {% if login %}
-            <div class="nav-icons"><i class="fa fa-power-off"></i></div> 
+                {% if user.is_authenticated %}
+                    <a href="{% url 'logout' %}">
+                {% else %}
+                    <a href="{% url 'login' %}">
+                {% endif %}
+                        <div class="nav-icons mr-3"><i class="fa fa-power-off"></i></div>
+                    </a>
             {% endif %}
 
         </div>

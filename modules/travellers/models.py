@@ -183,8 +183,9 @@ class TravellerVisitedArea(models.Model):
 
 # Traveller symptoms
 class TravellerSymptom(models.Model):
-    traveller = models.ForeignKey(Traveller, on_delete=models.PROTECT)
-    symptom = models.ForeignKey(Symptom, on_delete=models.DO_NOTHING)
+    traveller   = models.ForeignKey(Traveller, on_delete=models.PROTECT)
+    symptom     = models.ForeignKey(Symptom, on_delete=models.DO_NOTHING)
 
     class Meta:
         db_table = "et_traveller_symptoms"
+

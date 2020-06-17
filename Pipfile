@@ -16,6 +16,7 @@ django-inplaceedit = "*"
 django-crispy-forms = "*"
 django-phone-field = "*"
 django-formtools = "*"
+django-multiselectfield = "*"
 
 [requires]
 python_version = "3.8"

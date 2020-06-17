@@ -1,4 +1,5 @@
 from django import forms
+from datetime import datetime
 from .models import Location, PointOfEntry, Symptom
 
 BLANK_CHOICE = ((0, '-- Select --'),)
@@ -62,7 +63,8 @@ class TravellerForm(forms.Form):
         attrs={'class': 'form-control', 'id': 'arrival_date', 'placeholder': 'Pick arrival date...'}), required=True)
 
     mode_of_transport = forms.ChoiceField(label='Mode of Transport', choices=TRANSPORT_MODE, widget=forms.Select(
-        attrs={'class': 'form-control', 'id': 'mode_of_transport', 'onChange': 'suggest_point_of_entries()'}), required=True)
+        attrs={'class': 'form-control', 'id': 'mode_of_transport', 'onChange': 'suggest_point_of_entries()'}),
+                                          required=True)
 
     point_of_entry = forms.ModelChoiceField(queryset=PointOfEntry.objects.all(), empty_label='-- Select--',
                                             widget=forms.Select(
@@ -141,8 +143,8 @@ class TravellerForm(forms.Form):
         attrs={'class': 'form-control', 'id': 'location_visited',
                'placeholder': 'Write location/province visited...'}), required=False)
 
-    date = forms.CharField(label='Date', widget=forms.DateInput(
-        attrs={'class': 'form-control', 'id': 'datepicker', 'placeholder': 'Pick date...'}), required=False)
+    date = forms.DateField(label='Date', widget=forms.DateInput(
+        attrs={'type': 'date', 'class': 'form-control', 'max': datetime.now()}), required=False)
 
     days = forms.CharField(label='Number of days', widget=forms.TextInput(
         attrs={'class': 'form-control', 'id': 'days', 'placeholder': 'Write number of days...',

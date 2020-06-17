@@ -46,14 +46,14 @@
                     <h5 class="card-title text-uppercase text-center font-weight-bold">
                         International Travellers Surveillance Form
                     </h5>
-                    {% for message in messages %}
-                    <div class="alert {{ message.tags }} alert-dismissible">
-                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
-                            &times;
-                        </button>
-                        {{ message }}
-                    </div>
-                    {% endfor %}
+{#                    {% for message in messages %}#}
+{#                    <div class="alert {{ message.tags }} alert-dismissible">#}
+{#                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">#}
+{#                            &times;#}
+{#                        </button>#}
+{#                        {{ message }}#}
+{#                    </div>#}
+{#                    {% endfor %}#}
                 </div>
                 <!--./card-header -->
 
@@ -443,7 +443,7 @@
                                     <div class="row mt-2">
                                         <div class="col-lg-12 col-md-12 col-sm-12 col-12">
                                             <div class="form-group">
-                                                <input type="checkbox" name="accept" id="accept"> I declare that the
+                                                <input type="checkbox" name="accept" id="accept" value="1"> I declare that the
                                                 information provided is complete and correct to
                                                 the best of my knowledge. I understand that any false information
                                                 supplied could lead to fine.

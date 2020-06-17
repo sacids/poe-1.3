@@ -284,9 +284,12 @@
                     printError("errorAccept", "");
                     errorAccept = false;
                 } else {
-                    printError("errorAccept", "Tick the declaration to save");
+                    printError("errorAccept", "Tick the declaration.");
                 }
             }
+
+            //check all data in tab 5
+            return (errorAccept) !== true;
         }
         return true;
     }

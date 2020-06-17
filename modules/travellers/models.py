@@ -157,6 +157,7 @@ class Traveller(BaseModel):
     disease_to_screen = models.CharField(max_length=150, default='0')
     action_taken = models.CharField(max_length=100, default='None')
     other_symptoms = models.TextField(null=True)
+    accept = models.IntegerField(default=0, null=True)
     updated_at = models.DateTimeField("Updated At Date", null=True)
 
     class Meta(BaseModel.Meta):
@@ -183,9 +184,8 @@ class TravellerVisitedArea(models.Model):
 
 # Traveller symptoms
 class TravellerSymptom(models.Model):
-    traveller   = models.ForeignKey(Traveller, on_delete=models.PROTECT)
-    symptom     = models.ForeignKey(Symptom, on_delete=models.DO_NOTHING)
+    traveller = models.ForeignKey(Traveller, on_delete=models.PROTECT)
+    symptom = models.ForeignKey(Symptom, on_delete=models.DO_NOTHING)
 
     class Meta:
         db_table = "et_traveller_symptoms"
-

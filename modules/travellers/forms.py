@@ -1,5 +1,5 @@
 from django import forms
-from datetime import datetime
+from datetime import date, timedelta
 from .models import Location, PointOfEntry, Symptom
 
 BLANK_CHOICE = ((0, '-- Select --'),)
@@ -59,8 +59,10 @@ class TravellerForm(forms.Form):
                                 widget=forms.TextInput(
                                     attrs={'class': 'form-control', 'id': 'id_number',
                                            'placeholder': 'Write passport number...'}), required=True)
+
     arrival_date = forms.DateField(label='Arrival Date', widget=forms.DateInput(
-        attrs={'class': 'form-control', 'id': 'arrival_date', 'placeholder': 'Pick arrival date...'}), required=True)
+        attrs={'type': 'date', 'class': 'form-control', 'id': 'arrival_date', 'min': date.today(),
+               'max': date.today() + timedelta(days=5)}), required=True)
 
     mode_of_transport = forms.ChoiceField(label='Mode of Transport', choices=TRANSPORT_MODE, widget=forms.Select(
         attrs={'class': 'form-control', 'id': 'mode_of_transport', 'onChange': 'suggest_point_of_entries()'}),
@@ -144,7 +146,8 @@ class TravellerForm(forms.Form):
                'placeholder': 'Write location/province visited...'}), required=False)
 
     date = forms.DateField(label='Date', widget=forms.DateInput(
-        attrs={'type': 'date', 'class': 'form-control', 'max': datetime.now()}), required=False)
+        attrs={'type': 'date', 'class': 'form-control', 'max': date.today(), 'min': date.today() - timedelta(days=21)}),
+                           required=False)
 
     days = forms.CharField(label='Number of days', widget=forms.TextInput(
         attrs={'class': 'form-control', 'id': 'days', 'placeholder': 'Write number of days...',

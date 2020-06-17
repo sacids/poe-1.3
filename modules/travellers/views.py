@@ -1,5 +1,6 @@
 from django import template
 import datetime
+from datetime import timedelta
 from django.shortcuts import render, render_to_response, redirect
 from .models import Traveller, TravellerVisitedArea, TravellerSymptom, Location, PointOfEntry
 from .forms import TravellerForm
@@ -11,15 +12,16 @@ def default(request):
 
 
 def international(request):
-    # countries
-    countries = Location.objects.filter(parent=0)
+    countries = Location.objects.filter(parent=0)  # countries
+    today = datetime.date.today().strftime("%Y-%m-%d")
+    last_21_days = (datetime.date.today() - timedelta(days=21)).strftime("%Y-%m-%d")
 
     # if POST
     if request.method == "POST":
         form = TravellerForm(request.POST)
 
         # attributes
-        attr = {'form': form, 'countries': countries}
+        attr = {'form': form, 'countries': countries, 'today': today, 'last_21_days': last_21_days}
 
         if form.is_valid():
             # process form data
@@ -107,7 +109,7 @@ def international(request):
 
     else:
         form = TravellerForm()
-        return render(request, 'travellers/international.html', {'form': form, 'countries': countries})
+        return render(request, 'travellers/international.html', {'form': form, 'countries': countries, 'today': today, 'last_21_days': last_21_days})
 
 
 def domestic(request):

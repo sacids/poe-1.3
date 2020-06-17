@@ -23,7 +23,7 @@
             '<div class="col-lg-6 col-md-6 col-sm-6 col-12">' +
             '<div class="form-group">' +
             '<label>Date</label>' +
-            '<input type="date" name="date" min=" " max="{% now "Y-m-d" %}" id="datepicker" class="form-control dateinput" placeholder="Pick date..."/>' +
+            '<input type="date" name="date" min="{{ last_21_days }}" max="{{ today }}" id="date" class="form-control dateinput" placeholder="Pick date..."/>' +
             '<span id="errorDate" style="color: red;"></span>' +
             '</div>' +
             '</div>' +

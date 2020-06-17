@@ -484,29 +484,5 @@
     </div><!-- /main content -->
 </div><!-- /page content -->
 {% include 'travellers/validation.html' %}
-<script type="text/javascript">
-    //disabling past date from datepicker
-    let nowDate = new Date();
-    let today = new Date(nowDate.getFullYear(), nowDate.getMonth(), nowDate.getDate(), 0, 0, 0, 0);
-
-    //arrival date
-    $('#arrival_date').datepicker({
-        format: 'yyyy-mm-dd',
-        startDate: today,
-        endDate: '+5d',
-        autoclose: true
-    });
-
-    //date
-    $("input[id=datepicker]").datepicker(
-        {
-            format: 'yyyy-mm-dd',
-            startDate: "-21d",
-            endDate: "-1d",
-            autoclose: true
-        }
-    );
-
-</script>
 
 {% endblock %}

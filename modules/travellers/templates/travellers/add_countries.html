@@ -1,6 +1,6 @@
 <script type="text/javascript">
     $(document).ready(function () {
-        let maxField = 10; //Input fields increment limitation
+        let maxField = 5; //Input fields increment limitation
         let addButton = $('.add_button'); //Add button selector
         let wrapper = $('.field_wrapper'); //Input field wrapper
         let fieldHTML = '<div class="col-lg-6 col-md-6 col-sm-6 col-12">' +
@@ -30,7 +30,7 @@
             '<div class="col-lg-6 col-md-6 col-sm-6 col-12">' +
             '<div class="form-group">' +
             '<label>Number of Days</label>' +
-            '<input type="number" min="1" name="days" id="days" class="form-control" placeholder="Write number of days..." />' +
+            '<input type="number" min="1" name="days" id="days" min="1" max="21" class="form-control" placeholder="Write number of days..." />' +
             '<span id="errorDays" style="color: red;"></span>' +
             '</div>' +
             '</div>';

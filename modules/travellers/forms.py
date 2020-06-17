@@ -82,7 +82,7 @@ class TravellerForm(forms.Form):
     # tab 2
     visiting_purpose = forms.ChoiceField(label='Visiting Purpose', choices=PURPOSE,
                                          widget=forms.Select(attrs={'class': 'form-control', 'id': 'visiting_purpose'}),
-                                         required=True)
+                                         required=False)
 
     other_purpose = forms.CharField(label='Other Purposes (If any)', widget=forms.Textarea(
         attrs={'class': 'form-control', 'id': 'other_purpose', 'rows': 3,

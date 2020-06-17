@@ -67,11 +67,10 @@
         let phone = document.getElementById("phone").value;
         let email = document.getElementById("email").value;
 
-        let date = document.getElementById("date");
-        let days = document.getElementById("days");
+        let date = document.getElementsByName("date");
+        let days = document.getElementsByName("days");
 
         let symptoms = document.getElementsByName("symptoms");
-
         let accept = document.getElementById("accept");
 
         //validate per current tab
@@ -96,7 +95,7 @@
             if (age === "") {
                 printError("errorAge", "Age is required");
             } else {
-                if (age < 0 || age > 105) {
+                if (age < 0 || age > 150) {
                     printError("errorAge", "Invalid age");
                 } else {
                     printError("errorAge", "");
@@ -190,10 +189,10 @@
                 errorDurationOfStay = false;
             } else {
                 if (durationOfStay === "") {
-                    printError("errorDurationOfStay", "duration of stay required")
+                    printError("errorDurationOfStay", "Duration of stay required")
                 } else {
                     if (durationOfStay <= 0) {
-                        printError("errorDurationOfStay", "Invalid duration of stay")
+                        printError("errorDurationOfStay", "Duration of stay should be greater than 0")
                     } else {
                         printError("errorDurationOfStay", "");
                         errorDurationOfStay = false;
@@ -222,7 +221,7 @@
             } else {
                 let regex = /^\d{10}$/;
                 if (regex.test(phone) === false) {
-                    printError("errorPhone", "Invalid phone");
+                    printError("errorPhone", "Invalid phone. e.g 0717000000");
                 } else {
                     printError("errorPhone", "");
                     errorPhone = false;
@@ -256,8 +255,45 @@
                 errorLocationOrigin = false;
             }
 
+             //date
+            if (date.length > 0) {
+                let today = new Date();
+                //date
+                let day = today.getDate();
+                day = (day < 10) ? '0' + day : day;
+
+                //month
+                let month = today.getMonth() + 1;
+                month = (month < 10) ? '0' + month : month;
+
+                //year
+                let year = today.getFullYear();
+                let currentDate = year + '-' + month + '-' + day;
+
+                for (let i = 0; i < date.length; i++) {
+                    if (date[i].value > currentDate) {
+                        printError("errorDate", "Date should not be greater or equal to today");
+                    } else {
+                        printError("errorDate", "");
+                        errorDate = false;
+                    }
+                }
+            }
+
+            //no of days
+            if (days.length > 0) {
+                for (let i = 0; i < days.length; i++) {
+                    if (days[i].value > 21) {
+                        printError("errorDays", "No. of Days should not be greater than 21");
+                    } else {
+                        printError("errorDays", "");
+                        errorDays = false;
+                    }
+                }
+            }
+
             //check all data in tab 3
-            return errorLocationOrigin !== true;
+            return (errorLocationOrigin || errorDate || errorDays) !== true;
 
         } else if (currentTab === 4) {
             let errorSymptoms = true;

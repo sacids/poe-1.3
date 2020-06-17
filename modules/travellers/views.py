@@ -49,7 +49,6 @@ def international(request):
             traveller.hotel_name = form.cleaned_data['hotel_name']
             traveller.region_id = request.POST.get('region_id')
 
-
             if request.POST.get('district_id') is None:
                 traveller.district_id = request.POST.get('district_id')
 

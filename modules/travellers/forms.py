@@ -114,9 +114,9 @@ class TravellerForm(forms.Form):
                                            attrs={'class': 'form-control', 'id': 'region_id',
                                                   'onChange': 'suggest_districts()'}))
 
-    district_id = forms.ChoiceField(label='District', choices=BLANK_CHOICE,
-                                    widget=forms.Select(attrs={'class': 'form-control', 'id': 'district_id'}),
-                                    required=False)  # todo: review it
+    district_id = forms.ModelChoiceField(label='District', queryset=Location.objects.filter(code="TZD"), empty_label='-- Select --',
+                                         widget=forms.Select(attrs={'class': 'form-control', 'id': 'district_id'}),
+                                         required=False)
 
     street_or_ward = forms.CharField(label='Street/Ward', widget=forms.TextInput(
         attrs={'class': 'form-control', 'id': 'street_or_ward', 'placeholder': 'Write street or ward...'}),

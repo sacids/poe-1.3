@@ -48,10 +48,14 @@ def international(request):
             traveller.physical_address = form.cleaned_data['physical_address']
             traveller.hotel_name = form.cleaned_data['hotel_name']
             traveller.region_id = request.POST.get('region_id')
-            # traveller.district_id = request.POST.get('district_id')
+
+
+            if request.POST.get('district_id') is None:
+                traveller.district_id = request.POST.get('district_id')
+
             traveller.street_or_ward = form.cleaned_data['street_or_ward']
             traveller.phone = form.cleaned_data['phone']
-            traveller.email = form.cleaned_data['email']
+            traveller.email = form.cleaned_data['email'].lower()
 
             traveller.location_origin_id = request.POST.get('location_origin')
             traveller.other_symptoms = request.POST.get('other_symptoms')
@@ -109,7 +113,8 @@ def international(request):
 
     else:
         form = TravellerForm()
-        return render(request, 'travellers/international.html', {'form': form, 'countries': countries, 'today': today, 'last_21_days': last_21_days})
+        return render(request, 'travellers/international.html',
+                      {'form': form, 'countries': countries, 'today': today, 'last_21_days': last_21_days})
 
 
 def domestic(request):

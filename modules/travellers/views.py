@@ -8,20 +8,47 @@ from django.contrib import messages
 
 
 def default(request):
+    """ 
+    Default page. 
+
+    Function to display the default page. 
+
+    Parameters: 
+    None 
+
+    Returns: 
+    None
+
+    """
     return render(request, 'travellers/home.html', {})
 
 
 def international(request):
+    """
+    International Travellers Form.
+
+    Function for display and submit international travellers information.
+
+    Parameters:
+    None
+
+    Returns:
+    None
+
+    """
+
     countries = Location.objects.filter(parent=0)  # countries
     today = datetime.date.today().strftime("%Y-%m-%d")
-    last_21_days = (datetime.date.today() - timedelta(days=21)).strftime("%Y-%m-%d")
+    last_21_days = (datetime.date.today() -
+                    timedelta(days=21)).strftime("%Y-%m-%d")
 
     # if POST
     if request.method == "POST":
         form = TravellerForm(request.POST)
 
         # attributes
-        attr = {'form': form, 'countries': countries, 'today': today, 'last_21_days': last_21_days}
+        attr = {'form': form, 'countries': countries,
+                'today': today, 'last_21_days': last_21_days}
 
         if form.is_valid():
             # process form data
@@ -103,10 +130,12 @@ def international(request):
                 traveller_up.disease_to_screen = score
                 traveller_up.save()
 
-            messages.add_message(request, messages.SUCCESS, 'Success! Saved Successfully!')
+            messages.add_message(request, messages.SUCCESS,
+                                 'Success! Saved Successfully!')
             return redirect('/success')
         else:
-            messages.add_message(request, messages.WARNING, 'Warning! Please check all the fields!')
+            messages.add_message(request, messages.WARNING,
+                                 'Warning! Please check all the fields!')
 
         return render(request, 'travellers/international.html', attr)
 
@@ -121,15 +150,41 @@ def domestic(request):
 
 
 def success(request):
+    """
+    Success page.
+
+    Function to display success page
+
+    Parameters:
+    None
+
+    Returns:
+    None
+
+    """
     return render(request, 'travellers/success.html', {})
 
 
 def calculate_score(traveller_id):
+    """
+    Calculate score
+
+    Function to calculate score
+
+    Parameters:
+    int: unique id of traveller
+
+    Returns:
+    int: calculated score
+
+    """
     from django.db import connection
     cur = connection.cursor()
 
-    criteria = build_criteria_query(get_travellers_countries(traveller_id), get_travellers_symptoms(traveller_id))
-    query = "SELECT id,disease_id FROM et_ss_criteria WHERE active = '1' AND ( " + criteria + " )"
+    criteria = build_criteria_query(get_travellers_countries(
+        traveller_id), get_travellers_symptoms(traveller_id))
+    query = "SELECT id,disease_id FROM et_ss_criteria WHERE active = '1' AND ( " + \
+        criteria + " )"
 
     cur.execute(query)
     connection.commit()
@@ -145,28 +200,76 @@ def calculate_score(traveller_id):
 
 
 def build_criteria_query(countries, symptoms):
+    """
+    Build criteria algorthm query
+
+    Function to build query for calculating criteria
+
+    Parameters:
+    array: countries
+    array: symptoms
+
+    Returns:
+    str: query
+
+    """
+
     q = []
     if len(list(symptoms)) != 0:
-        s = "( symptoms LIKE '%S" + "S%' OR symptoms LIKE '%S".join(str(x.id) for x in symptoms) + "S%')"
+        s = "( symptoms LIKE '%S" + "S%' OR symptoms LIKE '%S".join(str(x.id)
+                                                                    for x in symptoms) + "S%')"
         q.append(s)
     if len(list(countries)) != 0:
-        c = "( countries LIKE '%C" + "C%' OR countries LIKE '%C".join(str(x.id) for x in countries) + "C%')"
+        c = "( countries LIKE '%C" + "C%' OR countries LIKE '%C".join(str(x.id)
+                                                                      for x in countries) + "C%')"
         q.append(c)
 
     return ' AND '.join(q)
 
 
 def get_travellers_countries(tv_id):
+    """
+    Query lists ot countries traveller visited
+
+    Parameters:
+    int: unique id of traveller
+
+    Returns:
+    array: list of registered countries
+
+    """
     countries = TravellerVisitedArea.objects.filter(traveller_id=tv_id)
     return countries
 
 
 def get_travellers_symptoms(tv_id):
+    """
+    Query lists ot symptoms traveller reported
+
+    Parameters:
+    int: unique id of traveller
+
+    Returns:
+    array: list of symptoms
+
+    """
+
     symptoms = TravellerSymptom.objects.filter(traveller_id=tv_id)
     return symptoms
 
 
 def auto_districts(request):
+    """
+    Auto select district from region 
+
+    Parameters:
+    int: id of region (GET)
+
+    Returns:
+    None
+
+    """
+
     if request.method == 'GET':
         region_id = request.GET.get('region_id')
         districts = Location.objects.filter(parent=region_id)
@@ -176,9 +279,21 @@ def auto_districts(request):
 
 
 def auto_point_of_entries(request):
+    """
+    Auto select point of entries from mode of transport
+
+    Parameters:
+    str: mode of transport (GET)
+
+    Returns:
+    None
+
+    """
+
     if request.method == 'GET':
         mode_of_transport = request.GET.get('mode_of_transport')
-        point_of_entries = PointOfEntry.objects.filter(mode_of_transport=mode_of_transport)
+        point_of_entries = PointOfEntry.objects.filter(
+            mode_of_transport=mode_of_transport)
 
         # return response
         return render_to_response('travellers/auto_point_of_entries.html', {'point_of_entries': point_of_entries})

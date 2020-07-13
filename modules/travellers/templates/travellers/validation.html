@@ -26,7 +26,7 @@
         let x = document.getElementsByClassName("tab");
 
         // Exit the function if any field in the current tab is invalid:
-        if (n === 1 && !validateForm()) return false;
+        //if (n === 1 && !validateForm()) return false;
         // Hide the current tab:
         x[currentTab].style.display = "none";
         // Increase or decrease the current tab by 1:
@@ -184,7 +184,7 @@
             let errorEmployment = errorDurationOfStay = true;
 
             //validate duration of stay
-            if (nationality === 2) {
+            if (nationality === 217) {
                 printError("errorDurationOfStay", "");
                 errorDurationOfStay = false;
             } else {

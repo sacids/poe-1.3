@@ -37,6 +37,11 @@ EMPLOYMENT = (
 
 # Traveller
 class TravellerForm(forms.Form):
+    """
+    A class to create traveller form.
+
+    """
+
     full_name = forms.CharField(
         label='Traveller Name (Three names [3])',
         widget=forms.TextInput(attrs={'class': 'form-control', 'id': 'full_name', 'placeholder': "Write full name..."}),

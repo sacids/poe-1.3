@@ -59,11 +59,11 @@ class Disease(models.Model):
 
 # symptoms
 class Symptom(models.Model):
-    """A class to create symptoms table."""
- title = models.CharField(max_length=100)
-  alias = models.CharField(max_length=100)
+    """ Class to create Symptom model"""
+    title = models.CharField(max_length=100)
+    alias = models.CharField(max_length=100)
 
-   class Meta:
+    class Meta:
         db_table = "et_symptoms"
 
     def __str__(self):
@@ -118,7 +118,7 @@ class LocationDisease(models.Model):
 
 # point of entries
 class PointOfEntry(models.Model):
-     """A class to create point of entries table."""
+    """A class to create point of entries table."""
     title = models.CharField(max_length=255)
     mode_of_transport = models.CharField(max_length=50, null=True)
 
@@ -131,7 +131,7 @@ class PointOfEntry(models.Model):
 
 # travellers
 class Traveller(BaseModel):
-     """A class to create travellers table."""
+    """A class to create travellers table."""
     full_name = models.CharField(max_length=250)
     type = models.CharField(choices=FORM_TYPE, max_length=25, default='none')
     sex = models.CharField(choices=SEX, max_length=15, default='none')
@@ -182,7 +182,7 @@ class Traveller(BaseModel):
 
 # Traveller visited area
 class TravellerVisitedArea(models.Model):
-     """A class to create traceller visited areas table."""
+    """A class to create traceller visited areas table."""
     traveller = models.ForeignKey(Traveller, on_delete=models.PROTECT)
     location = models.ForeignKey(Location, on_delete=models.DO_NOTHING)
     location_visited = models.CharField(max_length=250, null=True)
@@ -198,7 +198,7 @@ class TravellerVisitedArea(models.Model):
 
 # Traveller symptoms
 class TravellerSymptom(models.Model):
-     """A class to create traveller symptoms table."""
+    """A class to create traveller symptoms table."""
     traveller = models.ForeignKey(Traveller, on_delete=models.PROTECT)
     symptom = models.ForeignKey(Symptom, on_delete=models.DO_NOTHING)
 

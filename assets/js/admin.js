@@ -35,6 +35,8 @@ $(document).ready(function(){
 
     $('.fa-times-circle').on('click', function(){
         $(".site-search").removeClass('search-visible');
+        $("#site_search").val('');
+        oTable.search($(this).val()).draw() ;
     });
     
 

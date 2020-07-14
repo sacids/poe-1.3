@@ -5,6 +5,7 @@ from django.db.models import Q
 from .forms import RiskAssessmentForm
 from django.contrib.auth.decorators import login_required
 
+
 # Create your views here.
 
 @login_required
@@ -12,27 +13,34 @@ def risk_assessment(request, travellers_id):
     # create object of form 
     instance    = RiskAssessment.objects.filter(traveller_id=travellers_id).first()
 
-    travellers          = Traveller.objects.select_related('location_origin').get(pk=travellers_id)
-    disease_to_screen   = travellers.disease_to_screen.split(",")
+    traveller           = Traveller.objects.select_related('location_origin').get(pk=travellers_id)
+    disease_to_screen   = traveller.disease_to_screen.split(",")
     diseases            = Disease.objects.filter(pk__in=disease_to_screen).values()
+
+    fields              = traveller.__dict__
     
+
     if request.method   == "POST":
         form        = RiskAssessmentForm(request.POST, instance=instance) 
         if form.is_valid(): 
             action              = form.save(commit=False)
             action.traveller_id = travellers_id
             action.user_id      = 1
-            action.save() 
+            action.save()
+            form_submitted      = True
     else:
         form        = RiskAssessmentForm(instance=instance)
+        form_submitted      = False
     
     context = {
         "form"      : form,
-        "travellers": travellers,
-        "diseases"  : diseases
+        "traveller" : fields,
+        "travellers": traveller,
+        "diseases"  : diseases,
+        "form_submitted": form_submitted,
     }
-    return render(request, "risk_assessment.html", context)
 
+    return render(request, "risk_assessment.html", context)
 
 @login_required
 def traveller_info(request, travellers_id): 
@@ -44,10 +52,11 @@ def traveller_info(request, travellers_id):
 
     fields              = traveller.__dict__
 
-    print(symptoms)
+    #print(symptoms)
 
     context = {
         "traveller" : fields,
+        "travellers": traveller,
         "diseases"  : diseases,
         "symptoms"  : symptoms,
         "search"    : False,
@@ -69,17 +78,17 @@ def screen_list(request):
     return render(request, 'screen_list.html', context)
 
 
-
-
 @login_required
 def screen_traveller(request, travellers_id):
 
-    travellers          = Traveller.objects.select_related('location_origin').get(pk=travellers_id)
-    disease_to_screen   = travellers.disease_to_screen.split(",")
+    traveller           = Traveller.objects.select_related('location_origin').get(pk=travellers_id)
+    disease_to_screen   = traveller.disease_to_screen.split(",")
     diseases            = Disease.objects.filter(pk__in=disease_to_screen).values()
+    fields              = traveller.__dict__
 
     context = {
-        "travellers": travellers,
+        "traveller"     : fields,
+        "travellers": traveller,
         "diseases": diseases
     }
 
@@ -91,9 +100,10 @@ def survey(request, travellers_id, disease_id):
   
     questions           = DiseaseSurveyQns.objects.filter(disease_id=disease_id)
     answers             = DiseaseSurveyAns.objects.filter(disease_id=disease_id,traveller_id=travellers_id).values('id','question_id','title')
-    travellers          = Traveller.objects.select_related('location_origin').get(pk=travellers_id)
-    disease_to_screen   = travellers.disease_to_screen.split(",")
+    traveller           = Traveller.objects.select_related('location_origin').get(pk=travellers_id)
+    disease_to_screen   = traveller.disease_to_screen.split(",")
     diseases            = Disease.objects.filter(pk__in=disease_to_screen).values()
+    fields              = traveller.__dict__
 
     # tuple for storing answers if any
     ans_list            = {}
@@ -121,7 +131,8 @@ def survey(request, travellers_id, disease_id):
         form_submitted      = False
 
     context = {
-        "travellers"    : travellers,
+        "traveller"     : fields,
+        "travellers"    : traveller,
         "diseases"      : diseases,
         'questions'     : questions,
         'answers'       : ans_list,

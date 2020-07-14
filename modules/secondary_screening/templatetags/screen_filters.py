@@ -1,5 +1,4 @@
 from django import template
-from datetime import date, timedelta
 
 register = template.Library()
 
@@ -7,4 +6,10 @@ register = template.Library()
 def get_answer(array,key):
     if key in array:
         return array[key]
+    return False
+
+@register.filter(name='zget_id')
+def zget_id(array):
+    if 'id' in array:
+        return array['id']
     return False

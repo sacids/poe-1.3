@@ -1,13 +1,7 @@
 {% extends 'backend/base.html' %}
 
 {% block navarea %}
-    <div class="navarea clearfix">
-        <div class="float-left p-3"><a href="{% url 'screen_traveller' travellers.id %}info">General</a></div>
-        {% for disease in diseases %}
-            <div class="float-left p-3"><a href="{% url 'survey' travellers.id disease.id %}">{{ disease.title }}</a></div>
-        {% endfor %}
-        <div class="float-left p-3"><a href="{% url 'screen_traveller' travellers.id %}action">Action</a></div>
-    </div>
+    {% include 'navarea.html' %}
 {% endblock %}
 
 {% block content %}

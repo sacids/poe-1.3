@@ -2,24 +2,22 @@
 {% load crispy_forms_tags %}
 
 {% block navarea %}
-    <div class="navarea clearfix">
-        <div class="float-left p-3"><a href="{% url 'screen_traveller' travellers.id %}info">General</a></div>
-        {% for disease in diseases %}
-        <div class="float-left p-3"><a href="{% url 'survey' travellers.id disease.id %}">{{ disease.title }}</a></div>
-        {% endfor %}
-        <div class="float-left p-3"><a href="{% url 'screen_traveller' travellers.id %}action">Action</a></div>
-    </div>
+    {% include 'navarea.html' %}
 {% endblock %}
 
 {% block content %}
-    <form method="post" action="">
-    {% csrf_token %}
-    
-    <div class="row">
-        <div class="col-lg-6">
-        {{form|crispy }}
-        <input type="submit" value="Submit Form"/>
+    {% if not form_submitted %}
+        <form method="post" action="">
+        {% csrf_token %}
+        
+        <div class="row">
+            <div class="col-lg-6">
+            {{form|crispy }}
+            <input type="submit" value="Submit Form"/>
+            </div>
         </div>
-    </div>
-    </form>
+        </form>
+    {% else %}
+        <span>Data Received</div>
+    {% endif %}
 {% endblock %}

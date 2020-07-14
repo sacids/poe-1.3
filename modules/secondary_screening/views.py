@@ -88,30 +88,43 @@ def screen_traveller(request, travellers_id):
 
 @login_required
 def survey(request, travellers_id, disease_id):
+  
+    questions           = DiseaseSurveyQns.objects.filter(disease_id=disease_id)
+    answers             = DiseaseSurveyAns.objects.filter(disease_id=disease_id,traveller_id=travellers_id).values('id','question_id','title')
+    travellers          = Traveller.objects.select_related('location_origin').get(pk=travellers_id)
+    disease_to_screen   = travellers.disease_to_screen.split(",")
+    diseases            = Disease.objects.filter(pk__in=disease_to_screen).values()
 
+    # tuple for storing answers if any
+    ans_list            = {}
+    for ans in answers:
+        question_id     = ans['question_id']
+        title           = ans['title']
+        ans_list[question_id]   = title
+
+    
+    #print(answers)
     if request.method == "POST":
         for qn_id, ans in request.POST.items():
             survey_ans                  = DiseaseSurveyAns()
             survey_ans.disease_id       = disease_id
             survey_ans.traveller_id     = travellers_id
+
             if qn_id != 'csrfmiddlewaretoken':
-                #print(qn_id+ans)
-                survey_ans.question_id  = qn_id
-                survey_ans.title        = ans
-                survey_ans.save()
+                DiseaseSurveyAns.objects.update_or_create(
+                    disease_id=disease_id,traveller_id=travellers_id,question_id=qn_id,
+                    defaults={'question_id':qn_id,'title':ans}
+                )
+           
         form_submitted      = True
     else:
         form_submitted      = False
-    
-    questions           = DiseaseSurveyQns.objects.filter(disease_id=disease_id)
-    travellers          = Traveller.objects.select_related('location_origin').get(pk=travellers_id)
-    disease_to_screen   = travellers.disease_to_screen.split(",")
-    diseases            = Disease.objects.filter(pk__in=disease_to_screen).values()
 
     context = {
         "travellers"    : travellers,
         "diseases"      : diseases,
         'questions'     : questions,
+        'answers'       : ans_list,
         "form_submitted": form_submitted,
     }
     return render(request,'screen_traveller.html',context)

@@ -59,7 +59,7 @@ class Disease(models.Model):
 
 # symptoms
 class Symptom(models.Model):
-    """ Class to create Symptom model"""
+    """A class to create symptoms table."""
     title = models.CharField(max_length=100)
     alias = models.CharField(max_length=100)
 

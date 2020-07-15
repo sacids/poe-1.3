@@ -133,7 +133,7 @@ class TravellerForm(forms.Form):
     email = forms.CharField(label='Email', widget=forms.EmailInput(
         attrs={'class': 'form-control', 'id': 'email',
                'placeholder': 'Write email address...',
-               'onkeyup': "this.value.toLowerCase()"}), required=True)
+               'onkeyup': "this.value.toLowerCase()"}), required=False)
 
     # tab 4
     location_origin = forms.ModelChoiceField(label='Country where journey started',

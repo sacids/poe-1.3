@@ -1,8 +1,4 @@
-{% extends 'base.html' %}
-{% load static %}
-{% block title %}Travellers Surveillance{% endblock %}
-
-{% block content %}
+{% extends 'base.html' %} {% load static %} {% block title %}Travellers Surveillance{% endblock %} {% block content %}
 <!-- Page content -->
 <div class="page-content bg-white">
     <!-- Main content -->
@@ -19,8 +15,8 @@
 
                         <div id="content">
                             <h1>The United Republic of Tanzania</h1>
-                            <h3 class="d-none d-md-block">Ministry of Health, Community Development, Gender, Elderly and
-                                Children</h3>
+                            <h3 class="d-none d-md-block">Ministry of Health, Community Development, Gender, Elderly and Children
+                            </h3>
                             <h4 class="d-block d-sm-none">MoHCDGEC</h4>
                         </div>
                         <!--./content -->
@@ -30,7 +26,8 @@
                 <!--./page-header-content -->
             </div>
             <!--./container-fluid -->
-        </div><!-- /page header -->
+        </div>
+        <!-- /page header -->
 
         <!-- Content area -->
         <div class="content">
@@ -45,14 +42,12 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="text-intro">
-                                <p><b>Travellers Surveillance</b> an online web based system to help capturing and managing traveller’s health details
-                                    during fighting against pandemic
-                                    diseases such as COVID-19 and Ebola.</p>
+                                <p><b>Travellers Surveillance</b> an online web based system to help capturing and managing traveller’s health details during fighting against pandemic diseases such as COVID-19 and Ebola.</p>
                             </div>
                             <!--./text-intro-->
 
                             <div class="text-center">
-                                <div class="dropdown">
+                                <!-- <div class="dropdown">
                                     <button style="width: 200px;" class="btn btn-outline-primary dropdown-toggle"
                                         type="button" id="dropdownMenuButton" data-toggle="dropdown"
                                         aria-haspopup="true" aria-expanded="false">
@@ -66,12 +61,11 @@
                                                 src="{% static 'img/tz_flag.png' %}" alt="" /> SWA
                                         </a>
                                     </div>
-                                </div>
+                                </div> -->
                                 <!--./dropdown -->
                                 <div class="mt-4"></div>
 
-                                <a style="width: 200px;" href="{% url 'travellers:international' %}"
-                                    class="btn btn-primary btn-sm text-uppercase">International</a>
+                                <a style="width: 200px;" href="{% url 'travellers:international' %}" class="btn btn-primary btn-sm text-uppercase">International</a>
                                 <div class="mt-4"></div>
                                 <!-- <a style="width: 200px;" href="{% url 'travellers:domestic' %}"
                                     class="btn btn-secondary btn-sm text-uppercase">Domestic</a> -->
@@ -83,8 +77,12 @@
                     <!--./row -->
                 </div>
                 <!--./card-body -->
-            </div><!-- /basic card -->
-        </div><!-- /content area -->
-    </div><!-- /main content -->
-</div><!-- /page content -->
+            </div>
+            <!-- /basic card -->
+        </div>
+        <!-- /content area -->
+    </div>
+    <!-- /main content -->
+</div>
+<!-- /page content -->
 {% endblock %}

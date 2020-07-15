@@ -1,5 +1,5 @@
 <script type="text/javascript">
-    $(document).ready(function () {
+    $(document).ready(function() {
         let maxField = 5; //Input fields increment limitation
         let addButton = $('.add_button'); //Add button selector
         let wrapper = $('.field_wrapper'); //Input field wrapper
@@ -9,15 +9,15 @@
             '<select name="location" id="location" class="form-control">' +
             '<option value="">-- Select --</option>' +
             "{% for country in countries %}" +
-                "<option value='{{ country.id }}'>{{ country.title }}</option>" +
-                "{% endfor %}" +
+            "<option value='{{ country.id }}'>{{ country.title }}</option>" +
+            "{% endfor %}" +
             '</select>' +
             '</div>' +
             '</div>' +
             '<div class="col-lg-6 col-md-6 col-sm-6 col-12">' +
             '<div class="form-group">' +
-            '<label>Location Visited</label>' +
-            '<input type="text" name="location_visited" id="location_visited" class="form-control" placeholder="Write a location/provice visited..." />' +
+            '<label>Location/Province</label>' +
+            '<input type="text" name="location_visited" id="location_visited" class="form-control" placeholder="Write a location/province visited..." />' +
             '</div>' +
             '</div>' +
             '<div class="col-lg-6 col-md-6 col-sm-6 col-12">' +
@@ -37,7 +37,7 @@
 
         let x = 1; //Initial field counter is 1
         //Once add button is clicked
-        $(addButton).click(function () {
+        $(addButton).click(function() {
             //Check maximum number of input fields
             if (x < maxField) {
                 x++; //Increment field counter
@@ -46,7 +46,7 @@
         });
 
         //Once remove button is clicked
-        $(wrapper).on('click', '.remove_button', function (e) {
+        $(wrapper).on('click', '.remove_button', function(e) {
             e.preventDefault();
             $(this).parent('div').remove(); //Remove field html
             x--; //Decrement field counter

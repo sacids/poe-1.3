@@ -184,7 +184,7 @@
             let errorEmployment = errorDurationOfStay = true;
 
             //validate duration of stay
-            if (nationality === 217) {
+            if (nationality === '217') {
                 printError("errorDurationOfStay", "");
                 errorDurationOfStay = false;
             } else {
@@ -229,15 +229,20 @@
             }
 
             //validate email
-            if (email === "") {
-                printError("errorEmail", "Email is required");
+            if (nationality === '217') {
+                printError("errorEmail", "");
+                errorEmail = false;
             } else {
-                let regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-                if (regex.test(email) === false) {
-                    printError("errorEmail", "Invalid email address");
+                if (email === "") {
+                    printError("errorEmail", "Email is required");
                 } else {
-                    printError("errorEmail", "");
-                    errorEmail = false;
+                    let regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+                    if (regex.test(email) === false) {
+                        printError("errorEmail", "Invalid email address");
+                    } else {
+                        printError("errorEmail", "");
+                        errorEmail = false;
+                    }
                 }
             }
 
@@ -255,7 +260,7 @@
                 errorLocationOrigin = false;
             }
 
-             //date
+            //date
             if (date.length > 0) {
                 let today = new Date();
                 //date

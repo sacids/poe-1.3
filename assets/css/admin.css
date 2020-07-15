@@ -101,7 +101,7 @@
   
 
   .screen td{
-    background-color:#17a2b8 !important;
+    background-color:#ef5350 !important;
     color: white;
   }
 
@@ -117,6 +117,7 @@
 
   .dataTable thead {
     background-color: #283d33;
+    background-color: #5d5b5b;
     letter-spacing: .025em;
     color: #fff;
   }

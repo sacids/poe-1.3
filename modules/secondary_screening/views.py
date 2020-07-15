@@ -2,6 +2,7 @@ from django.shortcuts import render
 from .models import *
 from modules.travellers.models import Traveller, Disease, TravellerSymptom
 from django.db.models import Q
+from datetime import datetime, date
 from .forms import RiskAssessmentForm
 from django.contrib.auth.decorators import login_required
 
@@ -11,7 +12,7 @@ from django.contrib.auth.decorators import login_required
 @login_required
 def risk_assessment(request, travellers_id): 
     # create object of form 
-    instance    = RiskAssessment.objects.filter(traveller_id=travellers_id).first()
+    instance            = RiskAssessment.objects.filter(traveller_id=travellers_id).first()
 
     traveller           = Traveller.objects.select_related('location_origin').get(pk=travellers_id)
     disease_to_screen   = traveller.disease_to_screen.split(",")
@@ -69,6 +70,7 @@ def screen_list(request):
     travellers  =   (Traveller.objects
                             .select_related('location_origin')
                             .filter(~Q(disease_to_screen=0))
+                            .filter(arrival_date=date.today())
                             .values('id','full_name', 'id_number','temp', 'name_of_transport', 'disease_to_screen','location_origin__title')
                     )
     

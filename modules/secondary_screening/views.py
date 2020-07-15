@@ -69,8 +69,7 @@ def traveller_info(request, travellers_id):
 def screen_list(request):
     travellers  =   (Traveller.objects
                             .select_related('location_origin')
-                            .filter(~Q(disease_to_screen=0))
-                            .filter(arrival_date=date.today())
+                            .filter(~Q(disease_to_screen=0),Q(arrival_date=date.today()))
                             .values('id','full_name', 'id_number','temp', 'name_of_transport', 'disease_to_screen','location_origin__title')
                     )
     

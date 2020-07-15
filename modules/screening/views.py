@@ -36,15 +36,24 @@ def travellers_asJson(request):
 def set_temp(request):
     if request.method == 'GET':
         Trav = Traveller.objects.get(pk=request.GET.get("id"))
-        Trav.temp = request.GET.get('temp')
+        Temp = request.GET.get('temp')
+        Trav.temp   = Temp
+
+        if Temp > 38:
+            res     = 2
+        elif Temp < 36:
+            res     = 2
+        else:
+            res     = 1
+
         Trav.save()
 
-    return HttpResponse(1)
+    return HttpResponse(res)
 
 
 def score(request):
     if request.method == 'GET':
         id = request.GET.get("id")
-        # score = calculate_score(id)
+        #score = calculate_score(id)
 
     return HttpResponse(score)

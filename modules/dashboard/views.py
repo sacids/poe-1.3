@@ -200,8 +200,8 @@ def calc_percentage(num, total):
             if percent > 100:
                 return 100
             else:
-                return percent
+                return round(percent, 1)
         else:
             return 0
     else:
-        return percent
+        return round(percent, 1)

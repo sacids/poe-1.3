@@ -18,6 +18,7 @@ django-crispy-forms = "*"
 django-phone-field = "*"
 django-formtools = "*"
 django-multiselectfield = "*"
+faker = "*"
 
 [requires]
 python_version = "3.8"

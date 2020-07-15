@@ -118,7 +118,6 @@ class LocationDisease(models.Model):
 
 # point of entries
 class PointOfEntry(models.Model):
-
     """A class to create point of entries table."""
     title = models.CharField(max_length=255)
     mode_of_transport = models.CharField(max_length=50, null=True)

@@ -128,8 +128,8 @@
                 url:url
             }).done(function (data){
                 
-                if(data > 0) $('#row_'+id+' .temp').html(temp);
-                if(data = 2) $('#row_'+id).addClass('screen');
+                if(data >  0) $('#row_'+id+' .temp').html(temp);
+                if(data == 2) $('#row_'+id).addClass('screen');
 
             }).fail(function(jqXHR, textStatus, errorThrown){
                 alert('Failed to update temp');

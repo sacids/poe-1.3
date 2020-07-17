@@ -38,6 +38,31 @@ $(document).ready(function(){
         $("#site_search").val('');
         oTable.search($(this).val()).draw() ;
     });
+
+    $(document).on('click','#set_poe_btn',function(event){
+
+        var poe_id      = $('#set_poe').val();
+        var url     = window.location.origin+'/common/set_poe?poe_id='+poe_id;
+
+        var jqXHR = $.ajax({
+            type:"GET",
+            url:url
+        }).done(function (data){
+            
+            $('#poe_title').html(data);
+            location.reload();
+
+        }).fail(function(jqXHR, textStatus, errorThrown){
+            alert('Failed to update PoE');
+            if ( console && console.log ) {
+                console.log("Loading Ajax: " + textStatus + ", " + errorThrown);
+            }
+
+        }).always(function() {
+
+        });
+
+    });
     
 
 });

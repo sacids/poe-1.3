@@ -67,11 +67,16 @@ def traveller_info(request, travellers_id):
 
 @login_required
 def screen_list(request):
+
+    poe_id = request.session.get('poe_id')
+
     travellers  =   (Traveller.objects
                             .select_related('location_origin')
-                            .filter(~Q(disease_to_screen=0),Q(arrival_date=date.today()))
+                            .filter(~Q(disease_to_screen=0),Q(arrival_date=date.today(),))
                             .values('id','full_name', 'id_number','temp', 'name_of_transport', 'disease_to_screen','location_origin__title')
                     )
+    if poe_id:
+        travellers  = travellers.filter(Q(point_of_entry_id=poe_id))
     
     context = {
         "travellers": travellers

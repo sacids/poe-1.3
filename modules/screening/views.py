@@ -9,6 +9,8 @@ from django.contrib.auth.decorators import login_required
 
 @login_required
 def screen(request):
+    poe_id = request.session.get('poe_id')
+    print(poe_id)
     # travellers  = Traveller.objects.raw("SELECT id,full_name, id_number, name_of_transport, disease_to_screen FROM et_travellers WHERE arrival_date = '"+str(datetime.today().strftime('%Y-%m-%d')+"'"))
     travellers = (Traveller.objects
                   .select_related('location_origin')
@@ -16,8 +18,13 @@ def screen(request):
                   .values('id', 'full_name', 'id_number', 'temp', 'name_of_transport', 'disease_to_screen',
                           'location_origin__title')
                   )
+    if poe_id != 0:
+        travellers  = travellers.filter(point_of_entry_id=poe_id)
+
+
     temp_a = range(34, 41)
     temp_b = range(1, 10)
+    
 
     context = {
         "travellers": travellers,
@@ -36,7 +43,7 @@ def travellers_asJson(request):
 def set_temp(request):
     if request.method == 'GET':
         Trav = Traveller.objects.get(pk=request.GET.get("id"))
-        Temp = request.GET.get('temp')
+        Temp = float(request.GET.get('temp'))
         Trav.temp   = Temp
 
         if Temp > 38:

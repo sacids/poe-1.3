@@ -22,6 +22,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('dashboard/', include("modules.dashboard.urls")),
     path('screen/', include("modules.screening.urls")),
+    path('common/', include("modules.common.urls")),
     path('accounts/', include("django.contrib.auth.urls")),
     path('sec_screen/', include("modules.secondary_screening.urls")),
     path('', include("modules.travellers.urls")),

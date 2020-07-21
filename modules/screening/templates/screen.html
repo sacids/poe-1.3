@@ -1,25 +1,25 @@
 {% extends 'backend/base.html' %}
 
 {% block navarea %}
-    <div class="p-2">
-        <div class="float-left">
+    <div class="p-1">
+        <div class="float-left pl-2">
             <div style="font-size: 1.2em" id="full_name" class="font-weight-bold"></div>
             <div id="id_number" style="font-size: 0.8em"></div>
             <div id="name_of_transport" style="font-size: 0.8em"></div>
         </div>
         <div class="float-right mx-2">
             <input type="hidden" id="travellers_id" name="id">
-            <button type="button" class="btn btn-info btn-block" id="set_temp" style="font-size: 2.1em;margin-top:5px;margin-right:30px;">SET</button>
+            <button type="button" class="btn btn-info btn-block" id="set_temp" style="font-size: 1.7em;margin-top:5px;margin-right:30px;">SET</button>
         </div>
-        <div class="float-right" style="font-size: 3.1em" >               
+        <div class="float-right" style="font-size: 2.7em" >               
             <select class="" id="temp_b">
             {% for i in temp_b %}
                 <option value="{{i}}">{{i}}</option>
             {% endfor %}
             </select>
         </div>
-        <div class="float-right" style="font-size: 3.1em">.</div>
-        <div class="float-right" style="font-size: 3.1em">
+        <div class="float-right" style="font-size: 2.7em">.</div>
+        <div class="float-right" style="font-size: 2.7em">
             <select class="" id="temp_a">
             {% for i in temp_a %}
                 <option value="{{i}}">{{i}}</option>
@@ -132,7 +132,7 @@
                 
                 if(data >  0) $('#row_'+id+' .temp').html(temp);
                 if(data == 2) $('#row_'+id).addClass('screen');
-                if(data == 1) $('#row_'+id).removeClass('screen');
+                //if(data == 1) $('#row_'+id).removeClass('screen');
 
             }).fail(function(jqXHR, textStatus, errorThrown){
                 alert('Failed to update temp');

@@ -12,7 +12,7 @@
 
   .navopt{
     height: 80px;
-    padding: 18px 27px;
+    padding: 18px 18px;
     font-size: 2em;
   }
   .set_poe_div{
@@ -122,6 +122,9 @@
       z-index: 5;
   }
 
+  .site-search .close-search{
+    cursor: pointer;
+  }
   
 
   .screen td{

@@ -181,8 +181,6 @@
 </div>
 <!--./row -->
 
-{{poe_data}} {{passengers_data}} {{symptom_data}} {{symptom_occurrence_data}}
-
 <script>
     //Registered Passengers
     $(function() {
@@ -201,11 +199,7 @@
                 text: null
             },
             xAxis: {
-                categories: {
-                    {
-                        poe_data | safe
-                    }
-                },
+                categories: ["Julius Nyerere International Airport (JNIA)", "Kilimanjaro International Airport (KIA)", "Mwanza International Airport (MIA)"],
                 crosshair: true
             },
             yAxis: {
@@ -250,11 +244,7 @@
                 showInLegend: false,
                 name: 'Passengers',
                 color: '#1565c0',
-                data: {
-                    {
-                        passengers_data
-                    }
-                }
+                data: [31, 23, 0]
             }],
             credits: {
                 enabled: false
@@ -280,11 +270,7 @@
                 text: null
             },
             xAxis: {
-                categories: {
-                    {
-                        symptom_data | safe
-                    }
-                },
+                categories: ['Fever', 'Swollen glands', 'Vomiting', 'Coughing/Shortness breathing', 'Skin rash', 'Jaundice', 'Headache', 'Body weakness', 'Loss of appetite', 'Joint/Muscle pain', 'Diarrhea', 'Unusual bleeding', 'Flu', 'Difficulty in swallowing', 'Chills', 'Paralysis', 'None of above'],
                 crosshair: true
             },
             yAxis: {
@@ -329,11 +315,7 @@
                 showInLegend: false,
                 name: 'Reported symptoms',
                 color: '#B71C1C',
-                data: {
-                    {
-                        symptom_occurrence_data
-                    }
-                }
+                data: [3, 1, 2, 0, 1, 0, 0, 1, 1, 1, 0, 0, 0, 0, 1, 0, 1]
             }],
             credits: {
                 enabled: false

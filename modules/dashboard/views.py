@@ -12,12 +12,18 @@ def dashboard(request):
     symptom_series_data = list()
     symptom_occurrence_data = list()
 
-    # all queries
     # number of passenger per poe
-    point_of_entries = PointOfEntry.objects.all()
+    poe_id = request.session.get('poe_id')
 
+    # all queries
     # reported symptoms
     symptoms = Symptom.objects.all()
+
+    # check point of entry
+    if poe_id != 0:
+        point_of_entries = PointOfEntry.objects.filter(pk=poe_id)
+    else:
+        point_of_entries = PointOfEntry.objects.all()
 
     # traveller objects
     traveller = Traveller.objects
@@ -27,7 +33,8 @@ def dashboard(request):
     total_passengers = Traveller.objects
 
     # total passenger with normal temp
-    passenger_with_normal_temp = Traveller.objects.filter(temp__gte=35, temp__lte=36.9)
+    passenger_with_normal_temp = Traveller.objects.filter(
+        temp__gte=35, temp__lte=36.9)
 
     # total passenger with below normal temp
     passenger_with_below_normal_temp = Traveller.objects.filter(temp__lte=35)
@@ -36,10 +43,27 @@ def dashboard(request):
     passenger_with_above_normal_temp = Traveller.objects.filter(temp__gte=37)
 
     # male passengers with above temperature
-    male_passenger_with_above_normal_temp = Traveller.objects.filter(sex='M', temp__gte=38)
+    male_passenger_with_above_normal_temp = Traveller.objects.filter(
+        sex='M', temp__gte=38)
 
     # female passengers with above temperature
-    female_passenger_with_above_normal_temp = Traveller.objects.filter(sex='F', temp__gte=38)
+    female_passenger_with_above_normal_temp = Traveller.objects.filter(
+        sex='F', temp__gte=38)
+
+    #filter per point of entry
+    if poe_id != 0:
+       total_passengers = total_passengers.filter(point_of_entry_id=poe_id)
+       passenger_with_normal_temp = passenger_with_normal_temp.filter(
+           point_of_entry_id=poe_id)
+       passenger_with_below_normal_temp = passenger_with_below_normal_temp.filter(
+           point_of_entry_id=poe_id)
+       passenger_with_above_normal_temp = passenger_with_above_normal_temp.filter(
+           point_of_entry_id=poe_id)
+       male_passenger_with_above_normal_temp = male_passenger_with_above_normal_temp.filter(
+           point_of_entry_id=poe_id)
+       female_passenger_with_above_normal_temp = female_passenger_with_above_normal_temp.filter(
+           point_of_entry_id=poe_id)
+
 
     # filter
     if request.method == 'POST':
@@ -49,10 +73,14 @@ def dashboard(request):
         today = datetime.datetime.now()
         if day == 'today':
             # queries
-            total_passengers = total_passengers.filter(arrival_date=today).count()
-            passenger_with_normal_temp = passenger_with_normal_temp.filter(arrival_date=today).count()
-            passenger_with_below_normal_temp = passenger_with_below_normal_temp.filter(arrival_date=today).count()
-            passenger_with_above_normal_temp = passenger_with_above_normal_temp.filter(arrival_date=today).count()
+            total_passengers = total_passengers.filter(
+                arrival_date=today).count()
+            passenger_with_normal_temp = passenger_with_normal_temp.filter(
+                arrival_date=today).count()
+            passenger_with_below_normal_temp = passenger_with_below_normal_temp.filter(
+                arrival_date=today).count()
+            passenger_with_above_normal_temp = passenger_with_above_normal_temp.filter(
+                arrival_date=today).count()
             male_passenger_with_above_normal_temp = male_passenger_with_above_normal_temp.filter(
                 arrival_date=today).count()
             female_passenger_with_above_normal_temp = female_passenger_with_above_normal_temp.filter(
@@ -151,12 +179,14 @@ def dashboard(request):
         # point of entries
         for val in point_of_entries:
             poe_series_data.append(val.title)
-            passengers_series_data.append(Traveller.objects.filter(point_of_entry_id=val.id).count())
+            passengers_series_data.append(
+                Traveller.objects.filter(point_of_entry_id=val.id).count())
 
         # reported symptoms
         for value in symptoms:
             symptom_series_data.append(value.title)
-            symptom_occurrence_data.append(TravellerSymptom.objects.filter(symptom_id=value.id).count())
+            symptom_occurrence_data.append(
+                TravellerSymptom.objects.filter(symptom_id=value.id).count())
 
     # male percentage
     male_percent = calc_percentage(
@@ -180,7 +210,7 @@ def dashboard(request):
         'female_percent': female_percent,
         'secondary_screening': 0,
         'allowed_to_proceed': 0,
-        'poe_data': json.dumps(poe_series_data),
+        'poe_data': poe_series_data,
         'passengers_data': passengers_series_data,
         'symptom_data': symptom_series_data,
         'symptom_occurrence_data': symptom_occurrence_data

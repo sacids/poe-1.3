@@ -68,7 +68,11 @@ def international(request):
 
             traveller.visiting_purpose = form.cleaned_data['visiting_purpose']
             traveller.other_purpose = form.cleaned_data['other_purpose']
-            traveller.duration_of_stay = form.cleaned_data['duration_of_stay']
+
+            if request.POST.get('duration_of_stay') is None:
+                traveller.duration_of_stay = request.POST.get(
+                    'duration_of_stay')
+
             traveller.employment = form.cleaned_data['employment']
             traveller.other_employment = form.cleaned_data['other_employment']
 

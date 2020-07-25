@@ -210,10 +210,10 @@ def dashboard(request):
         'female_percent': female_percent,
         'secondary_screening': 0,
         'allowed_to_proceed': 0,
-        'poe_data': poe_series_data,
-        'passengers_data': passengers_series_data,
-        'symptom_data': symptom_series_data,
-        'symptom_occurrence_data': symptom_occurrence_data
+        'poe_data': json.dumps(poe_series_data),
+        'passengers_data': json.dumps(passengers_series_data),
+        'symptom_data': json.dumps(symptom_series_data),
+        'symptom_occurrence_data': json.dumps(symptom_occurrence_data)
     }
 
     return render(request, 'dashboard.html', ctx)

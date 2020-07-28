@@ -64,7 +64,6 @@ def dashboard(request):
        female_passenger_with_above_normal_temp = female_passenger_with_above_normal_temp.filter(
            point_of_entry_id=poe_id)
 
-
     # filter
     if request.method == 'POST':
         day = request.POST.get('day')

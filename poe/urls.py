@@ -15,10 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.conf.urls.i18n import i18n_patterns
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
-
-urlpatterns = [
+urlpatterns = i18n_patterns(
     path('admin/', admin.site.urls),
     path('dashboard/', include("modules.dashboard.urls")),
     path('screen/', include("modules.screening.urls")),
@@ -26,7 +26,8 @@ urlpatterns = [
     path('accounts/', include("django.contrib.auth.urls")),
     path('sec_screen/', include("modules.secondary_screening.urls")),
     path('', include("modules.travellers.urls")),
-]
+    prefix_default_language=False
+)
 
 urlpatterns += staticfiles_urlpatterns()
 

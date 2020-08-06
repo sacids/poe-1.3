@@ -1,5 +1,6 @@
+{% load i18n %}
 <select name="district_id" id="district_id">
-    <option value="">-- Select --</option>
+    <option value="">{% trans "-- Select --" %}</option>
     {% for district in districts %}
         <option value="{{ district.id }}">{{ district.title }}</option>
     {% endfor %}

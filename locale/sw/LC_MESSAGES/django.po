@@ -1,0 +1,493 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-08-06 11:38+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: modules/travellers/forms.py:7 modules/travellers/forms.py:10
+#: modules/travellers/forms.py:16 modules/travellers/forms.py:22
+#: modules/travellers/forms.py:29 modules/travellers/forms.py:62
+#: modules/travellers/forms.py:80 modules/travellers/forms.py:123
+#: modules/travellers/forms.py:128 modules/travellers/forms.py:147
+#: modules/travellers/forms.py:152
+#: modules/travellers/templates/travellers/add_countries.html:11
+#: modules/travellers/templates/travellers/auto_districts.html:3
+#: modules/travellers/templates/travellers/auto_point_of_entries.html:3
+msgid "-- Select --"
+msgstr "-- Chagua --"
+
+#: modules/travellers/forms.py:11
+msgid "Male"
+msgstr "Mwanaume"
+
+#: modules/travellers/forms.py:12
+msgid "Female"
+msgstr "Mwanamke"
+
+#: modules/travellers/forms.py:17
+msgid "Flight"
+msgstr "Ndege"
+
+#: modules/travellers/forms.py:18
+msgid "Vehicle"
+msgstr "Gari"
+
+#: modules/travellers/forms.py:19
+msgid "Vessel"
+msgstr "Meli"
+
+#: modules/travellers/forms.py:23
+msgid "Resident"
+msgstr "Mkazi"
+
+#: modules/travellers/forms.py:24
+msgid "Tourist"
+msgstr "Utalii"
+
+#: modules/travellers/forms.py:25
+msgid "Transit"
+msgstr "Mpito"
+
+#: modules/travellers/forms.py:26 modules/travellers/forms.py:34
+msgid "Business"
+msgstr "Biashara"
+
+#: modules/travellers/forms.py:30
+msgid "Government"
+msgstr "Serikalini"
+
+#: modules/travellers/forms.py:31
+msgid "Non-Government"
+msgstr "Taasisi Binafsi"
+
+#: modules/travellers/forms.py:32
+msgid "Non-Profit"
+msgstr "Asasi za kiraia"
+
+#: modules/travellers/forms.py:33
+msgid "Student"
+msgstr "Mwanafunzi"
+
+#: modules/travellers/forms.py:35
+msgid "Religious"
+msgstr "Taasisi za kidini"
+
+#: modules/travellers/forms.py:36
+msgid "Farmer"
+msgstr "Mkulima"
+
+#: modules/travellers/forms.py:48
+msgid "Traveller Name (Three names [3])"
+msgstr "Jina la msafiri(Majina matatu[3])"
+
+#: modules/travellers/forms.py:50
+msgid "Write full name..."
+msgstr "Andika jina kamili..."
+
+#: modules/travellers/forms.py:54
+msgid "Age (in years)"
+msgstr "Umri (kwa miaka)"
+
+#: modules/travellers/forms.py:56
+msgid "Write age..."
+msgstr "Andika umri..."
+
+#: modules/travellers/forms.py:58
+msgid "Sex"
+msgstr "Jinsia"
+
+#: modules/travellers/forms.py:62
+msgid "Nationality"
+msgstr "Uraia"
+
+#: modules/travellers/forms.py:67
+msgid "Passport Number"
+msgstr "Hati ya Kusafiri"
+
+#: modules/travellers/forms.py:70
+msgid "Write passport number..."
+msgstr "Andika namba ya hati ya kusafiri..."
+
+#: modules/travellers/forms.py:72
+msgid "Arrival Date"
+msgstr "Tarehe ya kuwasili"
+
+#: modules/travellers/forms.py:76
+msgid "Mode of Transport"
+msgstr "Aina ya usafiri"
+
+#: modules/travellers/forms.py:80
+msgid "Point of Entry"
+msgstr "Sehemu ulipowasili/utakapowasili"
+
+#: modules/travellers/forms.py:84
+msgid "Vessel/Flight/Vehicle Name/No"
+msgstr "Namba ya Meli/Ndege/Basi/Gari"
+
+#: modules/travellers/forms.py:86
+msgid "Write Vessel/Flight/Vehicle Name..."
+msgstr "Andika namba ya meli/ndege/basi/gari"
+
+#: modules/travellers/forms.py:88
+msgid "Seat Number"
+msgstr "Hati ya Kusafiri"
+
+#: modules/travellers/forms.py:89
+msgid "Write your seat number..."
+msgstr "Andika namba ya kiti..."
+
+#: modules/travellers/forms.py:92
+msgid "Visiting Purpose"
+msgstr "Lengo la safari Tanzania"
+
+#: modules/travellers/forms.py:97
+msgid "Other Purposes (If any)"
+msgstr "Lengo lingine la safari Tanzania (Taja)"
+
+#: modules/travellers/forms.py:99
+msgid "Write other visiting purpose, if any )"
+msgstr "Andika lengo lingine la safari"
+
+#: modules/travellers/forms.py:101
+msgid "Duration of stay (In days)"
+msgstr "Idadi ya siku utakazokaa"
+
+#: modules/travellers/forms.py:103
+msgid "Write duration of stay..."
+msgstr "Andika Idadi ya siku utakazokaa..."
+
+#: modules/travellers/forms.py:105
+msgid "Employment/Occupation"
+msgstr "Kazi/Ajira"
+
+#: modules/travellers/forms.py:110
+msgid "Other Employment (If any)"
+msgstr "Kazi/ajira nyingine"
+
+#: modules/travellers/forms.py:112
+msgid "Write other employment..."
+msgstr "Andika kazi/ajira nyingine"
+
+#: modules/travellers/forms.py:115
+msgid "Physical address"
+msgstr "Eneo na anwani ya eneo unalofikia"
+
+#: modules/travellers/forms.py:117
+msgid "Write address..."
+msgstr "Andika eneo na anwani ya unayofikia..."
+
+#: modules/travellers/forms.py:119
+msgid "Hotel Name"
+msgstr "Jina la hoteli unayofikia"
+
+#: modules/travellers/forms.py:120
+msgid "Write hotel name..."
+msgstr "Andika jina la hoteli unayofikia..."
+
+#: modules/travellers/forms.py:122
+msgid "Region"
+msgstr "Mkoa"
+
+#: modules/travellers/forms.py:128
+msgid "District"
+msgstr "Wilaya"
+
+#: modules/travellers/forms.py:133
+msgid "Street/Ward"
+msgstr "Mtaa/Kata"
+
+#: modules/travellers/forms.py:134
+msgid "Write street or ward..."
+msgstr "Andika mtaa/kata"
+
+#: modules/travellers/forms.py:137
+msgid "Phone"
+msgstr "Namba za simu ya kwako/utakapofikia"
+
+#: modules/travellers/forms.py:138
+msgid "Write phone..."
+msgstr "Andika namba ya simu"
+
+#: modules/travellers/forms.py:140
+msgid "Email"
+msgstr "Barua pepe"
+
+#: modules/travellers/forms.py:142
+msgid "Write email address..."
+msgstr "Andika barua pepe"
+
+#: modules/travellers/forms.py:146
+msgid "Country where journey started"
+msgstr "Nchi ulipoanzia safari"
+
+#: modules/travellers/forms.py:151
+#: modules/travellers/templates/travellers/add_countries.html:9
+msgid "Country"
+msgstr "Nchi"
+
+#: modules/travellers/forms.py:156
+#: modules/travellers/templates/travellers/add_countries.html:20
+msgid "Location/Province"
+msgstr "Mahali ulipotembelea"
+
+#: modules/travellers/forms.py:158
+msgid "Write location/province visited..."
+msgstr "Andika mahali ulipotembelea..."
+
+#: modules/travellers/forms.py:160
+#: modules/travellers/templates/travellers/add_countries.html:26
+msgid "Date"
+msgstr "Tarehe"
+
+#: modules/travellers/forms.py:164
+msgid "Number of days"
+msgstr "Idadi ya siku"
+
+#: modules/travellers/forms.py:165
+#: modules/travellers/templates/travellers/add_countries.html:34
+msgid "Write number of days..."
+msgstr "Andika idadi ya siku"
+
+#: modules/travellers/forms.py:177
+msgid "Other Symptoms (comma separated)"
+msgstr "Dalili zingine (Taja)"
+
+#: modules/travellers/forms.py:179
+msgid "Write other symptoms..."
+msgstr "Andika dalili zingine"
+
+#: modules/travellers/templates/base.html:48
+#: modules/travellers/templates/travellers/home.html:5
+#: modules/travellers/templates/travellers/home.html:43
+#: modules/travellers/templates/travellers/international.html:10
+#: modules/travellers/templates/travellers/success.html:5
+msgid "Travellers Surveillance Form"
+msgstr "Fomu ya ufuatiliaji wa magonjwa kwa abiria wa kimataifa"
+
+#: modules/travellers/templates/base.html:55
+msgid "Login"
+msgstr "Ingia"
+
+#: modules/travellers/templates/travellers/add_countries.html:21
+msgid "Write a location/province visited..."
+msgstr "Andika mahali ulipotembelea..."
+
+#: modules/travellers/templates/travellers/add_countries.html:27
+msgid "Pick date..."
+msgstr ""
+
+#: modules/travellers/templates/travellers/add_countries.html:33
+msgid "Number of Days"
+msgstr "Idadi ya siku"
+
+#: modules/travellers/templates/travellers/home.html:22
+#: modules/travellers/templates/travellers/index.html:22
+msgid "The United Republic of Tanzania."
+msgstr "Jamhuri ya Muungano wa Tanzania"
+
+#: modules/travellers/templates/travellers/home.html:24
+msgid "Ministry of Health, Community Development, Gender, Elderly and Children"
+msgstr "Wizara ya Afya, Maendeleo ya Jamii, Jinsia, Wazee na Watoto"
+
+#: modules/travellers/templates/travellers/home.html:51
+msgid ""
+"<b>Travellers Surveillance Form </b> an online web based system to help "
+"capturing and managing traveller’s health details during fighting against "
+"pandemic diseases such as COVID-19 and Ebola."
+msgstr ""
+"<b>Fomu ya ufuatiliaji magojwa</b> ni mfumo unaosaidia kukusanya taarifa za "
+"magojwa kwa abiria kusaidia kupambana na magonjwa ya milipuko"
+
+#: modules/travellers/templates/travellers/home.html:60
+msgid "Change Language"
+msgstr "Chagua Lugha"
+
+#: modules/travellers/templates/travellers/home.html:75
+msgid "International"
+msgstr "Kimataifa"
+
+#: modules/travellers/templates/travellers/international.html:25
+#: modules/travellers/templates/travellers/success.html:18
+msgid "International Travellers Surveillance Form"
+msgstr "Fomu ya ufuatiliaji wa magonjwa kwa abiria wa kimataifa"
+
+#: modules/travellers/templates/travellers/international.html:53
+msgid "Traveller Information"
+msgstr "Taarifa za msafiri"
+
+#: modules/travellers/templates/travellers/international.html:228
+msgid "Contact while in Tanzania"
+msgstr "Anwani na mawasiliano ukiwa Tanzania"
+
+#: modules/travellers/templates/travellers/international.html:315
+msgid "Countries visited in last 21 days (3 weeks)"
+msgstr "Nchi ulizotembelea ndani ya siku 21"
+
+#: modules/travellers/templates/travellers/international.html:364
+msgid "Add Another"
+msgstr "Weka nyingine"
+
+#: modules/travellers/templates/travellers/international.html:376
+msgid ""
+"Have you experienced the following conditions during the last 7 days (1 "
+"week)?"
+msgstr ""
+"Umewahi kuwa na dalili zifuatazo ndani ya siku 7 (Juma moja) zilizopita?"
+
+#: modules/travellers/templates/travellers/international.html:387
+msgid ""
+"Please, mark/tick all the clinical manifestations that you have experienced "
+"during the last 7 days (1 week)"
+msgstr ""
+"Tafadhali chagua dalili ulizokuwa nazo ndani ya siku 7 (juma moja) "
+"lililopita?"
+
+#: modules/travellers/templates/travellers/international.html:416
+msgid "Declarations of filled information"
+msgstr "Maazimio ya taarifa ulizojaza"
+
+#: modules/travellers/templates/travellers/international.html:428
+msgid ""
+"I declare that the information provided is complete and correct to the best "
+"of my knowledge. I understand that any false information supplied could lead "
+"to fine."
+msgstr "Nakubali kwamba taarifa nilizojaza ni sahihi kwa uelewa wangu. Ninafahamu kutoa taarifa za uongo inaweza kusababisha kutozwa faini."
+
+#: modules/travellers/templates/travellers/international.html:446
+msgid "Previous"
+msgstr "Nyuma"
+
+#: modules/travellers/templates/travellers/international.html:449
+#: modules/travellers/templates/travellers/validation.html:20
+msgid "Next"
+msgstr "Mbele"
+
+#: modules/travellers/templates/travellers/success.html:29
+msgid "Information registered successfully."
+msgstr "Umefanikiwa kukusanya taarifa zako"
+
+#: modules/travellers/templates/travellers/success.html:32
+msgid "Do you want to fill another form?"
+msgstr "Unataka kujaza fomu nyingine?"
+
+#: modules/travellers/templates/travellers/success.html:36
+msgid "Yes"
+msgstr "Yes"
+
+#: modules/travellers/templates/travellers/success.html:38
+msgid "No"
+msgstr "Hapana"
+
+#: modules/travellers/templates/travellers/validation.html:18
+msgid "Save"
+msgstr "Hifadhi"
+
+#: modules/travellers/templates/travellers/validation.html:85
+msgid "Traveller name is required"
+msgstr "Jina la msafiri linahitajika"
+
+#: modules/travellers/templates/travellers/validation.html:89
+msgid "Invalid traveller name"
+msgstr "Jina la msafiri limekosewa"
+
+#: modules/travellers/templates/travellers/validation.html:98
+msgid "Age is required"
+msgstr "Umri unahitajika"
+
+#: modules/travellers/templates/travellers/validation.html:101
+msgid "Invalid age"
+msgstr "Umri umekosewa"
+
+#: modules/travellers/templates/travellers/validation.html:110
+msgid "Sex is required"
+msgstr "Jinsia inahitajika"
+
+#: modules/travellers/templates/travellers/validation.html:118
+msgid "Nationality is required"
+msgstr "Uraia unahitajika"
+
+#: modules/travellers/templates/travellers/validation.html:126
+msgid "Passport number is required"
+msgstr "Hati ya Kusafiri"
+
+#: modules/travellers/templates/travellers/validation.html:134
+msgid "Mode of transport is required"
+msgstr "Aina ya usafiri"
+
+#: modules/travellers/templates/travellers/validation.html:142
+msgid "Vessel/Flight/Vehicle name is required"
+msgstr "Namba ya Meli/Ndege/Basi/Gari"
+
+#: modules/travellers/templates/travellers/validation.html:150
+msgid "Arrival date is required"
+msgstr "Tarehe ya kuwasili"
+
+#: modules/travellers/templates/travellers/validation.html:166
+msgid "Invalid arrival date"
+msgstr "Tarehe ya kuwasili"
+
+#: modules/travellers/templates/travellers/validation.html:175
+msgid "Point of entry required"
+msgstr "Sehemu ulipowasili/utakapowasili inahijika"
+
+#: modules/travellers/templates/travellers/validation.html:194
+msgid "Duration of stay required"
+msgstr "Idadi ya siku utakazokaa"
+
+#: modules/travellers/templates/travellers/validation.html:197
+msgid "Duration of stay should be greater than 0"
+msgstr "Idadi ya siku zinatakuwa kuwa kubwa zaidi ya 0"
+
+#: modules/travellers/templates/travellers/validation.html:214
+msgid "Region is required"
+msgstr "Mkoa unahitajika"
+
+#: modules/travellers/templates/travellers/validation.html:222
+msgid "Phone is required"
+msgstr "Namba ya simu inahitajika"
+
+#: modules/travellers/templates/travellers/validation.html:226
+msgid "Invalid phone. e.g 0717000000"
+msgstr "Umekosea namba ya simu. mfano 0717000000"
+
+#: modules/travellers/templates/travellers/validation.html:239
+msgid "Email is required"
+msgstr "Barua pepe inahitajika"
+
+#: modules/travellers/templates/travellers/validation.html:243
+msgid "Invalid email address"
+msgstr "Andika barua pepe"
+
+#: modules/travellers/templates/travellers/validation.html:259
+msgid "Country journey started is required"
+msgstr "Nchi ulipoanzia safari"
+
+#: modules/travellers/templates/travellers/validation.html:282
+msgid "Date should not be greater or equal to today"
+msgstr "Tarehe haitakiwi kuwa sawa au kuzidi leo"
+
+#: modules/travellers/templates/travellers/validation.html:294
+msgid "No. of Days should not be greater than 21"
+msgstr "Muda wa siku hautakiwi kuzidi 21"
+
+#: modules/travellers/templates/travellers/validation.html:314
+msgid "Symptoms are required"
+msgstr "Dalili zinahitajika"
+
+#: modules/travellers/templates/travellers/validation.html:330
+msgid "Tick the declaration."
+msgstr "Jibu tamko"

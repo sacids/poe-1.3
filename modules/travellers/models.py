@@ -53,15 +53,13 @@ class Disease(models.Model):
     class Meta:
         db_table = "et_diseases"
 
-    def __str__(self):
-        return self.title
-
 
 # symptoms
 class Symptom(models.Model):
     """A class to create symptoms table."""
     title = models.CharField(max_length=100)
-    alias = models.CharField(max_length=100)
+    title_sw = models.CharField(max_length=100, null=True)
+    alias = models.CharField(max_length=100, null=True)
 
     class Meta:
         db_table = "et_symptoms"

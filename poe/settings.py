@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
+from django.utils.translation import ugettext_lazy as _
 import os
 from decouple import config
 from django.contrib.messages import constants as messages
@@ -60,6 +61,7 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',  #add this to determine language session
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -68,6 +70,9 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'poe.urls'
+
+# HERE
+LOCALE_PATHS = [os.path.join(BASE_DIR, 'locale')]
 
 TEMPLATES = [
     {
@@ -122,8 +127,12 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
-
 LANGUAGE_CODE = 'en-us'
+
+LANGUAGES = [
+    ('en-us', 'English'),
+    ('sw', 'Swahili'),
+]
 
 TIME_ZONE = 'Africa/Dar_es_Salaam'
 

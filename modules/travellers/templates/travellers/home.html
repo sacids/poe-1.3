@@ -1,4 +1,9 @@
-{% extends 'base.html' %} {% load static %} {% block title %}Travellers Surveillance{% endblock %} {% block content %}
+{% extends 'base.html' %}
+{% load i18n %}
+{% load static %}
+
+{% block title %} {% trans "Travellers Surveillance Form" %} {% endblock %}
+{% block content %}
 <!-- Page content -->
 <div class="page-content bg-white">
     <!-- Main content -->
@@ -14,8 +19,9 @@
                         <!--./img -->
 
                         <div id="content">
-                            <h1>The United Republic of Tanzania</h1>
-                            <h3 class="d-none d-md-block">Ministry of Health, Community Development, Gender, Elderly and Children
+                            <h1>{% trans "The United Republic of Tanzania." %} </h1>
+                            <h3 class="d-none d-md-block">
+                                {% trans "Ministry of Health, Community Development, Gender, Elderly and Children" %}
                             </h3>
                             <h4 class="d-block d-sm-none">MoHCDGEC</h4>
                         </div>
@@ -34,7 +40,7 @@
             <!-- Basic card -->
             <div class="card">
                 <div class="card-header">
-                    <h5 class="card-title text-uppercase text-center">Travellers Surveillance</h5>
+                    <h5 class="card-title text-uppercase text-center">{% trans "Travellers Surveillance Form" %}</h5>
                 </div>
                 <!--./card-header -->
 
@@ -42,30 +48,33 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="text-intro">
-                                <p><b>Travellers Surveillance</b> an online web based system to help capturing and managing traveller’s health details during fighting against pandemic diseases such as COVID-19 and Ebola.</p>
+                                <p>{% trans "<b>Travellers Surveillance Form </b> an online web based system to help capturing and managing traveller’s health details during fighting against pandemic diseases such as COVID-19 and Ebola." %}</p>
                             </div>
                             <!--./text-intro-->
 
                             <div class="text-center">
-                                <!-- <div class="dropdown">
+                               
+
+                                <div class="dropdown">
                                     <button style="width: 200px;" class="btn btn-outline-primary dropdown-toggle"
                                         type="button" id="dropdownMenuButton" data-toggle="dropdown"
                                         aria-haspopup="true" aria-expanded="false">
-                                        Change Language
+                                        {% trans "Change Language" %}
                                     </button>
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                        <a class="dropdown-item" href="/"><img width="32"
+                                        <a class="dropdown-item" href="{% url 'travellers:change_language_en' %}"><img width="32"
                                                 src="{% static 'img/usa_flag.png' %}" alt="" /> ENG
                                         </a>
-                                        <a class="dropdown-item" href="/"><img width="32"
+                                        <a class="dropdown-item" href="{% url 'travellers:change_language_sw' %}"><img width="32"
                                                 src="{% static 'img/tz_flag.png' %}" alt="" /> SWA
                                         </a>
                                     </div>
-                                </div> -->
+                                </div>
                                 <!--./dropdown -->
                                 <div class="mt-4"></div>
 
-                                <a style="width: 200px;" href="{% url 'travellers:international' %}" class="btn btn-primary btn-sm text-uppercase">International</a>
+                                <a style="width: 200px;" href="{% url 'travellers:international' %}"
+                                    class="btn btn-primary btn-sm text-uppercase">{% trans "International" %}</a>
                                 <div class="mt-4"></div>
                                 <!-- <a style="width: 200px;" href="{% url 'travellers:domestic' %}"
                                     class="btn btn-secondary btn-sm text-uppercase">Domestic</a> -->

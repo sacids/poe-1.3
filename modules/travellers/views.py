@@ -1,10 +1,13 @@
 from django import template
+from django.http import HttpResponseRedirect
+from django.utils import translation
 import datetime
 from datetime import timedelta
 from django.shortcuts import render, render_to_response, redirect
 from .models import Traveller, TravellerVisitedArea, TravellerSymptom, Location, PointOfEntry
 from .forms import TravellerForm
 from django.contrib import messages
+from django.conf import settings
 
 
 def default(request):
@@ -21,6 +24,39 @@ def default(request):
 
     """
     return render(request, 'travellers/home.html', {})
+
+
+def change_language_en(request):
+    language = "en-us"
+    response = HttpResponseRedirect('/')
+    if language:
+        if language != settings.LANGUAGE_CODE and [lang for lang in settings.LANGUAGES if lang[0] == language]:
+            redirect_path = f'/{language}'
+        elif language == settings.LANGUAGE_CODE:
+            redirect_path = '/'
+        else:
+            return response
+
+        translation.activate(language)
+        response = HttpResponseRedirect(redirect_path)
+        response.set_cookie(settings.LANGUAGE_COOKIE_NAME, language)
+    return response
+
+def change_language_sw(request):
+    language = "sw"
+    response = HttpResponseRedirect('/')
+    if language:
+        if language != settings.LANGUAGE_CODE and [lang for lang in settings.LANGUAGES if lang[0] == language]:
+            redirect_path = f'/{language}'
+        elif language == settings.LANGUAGE_CODE:
+            redirect_path = '/'
+        else:
+            return response
+
+        translation.activate(language)
+        response = HttpResponseRedirect(redirect_path)
+        response.set_cookie(settings.LANGUAGE_COOKIE_NAME, language)
+    return response
 
 
 def international(request):

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-08-06 11:38+0300\n"
+"POT-Creation-Date: 2020-08-06 21:57+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,265 +18,261 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: modules/travellers/forms.py:7 modules/travellers/forms.py:10
-#: modules/travellers/forms.py:16 modules/travellers/forms.py:22
-#: modules/travellers/forms.py:29 modules/travellers/forms.py:62
-#: modules/travellers/forms.py:80 modules/travellers/forms.py:123
-#: modules/travellers/forms.py:128 modules/travellers/forms.py:147
-#: modules/travellers/forms.py:152
+#: modules/travellers/forms.py:8 modules/travellers/forms.py:11
+#: modules/travellers/forms.py:17 modules/travellers/forms.py:23
+#: modules/travellers/forms.py:30 modules/travellers/forms.py:63
+#: modules/travellers/forms.py:81 modules/travellers/forms.py:124
+#: modules/travellers/forms.py:129 modules/travellers/forms.py:148
+#: modules/travellers/forms.py:153
 #: modules/travellers/templates/travellers/add_countries.html:11
 #: modules/travellers/templates/travellers/auto_districts.html:3
 #: modules/travellers/templates/travellers/auto_point_of_entries.html:3
 msgid "-- Select --"
 msgstr "-- Chagua --"
 
-#: modules/travellers/forms.py:11
+#: modules/travellers/forms.py:12
 msgid "Male"
 msgstr "Mwanaume"
 
-#: modules/travellers/forms.py:12
+#: modules/travellers/forms.py:13
 msgid "Female"
 msgstr "Mwanamke"
 
-#: modules/travellers/forms.py:17
+#: modules/travellers/forms.py:18
 msgid "Flight"
 msgstr "Ndege"
 
-#: modules/travellers/forms.py:18
+#: modules/travellers/forms.py:19
 msgid "Vehicle"
 msgstr "Gari"
 
-#: modules/travellers/forms.py:19
+#: modules/travellers/forms.py:20
 msgid "Vessel"
 msgstr "Meli"
 
-#: modules/travellers/forms.py:23
+#: modules/travellers/forms.py:24
 msgid "Resident"
 msgstr "Mkazi"
 
-#: modules/travellers/forms.py:24
+#: modules/travellers/forms.py:25
 msgid "Tourist"
 msgstr "Utalii"
 
-#: modules/travellers/forms.py:25
+#: modules/travellers/forms.py:26
 msgid "Transit"
 msgstr "Mpito"
 
-#: modules/travellers/forms.py:26 modules/travellers/forms.py:34
+#: modules/travellers/forms.py:27 modules/travellers/forms.py:35
 msgid "Business"
 msgstr "Biashara"
 
-#: modules/travellers/forms.py:30
+#: modules/travellers/forms.py:31
 msgid "Government"
 msgstr "Serikalini"
 
-#: modules/travellers/forms.py:31
+#: modules/travellers/forms.py:32
 msgid "Non-Government"
 msgstr "Taasisi Binafsi"
 
-#: modules/travellers/forms.py:32
+#: modules/travellers/forms.py:33
 msgid "Non-Profit"
 msgstr "Asasi za kiraia"
 
-#: modules/travellers/forms.py:33
+#: modules/travellers/forms.py:34
 msgid "Student"
 msgstr "Mwanafunzi"
 
-#: modules/travellers/forms.py:35
+#: modules/travellers/forms.py:36
 msgid "Religious"
 msgstr "Taasisi za kidini"
 
-#: modules/travellers/forms.py:36
+#: modules/travellers/forms.py:37
 msgid "Farmer"
 msgstr "Mkulima"
 
-#: modules/travellers/forms.py:48
+#: modules/travellers/forms.py:49
 msgid "Traveller Name (Three names [3])"
 msgstr "Jina la msafiri(Majina matatu[3])"
 
-#: modules/travellers/forms.py:50
+#: modules/travellers/forms.py:51
 msgid "Write full name..."
 msgstr "Andika jina kamili..."
 
-#: modules/travellers/forms.py:54
+#: modules/travellers/forms.py:55
 msgid "Age (in years)"
 msgstr "Umri (kwa miaka)"
 
-#: modules/travellers/forms.py:56
+#: modules/travellers/forms.py:57
 msgid "Write age..."
 msgstr "Andika umri..."
 
-#: modules/travellers/forms.py:58
+#: modules/travellers/forms.py:59
 msgid "Sex"
 msgstr "Jinsia"
 
-#: modules/travellers/forms.py:62
+#: modules/travellers/forms.py:63
 msgid "Nationality"
 msgstr "Uraia"
 
-#: modules/travellers/forms.py:67
+#: modules/travellers/forms.py:68
 msgid "Passport Number"
 msgstr "Hati ya Kusafiri"
 
-#: modules/travellers/forms.py:70
+#: modules/travellers/forms.py:71
 msgid "Write passport number..."
 msgstr "Andika namba ya hati ya kusafiri..."
 
-#: modules/travellers/forms.py:72
+#: modules/travellers/forms.py:73
 msgid "Arrival Date"
 msgstr "Tarehe ya kuwasili"
 
-#: modules/travellers/forms.py:76
+#: modules/travellers/forms.py:77
 msgid "Mode of Transport"
 msgstr "Aina ya usafiri"
 
-#: modules/travellers/forms.py:80
+#: modules/travellers/forms.py:81
 msgid "Point of Entry"
 msgstr "Sehemu ulipowasili/utakapowasili"
 
-#: modules/travellers/forms.py:84
+#: modules/travellers/forms.py:85
 msgid "Vessel/Flight/Vehicle Name/No"
 msgstr "Namba ya Meli/Ndege/Basi/Gari"
 
-#: modules/travellers/forms.py:86
+#: modules/travellers/forms.py:87
 msgid "Write Vessel/Flight/Vehicle Name..."
 msgstr "Andika namba ya meli/ndege/basi/gari"
 
-#: modules/travellers/forms.py:88
+#: modules/travellers/forms.py:89
 msgid "Seat Number"
 msgstr "Hati ya Kusafiri"
 
-#: modules/travellers/forms.py:89
+#: modules/travellers/forms.py:90
 msgid "Write your seat number..."
 msgstr "Andika namba ya kiti..."
 
-#: modules/travellers/forms.py:92
+#: modules/travellers/forms.py:93
 msgid "Visiting Purpose"
 msgstr "Lengo la safari Tanzania"
 
-#: modules/travellers/forms.py:97
+#: modules/travellers/forms.py:98
 msgid "Other Purposes (If any)"
 msgstr "Lengo lingine la safari Tanzania (Taja)"
 
-#: modules/travellers/forms.py:99
+#: modules/travellers/forms.py:100
 msgid "Write other visiting purpose, if any )"
 msgstr "Andika lengo lingine la safari"
 
-#: modules/travellers/forms.py:101
+#: modules/travellers/forms.py:102
 msgid "Duration of stay (In days)"
 msgstr "Idadi ya siku utakazokaa"
 
-#: modules/travellers/forms.py:103
+#: modules/travellers/forms.py:104
 msgid "Write duration of stay..."
 msgstr "Andika Idadi ya siku utakazokaa..."
 
-#: modules/travellers/forms.py:105
+#: modules/travellers/forms.py:106
 msgid "Employment/Occupation"
 msgstr "Kazi/Ajira"
 
-#: modules/travellers/forms.py:110
+#: modules/travellers/forms.py:111
 msgid "Other Employment (If any)"
 msgstr "Kazi/ajira nyingine"
 
-#: modules/travellers/forms.py:112
+#: modules/travellers/forms.py:113
 msgid "Write other employment..."
 msgstr "Andika kazi/ajira nyingine"
 
-#: modules/travellers/forms.py:115
+#: modules/travellers/forms.py:116
 msgid "Physical address"
 msgstr "Eneo na anwani ya eneo unalofikia"
 
-#: modules/travellers/forms.py:117
+#: modules/travellers/forms.py:118
 msgid "Write address..."
 msgstr "Andika eneo na anwani ya unayofikia..."
 
-#: modules/travellers/forms.py:119
+#: modules/travellers/forms.py:120
 msgid "Hotel Name"
 msgstr "Jina la hoteli unayofikia"
 
-#: modules/travellers/forms.py:120
+#: modules/travellers/forms.py:121
 msgid "Write hotel name..."
 msgstr "Andika jina la hoteli unayofikia..."
 
-#: modules/travellers/forms.py:122
+#: modules/travellers/forms.py:123
 msgid "Region"
 msgstr "Mkoa"
 
-#: modules/travellers/forms.py:128
+#: modules/travellers/forms.py:129
 msgid "District"
 msgstr "Wilaya"
 
-#: modules/travellers/forms.py:133
+#: modules/travellers/forms.py:134
 msgid "Street/Ward"
 msgstr "Mtaa/Kata"
 
-#: modules/travellers/forms.py:134
+#: modules/travellers/forms.py:135
 msgid "Write street or ward..."
 msgstr "Andika mtaa/kata"
 
-#: modules/travellers/forms.py:137
+#: modules/travellers/forms.py:138
 msgid "Phone"
 msgstr "Namba za simu ya kwako/utakapofikia"
 
-#: modules/travellers/forms.py:138
+#: modules/travellers/forms.py:139
 msgid "Write phone..."
 msgstr "Andika namba ya simu"
 
-#: modules/travellers/forms.py:140
+#: modules/travellers/forms.py:141
 msgid "Email"
 msgstr "Barua pepe"
 
-#: modules/travellers/forms.py:142
+#: modules/travellers/forms.py:143
 msgid "Write email address..."
 msgstr "Andika barua pepe"
 
-#: modules/travellers/forms.py:146
+#: modules/travellers/forms.py:147
 msgid "Country where journey started"
 msgstr "Nchi ulipoanzia safari"
 
-#: modules/travellers/forms.py:151
+#: modules/travellers/forms.py:152
 #: modules/travellers/templates/travellers/add_countries.html:9
 msgid "Country"
 msgstr "Nchi"
 
-#: modules/travellers/forms.py:156
+#: modules/travellers/forms.py:157
 #: modules/travellers/templates/travellers/add_countries.html:20
 msgid "Location/Province"
 msgstr "Mahali ulipotembelea"
 
-#: modules/travellers/forms.py:158
+#: modules/travellers/forms.py:159
 msgid "Write location/province visited..."
 msgstr "Andika mahali ulipotembelea..."
 
-#: modules/travellers/forms.py:160
+#: modules/travellers/forms.py:161
 #: modules/travellers/templates/travellers/add_countries.html:26
 msgid "Date"
 msgstr "Tarehe"
 
-#: modules/travellers/forms.py:164
+#: modules/travellers/forms.py:165
 msgid "Number of days"
 msgstr "Idadi ya siku"
 
-#: modules/travellers/forms.py:165
+#: modules/travellers/forms.py:166
 #: modules/travellers/templates/travellers/add_countries.html:34
 msgid "Write number of days..."
 msgstr "Andika idadi ya siku"
 
-#: modules/travellers/forms.py:177
+#: modules/travellers/forms.py:173
 msgid "Other Symptoms (comma separated)"
 msgstr "Dalili zingine (Taja)"
 
-#: modules/travellers/forms.py:179
+#: modules/travellers/forms.py:175
 msgid "Write other symptoms..."
 msgstr "Andika dalili zingine"
 
 #: modules/travellers/templates/base.html:48
-#: modules/travellers/templates/travellers/home.html:5
-#: modules/travellers/templates/travellers/home.html:43
-#: modules/travellers/templates/travellers/international.html:10
-#: modules/travellers/templates/travellers/success.html:5
-msgid "Travellers Surveillance Form"
-msgstr "Fomu ya ufuatiliaji wa magonjwa kwa abiria wa kimataifa"
+msgid "Travellers Surveillance"
+msgstr "Fomu ya ufuatiliaji wa magonjwa"
 
 #: modules/travellers/templates/base.html:55
 msgid "Login"
@@ -293,6 +289,13 @@ msgstr ""
 #: modules/travellers/templates/travellers/add_countries.html:33
 msgid "Number of Days"
 msgstr "Idadi ya siku"
+
+#: modules/travellers/templates/travellers/home.html:5
+#: modules/travellers/templates/travellers/home.html:43
+#: modules/travellers/templates/travellers/international.html:10
+#: modules/travellers/templates/travellers/success.html:5
+msgid "Travellers Surveillance Form"
+msgstr "Fomu ya ufuatiliaji wa magonjwa kwa abiria wa kimataifa"
 
 #: modules/travellers/templates/travellers/home.html:22
 #: modules/travellers/templates/travellers/index.html:22
@@ -356,22 +359,24 @@ msgstr ""
 "Tafadhali chagua dalili ulizokuwa nazo ndani ya siku 7 (juma moja) "
 "lililopita?"
 
-#: modules/travellers/templates/travellers/international.html:416
+#: modules/travellers/templates/travellers/international.html:426
 msgid "Declarations of filled information"
 msgstr "Maazimio ya taarifa ulizojaza"
 
-#: modules/travellers/templates/travellers/international.html:428
+#: modules/travellers/templates/travellers/international.html:438
 msgid ""
 "I declare that the information provided is complete and correct to the best "
 "of my knowledge. I understand that any false information supplied could lead "
 "to fine."
-msgstr "Nakubali kwamba taarifa nilizojaza ni sahihi kwa uelewa wangu. Ninafahamu kutoa taarifa za uongo inaweza kusababisha kutozwa faini."
+msgstr ""
+"Nakubali kwamba taarifa nilizojaza ni sahihi kwa uelewa wangu. Ninafahamu "
+"kutoa taarifa za uongo inaweza kusababisha kutozwa faini."
 
-#: modules/travellers/templates/travellers/international.html:446
+#: modules/travellers/templates/travellers/international.html:456
 msgid "Previous"
 msgstr "Nyuma"
 
-#: modules/travellers/templates/travellers/international.html:449
+#: modules/travellers/templates/travellers/international.html:459
 #: modules/travellers/templates/travellers/validation.html:20
 msgid "Next"
 msgstr "Mbele"
@@ -386,7 +391,7 @@ msgstr "Unataka kujaza fomu nyingine?"
 
 #: modules/travellers/templates/travellers/success.html:36
 msgid "Yes"
-msgstr "Yes"
+msgstr "Ndio"
 
 #: modules/travellers/templates/travellers/success.html:38
 msgid "No"
@@ -470,7 +475,7 @@ msgstr "Barua pepe inahitajika"
 
 #: modules/travellers/templates/travellers/validation.html:243
 msgid "Invalid email address"
-msgstr "Andika barua pepe"
+msgstr "Umekosea kuandika barua pepe"
 
 #: modules/travellers/templates/travellers/validation.html:259
 msgid "Country journey started is required"

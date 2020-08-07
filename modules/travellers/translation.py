@@ -3,7 +3,6 @@ from .models import *
 
 
 class SymptomTranslationOptions(TranslationOptions):
-    fields = ('title', 'title_sw')
-
+    fields = ('title',)
 
 translator.register(Symptom, SymptomTranslationOptions)

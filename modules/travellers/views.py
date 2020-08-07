@@ -4,7 +4,7 @@ from django.utils import translation
 import datetime
 from datetime import timedelta
 from django.shortcuts import render, render_to_response, redirect
-from .models import Traveller, TravellerVisitedArea, TravellerSymptom, Location, PointOfEntry
+from .models import Traveller, TravellerVisitedArea, TravellerSymptom, Location, PointOfEntry,Symptom
 from .forms import TravellerForm
 from django.contrib import messages
 from django.conf import settings
@@ -72,7 +72,14 @@ def international(request):
     None
 
     """
+     #redirect path
+    redirectpath = ""
 
+    #activate current language
+    translation.activate(translation.get_language())
+   
+    #data
+    symptoms = Symptom.objects.all() #symptoms
     countries = Location.objects.filter(parent=0)  # countries
     today = datetime.date.today().strftime("%Y-%m-%d")
     last_21_days = (datetime.date.today() -
@@ -170,19 +177,22 @@ def international(request):
                 traveller_up.disease_to_screen = score
                 traveller_up.save()
 
-            messages.add_message(request, messages.SUCCESS,
-                                 'Success! Saved Successfully!')
-            return redirect('/success')
+            messages.add_message(request, messages.SUCCESS, 'Success! Saved Successfully!')
+            if translation.get_language() == 'en-us':
+                redirectpath = "/success"
+            elif translation.get_language() == "sw":
+                redirectpath = "/sw/success"
+
+            return redirect(redirectpath)
         else:
-            messages.add_message(request, messages.WARNING,
-                                 'Warning! Please check all the fields!')
+            messages.add_message(request, messages.WARNING, 'Warning! Please check all the fields!')
 
         return render(request, 'travellers/international.html', attr)
 
     else:
         form = TravellerForm()
         return render(request, 'travellers/international.html',
-                      {'form': form, 'countries': countries, 'today': today, 'last_21_days': last_21_days})
+                      {'form': form, 'countries': countries, 'symptoms': symptoms, 'today': today, 'last_21_days': last_21_days})
 
 
 def domestic(request):
@@ -202,6 +212,10 @@ def success(request):
     None
 
     """
+
+    #activate current language
+    translation.activate(translation.get_language())
+
     return render(request, 'travellers/success.html', {})
 
 

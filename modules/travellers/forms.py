@@ -167,15 +167,8 @@ class TravellerForm(forms.Form):
                'type': 'number', 'min': 1, 'max': 21}), required=False)
 
     # tab 5
-    print("Language => " + settings.LANGUAGE_CODE)
-
-    if translation.get_language() == "en-us":
-        symptoms = Symptom.objects.all().values_list("id", "title")
-    elif translation.get_language() == "sw":
-        symptoms = Symptom.objects.all().values_list("id", "title_sw")
-
-    symptoms = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple(
-        attrs={'id': 'symptoms'}), choices=symptoms)
+    # symptoms = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple(
+    #     attrs={'id': 'symptoms'}), choices=Symptom.objects.all().values_list('id', 'title'))
 
     other_symptoms = forms.CharField(label=_('Other Symptoms (comma separated)'), widget=forms.Textarea(
         attrs={'class': 'form-control', 'id': 'other_symptoms', 'rows': 3,

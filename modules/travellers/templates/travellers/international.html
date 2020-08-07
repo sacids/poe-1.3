@@ -387,7 +387,17 @@
                                                     {% trans "Please, mark/tick all the clinical manifestations that you have experienced during the last 7 days (1 week)" %}
                                                 </p>
 
-                                                {{ form.symptoms }}
+                                                <ul id="symptoms">
+                                                    {% for symptom in symptoms %}
+                                                    <li>
+                                                        <label for="symptoms_{{ symptom.id }}">
+                                                            <input type="checkbox" name="symptoms"
+                                                                value="{{ symptom.id }}" id="symptoms_{{ symptom.id }}">
+                                                            {{ symptom.title }}
+                                                        </label>
+                                                    </li>
+                                                    {% endfor %}
+                                                </ul>
                                                 <span id="errorSymptoms" style="color: red;"></span>
                                             </div>
                                             <!--./form-group -->

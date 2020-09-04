@@ -14,8 +14,24 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
+from django.conf.urls.i18n import i18n_patterns
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
-urlpatterns = [
+urlpatterns = i18n_patterns(
     path('admin/', admin.site.urls),
-]
+    path('dashboard/', include("modules.dashboard.urls")),
+    path('screen/', include("modules.screening.urls")),
+    path('common/', include("modules.common.urls")),
+    path('accounts/', include("django.contrib.auth.urls")),
+    path('sec_screen/', include("modules.secondary_screening.urls")),
+    path('', include("modules.travellers.urls")),
+    prefix_default_language=False
+)
+
+urlpatterns += staticfiles_urlpatterns()
+
+admin.site.site_header = 'Point of Entries Admin'
+admin.site.site_title = 'Point of Entries Admin'
+admin.site.index_title = 'Welcome to POE Admin Panel'
+

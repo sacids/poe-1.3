@@ -1,0 +1,26 @@
+{% extends 'backend/base.html' %}
+
+
+{% block navarea %}
+    {% include 'backend/navarea.html' %}
+{% endblock %}
+
+{% block content %}
+    <div class=" ">
+        <div><h1 class="text-info text-bold">{{ traveller.full_name }} </h1></div>
+        <div> {% for symptom in symptoms %}{{ symptom.symptom__title }}, {% endfor %} </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            {{ traveller.location_origin__title}}
+            <table>
+            {% for k,v in traveller.items %}
+                {% if k != "_state" %}
+                    <tr><td>{{ k }}</td><td> : {{ v }} </td></tr>
+                {% endif %}
+            {% endfor %}
+            </table>
+        </div>
+    </div>
+{% endblock %}
+

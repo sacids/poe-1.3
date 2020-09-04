@@ -1,0 +1,56 @@
+{% load i18n %}
+<script type="text/javascript">
+    $(document).ready(function() {
+        let maxField = 5; //Input fields increment limitation
+        let addButton = $('.add_button'); //Add button selector
+        let wrapper = $('.field_wrapper'); //Input field wrapper
+        let fieldHTML = '<div class="col-lg-6 col-md-6 col-sm-6 col-12">' +
+            '<div class="form-group">' +
+            '<label>{% trans "Country" %}</label>' +
+            '<select name="location" id="location" class="form-control">' +
+            '<option value="">{% trans "-- Select --" %}</option>' +
+            "{% for country in countries %}" +
+            "<option value='{{ country.id }}'>{{ country.title }}</option>" +
+            "{% endfor %}" +
+            '</select>' +
+            '</div>' +
+            '</div>' +
+            '<div class="col-lg-6 col-md-6 col-sm-6 col-12">' +
+            '<div class="form-group">' +
+            '<label>{% trans "Location/Province" %}</label>' +
+            '<input type="text" name="location_visited" id="location_visited" class="form-control" placeholder="{% trans "Write a location/province visited..." %}" />' +
+            '</div>' +
+            '</div>' +
+            '<div class="col-lg-6 col-md-6 col-sm-6 col-12">' +
+            '<div class="form-group">' +
+            '<label>{% trans "Date" %}</label>' +
+            '<input type="date" name="date" min="{{ last_21_days }}" max="{{ today }}" id="date" class="form-control dateinput" placeholder="{% trans "Pick date..." %}"/>' +
+            '<span id="errorDate" style="color: red;"></span>' +
+            '</div>' +
+            '</div>' +
+            '<div class="col-lg-6 col-md-6 col-sm-6 col-12">' +
+            '<div class="form-group">' +
+            '<label>{% trans "Number of Days" %}</label>' +
+            '<input type="number" min="1" name="days" id="days" min="1" max="21" class="form-control" placeholder="{% trans "Write number of days..." %}" />' +
+            '<span id="errorDays" style="color: red;"></span>' +
+            '</div>' +
+            '</div>';
+
+        let x = 1; //Initial field counter is 1
+        //Once add button is clicked
+        $(addButton).click(function() {
+            //Check maximum number of input fields
+            if (x < maxField) {
+                x++; //Increment field counter
+                $(wrapper).append(fieldHTML); //Add field html
+            }
+        });
+
+        //Once remove button is clicked
+        $(wrapper).on('click', '.remove_button', function(e) {
+            e.preventDefault();
+            $(this).parent('div').remove(); //Remove field html
+            x--; //Decrement field counter
+        });
+    });
+</script>

@@ -1,0 +1,22 @@
+{% load static %}
+<div id="mySidenav" class="sidenav">
+    <div><a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a></div>
+    <div class="set_poe_div">
+        <div><h5>SET POINT OF ENTRY<h5></div>
+        <select name="poe" id="set_poe">
+            <option value="0">ALL</option>
+            {% for poe in poes %}
+            <option value="{{ poe.id }}"> {{ poe.title }}</option>
+            {% endfor %}
+        </select>
+        <button value="SET" name="set_poe_btn" id="set_poe_btn">SET</button>
+    </div>
+    {% for module in modules %}
+        <div class="item text-left">
+            <a class="" href="{% url module.link %}">
+                <i class="fa fa-{{ module.icon }}"></i>
+                <span>{{ module.title }}</span>
+            </a>
+        </div>
+    {% endfor %}
+</div>

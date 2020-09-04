@@ -1,0 +1,226 @@
+/* Style the navbar */
+  #navbar {
+    overflow: hidden;
+    position: relative;
+    z-index: 3;
+  }
+  #topbar{
+      font-size: 0.8em;
+      padding: 3px 0 3px 20px;
+      color: #999;
+  }
+
+  .navopt{
+    height: 80px;
+    padding: 18px 18px;
+    font-size: 2em;
+  }
+  .set_poe_div{
+    padding: 10px 35px;
+    color: #818181;
+  }
+  .set_poe_div select{
+    width: 135px;
+    height: 35px;
+    font-size: 1.3em;
+    border: 1px solid #3C5E42;
+    background-color:  #203B25;
+    color: #818181;
+  }
+  .set_poe_div button{
+    width: 60px;
+    height: 35px;
+    border: 1px;
+    background-color: #3C5E42;;
+  }
+
+  #openNav{
+      font-size: 2em;
+      //padding: 20px 30px 20px 30px;
+  }
+  #openNav span{
+      cursor: pointer;
+  }
+  .nav-icons{
+      font-size: 1.1em;
+      display: inline-block;
+      border-radius: 60px;
+      box-shadow: 0px 0px 2px #888;
+      padding: 0.4em 0.7em;
+      margin-right: 10px;
+      color: #999;
+  }
+
+  /* Navbar links */
+  #navbar a {
+    float: left;
+    display: block;
+    text-align: center;
+    text-decoration: none;
+  }
+
+  /* Page content */
+  .content {
+    padding: 15px;
+    min-height: calc(100vh - 255px);
+  }
+
+  .footer{
+    padding: 15px;
+    height: 140px;
+  }
+
+  /* The sticky class is added to the navbar with JS when it reaches its scroll position */
+  .sticky {
+    position: fixed !important;
+    top: 0;
+    width: 100%;
+    -webkit-box-shadow: 0 3px 25px 0 rgba(47, 56, 68, 0.22);
+      -moz-box-shadow: 0 3px 25px 0 rgba(47, 56, 68, 0.22);
+      box-shadow: 0 3px 25px 0 rgba(47, 56, 68, 0.22);
+  }
+
+  /* Add some top padding to the page content to prevent sudden quick movement (as the navigation bar gets a new position at the top of the page (position:fixed and top:0) */
+  .sticky + .content {
+    padding-top: 60px;
+  }
+
+  .site-search {
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100px;
+      transition: .3s;
+      background-color: #fff;
+      opacity: 0;
+      visibility: hidden;
+      z-index: 10;
+  }
+  .site-search.search-visible {
+      opacity: 1;
+      visibility: visible;
+  }
+  .site-search > input {
+      display: block;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      padding-right: 120px;
+      padding-left: 30px;
+      border: 0;
+      background-color: #fff;
+      color: #606975;
+      font-size: 16px;
+  }
+  .site-search .search-tools {
+      position: absolute;
+      top: 50%;
+      right: 30px;
+      margin-top: -20px;
+      z-index: 5;
+  }
+
+  .site-search .close-search{
+    cursor: pointer;
+  }
+  
+
+  .screen td{
+    background-color:#ef5350 !important;
+    color: white;
+  }
+
+
+
+
+  /* data table css styling data tables */
+
+  /* hiding filter and info */
+  .dataTables_filter, .dataTables_info { 
+    display: none; 
+  }
+
+  .dataTable thead {
+    background-color: #283d33;
+    background-color: #5d5b5b;
+    letter-spacing: .025em;
+    color: #fff;
+  }
+
+  .dataTable tbody td {
+    border-right: 1px dashed #dddddd;
+    border-top: 0px dashed #dddddd;
+    cursor: pointer;
+  }
+
+  .dataTable tbody td:first-child {
+    border-left: 1px solid #dddddd;
+  }
+
+  .dataTable tbody td:last-child {
+    border-right: 1px solid #dddddd;
+  }
+
+
+
+
+
+
+
+
+
+  /* The side navigation menu */
+  .sidenav {
+    height: 100%; /* 100% Full-height */
+    width: 0; /* 0 width - change this with JavaScript */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Stay on top */
+    top: 0; /* Stay at the top */
+    left: 0;
+    background-color: #203B25;/* green*/
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 80px; /* Place content 60px from the top */
+    transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+  }
+
+  .sidenav > div{
+      border-bottom: 1px solid #3C5E42;
+  }
+
+  /* The navigation menu links */
+  .sidenav a {
+    padding: 15px 15px 15px 32px;
+    text-decoration: none;
+    font-size: 1.1em;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+  }
+
+  /* When you mouse over the navigation links, change their color */
+  .sidenav a:hover {
+    color: #f1f1f1;
+  }
+
+  /* Position and style the close button (top right corner) */
+  .sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 5px;
+    font-size: 36px;
+    margin-left: 50px;
+  }
+
+  /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
+  #main {
+    transition: margin-left .5s;
+    padding: 0px;
+  }
+
+  /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+  @media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+  }

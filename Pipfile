@@ -5,14 +5,20 @@ verify_ssl = true
 
 [dev-packages]
 autopep8 = "*"
+pylint = "*"
 
 [packages]
 django = "==2.2.*"
 django-admin = "*"
 python-decouple = "*"
 psycopg2-binary = "*"
-django-formtools = "*"
+gunicorn= "*"
 django-inplaceedit = "*"
+django-crispy-forms = "*"
+django-phone-field = "*"
+django-formtools = "*"
+django-multiselectfield = "*"
+faker = "*"
 
 [requires]
 python_version = "3.8"

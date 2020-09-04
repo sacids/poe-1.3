@@ -1,0 +1,349 @@
+{% load i18n %}
+
+<script type="text/javascript">
+    let currentTab=0; // Current tab is set to be the first tab (0)
+    showTab(currentTab); // Display the current tab
+
+    function showTab(n) {
+        // This function will display the specified tab of the form ...
+        let x=document.getElementsByClassName("tab");
+        x[n].style.display="block";
+        // ... and fix the Previous/Next buttons:
+        if (n===0) {
+            document.getElementById("prevBtn").style.display="none";
+        } else {
+            document.getElementById("prevBtn").style.display="inline";
+        }
+        if (n===(x.length-1)) {
+            document.getElementById("nextBtn").innerHTML="{%trans 'Save' %}"
+        } else {
+            document.getElementById("nextBtn").innerHTML="{%trans 'Next' %}"
+        }
+        // ... and run a function that displays the correct step indicator:
+        fixStepIndicator(n)
+    }
+
+    function nextPrev(n) {
+        // This function will figure out which tab to display
+        let x=document.getElementsByClassName("tab");
+
+        // Exit the function if any field in the current tab is invalid:
+        if (n===1&&!validateForm()) return false;
+        // Hide the current tab:
+        x[currentTab].style.display="none";
+        // Increase or decrease the current tab by 1:
+        currentTab=currentTab+n;
+        // if you have reached the end of the form... :
+        if (currentTab>=x.length) {
+            //...the form gets submitted:
+            document.getElementById("regForm").submit();
+            return false;
+        }
+        // Otherwise, display the correct tab:
+        showTab(currentTab);
+    }
+
+    // Defining a function to display error message
+    function printError(elemId,hintMsg) {
+        document.getElementById(elemId).innerHTML=hintMsg;
+    }
+
+    // Defining a function to validate form
+    function validateForm() {
+        // Retrieving the values of form elements
+        //let form_type = document.getElementById("form_type").value;
+        let name=document.getElementById("full_name").value;
+        let age=document.getElementById("age").value;
+        let sex=document.getElementById("sex").value;
+        let nationality=document.getElementById("nationality").value;
+        let idNumber=document.getElementById("id_number").value;
+        let modeOfTransport=document.getElementById("mode_of_transport").value;
+        let nameOfTransport=document.getElementById("name_of_transport").value;
+        let arrivalDate=document.getElementById("arrival_date").value;
+        let pointOfEntry=document.getElementById("point_of_entry").value;
+        let durationOfStay=document.getElementById("duration_of_stay").value;
+        let employment=document.getElementById("employment").value;
+        let locationOrigin=document.getElementById("location_origin").value;
+
+        let regionId=document.getElementById("region_id").value;
+        let phone=document.getElementById("phone").value;
+        let email=document.getElementById("email").value;
+
+        let date=document.getElementsByName("date");
+        let days=document.getElementsByName("days");
+
+        let symptoms=document.getElementsByName("symptoms");
+        let accept=document.getElementById("accept");
+
+        //validate per current tab
+        //tab 1 validation
+        if (currentTab===0) {
+            let errorName=errorAge=errorSex=errorNationality=errorIdNumber=errorModeOfTransport=errorNameOfTransport=errorArrivalDate=errorPointOfEntry=true;
+
+            // Validate name
+            if (name==="") {
+                printError("errorName","{%trans 'Traveller name is required' %}");
+            } else {
+                let regex=/^[a-zA-Z\s]+$/;
+                if (regex.test(name)===false) {
+                    printError("errorName","{% trans 'Invalid traveller name' %}");
+                } else {
+                    printError("errorName","");
+                    errorName=false;
+                }
+            }
+
+            //validate age
+            if (age==="") {
+                printError("errorAge","{% trans 'Age is required' %}");
+            } else {
+                if (age<0||age>150) {
+                    printError("errorAge","{% trans 'Invalid age' %}");
+                } else {
+                    printError("errorAge","");
+                    errorAge=false;
+                }
+            }
+
+            //validate sex
+            if (sex==="") {
+                printError("errorSex","{% trans 'Sex is required' %}");
+            } else {
+                printError("errorSex","");
+                errorSex=false;
+            }
+
+            //validate nationality
+            if (nationality==="") {
+                printError("errorNationality","{% trans 'Nationality is required' %}")
+            } else {
+                printError("errorNationality","");
+                errorNationality=false;
+            }
+
+            //validate passport
+            if (idNumber==="") {
+                printError("errorIdNumber","{% trans 'Passport number is required' %}")
+            } else {
+                printError("errorIdNumber","");
+                errorIdNumber=false;
+            }
+
+            //validate mode of transport
+            if (modeOfTransport==="") {
+                printError("errorModeOfTransport","{% trans 'Mode of transport is required' %}")
+            } else {
+                printError("errorModeOfTransport","");
+                errorModeOfTransport=false;
+            }
+
+            //validate name of transport
+            if (nameOfTransport==="") {
+                printError("errorNameOfTransport","{% trans 'Vessel/Flight/Vehicle name is required' %}")
+            } else {
+                printError("errorNameOfTransport","");
+                errorNameOfTransport=false;
+            }
+
+            //validate arrivalDate
+            if (arrivalDate==="") {
+                printError("errorArrivalDate","{% trans 'Arrival date is required' %}")
+            } else {
+                let today=new Date();
+                //date
+                let day=today.getDate();
+                day=(day<10)? '0'+day:day;
+
+                //month
+                let month=today.getMonth()+1;
+                month=(month<10)? '0'+month:month;
+
+                //year
+                let year=today.getFullYear();
+                let currentDate=year+'-'+month+'-'+day;
+
+                if (arrivalDate<currentDate) {
+                    printError("errorArrivalDate","{% trans 'Invalid arrival date' %}")
+                } else {
+                    printError("errorArrivalDate","");
+                    errorArrivalDate=false;
+                }
+            }
+
+            //validate pointOfEntry
+            if (pointOfEntry==="") {
+                printError("errorPointOfEntry","{% trans 'Point of entry required' %}")
+            } else {
+                printError("errorPointOfEntry","");
+                errorPointOfEntry=false;
+            }
+
+            //check all data in tab one
+            return (errorName||errorAge||errorSex||errorNationality||errorIdNumber||errorModeOfTransport||errorNameOfTransport||errorArrivalDate||errorPointOfEntry)!==true;
+
+            //tab 2 validation
+        } else if (currentTab===1) {
+            let errorEmployment=errorDurationOfStay=true;
+
+            //validate duration of stay
+            if (nationality==='217') {
+                printError("errorDurationOfStay","");
+                errorDurationOfStay=false;
+            } else {
+                if (durationOfStay==="") {
+                    printError("errorDurationOfStay","{% trans 'Duration of stay required' %}")
+                } else {
+                    if (durationOfStay<=0) {
+                        printError("errorDurationOfStay","{% trans 'Duration of stay should be greater than 0' %}")
+                    } else {
+                        printError("errorDurationOfStay","");
+                        errorDurationOfStay=false;
+                    }
+                }
+            }
+
+            //check all data in tab one
+            return (errorDurationOfStay)!==true;
+
+            //tab 3 validation
+        } else if (currentTab===2) {
+            let errorRegion=errorPhone=errorEmail=true;
+
+            //validate region
+            if (regionId==="") {
+                printError("errorRegion","{% trans 'Region is required' %}");
+            } else {
+                printError("errorRegion","");
+                errorRegion=false;
+            }
+
+            //validate mobile
+            if (phone==="") {
+                printError("errorPhone","{% trans 'Phone is required' %}");
+            } else {
+                let regex=/^\d{10}$/;
+                if (regex.test(phone)===false) {
+                    printError("errorPhone","{% trans 'Invalid phone. e.g 0717000000' %}");
+                } else {
+                    printError("errorPhone","");
+                    errorPhone=false;
+                }
+            }
+
+            //validate email
+            if (nationality==='217') {
+                printError("errorEmail","");
+                errorEmail=false;
+            } else {
+                if (email==="") {
+                    printError("errorEmail","{% trans 'Email is required' %}");
+                } else {
+                    let regex=/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+                    if (regex.test(email)===false) {
+                        printError("errorEmail","{% trans 'Invalid email address' %}");
+                    } else {
+                        printError("errorEmail","");
+                        errorEmail=false;
+                    }
+                }
+            }
+
+            //check all data in tab one
+            return (errorRegion||errorPhone||errorEmail)!==true;
+
+            //tab 3 validation
+        } else if (currentTab===3) {
+            let errorLocationOrigin=errorDate=errorDays=true;
+
+            if (locationOrigin==="") {
+                printError("errorLocationOrigin","{% trans 'Country journey started is required' %}");
+            } else {
+                printError("errorLocationOrigin","");
+                errorLocationOrigin=false;
+            }
+
+            //date
+            if (date.length>0) {
+                let today=new Date();
+                //date
+                let day=today.getDate();
+                day=(day<10)? '0'+day:day;
+
+                //month
+                let month=today.getMonth()+1;
+                month=(month<10)? '0'+month:month;
+
+                //year
+                let year=today.getFullYear();
+                let currentDate=year+'-'+month+'-'+day;
+
+                for (let i=0;i<date.length;i++) {
+                    if (date[i].value>currentDate) {
+                        printError("errorDate","{% trans 'Date should not be greater or equal to today' %}");
+                    } else {
+                        printError("errorDate","");
+                        errorDate=false;
+                    }
+                }
+            }
+
+            //no of days
+            if (days.length>0) {
+                for (let i=0;i<days.length;i++) {
+                    if (days[i].value>21) {
+                        printError("errorDays","{% trans 'No. of Days should not be greater than 21' %}");
+                    } else {
+                        printError("errorDays","");
+                        errorDays=false;
+                    }
+                }
+            }
+
+            //check all data in tab 3
+            return (errorLocationOrigin||errorDate||errorDays)!==true;
+
+        } else if (currentTab===4) {
+            let errorSymptoms=true;
+
+            for (let i=0;i<symptoms.length;i++) {
+                if (symptoms[i].type==='checkbox') {
+                    if (symptoms[i].checked) {
+                        printError("errorSymptoms","");
+                        errorSymptoms=false;
+                    } else {
+                        printError("errorSymptoms","{% trans 'Symptoms are required' %}");
+                    }
+                }
+            }
+
+            //check all data in tab 3
+            return (errorSymptoms)!==true;
+
+        } else if (currentTab===5) {
+            let errorAccept=true;
+
+            if (accept.type==='checkbox') {
+                if (accept.checked) {
+                    printError("errorAccept","");
+                    errorAccept=false;
+                } else {
+                    printError("errorAccept","{% trans 'Tick the declaration.' %}");
+                }
+            }
+
+            //check all data in tab 5
+            return (errorAccept)!==true;
+        }
+        return true;
+    }
+
+    function fixStepIndicator(n) {
+        // This function removes the "active" class of all steps...
+        let i,x=document.getElementsByClassName("step");
+        for (i=0;i<x.length;i++) {
+            x[i].className=x[i].className.replace(" active","");
+        }
+        //... and adds the "active" class to the current step:
+        x[n].className+=" active";
+    }
+</script>

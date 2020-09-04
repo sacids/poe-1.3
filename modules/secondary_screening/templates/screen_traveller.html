@@ -1,0 +1,16 @@
+{% extends 'backend/base.html' %}
+
+{% block navarea %}
+    {% include 'backend/navarea.html' %}
+{% endblock %}
+
+{% block content %}
+    
+    <section class="survey">
+    {% if not form_submitted %}
+        {% include 'survey.html' %}
+    {% else %}
+        <span>Data Received</div>
+    {% endif %}
+    </section>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends 'backend/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block navarea %}
+    {% include 'backend/navarea.html' %}
+{% endblock %}
+
+{% block content %}
+    {% if not form_submitted %}
+        <form method="post" action="">
+        {% csrf_token %}
+        
+        <div class="row">
+            <div class="col-lg-6">
+            {{form|crispy }}
+            <input type="submit" value="Submit Form"/>
+            </div>
+        </div>
+        </form>
+    {% else %}
+        <span>Data Received</div>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,333 @@
+{% extends 'backend/base.html' %} {% load static %} {% block highcharts_js %}
+<script src="{% static 'js/highcharts.js' %}"></script>
+{% endblock%} {% block title %} Dashboard {% endblock %} {% block navarea %}
+<div class="p-2">
+    <form action="" method="POST" accept-charset="utf-8" class="form-inline">
+        {% csrf_token %}
+        <div class="form-group">
+            <select name="day" class="form-control" style="width: 250px !important;">
+                <option value="" selected="selected">-- Select --</option>
+                <option value="today">Today</option>
+                <option value="yesterday">Yesterday</option>
+                <option value="last_week">Last week</option>
+                <option value="last_month">Last month</option>
+                <option value="overall">Overall</option>
+            </select>
+        </div>
+        <!-- /form-group -->
+
+        <div class="form-group pl-2">
+            <button type="submit" name="filter" class="btn btn-primary btn-sm" style="width: 100px !important;">
+                <i class="fa fa-search"></i> Filter
+            </button>
+        </div>
+        <!-- /form-group -->
+    </form>
+</div>
+<!--./p-2 -->
+{% endblock %} {% block content %}
+<div class="row">
+    <div class="col-lg-3 col-md-2">
+        <div class="card bg-primary-200">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-3 col-xs-3">
+                        <i class="fa fa-reg-users"></i>
+                    </div>
+                    <div class="col-md-9 col-xs-9 text-right">
+                        <div class="text-medium">
+                            Total Passengers
+                        </div>
+                        <br />
+                        <div class="text-large">
+                            {{ total_passengers }} </div>
+                    </div>
+                    <!--./col-xs-9 -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--./col-md-3 -->
+
+    <div class="col-lg-3 col-md-3">
+        <div class="card bg-success">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-3 col-xs-3">
+                        <i class="fa fa-normal-temp"></i>
+                    </div>
+                    <div class="col-md-9 col-xs-9 text-right">
+                        <div class="text-medium">Normal Temp</div>
+                        <br />
+                        <div class="text-large">{{ passenger_with_normal_temp }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--./col-md-3 -->
+
+    <div class="col-lg-3 col-md-3">
+        <div class="card bg-danger">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-3 col-xs-3">
+                        <i class="fa fa-above-temp"></i>
+                    </div>
+                    <div class="col-md-9 col-xs-9 text-right">
+                        <div class="text-medium">Above Normal Temp</div>
+                        <br />
+                        <div class="text-large">{{ passenger_with_above_normal_temp }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--./col-md-3 -->
+
+    <div class="col-lg-3 col-md-3">
+        <div class="card bg-danger-100">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-3 col-xs-3">
+                        <i class="fa fa-couple-users"></i>
+                    </div>
+                    <div class="col-md-9 col-xs-9 text-right">
+                        <div class="text-medium">Above Normal Temp</div>
+
+                        <div class="text-small">
+                            Male: {{ male_percent }}%
+                        </div>
+                        <div class="text-small">
+                            Female: {{ female_percent }}%
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--./col-md-3 -->
+</div>
+<!--./row -->
+
+<div class="row mt-4 mb-4">
+    <div class="col-md-9 col-12">
+        <div class="card card-flat bg-graph p-2">
+            <div class="card-heading">
+                <b class="text-uppercase">Registered Passengers per POE</b>
+            </div>
+            <div class="card-body">
+                <div id="registered-passengers" style="height: 350px; width: 100%;"></div>
+            </div>
+        </div>
+        <!--./card-->
+    </div>
+    <!--./col-md-6 -->
+
+    <div class="col-md-3 col-12">
+        <div class="card card-flat bg-graph p-2">
+            <div class="card-heading">
+                <b class="text-uppercase">Actions</b>
+            </div>
+
+            <div class="card-body">
+                <div class="info" style="height: 350px; width: 100%;">
+                    <p>Below Normal Temp
+                        <span>{{ passenger_with_below_normal_temp }}</span>
+                    </p>
+
+                    <p>Above Normal Temp
+                        <span>{{ passenger_with_above_normal_temp }}</span>
+                    </p>
+
+                    <p>Male Above Temp
+                        <span>{{ male_passenger_with_above_normal_temp }}</span>
+                    </p>
+
+                    <p>Female Above Temp
+                        <span>{{ female_passenger_with_above_normal_temp }}</span>
+                    </p>
+
+                    <p>Going to secondary screening
+                        <span>{{ secondary_screening }}</span>
+                    </p>
+
+                    <p>Allowed to Proceed
+                        <span>{{ allowed_to_proceed }}</span>
+                    </p>
+                </div>
+                <!--stats -->
+            </div>
+        </div>
+        <!--./card-->
+    </div>
+    <!--./col-md-3 -->
+</div>
+<!--./row -->
+
+<div class="row mt-4 mb-4">
+    <div class="col-md-12 col-12">
+        <div class="card card-flat bg-graph p-2">
+            <div class="card-heading">
+                <b class="text-uppercase">Reported symptoms</b>
+            </div>
+            <div class="card-body">
+                <div id="reported-symptoms" style="height: 400px; width: 100%;"></div>
+            </div>
+        </div>
+        <!--./card-->
+    </div>
+    <!--./col-md-6 -->
+</div>
+<!--./row -->
+
+<script type="text/javascript">
+    //Registered Passengers 
+    const _poe_data={{ poe_data|safe }};
+    const _passengers_data={{ passengers_data|safe }};
+
+    //Reported Symptoms
+    const _symptom_data={{ symptom_data|safe }}
+    const _symptom_occurrence_data={{ symptom_occurrence_data|safe }}
+
+    //Registered Passengers
+    $(function () {
+        Highcharts.setOptions({
+            lang: {
+                thousandsSep: ','
+            }
+        });
+
+        $('#registered-passengers').highcharts({
+            chart: {
+                type: 'column',
+                backgroundColor: '#fafafa'
+            },
+            title: {
+                text: null
+            },
+            xAxis: {
+                categories: _poe_data,
+                crosshair: true
+            },
+            yAxis: {
+                title: {
+                    text: null
+                }
+            },
+            tooltip: {
+                headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>'+
+                    '<td style="padding:0"><b>{point.y:,.0f}</b></td></tr>',
+                footerFormat: '</table>',
+                shared: true,
+                useHTML: true
+            },
+            plotOptions: {
+                column: {
+                    pointPadding: 0.2,
+                    borderWidth: 0,
+                    minPointLength: 3,
+                    dataLabels: {
+                        enabled: true,
+                        style: {
+                            fontWeight: 'bold',
+                            fontSize: '8px'
+                        }
+                    }
+                },
+                series: {
+                    cursor: 'pointer',
+                    point: {
+                        events: {
+                            click: function () {
+                                //todo: prompt link to a specific poe
+
+                            }
+                        }
+                    }
+                }
+            },
+            series: [{
+                showInLegend: false,
+                name: 'Passengers',
+                color: '#1565c0',
+                data: _passengers_data
+            }],
+            credits: {
+                enabled: false
+            }
+        });
+    });
+
+    //reported-symptoms
+        $(function () {
+            Highcharts.setOptions({
+                lang: {
+                    thousandsSep: ','
+                }
+            });
+
+            $('#reported-symptoms').highcharts({
+                chart: {
+                    type: 'column',
+                    backgroundColor: '#fafafa'
+                },
+                title: {
+                    text: null
+                },
+                xAxis: {
+                    categories: _symptom_data,
+                    crosshair: true
+                },
+                yAxis: {
+                    title: {
+                        text: null
+                    }
+                },
+                tooltip: {
+                    headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                    pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>'+
+                        '<td style="padding:0"><b>{point.y:,.0f}</b></td></tr>',
+                    footerFormat: '</table>',
+                    shared: true,
+                    useHTML: true
+                },
+                plotOptions: {
+                    column: {
+                        pointPadding: 0.2,
+                        borderWidth: 0,
+                        minPointLength: 3,
+                        dataLabels: {
+                            enabled: true,
+                            style: {
+                                fontWeight: 'bold',
+                                fontSize: '8px'
+                            }
+                        }
+                    },
+                    series: {
+                        cursor: 'pointer',
+                        point: {
+                            events: {
+                                click: function () {
+                                    //todo: prompt link to a specific poe
+
+                                }
+                            }
+                        }
+                    }
+                },
+                series: [{
+                    showInLegend: false,
+                    name: 'Reported symptoms',
+                    color: '#B71C1C',
+                    data: _symptom_occurrence_data
+                }],
+                credits: {
+                    enabled: false
+                }
+            });
+        });
+</script>
+{% endblock %}

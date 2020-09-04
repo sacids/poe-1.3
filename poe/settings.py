@@ -28,7 +28,7 @@ SECRET_KEY = config('SECRET_KEY')
 DEBUG = config('DEBUG', cast=bool)
 
 # ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=lambda v: [s.strip() for s in v.split(',')])
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'poe.sacids.org']
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -134,6 +134,11 @@ LANGUAGES = [
     ('en-us', 'English'),
     ('sw', 'Swahili'),
 ]
+
+# modeltranslation only works when IS_MONOLINGUAL is False
+IS_MONOLINGUAL = False
+
+TRANSLATABLE_MODEL_MODULES = ["travellers.models"]
 
 TIME_ZONE = 'Africa/Dar_es_Salaam'
 

@@ -234,8 +234,9 @@ def calculate_score(traveller_id):
     for s in symptoms:
         fs |= models.Q(symptoms__id=s.id,)
 
-    queryset        = ScreenCriteria.objects.filter(fc & fs).values('disease_id').distinct()
-    return queryset
+    queryset        = ScreenCriteria.objects.filter(fc & fs).distinct()
+    score           = ', '.join(str(id.disease_id) for id in queryset)
+    return score
 
 
 def calculate_score1(traveller_id):

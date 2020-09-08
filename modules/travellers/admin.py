@@ -1,13 +1,13 @@
 from django.contrib import admin
 from .models import *
 
-admin.site.register(Location)
+#admin.site.register(Location)
 admin.site.register(PointOfEntry)
 admin.site.register(TravellerVisitedArea)
 admin.site.register(TravellerSymptom)
-admin.site.register(Symptom)
+#admin.site.register(Symptom)
 admin.site.register(ScreenCriteria)
-admin.site.register(Disease)
+#admin.site.register(Disease)
 
 
 @admin.register(Traveller)
@@ -25,3 +25,23 @@ class TravellerAdmin(admin.ModelAdmin):
 # class TravellerSymptomAdmin(admin.ModelAdmin):
 #     list_display = ('condition',)
 #     search_fields = ('condition',)
+
+class CriteriaInline(admin.StackedInline):
+    model           = ScreenCriteria
+
+class DiseaseAdmin(admin.ModelAdmin):
+    list_display    = ['title']
+    inlines         = [CriteriaInline]
+
+admin.site.register(Disease,DiseaseAdmin)
+
+class LocationAdmin(admin.ModelAdmin):
+    list_display    = ['id','title','code','parent']
+
+admin.site.register(Location,LocationAdmin)
+
+
+class SymptomAdmin(admin.ModelAdmin):
+    list_display    = ['id','title']
+
+admin.site.register(Symptom,SymptomAdmin)

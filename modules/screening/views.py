@@ -3,14 +3,16 @@ from django.http import HttpResponse
 from django.core import serializers
 from datetime import datetime, date
 from modules.common.models import Module
-from modules.travellers.models import Traveller, TravellerSymptom, TravellerVisitedArea
+from modules.travellers.models import Traveller, TravellerSymptom, TravellerVisitedArea, ScreenCriteria
 from django.contrib.auth.decorators import login_required
+from modules.travellers.views import get_travellers_countries, get_travellers_symptoms
+from django.db import models
 
 
 @login_required
 def screen(request):
     poe_id = request.session.get('poe_id')
-    print(poe_id)
+    #print(poe_id)
     # travellers  = Traveller.objects.raw("SELECT id,full_name, id_number, name_of_transport, disease_to_screen FROM et_travellers WHERE arrival_date = '"+str(datetime.today().strftime('%Y-%m-%d')+"'"))
     travellers = (Traveller.objects
                   .select_related('location_origin')
@@ -31,6 +33,29 @@ def screen(request):
         "temp_a": temp_a,
         "temp_b": temp_b,
     }
+
+
+    countries       = get_travellers_countries(8)
+    symptoms        = get_travellers_symptoms(8)
+    Location        = Traveller.objects.get(pk=8).location_origin.id
+
+    filters         = models.Q()
+    fc              = models.Q()
+    fs              = models.Q()
+
+    fc              |= models.Q(countries__id=Location)
+    for c in countries:
+        fc |= models.Q(countries__id=c.id,)
+    
+    for s in symptoms:
+        fs |= models.Q( symptoms__id=s.id,)
+
+    queryset        = ScreenCriteria.objects.filter(fc & fs).distinct()
+
+    print(filters)
+    for q in queryset:
+        print(q.disease_id)
+
     return render(request, 'screen.html', context)
 
 

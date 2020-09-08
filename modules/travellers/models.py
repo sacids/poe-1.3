@@ -1,5 +1,6 @@
 from django.db import models
 from phone_field import PhoneField
+from django.contrib.postgres.fields import ArrayField
 from modules.common.models import BaseModel
 
 FORM_TYPE = (
@@ -94,9 +95,9 @@ class Location(models.Model):
 class ScreenCriteria(models.Model):
     """A class to create screening criteria table."""
     disease = models.ForeignKey(Disease, on_delete=models.PROTECT)
-    countries = models.CharField(max_length=250)
-    symptoms = models.CharField(max_length=250)
-    temp = models.CharField(max_length=250)
+    countries = models.ManyToManyField(Location,related_name='countries',blank=True, null=True)
+    symptoms = models.ManyToManyField(Symptom,related_name='symptoms',blank=True, null=True)
+    temp = models.CharField(max_length=250,blank=True, null=True)
     active = models.CharField(choices=ACTIVE, max_length=1, default='0')
 
     class Meta:

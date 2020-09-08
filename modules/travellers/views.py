@@ -4,10 +4,11 @@ from django.utils import translation
 import datetime
 from datetime import timedelta
 from django.shortcuts import render, render_to_response, redirect
-from .models import Traveller, TravellerVisitedArea, TravellerSymptom, Location, PointOfEntry,Symptom
+from .models import Traveller, TravellerVisitedArea, TravellerSymptom, Location, PointOfEntry,Symptom,ScreenCriteria
 from .forms import TravellerForm
 from django.contrib import messages
 from django.conf import settings
+from django.db import models
 
 
 def default(request):
@@ -218,8 +219,26 @@ def success(request):
 
     return render(request, 'travellers/success.html', {})
 
-
 def calculate_score(traveller_id):
+    countries       = get_travellers_countries(traveller_id)
+    symptoms        = get_travellers_symptoms(traveller_id)
+    Location        = Traveller.objects.get(pk=traveller_id).location_origin.id
+
+    fc              = models.Q()
+    fs              = models.Q()
+
+    fc              |= models.Q(countries__id=Location)
+    for c in countries:
+        fc |= models.Q(countries__id=c.id,)
+    
+    for s in symptoms:
+        fs |= models.Q(symptoms__id=s.id,)
+
+    queryset        = ScreenCriteria.objects.filter(fc & fs).values('disease_id').distinct()
+    return queryset
+
+
+def calculate_score1(traveller_id):
     """
     Calculate score
 

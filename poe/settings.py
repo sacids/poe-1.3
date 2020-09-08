@@ -136,9 +136,6 @@ LANGUAGES = [
 ]
 
 # modeltranslation only works when IS_MONOLINGUAL is False
-IS_MONOLINGUAL = False
-
-TRANSLATABLE_MODEL_MODULES = ["travellers.models"]
 
 TIME_ZONE = 'Africa/Dar_es_Salaam'
 

@@ -7,7 +7,6 @@ FORM_TYPE = (
     ('domestic', "DOMESTIC"),
 )
 SEX = (
-    ('', "-- Select --"),
     ('M', "Male"),
     ('F', "Female"),
 )
@@ -21,20 +20,18 @@ ID_TYPE = (
     ('voter-id', "VOTER ID"),
 )
 TRANSPORT_MODE = (
-    ('', "-- Select --"),
     ('flight', 'Flight'),
     ('vehicle', 'Vehicle'),
     ('vessel', 'Vessel'),
+    ('train', 'Train'),
 )
 PURPOSE = (
-    ('', "-- Select --"),
     ('resident', 'Resident'),
     ('tourist', 'Tourist'),
     ('transit', 'Transit'),
     ('business', 'Business'),
 )
 EMPLOYMENT = (
-    ('', "-- Select --"),
     ('government', 'Government'),
     ('non-government', 'Non-Government'),
     ('non-profit', 'Non-Profit'),
@@ -50,8 +47,12 @@ class Disease(models.Model):
     """A class to create disease table."""
     title = models.CharField(max_length=100)
 
+    def __str__(self):
+        return self.title
+
     class Meta:
         db_table = "et_diseases"
+        verbose_name_plural = "Diseases"
 
 
 # symptoms
@@ -86,6 +87,7 @@ class Location(models.Model):
 
     class Meta:
         db_table = "et_locations"
+        verbose_name_plural = "Locations"
 
     def __str__(self):
         return self.title
@@ -117,10 +119,12 @@ class LocationDisease(models.Model):
 class PointOfEntry(models.Model):
     """A class to create point of entries table."""
     title = models.CharField(max_length=255)
-    mode_of_transport = models.CharField(max_length=50, null=True)
+    mode_of_transport = models.CharField(
+        choices=TRANSPORT_MODE, max_length=50,  null=True)
 
     class Meta:
         db_table = "et_point_of_entries"
+        verbose_name_plural = "Point of Entries"
 
     def __str__(self):
         return self.title

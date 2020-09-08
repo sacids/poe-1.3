@@ -31,7 +31,7 @@ urlpatterns = i18n_patterns(
 
 urlpatterns += staticfiles_urlpatterns()
 
-admin.site.site_header = 'Point of Entries Admin'
-admin.site.site_title = 'Point of Entries Admin'
+admin.site.site_header = 'POE Surveillance'
+admin.site.site_title = 'POE Surveillance'
 admin.site.index_title = 'Welcome to POE Admin Panel'
 

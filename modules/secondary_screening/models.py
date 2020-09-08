@@ -104,6 +104,7 @@ class DiseaseSurveyQns(models.Model):
 
     class Meta:
         db_table = "ss_disease_survey_qns"
+        verbose_name_plural = "Disease Survey Questions"
 
     def __str__(self):
         return self.title
@@ -116,6 +117,7 @@ class DiseaseSurveyAns(models.Model):
 
     class Meta:
         db_table = "ss_disease_survey_ans"
+        verbose_name_plural = "Disease Survey Answers"
 
     def __str__(self):
         return self.title
@@ -129,6 +131,7 @@ class RiskAssessment(models.Model):
 
     class Meta:
         db_table = "ss_risk_assessment"
+        verbose_name_plural = "Risks Assessment"
 
     def __str__(self):
         return self.decision

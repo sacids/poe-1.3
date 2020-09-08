@@ -8,6 +8,7 @@ django-excel-base==1.0.4
 django-excel-response2==3.0.2
 django-formtools==2.2
 django-inplaceedit==1.4.1
+django-modeltranslation==0.15.2
 django-multiselectfield==0.1.12
 django-phone-field==1.8.1
 django-six==1.0.4

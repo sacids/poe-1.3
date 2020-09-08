@@ -18,6 +18,7 @@ TRANSPORT_MODE = (
     ('flight', _('Flight')),
     ('vehicle', _('Vehicle')),
     ('vessel', _('Vessel')),
+    ('train', _('Train')),
 )
 PURPOSE = (
     ('', _('-- Select --')),

@@ -2,7 +2,16 @@ from django.contrib import admin
 from .models import *
 
 # Register your models here.
+class DiseaseSurveyAnsInline(admin.StackedInline):
+    model = DiseaseSurveyAns
 
-admin.site.register(DiseaseSurveyAns)
-admin.site.register(DiseaseSurveyQns)
-admin.site.register(RiskAssessment)
+@admin.register(DiseaseSurveyQns)
+class DiseaseSurveyQnsAdmin(admin.ModelAdmin):
+    list_display = ['title', 'category', 'disease_id']
+    list_filter = ['disease_id']
+    search_fields = ['title__startwith']
+    #inlines  = [DiseaseSurveyAnsInline]
+
+# @admin.register(RiskAssessment)
+# class RiskAssessmentAdmin(admin.ModelAdmin):
+#     pass

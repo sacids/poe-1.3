@@ -45,7 +45,7 @@ INSTALLED_APPS = [
     'phone_field',
     'formtools',
     'multiselectfield',
-    #'modeltranslation',
+    'modeltranslation',
 
     # custom apps
     'modules.config',

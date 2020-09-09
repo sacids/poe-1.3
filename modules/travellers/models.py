@@ -28,18 +28,12 @@ TRANSPORT_MODE = (
     ('train', 'Train'),
 )
 TRANSPORT_CATEGORY = (
-<<<<<<< HEAD
     ('Ground crossing', 'Ground crossing'),
     ('Dry port', 'Dry port'),
     ('Airport', 'Airport'),
     ('Lakeport', 'Lakeport'),
     ('Seaport', 'Seaport'),
     ('Railway', 'Railway'),
-=======
-    ('GROUND', 'Ground Crossing'),
-    ('DRYPORT', 'Dry Port'),
-    ('AIRPORT', 'Air Port')
->>>>>>> 734dd63f89208d5fed2142261dc55cbbead5839f
 )
 PURPOSE = (
     ('resident', 'Resident'),
@@ -137,17 +131,10 @@ class LocationDisease(models.Model):
 # point of entries
 class PointOfEntry(models.Model):
     """A class to create point of entries table."""
-<<<<<<< HEAD
-    title = models.CharField(max_length=255)
-    mode_of_transport = models.CharField(choices=TRANSPORT_MODE, max_length=50,  null=True)
-    category = models.CharField(choices=TRANSPORT_CATEGORY, max_length=100, null=True)
-    agents = models.ManyToManyField(User, related_name="agents", blank=True)
-=======
     title               = models.CharField(max_length=255)
     mode_of_transport   = models.CharField(choices=TRANSPORT_MODE, max_length=50,  null=True)
     category            = models.CharField(choices=TRANSPORT_CATEGORY, max_length=50,null=True)
     agents              = models.ManyToManyField(User, blank=True)
->>>>>>> 734dd63f89208d5fed2142261dc55cbbead5839f
 
     class Meta:
         db_table = "et_point_of_entries"

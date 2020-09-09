@@ -14,7 +14,7 @@ cd poe-1.3
 To set up a development environment quickly, first install Python 3. It comes with virtualenv built-in. So create a virtual env by:
 
 ```bash
-python -m venv env
+python -m virtualenv env
 env/bin/activate
 ```
 

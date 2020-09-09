@@ -33,6 +33,7 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
+    #'modeltranslation',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -45,7 +46,7 @@ INSTALLED_APPS = [
     'phone_field',
     'formtools',
     'multiselectfield',
-#    'modeltranslation',
+    'reset_migrations',
 
     # custom apps
     'modules.config',
@@ -134,8 +135,6 @@ LANGUAGES = [
     ('en-us', 'English'),
     ('sw', 'Swahili'),
 ]
-
-# modeltranslation only works when IS_MONOLINGUAL is False
 
 TIME_ZONE = 'Africa/Dar_es_Salaam'
 

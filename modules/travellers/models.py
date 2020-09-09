@@ -2,6 +2,7 @@ from django.db import models
 from phone_field import PhoneField
 from django.contrib.postgres.fields import ArrayField
 from modules.common.models import BaseModel
+from django.contrib.auth.models import User
 
 FORM_TYPE = (
     ('international', "INTERNATIONAL"),
@@ -120,8 +121,8 @@ class LocationDisease(models.Model):
 class PointOfEntry(models.Model):
     """A class to create point of entries table."""
     title = models.CharField(max_length=255)
-    mode_of_transport = models.CharField(
-        choices=TRANSPORT_MODE, max_length=50,  null=True)
+    mode_of_transport = models.CharField(choices=TRANSPORT_MODE, max_length=50,  null=True)
+    users = models.ManyToManyField(User,related_name='users',blank=True, null=True)
 
     class Meta:
         db_table = "et_point_of_entries"

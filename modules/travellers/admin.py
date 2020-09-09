@@ -28,7 +28,6 @@ class DiseaseAdmin(admin.ModelAdmin):
     ordering = ("id",)
     inlines = [ScreenCriteriaInline]
 
-
 admin.site.register(Symptom)
 
 # @admin.register(Symptom)

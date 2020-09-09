@@ -2,6 +2,7 @@ from django.db import models
 from phone_field import PhoneField
 from django.contrib.postgres.fields import ArrayField
 from modules.common.models import BaseModel
+from django.contrib.auth.models import User
 
 FORM_TYPE = (
     ('international', "INTERNATIONAL"),
@@ -25,6 +26,11 @@ TRANSPORT_MODE = (
     ('vehicle', 'Vehicle'),
     ('vessel', 'Vessel'),
     ('train', 'Train'),
+)
+TRANSPORT_CATEGORY = (
+    ('GROUND', 'Ground Crossing'),
+    ('DRYPORT', 'Dry Port'),
+    ('AIRPORT', 'Air Port')
 )
 PURPOSE = (
     ('resident', 'Resident'),
@@ -97,8 +103,8 @@ class Location(models.Model):
 class ScreenCriteria(models.Model):
     """A class to create screening criteria table."""
     disease = models.ForeignKey(Disease, on_delete=models.PROTECT)
-    countries = models.ManyToManyField(Location,related_name='countries',blank=True, null=True)
-    symptoms = models.ManyToManyField(Symptom,related_name='symptoms',blank=True, null=True)
+    countries = models.ManyToManyField(Location,related_name='countries',blank=True)
+    symptoms = models.ManyToManyField(Symptom,related_name='symptoms',blank=True)
     temp = models.CharField(max_length=250,blank=True, null=True)
     active = models.CharField(choices=ACTIVE, max_length=1, default='0')
 
@@ -119,9 +125,10 @@ class LocationDisease(models.Model):
 # point of entries
 class PointOfEntry(models.Model):
     """A class to create point of entries table."""
-    title = models.CharField(max_length=255)
-    mode_of_transport = models.CharField(
-        choices=TRANSPORT_MODE, max_length=50,  null=True)
+    title               = models.CharField(max_length=255)
+    mode_of_transport   = models.CharField(choices=TRANSPORT_MODE, max_length=50,  null=True)
+    category            = models.CharField(choices=TRANSPORT_CATEGORY, max_length=50,null=True)
+    agents              = models.ManyToManyField(User, blank=True)
 
     class Meta:
         db_table = "et_point_of_entries"

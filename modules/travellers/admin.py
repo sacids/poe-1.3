@@ -9,7 +9,7 @@ class LocationAdmin(admin.ModelAdmin):
 
 @admin.register(PointOfEntry)
 class PointOfEntryAdmin(admin.ModelAdmin):
-    list_display = ['id','title', 'mode_of_transport']
+    list_display = ['id','title', 'mode_of_transport','category']
     list_filter = ['mode_of_transport']
     search_fields = ['title__startwith']
     ordering = ("id",)

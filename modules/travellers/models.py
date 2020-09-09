@@ -98,8 +98,8 @@ class Location(models.Model):
 class ScreenCriteria(models.Model):
     """A class to create screening criteria table."""
     disease = models.ForeignKey(Disease, on_delete=models.PROTECT)
-    countries = models.ManyToManyField(Location,related_name='countries',blank=True, null=True)
-    symptoms = models.ManyToManyField(Symptom,related_name='symptoms',blank=True, null=True)
+    countries = models.ManyToManyField(Location,related_name='countries',blank=True)
+    symptoms = models.ManyToManyField(Symptom,related_name='symptoms',blank=True)
     temp = models.CharField(max_length=250,blank=True, null=True)
     active = models.CharField(choices=ACTIVE, max_length=1, default='0')
 
@@ -122,7 +122,7 @@ class PointOfEntry(models.Model):
     """A class to create point of entries table."""
     title = models.CharField(max_length=255)
     mode_of_transport = models.CharField(choices=TRANSPORT_MODE, max_length=50,  null=True)
-    users = models.ManyToManyField(User,related_name='users',blank=True, null=True)
+    users = models.ManyToManyField(User,related_name='users',blank=True)
 
     class Meta:
         db_table = "et_point_of_entries"

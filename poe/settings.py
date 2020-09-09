@@ -135,8 +135,6 @@ LANGUAGES = [
     ('sw', 'Swahili'),
 ]
 
-# modeltranslation only works when IS_MONOLINGUAL is False
-
 TIME_ZONE = 'Africa/Dar_es_Salaam'
 
 USE_I18N = True

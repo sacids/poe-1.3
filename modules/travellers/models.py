@@ -61,10 +61,11 @@ class Disease(models.Model):
 class Symptom(models.Model):
     """A class to create symptoms table."""
     title = models.CharField(max_length=100)
-    alias = models.CharField(max_length=100, null=True)
+    alias = models.CharField(max_length=150, null=True)
 
     class Meta:
         db_table = "et_symptoms"
+        verbose_name_plural = "Symptoms"
 
     def __str__(self):
         return self.title
@@ -78,6 +79,7 @@ class DiseaseSymptom(models.Model):
 
     class Meta:
         db_table = 'et_disease_symptoms'
+        verbose_name_plural = "Disease Sysmptoms"
 
 
 # locations
@@ -105,6 +107,7 @@ class ScreenCriteria(models.Model):
 
     class Meta:
         db_table = "et_ss_criteria"
+        verbose_name_plural = "Screening Criteria"
 
 
 class LocationDisease(models.Model):

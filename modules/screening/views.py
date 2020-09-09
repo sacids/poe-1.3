@@ -3,14 +3,16 @@ from django.http import HttpResponse
 from django.core import serializers
 from datetime import datetime, date
 from modules.common.models import Module
-from modules.travellers.models import Traveller, TravellerSymptom, TravellerVisitedArea
+from modules.travellers.models import Traveller, TravellerSymptom, TravellerVisitedArea, ScreenCriteria
 from django.contrib.auth.decorators import login_required
+from modules.travellers.views import calculate_score
+from django.db import models
 
 
 @login_required
 def screen(request):
     poe_id = request.session.get('poe_id')
-    print(poe_id)
+    #print(poe_id)
     # travellers  = Traveller.objects.raw("SELECT id,full_name, id_number, name_of_transport, disease_to_screen FROM et_travellers WHERE arrival_date = '"+str(datetime.today().strftime('%Y-%m-%d')+"'"))
     travellers = (Traveller.objects
                   .select_related('location_origin')
@@ -31,6 +33,10 @@ def screen(request):
         "temp_a": temp_a,
         "temp_b": temp_b,
     }
+
+    score   = calculate_score(8)
+    print(score)
+    
     return render(request, 'screen.html', context)
 
 

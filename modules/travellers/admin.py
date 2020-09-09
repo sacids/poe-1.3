@@ -33,19 +33,3 @@ class SymptomAdmin(admin.ModelAdmin):
     search_fields = ['title__startwith']
 
 
-
-#admin.site.register(Traveller)
-#admin.site.register(TravellerVisitedArea)
-#admin.site.register(TravellerSymptom) 
- 
-
-# @admin.register(InternationalTravellerExt)
-# class TravellerExtAdmin(admin.ModelAdmin):
-#     list_display = ('international_traveller', 'country', 'location_visited', 'date', 'days')
-#     search_fields = ('country', 'location_visited')
-#
-#
-# @admin.register(TravellerSymptom)
-# class TravellerSymptomAdmin(admin.ModelAdmin):
-#     list_display = ('condition',)
-#     search_fields = ('condition',)

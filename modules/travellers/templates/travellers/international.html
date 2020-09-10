@@ -23,18 +23,6 @@
                 <div class="card-header">
                     <h5 class="card-title text-uppercase text-center font-weight-bold">
                         {% trans "International Travellers Surveillance Form" %}
-
-                        {% get_current_language as LANGUAGE_CODE %}
-                        <!-- Current language: {{ LANGUAGE_CODE }} -->
-                        <p>{% trans "Welcome to our page" %}</p>
-
-                        {{ LANGUAGE_CODE}}
-
-                        {% language 'en' %}
-                        {% get_current_language as LANGUAGE_CODE %}
-                        <!-- Current language: {{ LANGUAGE_CODE }} -->
-                        <p>{% trans "Welcome to our page" %}</p>
-                        {% endlanguage %}
                     </h5>
                 </div>
                 <!--./card-header -->
@@ -405,7 +393,12 @@
                                                         <label for="symptoms_{{ symptom.id }}">
                                                             <input type="checkbox" name="symptoms"
                                                                 value="{{ symptom.id }}" id="symptoms_{{ symptom.id }}">
+                                                            {% get_current_language as LANGUAGE_CODE %}
+                                                            {% if LANGUAGE_CODE == 'sw' %}
+                                                            {{ symptom.title_sw }}
+                                                            {% else %}
                                                             {{ symptom.title }}
+                                                            {% endif %}
                                                         </label>
                                                     </li>
                                                     {% endfor %}

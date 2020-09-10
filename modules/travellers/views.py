@@ -4,7 +4,7 @@ from django.utils import translation
 import datetime
 from datetime import timedelta
 from django.shortcuts import render, render_to_response, redirect
-from .models import Traveller, TravellerVisitedArea, TravellerSymptom, Location, PointOfEntry,Symptom,ScreenCriteria
+from .models import *
 from .forms import TravellerForm
 from django.contrib import messages
 from django.conf import settings

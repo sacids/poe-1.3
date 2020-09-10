@@ -4,8 +4,8 @@ from django.db import models
 # Create your models here.
 class Module(models.Model):
     title = models.CharField(max_length=100)
-    icon = models.CharField(max_length=30)
-    link = models.CharField(max_length=150)
+    icon = models.CharField(max_length=100)
+    link = models.CharField(max_length=255)
     #perms = models.TextField(default='')
 
     class Meta:

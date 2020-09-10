@@ -31,6 +31,6 @@ class DiseaseAdmin(admin.ModelAdmin):
 
 @admin.register(Symptom)
 class SymptomAdmin(admin.ModelAdmin):
-    list_display = ['id','title']
+    list_display = ['id','title', 'title_sw']
     search_fields = ['title__startwith']
     ordering = ("id",)

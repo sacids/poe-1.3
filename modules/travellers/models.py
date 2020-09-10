@@ -69,7 +69,7 @@ class Disease(models.Model):
 class Symptom(models.Model):
     """A class to create symptoms table."""
     title = models.CharField(max_length=100)
-    title_sw = models.CharField(max_length=100)
+    title_sw = models.CharField(max_length=100, null=True)
     alias = models.CharField(max_length=120, null=True)
 
     class Meta:
@@ -133,8 +133,8 @@ class LocationDisease(models.Model):
 class PointOfEntry(models.Model):
     """A class to create point of entries table."""
     title               = models.CharField(max_length=255)
-    mode_of_transport   = models.CharField(choices=TRANSPORT_MODE, max_length=50,  null=True)
-    category            = models.CharField(choices=TRANSPORT_CATEGORY, max_length=50,null=True)
+    mode_of_transport   = models.CharField(choices=TRANSPORT_MODE, max_length=40,  null=True)
+    category            = models.CharField(choices=TRANSPORT_CATEGORY, max_length=40,null=True)
     agents              = models.ManyToManyField(User, blank=True)
 
     class Meta:

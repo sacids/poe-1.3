@@ -151,3 +151,4 @@ poe/__pycache__/__init__.cpython-38.pyc
 poe/__pycache__/settings.cpython-38.pyc
 poe/__pycache__/urls.cpython-38.pyc
 poe/__pycache__/wsgi.cpython-38.pyc
+modules/travellers/__pycache__/models.cpython-38.pyc

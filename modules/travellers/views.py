@@ -43,6 +43,7 @@ def change_language_en(request):
         response.set_cookie(settings.LANGUAGE_COOKIE_NAME, language)
     return response
 
+
 def change_language_sw(request):
     language = "sw"
     response = HttpResponseRedirect('/')
@@ -73,14 +74,14 @@ def international(request):
     None
 
     """
-     #redirect path
+    # redirect path
     redirectpath = ""
 
-    #activate current language
+    # activate current language
     translation.activate(translation.get_language())
-   
-    #data
-    symptoms = Symptom.objects.all() #symptoms
+
+    # data
+    symptoms = Symptom.objects.all()  # symptoms
     countries = Location.objects.filter(parent=0)  # countries
     today = datetime.date.today().strftime("%Y-%m-%d")
     last_21_days = (datetime.date.today() -
@@ -173,12 +174,19 @@ def international(request):
                 # todo: call function to calculate score
                 score = calculate_score(traveller.id)
 
+                if score not '':
+                    action_taken = 'Sent to secondary screening'
+                else:
+                    action_taken = 'Allowed to proceed'
+
                 # update traveller
                 traveller_up = Traveller.objects.get(pk=traveller.id)
                 traveller_up.disease_to_screen = score
+                traveller_up.action_taken = action_taken
                 traveller_up.save()
 
-            messages.add_message(request, messages.SUCCESS, 'Success! Saved Successfully!')
+            messages.add_message(request, messages.SUCCESS,
+                                 'Success! Saved Successfully!')
             if translation.get_language() == 'en-us':
                 redirectpath = "/success"
             elif translation.get_language() == "sw":
@@ -186,7 +194,8 @@ def international(request):
 
             return redirect(redirectpath)
         else:
-            messages.add_message(request, messages.WARNING, 'Warning! Please check all the fields!')
+            messages.add_message(request, messages.WARNING,
+                                 'Warning! Please check all the fields!')
 
         return render(request, 'travellers/international.html', attr)
 
@@ -214,28 +223,29 @@ def success(request):
 
     """
 
-    #activate current language
+    # activate current language
     translation.activate(translation.get_language())
 
     return render(request, 'travellers/success.html', {})
 
+
 def calculate_score(traveller_id):
-    countries       = get_travellers_countries(traveller_id)
-    symptoms        = get_travellers_symptoms(traveller_id)
-    Location        = Traveller.objects.get(pk=traveller_id).location_origin.id
+    countries = get_travellers_countries(traveller_id)
+    symptoms = get_travellers_symptoms(traveller_id)
+    Location = Traveller.objects.get(pk=traveller_id).location_origin.id
 
-    fc              = models.Q()
-    fs              = models.Q()
+    fc = models.Q()
+    fs = models.Q()
 
-    fc              |= models.Q(countries__id=Location)
+    fc |= models.Q(countries__id=Location)
     for c in countries:
         fc |= models.Q(countries__id=c.id,)
-    
+
     for s in symptoms:
         fs |= models.Q(symptoms__id=s.id,)
 
-    queryset        = ScreenCriteria.objects.filter(fc & fs).distinct()
-    score           = ', '.join(str(id.disease_id) for id in queryset)
+    queryset = ScreenCriteria.objects.filter(fc & fs).distinct()
+    score = ', '.join(str(id.disease_id) for id in queryset)
     return score
 
 

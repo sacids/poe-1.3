@@ -55,7 +55,8 @@ INSTALLED_APPS = [
     'modules.secondary_screening',
     'modules.travellers',
     'modules.user_management',
-    'modules.common'
+    'modules.common',
+    'modules.report',
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'

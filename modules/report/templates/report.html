@@ -1,35 +1,41 @@
 {% extends 'backend/base.html' %}
 
 {% block navarea %}
-    <div class="p-1">
-        <div class="float-left pl-2">
-            <div style="font-size: 1.2em" id="full_name" class="font-weight-bold"></div>
-            <div id="id_number" style="font-size: 0.8em"></div>
-            <div id="name_of_transport" style="font-size: 0.8em"></div>
-        </div>
-        <div class="float-right mx-2">
-            <input type="hidden" id="travellers_id" name="id">
-            <button type="button" class="btn btn-info btn-block" id="set_temp" style="font-size: 1.7em;margin-top:5px;margin-right:30px;">SET</button>
-        </div>
-        <div class="float-right" style="font-size: 2.7em" >               
-            <select class="" id="temp_b">
-            {% for i in temp_b %}
-                <option value="{{i}}">{{i}}</option>
-            {% endfor %}
+    <form method="post">
+    <div class="p-1 d-flex flex-row">
+        {% csrf_token %}
+        <div class="p-2">
+            <h6>Report</h6>
+            <select name="report_id" style="padding:2px;font-size:1.15em">
+                <option value='1'>Report 1 a longer name for display</option>
+                <option value='1'>Report 1</option>
+                <option value='1'>Report 1</option>
+                <option value='1'>Report 1</option>
             </select>
         </div>
-        <div class="float-right" style="font-size: 2.7em">.</div>
-        <div class="float-right" style="font-size: 2.7em">
-            <select class="" id="temp_a">
-            {% for i in temp_a %}
-                <option value="{{i}}">{{i}}</option>
-            {% endfor %}
-            </select>
+        <div class="p-2">
+            <h6>From</h6>
+            <input name="from_date" type="date" id="from_date" style="width:150px;">
+        </div>
+        <div class="p-2">
+            <h6>To</h6>
+            <input name="to_date" type="date" id="to_date" style="width:150px;">
+        </div>
+        <div class="p-1">
+            <input type="submit" class="btn btn-info btn-block" id="get_report" style="font-size: 1.8em;margin-top:3px" value="SHOW">
         </div>
     </div>
+    </form>
 {% endblock %}
 {% block content %}
     <div class="report_wrp" id="report_wrp">
+        {% if not report_id %}
+            <h6> Please select required report above </h6>
+        {% else %}
+            {{ report_id }}
+            {{ from_date }}
+            {{ to_date }}
+        {% endif %}
     </div>
 {% endblock %}
 

@@ -69,6 +69,7 @@ class Disease(models.Model):
 class Symptom(models.Model):
     """A class to create symptoms table."""
     title = models.CharField(max_length=100)
+    title_sw = models.CharField(max_length=100)
     alias = models.CharField(max_length=150, null=True)
 
     class Meta:

@@ -128,3 +128,27 @@ run
 
 
 **/migrations/*
+modules/config/__pycache__/__init__.cpython-38.pyc
+modules/config/__pycache__/__init__.cpython-38.pyc
+modules/config/__pycache__/admin.cpython-38.pyc
+modules/config/__pycache__/models.cpython-38.pyc
+modules/dashboard/__pycache__/__init__.cpython-38.pyc
+modules/dashboard/__pycache__/admin.cpython-38.pyc
+modules/dashboard/__pycache__/models.cpython-38.pyc
+modules/screening/__pycache__/__init__.cpython-38.pyc
+modules/screening/__pycache__/admin.cpython-38.pyc
+modules/screening/__pycache__/models.cpython-38.pyc
+modules/secondary_screening/__pycache__/__init__.cpython-38.pyc
+modules/secondary_screening/__pycache__/admin.cpython-38.pyc
+modules/secondary_screening/__pycache__/models.cpython-38.pyc
+modules/travellers/__pycache__/__init__.cpython-38.pyc
+modules/travellers/__pycache__/admin.cpython-38.pyc
+modules/travellers/__pycache__/models.cpython-38.pyc
+modules/user_management/__pycache__/__init__.cpython-38.pyc
+modules/user_management/__pycache__/admin.cpython-38.pyc
+modules/user_management/__pycache__/models.cpython-38.pyc
+poe/__pycache__/__init__.cpython-38.pyc
+poe/__pycache__/settings.cpython-38.pyc
+poe/__pycache__/urls.cpython-38.pyc
+poe/__pycache__/wsgi.cpython-38.pyc
+modules/travellers/__pycache__/models.cpython-38.pyc

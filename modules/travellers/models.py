@@ -28,9 +28,12 @@ TRANSPORT_MODE = (
     ('train', 'Train'),
 )
 TRANSPORT_CATEGORY = (
-    ('GROUND', 'Ground Crossing'),
-    ('DRYPORT', 'Dry Port'),
-    ('AIRPORT', 'Air Port')
+    ('Ground crossing', 'Ground crossing'),
+    ('Dry port', 'Dry port'),
+    ('Airport', 'Airport'),
+    ('Lakeport', 'Lakeport'),
+    ('Seaport', 'Seaport'),
+    ('Railway', 'Railway'),
 )
 PURPOSE = (
     ('resident', 'Resident'),
@@ -52,7 +55,7 @@ EMPLOYMENT = (
 # diseases
 class Disease(models.Model):
     """A class to create disease table."""
-    title = models.CharField(max_length=100)
+    title = models.CharField(max_length=50)
 
     def __str__(self):
         return self.title
@@ -65,7 +68,8 @@ class Disease(models.Model):
 # symptoms
 class Symptom(models.Model):
     """A class to create symptoms table."""
-    title = models.CharField(max_length=100)
+    title = models.CharField(max_length=150)
+    title_sw = models.CharField(max_length=150, null=True)
     alias = models.CharField(max_length=150, null=True)
 
     class Meta:
@@ -90,8 +94,8 @@ class DiseaseSymptom(models.Model):
 # locations
 class Location(models.Model):
     """A class to create location table."""
-    title = models.CharField(max_length=50)
-    code = models.CharField(max_length=5, null=True)
+    title = models.CharField(max_length=100)
+    code = models.CharField(max_length=10, null=True)
     parent = models.PositiveIntegerField()
 
     class Meta:
@@ -128,7 +132,7 @@ class LocationDisease(models.Model):
 # point of entries
 class PointOfEntry(models.Model):
     """A class to create point of entries table."""
-    title               = models.CharField(max_length=255)
+    title               = models.CharField(max_length=100)
     mode_of_transport   = models.CharField(choices=TRANSPORT_MODE, max_length=50,  null=True)
     category            = models.CharField(choices=TRANSPORT_CATEGORY, max_length=50,null=True)
     agents              = models.ManyToManyField(User, blank=True)

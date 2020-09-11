@@ -114,7 +114,7 @@ def international(request):
             traveller.visiting_purpose = form.cleaned_data['visiting_purpose']
             traveller.other_purpose = form.cleaned_data['other_purpose']
 
-            if request.POST.get('duration_of_stay') is not None:
+            if request.POST.get('duration_of_stay') != '':
                 traveller.duration_of_stay = request.POST.get('duration_of_stay')
 
             traveller.employment = form.cleaned_data['employment']
@@ -124,7 +124,7 @@ def international(request):
             traveller.hotel_name = form.cleaned_data['hotel_name']
             traveller.region_id = request.POST.get('region_id')
 
-            if request.POST.get('district_id') is not None:
+            if request.POST.get('district_id') != '':
                 traveller.district_id = request.POST.get('district_id')
 
             traveller.street_or_ward = form.cleaned_data['street_or_ward']
@@ -172,8 +172,6 @@ def international(request):
 
                 # todo: call function to calculate score
                 score = calculate_score(traveller.id)
-
-                print("score =>" + score)
 
                 if score is not None:
                     action_taken = 'Allowed'

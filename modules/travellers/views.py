@@ -178,7 +178,7 @@ def international(request):
                     action_taken = 'Allowed'
                 else:
                     action_taken = 'Screening'
-
+                    
                 # update traveller
                 traveller_up = Traveller.objects.get(pk=traveller.id)
                 traveller_up.disease_to_screen = score
@@ -201,7 +201,8 @@ def international(request):
 
     else:
         form = TravellerForm()
-        return render(request, 'travellers/international.html', attr)
+        return render(request, 'travellers/international.html',
+                      {'form': form, 'countries': countries, 'symptoms': symptoms, 'today': today, 'last_21_days': last_21_days})
 
 
 def domestic(request):

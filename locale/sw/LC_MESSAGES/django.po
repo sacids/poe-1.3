@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-09-10 16:15+0300\n"
+"POT-Creation-Date: 2020-09-12 02:02+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -50,7 +50,7 @@ msgstr "Meli"
 
 #: modules/travellers/forms.py:21
 msgid "Train"
-msgstr ""
+msgstr "Treni"
 
 #: modules/travellers/forms.py:25
 msgid "Resident"
@@ -214,7 +214,7 @@ msgstr "Mtaa/Kata"
 
 #: modules/travellers/forms.py:136
 msgid "Write street or ward..."
-msgstr "Andika mtaa/kata"
+msgstr "Andika mtaa/kata..."
 
 #: modules/travellers/forms.py:139
 msgid "Phone"
@@ -222,7 +222,7 @@ msgstr "Namba za simu ya kwako/utakapofikia"
 
 #: modules/travellers/forms.py:140
 msgid "Write phone..."
-msgstr "Andika namba ya simu"
+msgstr "Andika namba ya simu..."
 
 #: modules/travellers/forms.py:142
 msgid "Email"
@@ -230,7 +230,7 @@ msgstr "Barua pepe"
 
 #: modules/travellers/forms.py:144
 msgid "Write email address..."
-msgstr "Andika barua pepe"
+msgstr "Andika barua pepe..."
 
 #: modules/travellers/forms.py:148
 msgid "Country where journey started"
@@ -270,13 +270,13 @@ msgstr "Dalili zingine (Taja)"
 
 #: modules/travellers/forms.py:176
 msgid "Write other symptoms..."
-msgstr "Andika dalili zingine"
+msgstr "Andika dalili zingine..."
 
-#: modules/travellers/templates/base.html:48
+#: modules/travellers/templates/base.html:49
 msgid "Travellers Surveillance"
 msgstr "Fomu ya ufuatiliaji wa magonjwa"
 
-#: modules/travellers/templates/base.html:55
+#: modules/travellers/templates/base.html:56
 msgid "Login"
 msgstr "Ingia"
 
@@ -286,14 +286,14 @@ msgstr "Andika mahali ulipotembelea..."
 
 #: modules/travellers/templates/travellers/add_countries.html:27
 msgid "Pick date..."
-msgstr ""
+msgstr "Chagua Tarehe"
 
 #: modules/travellers/templates/travellers/add_countries.html:33
 msgid "Number of Days"
 msgstr "Idadi ya siku"
 
 #: modules/travellers/templates/travellers/home.html:5
-#: modules/travellers/templates/travellers/home.html:43
+#: modules/travellers/templates/travellers/home.html:66
 #: modules/travellers/templates/travellers/international.html:10
 #: modules/travellers/templates/travellers/success.html:5
 msgid "Travellers Surveillance Form"
@@ -308,7 +308,11 @@ msgstr "Jamhuri ya Muungano wa Tanzania"
 msgid "Ministry of Health, Community Development, Gender, Elderly and Children"
 msgstr "Wizara ya Afya, Maendeleo ya Jamii, Jinsia, Wazee na Watoto"
 
-#: modules/travellers/templates/travellers/home.html:51
+#: modules/travellers/templates/travellers/home.html:43
+msgid "Change Language"
+msgstr "Badili Lugha"
+
+#: modules/travellers/templates/travellers/home.html:75
 msgid ""
 "<b>Travellers Surveillance Form </b> an online web based system to help "
 "capturing and managing traveller’s health details during fighting against "
@@ -317,13 +321,13 @@ msgstr ""
 "<b>Fomu ya ufuatiliaji magojwa</b> ni mfumo unaosaidia kukusanya taarifa za "
 "magojwa kwa abiria kusaidia kupambana na magonjwa ya milipuko"
 
-#: modules/travellers/templates/travellers/home.html:60
-msgid "Change Language"
-msgstr "Chagua Lugha"
+#: modules/travellers/templates/travellers/home.html:78
+msgid "To fill International Surveillance Form click button below."
+msgstr "Kujaza fomu ya ufuatiliaji kwa abiria wa kimataifa, bonyeza kitufe chini."
 
-#: modules/travellers/templates/travellers/home.html:75
-msgid "International"
-msgstr "Kimataifa"
+#: modules/travellers/templates/travellers/home.html:89
+msgid "International Form"
+msgstr "Fomu ya kimataifa"
 
 #: modules/travellers/templates/travellers/international.html:25
 #: modules/travellers/templates/travellers/success.html:18
@@ -361,11 +365,11 @@ msgstr ""
 "Tafadhali chagua dalili ulizokuwa nazo ndani ya siku 7 (juma moja) "
 "lililopita?"
 
-#: modules/travellers/templates/travellers/international.html:426
+#: modules/travellers/templates/travellers/international.html:431
 msgid "Declarations of filled information"
 msgstr "Maazimio ya taarifa ulizojaza"
 
-#: modules/travellers/templates/travellers/international.html:438
+#: modules/travellers/templates/travellers/international.html:443
 msgid ""
 "I declare that the information provided is complete and correct to the best "
 "of my knowledge. I understand that any false information supplied could lead "
@@ -374,11 +378,11 @@ msgstr ""
 "Nakubali kwamba taarifa nilizojaza ni sahihi kwa uelewa wangu. Ninafahamu "
 "kutoa taarifa za uongo inaweza kusababisha kutozwa faini."
 
-#: modules/travellers/templates/travellers/international.html:456
+#: modules/travellers/templates/travellers/international.html:461
 msgid "Previous"
 msgstr "Nyuma"
 
-#: modules/travellers/templates/travellers/international.html:459
+#: modules/travellers/templates/travellers/international.html:464
 #: modules/travellers/templates/travellers/validation.html:20
 msgid "Next"
 msgstr "Mbele"

@@ -174,10 +174,10 @@ def international(request):
                 # todo: call function to calculate score
                 score = calculate_score(traveller.id)
 
-                if score not '':
-                    action_taken = 'Sent to secondary screening'
+                if score != '':
+                    action_taken = 'Screening'
                 else:
-                    action_taken = 'Allowed to proceed'
+                    action_taken = 'Allowed'
 
                 # update traveller
                 traveller_up = Traveller.objects.get(pk=traveller.id)

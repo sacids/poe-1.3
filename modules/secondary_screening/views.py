@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .models import *
-from modules.travellers.models import Traveller, Disease, TravellerSymptom
+from modules.travellers.models import Traveller, Disease, TravellerSymptom, TravellerVisitedArea
 from django.db.models import Q
 from datetime import datetime, date
 from .forms import RiskAssessmentForm
@@ -50,6 +50,7 @@ def traveller_info(request, travellers_id):
     disease_to_screen   = traveller.disease_to_screen.split(",")
     diseases            = Disease.objects.filter(pk__in=disease_to_screen).values()
     symptoms            = TravellerSymptom.objects.select_related('symptom').filter(traveller_id=travellers_id).values("symptom__title")
+    visited_countries   = TravellerVisitedArea.objects.select_related('location').filter(traveller_id=travellers_id).values("location__title")
 
     fields              = traveller.__dict__
 
@@ -60,6 +61,7 @@ def traveller_info(request, travellers_id):
         "travellers": traveller,
         "diseases"  : diseases,
         "symptoms"  : symptoms,
+        "countries" : visited_countries,
         "search"    : False,
     }
     return render(request, "travellers_info.html", context)

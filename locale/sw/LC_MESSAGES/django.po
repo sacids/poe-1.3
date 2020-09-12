@@ -142,11 +142,11 @@ msgstr "Namba ya Meli/Ndege/Basi/Gari"
 
 #: modules/travellers/forms.py:88
 msgid "Write Vessel/Flight/Vehicle Name..."
-msgstr "Andika namba ya meli/ndege/basi/gari"
+msgstr "Andika namba ya meli/ndege/basi/gari..."
 
 #: modules/travellers/forms.py:90
 msgid "Seat Number"
-msgstr "Hati ya Kusafiri"
+msgstr "Namba ya kiti"
 
 #: modules/travellers/forms.py:91
 msgid "Write your seat number..."
@@ -182,7 +182,7 @@ msgstr "Kazi/ajira nyingine"
 
 #: modules/travellers/forms.py:114
 msgid "Write other employment..."
-msgstr "Andika kazi/ajira nyingine"
+msgstr "Andika kazi/ajira nyingine..."
 
 #: modules/travellers/forms.py:117
 msgid "Physical address"

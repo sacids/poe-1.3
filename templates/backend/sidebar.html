@@ -6,7 +6,7 @@
         <select name="poe" id="set_poe">
             <option value="0">ALL</option>
             {% for poe in poes %}
-            <option value="{{ poe.id }}"> {{ poe.title }}</option>
+            <option value="{{ poe.id }}"> {{ poe.code }}</option>
             {% endfor %}
         </select>
         <button value="SET" name="set_poe_btn" id="set_poe_btn">SET</button>

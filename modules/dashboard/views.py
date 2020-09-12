@@ -85,7 +85,7 @@ def dashboard(request):
 
             # point of entries
             for val in point_of_entries:
-                poe_series_data.append(val.title)
+                poe_series_data.append(val.code)
                 passengers_series_data.append(travellers.filter(
                     point_of_entry_id=val.id, arrival_date=today).count())
 
@@ -114,7 +114,7 @@ def dashboard(request):
 
             # point of entries
             for val in point_of_entries:
-                poe_series_data.append(val.title)
+                poe_series_data.append(val.code)
                 passengers_series_data.append(travellers.filter(
                     point_of_entry_id=val.id, arrival_date=yesterday).count())
 
@@ -144,7 +144,7 @@ def dashboard(request):
 
             # point of entries
             for val in point_of_entries:
-                poe_series_data.append(val.title)
+                poe_series_data.append(val.code)
                 passengers_series_data.append(travellers.filter(
                     point_of_entry_id=val.id, arrival_date__range=[start_at, end_at]).count())
 
@@ -152,7 +152,7 @@ def dashboard(request):
             for value in symptoms:
                 symptom_series_data.append(value.title)
                 symptom_occurrence_data.append(
-                    traveller_symptoms.filter(symptom_id=value.id, traveller__arrival_date=[start_at, end_at]).count())
+                    traveller_symptoms.filter(symptom_id=value.id, traveller__arrival_date__range=[start_at, end_at]).count())
 
         elif day == 'last_month':
             this_year = today.year
@@ -174,15 +174,15 @@ def dashboard(request):
 
             # point of entries
             for val in point_of_entries:
-                poe_series_data.append(val.title)
+                poe_series_data.append(val.code)
                 passengers_series_data.append(travellers.filter(
                     point_of_entry_id=val.id, arrival_date__month=last_month, arrival_date__year=this_year).count())
 
-            # point of entries
-            for val in point_of_entries:
-                poe_series_data.append(val.title)
-                passengers_series_data.append(travellers.filter(
-                    point_of_entry_id=val.id, arrival_date__month=last_month, arrival_date__year=this_year).count())
+            # reported symptoms
+            for value in symptoms:
+                symptom_series_data.append(value.title)
+                symptom_occurrence_data.append(
+                    traveller_symptoms.filter(symptom_id=value.id, traveller__arrival_date__month=last_month, traveller__arrival_date__year=this_year).count())
 
         elif day == 'overall':
             total_passengers = total_passengers.count()
@@ -194,7 +194,7 @@ def dashboard(request):
 
             # point of entries
             for val in point_of_entries:
-                poe_series_data.append(val.title)
+                poe_series_data.append(val.code)
                 passengers_series_data.append(
                     travellers.filter(point_of_entry_id=val.id).count())
 
@@ -225,7 +225,7 @@ def dashboard(request):
 
         # point of entries
         for val in point_of_entries:
-            poe_series_data.append(val.title)
+            poe_series_data.append(val.code)
             passengers_series_data.append(
                 travellers.filter(point_of_entry_id=val.id).count())
 

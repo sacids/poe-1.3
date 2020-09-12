@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-09-12 02:02+0300\n"
+"POT-Creation-Date: 2020-09-12 02:16+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -323,7 +323,8 @@ msgstr ""
 
 #: modules/travellers/templates/travellers/home.html:78
 msgid "To fill International Surveillance Form click button below."
-msgstr "Kujaza fomu ya ufuatiliaji kwa abiria wa kimataifa, bonyeza kitufe chini."
+msgstr ""
+"Kujaza fomu ya ufuatiliaji kwa abiria wa kimataifa, bonyeza kitufe chini."
 
 #: modules/travellers/templates/travellers/home.html:89
 msgid "International Form"
@@ -357,7 +358,7 @@ msgid ""
 msgstr ""
 "Umewahi kuwa na dalili zifuatazo ndani ya siku 7 (Juma moja) zilizopita?"
 
-#: modules/travellers/templates/travellers/international.html:387
+#: modules/travellers/templates/travellers/international.html:388
 msgid ""
 "Please, mark/tick all the clinical manifestations that you have experienced "
 "during the last 7 days (1 week)"
@@ -365,11 +366,11 @@ msgstr ""
 "Tafadhali chagua dalili ulizokuwa nazo ndani ya siku 7 (juma moja) "
 "lililopita?"
 
-#: modules/travellers/templates/travellers/international.html:431
+#: modules/travellers/templates/travellers/international.html:432
 msgid "Declarations of filled information"
 msgstr "Maazimio ya taarifa ulizojaza"
 
-#: modules/travellers/templates/travellers/international.html:443
+#: modules/travellers/templates/travellers/international.html:445
 msgid ""
 "I declare that the information provided is complete and correct to the best "
 "of my knowledge. I understand that any false information supplied could lead "
@@ -378,18 +379,18 @@ msgstr ""
 "Nakubali kwamba taarifa nilizojaza ni sahihi kwa uelewa wangu. Ninafahamu "
 "kutoa taarifa za uongo inaweza kusababisha kutozwa faini."
 
-#: modules/travellers/templates/travellers/international.html:461
+#: modules/travellers/templates/travellers/international.html:463
 msgid "Previous"
 msgstr "Nyuma"
 
-#: modules/travellers/templates/travellers/international.html:464
+#: modules/travellers/templates/travellers/international.html:466
 #: modules/travellers/templates/travellers/validation.html:20
 msgid "Next"
 msgstr "Mbele"
 
 #: modules/travellers/templates/travellers/success.html:29
-msgid "Information registered successfully."
-msgstr "Umefanikiwa kukusanya taarifa zako"
+msgid "Information successfully submitted."
+msgstr "Umefanikiwa kuwasilisha taarifa zako"
 
 #: modules/travellers/templates/travellers/success.html:32
 msgid "Do you want to fill another form?"
@@ -405,8 +406,8 @@ msgid "No"
 msgstr "Hapana"
 
 #: modules/travellers/templates/travellers/validation.html:18
-msgid "Save"
-msgstr "Hifadhi"
+msgid "Submit"
+msgstr "Wasilisha"
 
 #: modules/travellers/templates/travellers/validation.html:85
 msgid "Traveller name is required"

@@ -159,10 +159,11 @@ class PointOfEntry(models.Model):
 
 
 #action taken
+
 class ActionTaken(models.Model):
     title               = models.CharField(max_length=255, null=False)
     description         = models.TextField(null=True)
-    
+
     class Meta:
         db_table = "et_action_taken"
         verbose_name_plural = "Action Taken"

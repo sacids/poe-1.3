@@ -19,7 +19,8 @@ class ReportView(generic.TemplateView):
 
     def get_context_data(self, **kwargs):
         context                 = super(ReportView, self).get_context_data(**kwargs)
-        context['smr_options']  = {'point_of_entry','nationality','location_origin','action_taken','sex','age'}
+        context['smr_options']  = {'point_of_entry','nationality','location_origin','action_taken','sex','age','temp'}
+        context['action_taken'] = {'allowed','screen','denied','conditional_entry'}
         return context
 
 

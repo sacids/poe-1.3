@@ -7,7 +7,7 @@
 {% load static %}
 {#{% load sweetify %}#}
 {#{% sweetify %}#}
-{% block title %} {% trans "Travellers Surveillance Form" %} {% endblock %}
+{% block title %} {% trans "Traveller's Surveillance Form" %} {% endblock %}
 
 {% block content %}
 {% include 'travellers/add_countries.html' %}
@@ -15,6 +15,9 @@
 <div class="page-content bg-white">
     <!-- Main content -->
     <div class="content-wrapper">
+        <!-- Page header -->
+        {% include 'page-header.html' %}
+        <!-- /page header -->
 
         <!-- Content area -->
         <div class="content">
@@ -22,7 +25,7 @@
             <div class="card">
                 <div class="card-header">
                     <h5 class="card-title text-uppercase text-center font-weight-bold">
-                        {% trans "International Travellers Surveillance Form" %}
+                        {% trans "Traveller's Health Declaration Form" %}
                     </h5>
                 </div>
                 <!--./card-header -->
@@ -60,8 +63,26 @@
                                     <div class="row">
                                         <div class="col-lg-6 col-md-6 col-sm-12 col-12">
                                             <div class="form-group">
-                                                {{ form.full_name|as_crispy_field }}
+                                                {{ form.surname|as_crispy_field }}
                                                 <span id="errorName" style="color: red;"></span>
+                                            </div>
+                                            <!--./form-group -->
+                                        </div>
+                                        <!--./col-lg-6 -->
+
+                                        <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                                            <div class="form-group">
+                                                {{ form.other_names|as_crispy_field }}
+                                                <span id="errorName" style="color: red;"></span>
+                                            </div>
+                                            <!--./form-group -->
+                                        </div>
+                                        <!--./col-lg-6 -->
+
+                                        <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                                            <div class="form-group">
+                                                {{ form.age_category|as_crispy_field }}
+                                                <span id="errorAge" style="color: red;"></span>
                                             </div>
                                             <!--./form-group -->
                                         </div>
@@ -153,7 +174,7 @@
 
                                         <div class="col-lg-6 col-md-6 col-sm-12 col-12">
                                             <div class="form-group">
-                                                {{ form.seat_no|as_crispy_field }}
+                                                {{ form.seat_no|as_crispy_field }} 
                                                 <span id="errorSeatNo" style="color: red;"></span>
                                             </div>
                                             <!--./form-group -->
@@ -305,7 +326,7 @@
                                             </div>
                                             <!--./form-group -->
                                         </div>
-                                        <!--./col-lg-6 -->
+                                        <!--./col-lg-12 -->
                                     </div>
                                     <!--./row -->
 
@@ -315,57 +336,26 @@
                                                 {% trans "Countries visited in last 21 days (3 weeks)" %}
                                             </h6>
                                         </div>
-                                        <!--./col-lg-6 -->
-                                    </div>
-                                    <!--./row -->
-
-                                    <div class="row field_wrapper">
-                                        <div class="col-lg-6 col-md-6 col-sm-12 col-12">
-                                            <div class="form-group">
-                                                {{ form.location|as_crispy_field }}
-                                            </div>
-                                            <!--./form-group -->
-                                        </div>
-                                        <!--./col-lg-2 -->
-
-                                        <div class="col-lg-6 col-md-6 col-sm-12 col-12">
-                                            <div class="form-group">
-                                                {{ form.location_visited|as_crispy_field }}
-                                            </div>
-                                            <!--./form-group -->
-                                        </div>
-                                        <!--./col-lg-2 -->
-
-                                        <div class="col-lg-6 col-md-6 col-sm-12 col-12">
-                                            <div class="form-group">
-                                                {{ form.date|as_crispy_field }}
-                                                <span id="errorDate" style="color: red;"></span>
-                                            </div>
-                                            <!--./form-group -->
-                                        </div>
-                                        <!--./col-lg-6 -->
-
-                                        <div class="col-lg-6 col-md-6 col-sm-12 col-12">
-                                            <div class="form-group">
-                                                {{ form.days|as_crispy_field }}
-                                                <span id="errorDays" style="color: red;"></span>
-                                            </div>
-                                            <!--./form-group -->
-                                        </div>
-                                        <!--./col-lg-2 -->
+                                        <!--./col-lg-12 -->
                                     </div>
                                     <!--./row -->
 
                                     <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="pull-right">
-                                                <a href="javascript:void(0);" class="add_button btn btn-info btn-sm"
-                                                    title="Add field">
-                                                    {% trans "Add Another" %}
-                                                </a>
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                                            <div class="form-group">
+                                                {{ form.number_countries|as_crispy_field }}
+                                                <span id="errorLocationOrigin" style="color: red;"></span>
                                             </div>
+                                            <!--./form-group -->
                                         </div>
+                                        <!--./col-lg-12 -->
                                     </div>
+                                    <!--./row -->
+
+                                    <div class="field_wrapper">
+                                        
+                                    </div>
+                                    <!--./row -->
                                 </div>
                                 <!--./tab-->
 

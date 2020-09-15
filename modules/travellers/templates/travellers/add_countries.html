@@ -1,12 +1,11 @@
 {% load i18n %}
 <script type="text/javascript">
-    $(document).ready(function() {
-        let maxField = 5; //Input fields increment limitation
-        let addButton = $('.add_button'); //Add button selector
+    $(document).ready(function () {
         let wrapper = $('.field_wrapper'); //Input field wrapper
-        let fieldHTML = '<div class="col-lg-6 col-md-6 col-sm-12 col-12">' +
+        let fieldHTML = '<div class="row mt-2">' +
+            '<div class="col-lg-6 col-md-6 col-sm-12 col-12">' +
             '<div class="form-group">' +
-            '<label>{% trans "Country" %}</label>' +
+            '<label>{% trans "Country Visited" %}</label>' +
             '<select name="location" id="location" class="form-control">' +
             '<option value="">{% trans "-- Select --" %}</option>' +
             "{% for country in countries %}" +
@@ -23,7 +22,7 @@
             '</div>' +
             '<div class="col-lg-6 col-md-6 col-sm-12 col-12">' +
             '<div class="form-group">' +
-            '<label>{% trans "Date" %}</label>' +
+            '<label>{% trans "Entry Date" %}</label>' +
             '<input type="date" name="date" min="{{ last_21_days }}" max="{{ today }}" id="date" class="form-control dateinput" placeholder="{% trans "Pick date..." %}"/>' +
             '<span id="errorDate" style="color: red;"></span>' +
             '</div>' +
@@ -34,23 +33,19 @@
             '<input type="number" min="1" name="days" id="days" min="1" max="21" class="form-control" placeholder="{% trans "Write number of days..." %}" />' +
             '<span id="errorDays" style="color: red;"></span>' +
             '</div>' +
-            '</div>';
+            '</div>' +
+            '</div>' +
+            '<hr>';
 
-        let x = 1; //Initial field counter is 1
-        //Once add button is clicked
-        $(addButton).click(function() {
-            //Check maximum number of input fields
-            if (x < maxField) {
-                x++; //Increment field counter
+        $("#number_countries").on("input", function () {
+            // console
+            $(wrapper).text(""); //Add field html
+            console.log("values => " + $(this).val());
+
+            let count = $(this).val();
+            for (var i = 1; i <= count; i++) {
                 $(wrapper).append(fieldHTML); //Add field html
             }
-        });
-
-        //Once remove button is clicked
-        $(wrapper).on('click', '.remove_button', function(e) {
-            e.preventDefault();
-            $(this).parent('div').remove(); //Remove field html
-            x--; //Decrement field counter
         });
     });
 </script>

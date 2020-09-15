@@ -1,0 +1,28 @@
+{% load i18n %}
+{% load static %}
+
+<div class="page-header">
+    <div class="container-fluid">
+        <div class="page-header-content">
+            <div class="page-title d-flex">
+                <div class="img">
+                    <a href="{% url 'travellers:index' %}">
+                        <img src="{% static 'img/CoatofArms_Lg.png' %}" alt="" />
+                    </a>
+                </div>
+                <!--./img -->
+
+                <div id="content">
+                    <h1>{% trans "The United Republic of Tanzania." %} </h1>
+                    <h3 class="d-block d-md-block">
+                        {% trans "Ministry of Health, Community Development, Gender, Elderly and Children" %}
+                    </h3>
+                </div>
+                <!--./content -->
+            </div>
+            <!--./page-title -->
+        </div>
+        <!--./page-header-content -->
+    </div>
+    <!--./container-fluid -->
+</div>

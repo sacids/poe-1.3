@@ -4,10 +4,16 @@ from django.contrib.postgres.fields import ArrayField
 from modules.common.models import BaseModel
 from django.contrib.auth.models import User
 
-FORM_TYPE = (
-    ('international', "INTERNATIONAL"),
-    ('domestic', "DOMESTIC"),
+FORM_CATEGORY = (
+    ('arrival', "ARRIVAL"),
+    ('departure', "DEPARTURE"),
 )
+
+AGE_CATEGORY = (
+    ('above', "ABOVE 1"),
+    ('below', "BELOW 1"),
+)
+
 SEX = (
     ('M', "Male"),
     ('F', "Female"),
@@ -23,6 +29,8 @@ ID_TYPE = (
 )
 TRANSPORT_MODE = (
     ('flight', 'Flight'),
+    ('truck', 'Truck'),
+    ('bus', 'Bus'),
     ('vehicle', 'Vehicle'),
     ('vessel', 'Vessel'),
     ('train', 'Train'),
@@ -150,14 +158,22 @@ class PointOfEntry(models.Model):
         return self.title
 
 
+#action taken
+class ActionTaken(models.Model):
+    title               = models.CharField(max_length=255, null=False)
+    description         = models.TextField(null=True)
+
+
 # travellers
 class Traveller(BaseModel):
     """A class to create travellers table."""
-    full_name = models.CharField(max_length=250)
-    type = models.CharField(choices=FORM_TYPE, max_length=25, default='none')
+    surname = models.CharField(max_length=30, null=True)
+    other_names = models.CharField(max_length=150, null=True)
+    category = models.CharField(choices=FORM_CATEGORY, max_length=30, default='none')
     sex = models.CharField(choices=SEX, max_length=15, default='none')
-    age = models.IntegerField(null=True)
-    nationality = models.IntegerField(default=-1, null=True)
+    age_category = models.CharField(choices=AGE_CATEGORY, max_length=30, null=True)
+    age = models.IntegerField(default=0, null=True)
+    nationality = models.ForeignKey(Location, related_name="nationality", default=0, on_delete=models.DO_NOTHING)
     id_type = models.CharField(choices=ID_TYPE, max_length=50, default='none')
     id_number = models.CharField(max_length=50)
     employment = models.CharField(
@@ -176,12 +192,12 @@ class Traveller(BaseModel):
         choices=PURPOSE, max_length=45, default='none')  # to look around
     other_purpose = models.TextField(null=True)
     duration_of_stay = models.PositiveIntegerField(default=0, null=True)
-    location_origin = models.ForeignKey(Location, on_delete=models.DO_NOTHING)
+    location_origin = models.ForeignKey(Location, related_name="location_origin", on_delete=models.DO_NOTHING)
 
     physical_address = models.TextField(null=True)
     hotel_name = models.CharField(max_length=255, null=True)
-    region_id = models.IntegerField(default=-1, null=True)  # to look around
-    district_id = models.IntegerField(default=-1, null=True)  # to look around
+    region_id = models.ForeignKey(Location, related_name="region", default=0, on_delete=models.DO_NOTHING)  # to look around
+    district_id = models.IntegerField(default=0, null=True)  # to look around
     street_or_ward = models.CharField(
         max_length=100, null=True)  # to look around
     phone = models.CharField(max_length=25, default='None')
@@ -189,7 +205,7 @@ class Traveller(BaseModel):
 
     temp = models.FloatField(null=True)
     disease_to_screen = models.CharField(max_length=150, default='0')
-    action_taken = models.CharField(choices=ACTION_TAKEN, max_length=100, default='None')
+    action_taken = models.ForeignKey(ActionTaken, default=1, on_delete=models.DO_NOTHING)
     other_symptoms = models.TextField(null=True)
     accept = models.IntegerField(default=0, null=True)
     updated_at = models.DateTimeField("Updated At Date", null=True)

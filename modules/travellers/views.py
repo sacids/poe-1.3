@@ -61,7 +61,7 @@ def change_language_sw(request):
     return response
 
 
-def international(request):
+def arrival(request):
     """
     International Travellers Form.
 
@@ -200,12 +200,12 @@ def international(request):
 
     else:
         form = TravellerForm()
-        return render(request, 'travellers/international.html',
+        return render(request, 'travellers/arrival.html',
                       {'form': form, 'countries': countries, 'symptoms': symptoms, 'today': today, 'last_21_days': last_21_days})
 
 
-def domestic(request):
-    return render(request, 'travellers/domestic.html', {})
+def departure(request):
+    return render(request, 'travellers/departure.html', {})
 
 
 def success(request):
@@ -244,6 +244,8 @@ def calculate_score(traveller_id):
         fs |= models.Q(symptoms__id=s.id,)
 
     queryset = ScreenCriteria.objects.filter(fc & fs).distinct()
+
+    #if count is more than one join otherwise set zero
     score = ', '.join(str(id.disease_id) for id in queryset)
     return score
 

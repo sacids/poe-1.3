@@ -7,6 +7,12 @@ from .models import Location, PointOfEntry, Symptom
 
 BLANK_CHOICE = (('', _('-- Select --')),)
 
+AGE_CATEGORY = (
+    ('', _('-- Select --')),
+    ('above', _('Above 1 year')),
+    ('below', _('Below 1 year')),
+)
+
 SEX = (
     ('', _('-- Select --')),
     ('M', _('Male')),
@@ -15,11 +21,14 @@ SEX = (
 
 TRANSPORT_MODE = (
     ('', _('-- Select --')),
-    ('flight', _('Flight')),
-    ('vehicle', _('Vehicle')),
-    ('vessel', _('Vessel')),
-    ('train', _('Train')),
+    ('flight', 'Flight'),
+    ('truck', 'Truck'),
+    ('bus', 'Bus'),
+    ('vehicle', 'Private vehicle'),
+    ('vessel', 'Vessel'),
+    ('train', 'Train'),
 )
+
 PURPOSE = (
     ('', _('-- Select --')),
     ('resident', _('Resident')),
@@ -27,6 +36,7 @@ PURPOSE = (
     ('transit', _('Transit')),
     ('business', _('Business')),
 )
+
 EMPLOYMENT = (
     ('', _('-- Select --')),
     ('government', _('Government')),
@@ -46,14 +56,24 @@ class TravellerForm(forms.Form):
 
     """
 
-    full_name = forms.CharField(
-        label=_('Traveller Name (Three names [3])'),
+    surname = forms.CharField(
+        label=_('Surname'),
         widget=forms.TextInput(attrs={
-                               'class': 'form-control', 'id': 'full_name', 'placeholder': _('Write full name...')}),
+                               'class': 'form-control', 'id': 'surname', 'placeholder': _('Write surname...')}),
         required=True)
 
+    other_names = forms.CharField(
+        label=_('Other names'),
+        widget=forms.TextInput(attrs={
+                               'class': 'form-control', 'id': 'other_names', 'placeholder': _('Write other names...')}),
+        required=True)
+
+    age_category = forms.ChoiceField(label=_('Age Category'), choices=AGE_CATEGORY,
+                                     widget=forms.Select(
+        attrs={'class': 'form-control', 'id': 'age_category'}), required=True)
+
     age = forms.CharField(
-        label=_('Age (in years)'),
+        label=_('Age <span id="age_category"></span>'),
         widget=forms.TextInput(attrs={'class': 'form-control', 'id': 'age', 'type': 'number', 'min': 1, 'max': 120,
                                       'placeholder': _('Write age...')}), required=True)
 
@@ -68,12 +88,11 @@ class TravellerForm(forms.Form):
 
     id_number = forms.CharField(label=_('Passport Number'),
                                 widget=forms.TextInput(
-                                    attrs={'class': 'form-control', 'id': 'id_number',
-                                           'placeholder': _('Write passport number...')}), required=True)
+                                    attrs={'class': 'form-control', 'id': 'id_number', 'placeholder': _('Write passport number...')}), required=True)
 
     arrival_date = forms.DateField(label=_('Arrival Date'), widget=forms.DateInput(
         attrs={'type': 'date', 'class': 'form-control', 'id': 'arrival_date', 'min': date.today(),
-               'max': date.today() + timedelta(days=2)}), required=True)
+               'max': date.today() + timedelta(days=1)}), required=True)
 
     mode_of_transport = forms.ChoiceField(label=_('Mode of Transport'), choices=TRANSPORT_MODE, widget=forms.Select(
         attrs={'class': 'form-control', 'id': 'mode_of_transport', 'onChange': 'suggest_point_of_entries()'}),
@@ -104,14 +123,14 @@ class TravellerForm(forms.Form):
         attrs={'class': 'form-control', 'id': 'duration_of_stay', 'type': 'number', 'min': 1,
                'placeholder': _('Write duration of stay...')}), required=False)
 
-    employment = forms.ChoiceField(label=_('Employment/Occupation'), choices=EMPLOYMENT,
+    employment = forms.ChoiceField(label=_('Occupation'), choices=EMPLOYMENT,
                                    widget=forms.Select(
                                        attrs={'class': 'form-control', 'id': 'employment'}),
                                    required=False)
 
-    other_employment = forms.CharField(label=_('Other Employment (If any)'), widget=forms.Textarea(
+    other_employment = forms.CharField(label=_('Other occupation (If any)'), widget=forms.Textarea(
         attrs={'class': 'form-control', 'id': 'other_employment', 'rows': 3,
-               'placeholder': _('Write other employment...')}), required=False)
+               'placeholder': _('Write other occupation...')}), required=False)
 
     # tab 3
     physical_address = forms.CharField(label=_('Physical address'), widget=forms.Textarea(
@@ -150,6 +169,11 @@ class TravellerForm(forms.Form):
                                              widget=forms.Select(
                                                  attrs={'class': 'form-control', 'id': 'location_origin'}))
 
+    number_countries = forms.CharField(label=_('Number of countries'),
+                                       widget=forms.TextInput(
+        attrs={'class': 'form-control', 'id': 'number_countries',
+               'placeholder': _('Write number of countries...'), 'type': 'number', 'min': 1, 'max': 5}), required=True)
+
     location = forms.ModelChoiceField(label=_('Country'), queryset=Location.objects.filter(parent=0),
                                       empty_label=_('-- Select --'),
                                       widget=forms.Select(
@@ -160,7 +184,7 @@ class TravellerForm(forms.Form):
                'placeholder': _('Write location/province visited...')}), required=False)
 
     date = forms.DateField(label=_('Date'), widget=forms.DateInput(
-        attrs={'type': 'date', 'class': 'form-control', 'max': date.today(), 'min': date.today() - timedelta(days=21)}),
+        attrs={'type': 'date', 'class': 'form-control', 'max': date.today() - timedelta(days=3), 'min': date.today() - timedelta(days=24)}),
         required=False)
 
     days = forms.CharField(label=_('Number of days'), widget=forms.TextInput(
@@ -168,9 +192,6 @@ class TravellerForm(forms.Form):
                'type': 'number', 'min': 1, 'max': 21}), required=False)
 
     # tab 5
-    # symptoms = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple(
-    #     attrs={'id': 'symptoms'}), choices=Symptom.objects.all().values_list('id', 'title'))
-
     other_symptoms = forms.CharField(label=_('Other Symptoms (comma separated)'), widget=forms.Textarea(
         attrs={'class': 'form-control', 'id': 'other_symptoms', 'rows': 3,
                'placeholder': _('Write other symptoms...')}), required=False)

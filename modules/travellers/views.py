@@ -4,7 +4,7 @@ from django.utils import translation
 import datetime
 from datetime import timedelta
 from django.shortcuts import render, render_to_response, redirect
-from .models import Traveller, TravellerVisitedArea, TravellerSymptom, Location, PointOfEntry,Symptom,ScreenCriteria
+from .models import *
 from .forms import TravellerForm
 from django.contrib import messages
 from django.conf import settings
@@ -43,6 +43,7 @@ def change_language_en(request):
         response.set_cookie(settings.LANGUAGE_COOKIE_NAME, language)
     return response
 
+
 def change_language_sw(request):
     language = "sw"
     response = HttpResponseRedirect('/')
@@ -73,14 +74,14 @@ def international(request):
     None
 
     """
-     #redirect path
+    # redirect path
     redirectpath = ""
 
-    #activate current language
+    # activate current language
     translation.activate(translation.get_language())
-   
-    #data
-    symptoms = Symptom.objects.all() #symptoms
+
+    # data
+    symptoms = Symptom.objects.all()  # symptoms
     countries = Location.objects.filter(parent=0)  # countries
     today = datetime.date.today().strftime("%Y-%m-%d")
     last_21_days = (datetime.date.today() -
@@ -91,7 +92,7 @@ def international(request):
         form = TravellerForm(request.POST)
 
         # attributes
-        attr = {'form': form, 'countries': countries,
+        attr = {'form': form, 'countries': countries, 'symptoms': symptoms,
                 'today': today, 'last_21_days': last_21_days}
 
         if form.is_valid():
@@ -113,9 +114,8 @@ def international(request):
             traveller.visiting_purpose = form.cleaned_data['visiting_purpose']
             traveller.other_purpose = form.cleaned_data['other_purpose']
 
-            if request.POST.get('duration_of_stay') is None:
-                traveller.duration_of_stay = request.POST.get(
-                    'duration_of_stay')
+            if request.POST.get('duration_of_stay') != '':
+                traveller.duration_of_stay = request.POST.get('duration_of_stay')
 
             traveller.employment = form.cleaned_data['employment']
             traveller.other_employment = form.cleaned_data['other_employment']
@@ -124,7 +124,7 @@ def international(request):
             traveller.hotel_name = form.cleaned_data['hotel_name']
             traveller.region_id = request.POST.get('region_id')
 
-            if request.POST.get('district_id') is None:
+            if request.POST.get('district_id') != '':
                 traveller.district_id = request.POST.get('district_id')
 
             traveller.street_or_ward = form.cleaned_data['street_or_ward']
@@ -173,12 +173,19 @@ def international(request):
                 # todo: call function to calculate score
                 score = calculate_score(traveller.id)
 
+                if score is not None:
+                    action_taken = 'Allowed'
+                else:
+                    action_taken = 'Screening'
+                    
                 # update traveller
                 traveller_up = Traveller.objects.get(pk=traveller.id)
                 traveller_up.disease_to_screen = score
+                traveller_up.action_taken = action_taken
                 traveller_up.save()
 
-            messages.add_message(request, messages.SUCCESS, 'Success! Saved Successfully!')
+            messages.add_message(request, messages.SUCCESS,
+                                 'Success! Saved Successfully!')
             if translation.get_language() == 'en-us':
                 redirectpath = "/success"
             elif translation.get_language() == "sw":
@@ -186,7 +193,8 @@ def international(request):
 
             return redirect(redirectpath)
         else:
-            messages.add_message(request, messages.WARNING, 'Warning! Please check all the fields!')
+            messages.add_message(request, messages.WARNING,
+                                 'Warning! Please check all the fields!')
 
         return render(request, 'travellers/international.html', attr)
 
@@ -214,28 +222,29 @@ def success(request):
 
     """
 
-    #activate current language
+    # activate current language
     translation.activate(translation.get_language())
 
     return render(request, 'travellers/success.html', {})
 
+
 def calculate_score(traveller_id):
-    countries       = get_travellers_countries(traveller_id)
-    symptoms        = get_travellers_symptoms(traveller_id)
-    Location        = Traveller.objects.get(pk=traveller_id).location_origin.id
+    countries = get_travellers_countries(traveller_id)
+    symptoms = get_travellers_symptoms(traveller_id)
+    Location = Traveller.objects.get(pk=traveller_id).location_origin.id
 
-    fc              = models.Q()
-    fs              = models.Q()
+    fc = models.Q()
+    fs = models.Q()
 
-    fc              |= models.Q(countries__id=Location)
+    fc |= models.Q(countries__id=Location)
     for c in countries:
         fc |= models.Q(countries__id=c.id,)
-    
+
     for s in symptoms:
         fs |= models.Q(symptoms__id=s.id,)
 
-    queryset        = ScreenCriteria.objects.filter(fc & fs).distinct()
-    score           = ', '.join(str(id.disease_id) for id in queryset)
+    queryset = ScreenCriteria.objects.filter(fc & fs).distinct()
+    score = ', '.join(str(id.disease_id) for id in queryset)
     return score
 
 

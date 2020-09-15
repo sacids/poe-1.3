@@ -8,7 +8,7 @@ def poe_defaults(request):
         "modules"       : Module.objects.all(),
         'poes'          : PointOfEntry.objects.filter(agents__id=request.user.id),
         'poe_id'        : request.session.get('poe_id', 0),  
-        'poe_title'     : request.session.get('poe_title', 0),        
+        'poe_title'     : request.session.get('poe_title', 'ALL'),        
     }
 
     url_segment = request.path_info.strip("/").split("/")

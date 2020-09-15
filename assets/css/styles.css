@@ -58,6 +58,12 @@ navigation menu
     background-color: #088c4a;
 }
 
+.navbar-header {
+    margin: 0 auto;
+    display: table;
+    margin-right: auto !important;
+ }
+
 .navbar-brand {
     font-weight: 600;
     font-size: 18px;
@@ -179,7 +185,7 @@ navigation menu
  content
  ==========================================*/
 .content {
-    padding: 1.25rem 1.25rem;
+    padding: .5rem .5rem;
     flex-grow: 1;
 }
 
@@ -198,6 +204,29 @@ navigation menu
     font-size: 18px;
     font-weight: 500;
 }
+
+/*==========================================
+flex box
+==========================================*/
+.flex-container {
+    margin: 0 auto;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+  }
+
+  .flex-container > div.items {
+    margin: 10px;
+    text-align: center;
+    line-height: 10px;
+    flex: 1 1;
+  }
+
+  .flex-container > div.items p {
+    font-weight: 600;
+    display: table-cell;
+    vertical-align: middle;
+  }
 
 
 /*===========================================

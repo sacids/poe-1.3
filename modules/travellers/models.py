@@ -51,6 +51,10 @@ EMPLOYMENT = (
     ('farmers', 'Farmer'),
 )
 
+ACTION_TAKEN = (
+    ('Allowed','Allowed to Proceed with entry/Exit formalities'),
+    ('Screening','Sent to secondary screening'),
+)
 
 # diseases
 class Disease(models.Model):
@@ -133,6 +137,7 @@ class LocationDisease(models.Model):
 class PointOfEntry(models.Model):
     """A class to create point of entries table."""
     title               = models.CharField(max_length=100)
+    code                = models.CharField(max_length=100, null=True)
     mode_of_transport   = models.CharField(choices=TRANSPORT_MODE, max_length=50,  null=True)
     category            = models.CharField(choices=TRANSPORT_CATEGORY, max_length=50,null=True)
     agents              = models.ManyToManyField(User, blank=True)
@@ -184,7 +189,7 @@ class Traveller(BaseModel):
 
     temp = models.FloatField(null=True)
     disease_to_screen = models.CharField(max_length=150, default='0')
-    action_taken = models.CharField(max_length=100, default='None')
+    action_taken = models.CharField(choices=ACTION_TAKEN, max_length=100, default='None')
     other_symptoms = models.TextField(null=True)
     accept = models.IntegerField(default=0, null=True)
     updated_at = models.DateTimeField("Updated At Date", null=True)

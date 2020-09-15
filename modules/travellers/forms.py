@@ -73,7 +73,7 @@ class TravellerForm(forms.Form):
 
     arrival_date = forms.DateField(label=_('Arrival Date'), widget=forms.DateInput(
         attrs={'type': 'date', 'class': 'form-control', 'id': 'arrival_date', 'min': date.today(),
-               'max': date.today() + timedelta(days=5)}), required=True)
+               'max': date.today() + timedelta(days=2)}), required=True)
 
     mode_of_transport = forms.ChoiceField(label=_('Mode of Transport'), choices=TRANSPORT_MODE, widget=forms.Select(
         attrs={'class': 'form-control', 'id': 'mode_of_transport', 'onChange': 'suggest_point_of_entries()'}),

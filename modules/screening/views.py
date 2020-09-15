@@ -34,8 +34,8 @@ def screen(request):
         "temp_b": temp_b,
     }
 
-    score   = calculate_score(8)
-    print(score)
+    # score   = calculate_score(8)
+    # print(score)
     
     return render(request, 'screen.html', context)
 

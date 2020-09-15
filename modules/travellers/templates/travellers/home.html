@@ -37,8 +37,31 @@
 
         <!-- Content area -->
         <div class="content">
+            <div class="flex-container bg-grey">
+                <!-- <div class="items">
+                    <p>
+                        {% trans "Change Language" %}
+                    </p>
+                </div> -->
+                <div class="items">
+                    <a href="{% url 'travellers:change_language_en' %}"><img width="48"
+                            src="{% static 'img/usa_flag.png' %}" alt="" />
+                    </a>
+                </div>
+                <!--./div-->
+
+                <div class="items">
+                    <a href="{% url 'travellers:change_language_sw' %}"><img width="48"
+                            src="{% static 'img/tz_flag.png' %}" alt="" />
+                    </a>
+                </div>
+                <!--./div-->
+            </div>
+
+
+
             <!-- Basic card -->
-            <div class="card">
+            <div class="card mt-4">
                 <div class="card-header">
                     <h5 class="card-title text-uppercase text-center">{% trans "Travellers Surveillance Form" %}</h5>
                 </div>
@@ -48,31 +71,22 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="text-intro">
-                                <p>{% trans "<b>Travellers Surveillance Form </b> an online web based system to help capturing and managing traveller’s health details during fighting against pandemic diseases such as COVID-19 and Ebola." %}</p>
+                                <p>
+                                    {% trans "<b>Travellers Surveillance Form </b> an online web based system to help capturing and managing traveller’s health details during fighting against pandemic diseases such as COVID-19 and Ebola." %}
+                                </p>
+
+                                <p>{% trans "To fill International Surveillance Form click button below." %}</p>
+
                             </div>
                             <!--./text-intro-->
 
                             <div class="text-center">
-                                <div class="dropdown">
-                                    <button style="width: 200px;" class="btn btn-outline-primary dropdown-toggle"
-                                        type="button" id="dropdownMenuButton" data-toggle="dropdown"
-                                        aria-haspopup="true" aria-expanded="false">
-                                        {% trans "Change Language" %}
-                                    </button>
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                        <a class="dropdown-item" href="{% url 'travellers:change_language_en' %}"><img width="32"
-                                                src="{% static 'img/usa_flag.png' %}" alt="" /> ENG
-                                        </a>
-                                        <a class="dropdown-item" href="{% url 'travellers:change_language_sw' %}"><img width="32"
-                                                src="{% static 'img/tz_flag.png' %}" alt="" /> SWA
-                                        </a>
-                                    </div>
-                                </div>
                                 <!--./dropdown -->
                                 <div class="mt-4"></div>
+                                
 
                                 <a style="width: 200px;" href="{% url 'travellers:international' %}"
-                                    class="btn btn-primary btn-sm text-uppercase">{% trans "International" %}</a>
+                                    class="btn btn-primary btn-sm text-uppercase">{% trans "International Form" %}</a>
                                 <div class="mt-4"></div>
                                 <!-- <a style="width: 200px;" href="{% url 'travellers:domestic' %}"
                                     class="btn btn-secondary btn-sm text-uppercase">Domestic</a> -->

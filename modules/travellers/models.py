@@ -162,53 +162,55 @@ class PointOfEntry(models.Model):
 class ActionTaken(models.Model):
     title               = models.CharField(max_length=255, null=False)
     description         = models.TextField(null=True)
+    
+    class Meta:
+        db_table = "et_action_taken"
+        verbose_name_plural = "Action Taken"
+
+    def __str__(self):
+        return self.title
 
 
 # travellers
 class Traveller(BaseModel):
     """A class to create travellers table."""
-    surname = models.CharField(max_length=30, null=True)
-    other_names = models.CharField(max_length=150, null=True)
-    category = models.CharField(choices=FORM_CATEGORY, max_length=30, default='none')
-    sex = models.CharField(choices=SEX, max_length=15, default='none')
-    age_category = models.CharField(choices=AGE_CATEGORY, max_length=30, null=True)
-    age = models.IntegerField(default=0, null=True)
-    nationality = models.ForeignKey(Location, related_name="nationality", default=0, on_delete=models.DO_NOTHING)
-    id_type = models.CharField(choices=ID_TYPE, max_length=50, default='none')
-    id_number = models.CharField(max_length=50)
-    employment = models.CharField(
-        choices=EMPLOYMENT, max_length=45, default='none')
-    other_employment = models.CharField(max_length=255, blank=True, null=True)
+    surname         = models.CharField(max_length=30, null=True)
+    other_names     = models.CharField(max_length=150, null=True)
+    category        = models.CharField(choices=FORM_CATEGORY, max_length=30, default='none')
+    sex             = models.CharField(choices=SEX, max_length=15, default='none')
+    age_category    = models.CharField(choices=AGE_CATEGORY, max_length=30, null=True)
+    age             = models.IntegerField(default=0, null=True)
+    nationality     = models.ForeignKey(Location, related_name="nationality", default=0, on_delete=models.DO_NOTHING)
+    id_type         = models.CharField(choices=ID_TYPE, max_length=50, default='none')
+    id_number       = models.CharField(max_length=50)
+    employment      = models.CharField(choices=EMPLOYMENT, max_length=45, default='none')
+    other_employment    = models.CharField(max_length=255, blank=True, null=True)
 
-    mode_of_transport = models.CharField(
-        choices=TRANSPORT_MODE, max_length=30, default='none')
-    name_of_transport = models.CharField(max_length=30)
-    seat_no = models.CharField(max_length=30, null=True)
-    arrival_date = models.DateField(verbose_name="Arrival Date")
-    point_of_entry = models.ForeignKey(
-        PointOfEntry, on_delete=models.DO_NOTHING)
+    mode_of_transport   = models.CharField(choices=TRANSPORT_MODE, max_length=30, default='none')
+    name_of_transport   = models.CharField(max_length=30)
+    seat_no             = models.CharField(max_length=30, null=True)
+    arrival_date        = models.DateField(verbose_name="Arrival Date")
+    point_of_entry      = models.ForeignKey(PointOfEntry, on_delete=models.DO_NOTHING)
 
-    visiting_purpose = models.CharField(
-        choices=PURPOSE, max_length=45, default='none')  # to look around
-    other_purpose = models.TextField(null=True)
-    duration_of_stay = models.PositiveIntegerField(default=0, null=True)
-    location_origin = models.ForeignKey(Location, related_name="location_origin", on_delete=models.DO_NOTHING)
+    visiting_purpose    = models.CharField(choices=PURPOSE, max_length=45, default='none')  # to look around
+    other_purpose       = models.TextField(null=True)
+    duration_of_stay    = models.PositiveIntegerField(default=0, null=True)
+    location_origin     = models.ForeignKey(Location, related_name="location_origin", on_delete=models.DO_NOTHING)
 
-    physical_address = models.TextField(null=True)
-    hotel_name = models.CharField(max_length=255, null=True)
-    region_id = models.ForeignKey(Location, related_name="region", default=0, on_delete=models.DO_NOTHING)  # to look around
-    district_id = models.IntegerField(default=0, null=True)  # to look around
-    street_or_ward = models.CharField(
-        max_length=100, null=True)  # to look around
-    phone = models.CharField(max_length=25, default='None')
-    email = models.EmailField(max_length=255, default='None')
+    physical_address    = models.TextField(null=True)
+    hotel_name          = models.CharField(max_length=255, null=True)
+    region_id           = models.ForeignKey(Location, related_name="region", default=0, on_delete=models.DO_NOTHING)  # to look around
+    district_id         = models.IntegerField(default=0, null=True)  # to look around
+    street_or_ward      = models.CharField(max_length=100, null=True)  # to look around
+    phone               = models.CharField(max_length=25, default='None')
+    email               = models.EmailField(max_length=255, default='None')
 
-    temp = models.FloatField(null=True)
-    disease_to_screen = models.CharField(max_length=150, default='0')
-    action_taken = models.ForeignKey(ActionTaken, default=1, on_delete=models.DO_NOTHING)
-    other_symptoms = models.TextField(null=True)
-    accept = models.IntegerField(default=0, null=True)
-    updated_at = models.DateTimeField("Updated At Date", null=True)
+    temp                = models.FloatField(null=True)
+    disease_to_screen   = models.CharField(max_length=150, default='0')
+    action_taken        = models.ForeignKey(ActionTaken, default=1, on_delete=models.DO_NOTHING)
+    other_symptoms      = models.TextField(null=True)
+    accept              = models.IntegerField(default=0, null=True)
+    updated_at          = models.DateTimeField("Updated At Date", null=True)
 
     class Meta(BaseModel.Meta):
         db_table = "et_travellers"

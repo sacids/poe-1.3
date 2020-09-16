@@ -12,9 +12,9 @@ $(document).ready(function () {
         age_category = $(this).val();
 
         if (age_category === 'above') {
-            $('#age_cat').text(" (In years) ");
+            $('#age_cat').text("{% trans ' (In years) ' %}");
         } else if (age_category === 'below') {
-            $('#age_cat').text(" (In months) ");
+            $('#age_cat').text("{% trans ' (In months) ' %} ");
         }
     });
 

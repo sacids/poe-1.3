@@ -222,7 +222,7 @@ class Traveller(BaseModel):
         db_table = "et_travellers"
 
     def __str__(self):
-        return self.id
+        return self.surname
 
 
 # Traveller visited area

@@ -36,7 +36,7 @@
                     </div>
                     <div class="col-md-9 col-xs-9 text-right">
                         <div class="text-medium">
-                            Total Passengers
+                            Travellers Filled Forms
                         </div>
                         <br />
                         <div class="text-large">
@@ -57,9 +57,9 @@
                         <i class="fa fa-normal-temp"></i>
                     </div>
                     <div class="col-md-9 col-xs-9 text-right">
-                        <div class="text-medium">Normal Temp</div>
+                        <div class="text-medium">Allowed To Proceed</div>
                         <br />
-                        <div class="text-large">{{ passenger_with_normal_temp }}</div>
+                        <div class="text-large">{{ allowed_to_proceed }}</div>
                     </div>
                 </div>
             </div>
@@ -75,9 +75,9 @@
                         <i class="fa fa-above-temp"></i>
                     </div>
                     <div class="col-md-9 col-xs-9 text-right">
-                        <div class="text-medium">Above Normal Temp</div>
+                        <div class="text-medium">Going Secondary Screening</div>
                         <br />
-                        <div class="text-large">{{ passenger_with_above_normal_temp }}</div>
+                        <div class="text-large">{{ secondary_screening }}</div>
                     </div>
                 </div>
             </div>
@@ -96,10 +96,10 @@
                         <div class="text-medium">Above Normal Temp</div>
 
                         <div class="text-small">
-                            Male: {{ male_percent }}%
+                            Male: {{ male_passenger_with_above_normal_temp }}
                         </div>
                         <div class="text-small">
-                            Female: {{ female_percent }}%
+                            Female: {{ female_passenger_with_above_normal_temp }}
                         </div>
                     </div>
                 </div>

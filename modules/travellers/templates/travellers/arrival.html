@@ -64,7 +64,7 @@
                                         <div class="col-lg-6 col-md-6 col-sm-12 col-12">
                                             <div class="form-group">
                                                 {{ form.surname|as_crispy_field }}
-                                                <span id="errorName" style="color: red;"></span>
+                                                <span id="errorSurname" style="color: red;"></span>
                                             </div>
                                             <!--./form-group -->
                                         </div>
@@ -73,7 +73,7 @@
                                         <div class="col-lg-6 col-md-6 col-sm-12 col-12">
                                             <div class="form-group">
                                                 {{ form.other_names|as_crispy_field }}
-                                                <span id="errorName" style="color: red;"></span>
+                                                <span id="errorOtherNames" style="color: red;"></span>
                                             </div>
                                             <!--./form-group -->
                                         </div>
@@ -82,7 +82,7 @@
                                         <div class="col-lg-6 col-md-6 col-sm-12 col-12">
                                             <div class="form-group">
                                                 {{ form.age_category|as_crispy_field }}
-                                                <span id="errorAge" style="color: red;"></span>
+                                                <span id="errorAgeCategory" style="color: red;"></span>
                                             </div>
                                             <!--./form-group -->
                                         </div>
@@ -174,8 +174,8 @@
 
                                         <div class="col-lg-6 col-md-6 col-sm-12 col-12">
                                             <div class="form-group">
-                                                {{ form.seat_no|as_crispy_field }} 
-                                                <span id="errorSeatNo" style="color: red;"></span>
+                                                {{ form.seat_number|as_crispy_field }} 
+                                                <span id="errorSeatNumber" style="color: red;"></span>
                                             </div>
                                             <!--./form-group -->
                                         </div>
@@ -432,7 +432,7 @@
                                             <div class="form-group">
                                                 <input type="checkbox" name="accept" id="accept" value="1">
                                                 <strong>
-                                                    {% trans "I declare that the information provided is complete and correct to the best of my knowledge. I understand that any false information supplied could lead to fine." %}
+                                                    {% trans "I declare that the information provided is complete and correct to the best of my knowledge. I understand that any false information filled could lead to denial or prosecution in accordance to law." %}
                                                 </strong>
                                                 <br />
                                                 <span id="errorAccept" style="color: red;"></span>

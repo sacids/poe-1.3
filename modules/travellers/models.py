@@ -3,6 +3,7 @@ from phone_field import PhoneField
 from django.contrib.postgres.fields import ArrayField
 from modules.common.models import BaseModel
 from django.contrib.auth.models import User
+from multiselectfield import MultiSelectField
 
 FORM_CATEGORY = (
     ('arrival', "ARRIVAL"),
@@ -146,7 +147,7 @@ class PointOfEntry(models.Model):
     """A class to create point of entries table."""
     title               = models.CharField(max_length=100)
     code                = models.CharField(max_length=100, null=True)
-    mode_of_transport   = models.CharField(choices=TRANSPORT_MODE, max_length=50,  null=True)
+    mode_of_transport   = models.CharField(choices=TRANSPORT_MODE, max_length=255,  null=True)
     category            = models.CharField(choices=TRANSPORT_CATEGORY, max_length=50,null=True)
     agents              = models.ManyToManyField(User, blank=True)
 
@@ -162,6 +163,13 @@ class PointOfEntry(models.Model):
 class ActionTaken(models.Model):
     title               = models.CharField(max_length=255, null=False)
     description         = models.TextField(null=True)
+
+    class Meta: 
+        db_table = "et_action_taken"
+        verbose_name_plural = "Action Taken"
+
+    def __str__(self):
+        return self.title;    
 
 
 # travellers
@@ -183,7 +191,7 @@ class Traveller(BaseModel):
     mode_of_transport = models.CharField(
         choices=TRANSPORT_MODE, max_length=30, default='none')
     name_of_transport = models.CharField(max_length=30)
-    seat_no = models.CharField(max_length=30, null=True)
+    seat_number = models.CharField(max_length=30, null=True)
     arrival_date = models.DateField(verbose_name="Arrival Date")
     point_of_entry = models.ForeignKey(
         PointOfEntry, on_delete=models.DO_NOTHING)
@@ -196,7 +204,7 @@ class Traveller(BaseModel):
 
     physical_address = models.TextField(null=True)
     hotel_name = models.CharField(max_length=255, null=True)
-    region_id = models.ForeignKey(Location, related_name="region", default=0, on_delete=models.DO_NOTHING)  # to look around
+    region = models.ForeignKey(Location, related_name="region", default=0, on_delete=models.DO_NOTHING)  # to look around
     district_id = models.IntegerField(default=0, null=True)  # to look around
     street_or_ward = models.CharField(
         max_length=100, null=True)  # to look around

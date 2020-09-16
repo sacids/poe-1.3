@@ -41,8 +41,10 @@ p {
 /*===============================================
 navigation menu
 ===============================================*/
-.navbar {
-    background-color: #088c4a;
+@media only screen and (min-device-width: 768px){
+    .navbar{ 
+        background-color: #088c4a;
+    }
 }
 
 .navbar .navbar-toggle {

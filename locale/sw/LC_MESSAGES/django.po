@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-09-16 07:03+0300\n"
+"POT-Creation-Date: 2020-09-17 12:54+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -43,6 +43,30 @@ msgstr "Mwanaume"
 #: modules/travellers/forms.py:19
 msgid "Female"
 msgstr "Mwanamke"
+
+#: modules/travellers/forms.py:24
+msgid "Flight"
+msgstr "Ndege"
+
+#: modules/travellers/forms.py:25
+msgid "Truck"
+msgstr "Lori"
+
+#: modules/travellers/forms.py:26
+msgid "Bus"
+msgstr "Basi"
+
+#: modules/travellers/forms.py:27
+msgid "Private vehicle"
+msgstr "Gari binafsi"
+
+#: modules/travellers/forms.py:28
+msgid "Vessel"
+msgstr "Meli/Boti"
+
+#: modules/travellers/forms.py:29
+msgid "Train"
+msgstr "Treni"
 
 #: modules/travellers/forms.py:34
 msgid "Resident"
@@ -105,8 +129,8 @@ msgid "Age Category"
 msgstr "Jamii ya umri"
 
 #: modules/travellers/forms.py:76
-msgid "Age"
-msgstr "Umri"
+msgid "Age <span id=\"age_cat\"></span>"
+msgstr "Umri <span id=\"age_cat\"></span>"
 
 #: modules/travellers/forms.py:78
 msgid "Write age..."
@@ -149,8 +173,8 @@ msgid "Write Vessel/Flight/Vehicle Name..."
 msgstr "Andika namba ya meli/ndege/basi/gari..."
 
 #: modules/travellers/forms.py:109
-msgid "Seat Number"
-msgstr "Namba ya kiti"
+msgid "Seat Number <span id=\"seat_astr\" class=\"asteriskField\"></span>"
+msgstr "Namba ya kiti <span id=\"seat_astr\" class=\"asteriskField\"></span>"
 
 #: modules/travellers/forms.py:110
 msgid "Write your seat number..."
@@ -169,8 +193,10 @@ msgid "Write other visiting purpose, if any )"
 msgstr "Andika lengo lingine la safari"
 
 #: modules/travellers/forms.py:122
-msgid "Duration of stay (In days)"
-msgstr "Idadi ya siku utakazokaa"
+msgid ""
+"Duration of stay (In days) <span id=\"dur_stay_astr\" class=\"asteriskField"
+"\"></span>"
+msgstr "Idadi ya siku unazokaa <span id=\"seat_astr\" class=\"asteriskField\"></span>"
 
 #: modules/travellers/forms.py:124
 msgid "Write duration of stay..."
@@ -263,7 +289,7 @@ msgstr "Andika mahali ulipotembelea..."
 
 #: modules/travellers/forms.py:186
 msgid "Date"
-msgstr "Tarehe"
+msgstr ""
 
 #: modules/travellers/forms.py:190
 msgid "Number of days"
@@ -325,31 +351,31 @@ msgstr "Idadi ya siku"
 msgid "Traveller's Surveillance Form"
 msgstr "Fomu ya ufuatiliaji wa magonjwa kwa abiria."
 
-#: modules/travellers/templates/travellers/arrival.html:28
+#: modules/travellers/templates/travellers/arrival.html:29
 #: modules/travellers/templates/travellers/success.html:22
 msgid "Traveller's Health Declaration Form"
 msgstr "Fomu ya ufuatiliaji wa magonjwa kwa abiria"
 
-#: modules/travellers/templates/travellers/arrival.html:56
+#: modules/travellers/templates/travellers/arrival.html:57
 msgid "Traveller Information"
 msgstr "Taarifa za msafiri"
 
-#: modules/travellers/templates/travellers/arrival.html:249
+#: modules/travellers/templates/travellers/arrival.html:250
 msgid "Contact while in Tanzania"
 msgstr "Anwani na mawasiliano ukiwa Tanzania"
 
-#: modules/travellers/templates/travellers/arrival.html:336
+#: modules/travellers/templates/travellers/arrival.html:337
 msgid "Countries visited in last 21 days (3 weeks)"
 msgstr "Nchi ulizotembelea ndani ya siku 21"
 
-#: modules/travellers/templates/travellers/arrival.html:366
+#: modules/travellers/templates/travellers/arrival.html:367
 msgid ""
 "Have you experienced the following conditions during the last 7 days (1 "
 "week)?"
 msgstr ""
 "Umewahi kuwa na dalili zifuatazo ndani ya siku 7 (Juma moja) zilizopita?"
 
-#: modules/travellers/templates/travellers/arrival.html:378
+#: modules/travellers/templates/travellers/arrival.html:379
 msgid ""
 "Please, mark/tick all the clinical manifestations that you have experienced "
 "during the last 7 days (1 week)"
@@ -357,11 +383,11 @@ msgstr ""
 "Tafadhali chagua dalili ulizokuwa nazo ndani ya siku 7 (juma moja) "
 "lililopita?"
 
-#: modules/travellers/templates/travellers/arrival.html:422
+#: modules/travellers/templates/travellers/arrival.html:423
 msgid "Declarations of filled information"
 msgstr "Maazimio ya taarifa ulizojaza"
 
-#: modules/travellers/templates/travellers/arrival.html:435
+#: modules/travellers/templates/travellers/arrival.html:436
 msgid ""
 "I declare that the information provided is complete and correct to the best "
 "of my knowledge. I understand that any false information filled could lead "
@@ -371,11 +397,11 @@ msgstr ""
 "kutoa taarifa za uongo inaweza kusababisha kukataliwa kuingia nchini au "
 "kushtakiwa."
 
-#: modules/travellers/templates/travellers/arrival.html:453
+#: modules/travellers/templates/travellers/arrival.html:454
 msgid "Previous"
 msgstr "Nyuma"
 
-#: modules/travellers/templates/travellers/arrival.html:456
+#: modules/travellers/templates/travellers/arrival.html:457
 #: modules/travellers/templates/travellers/validation.html:20
 msgid "Next"
 msgstr "Mbele"
@@ -410,6 +436,14 @@ msgstr "Kuwasili"
 #: modules/travellers/templates/travellers/home.html:61
 msgid "Departure"
 msgstr "Kuondoka"
+
+#: modules/travellers/templates/travellers/scripts.html:10
+msgid "(In years) "
+msgstr "(Kwa miaka)"
+
+#: modules/travellers/templates/travellers/scripts.html:12
+msgid "(In months) "
+msgstr "(Kwa miezi)"
 
 #: modules/travellers/templates/travellers/success.html:5
 msgid "Travellers Surveillance Form"
@@ -460,102 +494,109 @@ msgstr "Jamii ya umri inahitajika"
 msgid "Age is required"
 msgstr "Umri unahitajika"
 
-#: modules/travellers/templates/travellers/validation.html:127
-msgid "Invalid age"
-msgstr "Umri umekosewa"
+#: modules/travellers/templates/travellers/validation.html:128
+msgid "Age should be between 1 and 150 years"
+msgstr "Umri unatakiwa kuwa kati ya mwaka 1 mpaka miaka 150"
 
-#: modules/travellers/templates/travellers/validation.html:136
+#: modules/travellers/templates/travellers/validation.html:135
+msgid "Age should be between 1 and 12 months"
+msgstr "Umri unatakiwa kuwa kati ya mwezi 1 mpaka 12"
+
+#: modules/travellers/templates/travellers/validation.html:145
 msgid "Sex is required"
 msgstr "Jinsia inahitajika"
 
-#: modules/travellers/templates/travellers/validation.html:144
+#: modules/travellers/templates/travellers/validation.html:153
 msgid "Nationality is required"
 msgstr "Uraia unahitajika"
 
-#: modules/travellers/templates/travellers/validation.html:152
+#: modules/travellers/templates/travellers/validation.html:161
 msgid "Passport number is required"
 msgstr "Hati ya Kusafiri"
 
-#: modules/travellers/templates/travellers/validation.html:160
+#: modules/travellers/templates/travellers/validation.html:169
 msgid "Arrival date is required"
 msgstr "Tarehe ya kuwasili"
 
-#: modules/travellers/templates/travellers/validation.html:176
+#: modules/travellers/templates/travellers/validation.html:185
 msgid "Invalid arrival date"
 msgstr "Tarehe ya kuwasili"
 
-#: modules/travellers/templates/travellers/validation.html:185
+#: modules/travellers/templates/travellers/validation.html:194
 msgid "Mode of transport is required"
 msgstr "Aina ya usafiri"
 
-#: modules/travellers/templates/travellers/validation.html:193
+#: modules/travellers/templates/travellers/validation.html:202
 msgid "Vessel/Flight/Vehicle name is required"
 msgstr "Namba ya Meli/Ndege/Basi/Gari"
 
-#: modules/travellers/templates/travellers/validation.html:201
+#: modules/travellers/templates/travellers/validation.html:210
 msgid "Point of entry required"
 msgstr "Sehemu ulipowasili/utakapowasili inahijika"
 
-#: modules/travellers/templates/travellers/validation.html:210
+#: modules/travellers/templates/travellers/validation.html:219
 msgid "Seat number required"
 msgstr "Namba ya kiti inahitajika"
 
-#: modules/travellers/templates/travellers/validation.html:233
+#: modules/travellers/templates/travellers/validation.html:242
 msgid "Duration of stay required"
 msgstr "Idadi ya siku utakazokaa"
 
-#: modules/travellers/templates/travellers/validation.html:236
+#: modules/travellers/templates/travellers/validation.html:245
 msgid "Duration of stay should be greater than 0"
 msgstr "Idadi ya siku zinatakuwa kuwa kubwa zaidi ya 0"
 
-#: modules/travellers/templates/travellers/validation.html:253
+#: modules/travellers/templates/travellers/validation.html:262
 msgid "Region is required"
 msgstr "Mkoa unahitajika"
 
-#: modules/travellers/templates/travellers/validation.html:261
+#: modules/travellers/templates/travellers/validation.html:270
 msgid "Phone is required"
 msgstr "Namba ya simu inahitajika"
 
-#: modules/travellers/templates/travellers/validation.html:265
+#: modules/travellers/templates/travellers/validation.html:274
 msgid "Invalid phone. e.g 255717000000"
-msgstr "Umekosea namba ya simu. mfano 0717000000"
+msgstr "Umekosea namba ya simu. mfano 255717000000"
 
-#: modules/travellers/templates/travellers/validation.html:278
+#: modules/travellers/templates/travellers/validation.html:287
 msgid "Email is required"
 msgstr "Barua pepe inahitajika"
 
-#: modules/travellers/templates/travellers/validation.html:282
+#: modules/travellers/templates/travellers/validation.html:291
 msgid "Invalid email address"
 msgstr "Umekosea kuandika barua pepe"
 
-#: modules/travellers/templates/travellers/validation.html:298
+#: modules/travellers/templates/travellers/validation.html:307
 msgid "Country journey started is required"
 msgstr "Nchi ulipoanzia safari"
 
-#: modules/travellers/templates/travellers/validation.html:308
+#: modules/travellers/templates/travellers/validation.html:317
 msgid "Country visited required"
 msgstr "Nchi ulipoanzia safari"
 
-#: modules/travellers/templates/travellers/validation.html:333
+#: modules/travellers/templates/travellers/validation.html:342
 msgid "Entry date required"
 msgstr "Tarehe ya kuwasili"
 
-#: modules/travellers/templates/travellers/validation.html:336
+#: modules/travellers/templates/travellers/validation.html:345
 msgid "Entry date should not be greater or equal to today"
 msgstr "Tarehe haitakiwi kuwa sawa au kuzidi leo"
 
-#: modules/travellers/templates/travellers/validation.html:349
+#: modules/travellers/templates/travellers/validation.html:358
 msgid "Number of days required"
 msgstr "Idadi ya siku zinahitajika"
 
-#: modules/travellers/templates/travellers/validation.html:352
+#: modules/travellers/templates/travellers/validation.html:361
 msgid "Number of days should not be greater than 21"
 msgstr "Muda wa siku hautakiwi kuzidi 21"
 
-#: modules/travellers/templates/travellers/validation.html:374
+#: modules/travellers/templates/travellers/validation.html:383
 msgid "Symptoms are required"
 msgstr "Dalili zinahitajika"
 
-#: modules/travellers/templates/travellers/validation.html:390
+#: modules/travellers/templates/travellers/validation.html:399
 msgid "Tick the declaration."
 msgstr "Jibu tamko"
+
+#~ msgid "Duration of stay (In days)"
+#~ msgstr "Idadi ya siku utakazokaa"

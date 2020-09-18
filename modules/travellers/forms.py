@@ -21,12 +21,12 @@ SEX = (
 
 TRANSPORT_MODE = (
     ('', _('-- Select --')),
-    ('flight', 'Flight'),
-    ('truck', 'Truck'),
-    ('bus', 'Bus'),
-    ('vehicle', 'Private vehicle'),
-    ('vessel', 'Vessel'),
-    ('train', 'Train'),
+    ('flight', _('Flight')),
+    ('truck', _('Truck')),
+    ('bus', _('Bus')),
+    ('vehicle', _('Private vehicle')),
+    ('vessel', _('Vessel')),
+    ('train', _('Train')),
 )
 
 PURPOSE = (
@@ -73,7 +73,7 @@ class TravellerForm(forms.Form):
         attrs={'class': 'form-control', 'id': 'age_category'}), required=True)
 
     age = forms.CharField(
-        label=_('Age')+ '<span id="age_cat"></span>',
+        label=_('Age <span id="age_cat"></span>'),
         widget=forms.TextInput(attrs={'class': 'form-control', 'id': 'age', 'type': 'number', 'min': 1, 'max': 120,
                                       'placeholder': _('Write age...')}), required=True)
 
@@ -83,7 +83,7 @@ class TravellerForm(forms.Form):
 
     nationality = forms.ModelChoiceField(label=_('Nationality'), queryset=Location.objects.filter(parent=0), empty_label=_('-- Select --'),
                                          widget=forms.Select(
-                                             attrs={'class': 'form-control', 'id': 'nationality'}),
+                                             attrs={'class': 'form-control form-control-select', 'id': 'nationality'}),
                                          required=True)  # todo: review it
 
     id_number = forms.CharField(label=_('Passport Number'),
@@ -106,7 +106,7 @@ class TravellerForm(forms.Form):
         attrs={'class': 'form-control', 'id': 'name_of_transport',
                'placeholder': _('Write Vessel/Flight/Vehicle Name...')}), required=True)
 
-    seat_number = forms.CharField(label=_('Seat Number') + ' <span id="seat_astr" class="asteriskField"></span>', widget=forms.TextInput(
+    seat_number = forms.CharField(label=_('Seat Number <span id="seat_astr" class="asteriskField"></span>'), widget=forms.TextInput(
         attrs={'class': 'form-control', 'id': 'seat_number', 'placeholder': _('Write your seat number...')}), required=False)
 
     # tab 2
@@ -119,7 +119,7 @@ class TravellerForm(forms.Form):
         attrs={'class': 'form-control', 'id': 'other_purpose', 'rows': 3,
                'placeholder': _('Write other visiting purpose, if any )')}), required=False)
 
-    duration_of_stay = forms.CharField(label=_('Duration of stay (In days)') + '<span id="dur_stay_astr" class="asteriskField"></span>', widget=forms.TextInput(
+    duration_of_stay = forms.CharField(label=_('Duration of stay (In days) <span id="dur_stay_astr" class="asteriskField"></span>'), widget=forms.TextInput(
         attrs={'class': 'form-control', 'id': 'duration_of_stay', 'type': 'number', 'min': 1,
                'placeholder': _('Write duration of stay...')}), required=False)
 

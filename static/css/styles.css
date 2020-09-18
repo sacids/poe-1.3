@@ -1,0 +1,482 @@
+/*!
+ * Start Bootstrap - Creative Bootstrap Theme (http://startbootstrap.com)
+ * Code licensed under the Apache License v2.0.
+ * For details, see http://www.apache.org/licenses/LICENSE-2.0.
+ */
+html, body {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    color: #424242;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+a {
+    color: #2f4050;
+}
+
+a:hover,
+a:focus {
+    text-decoration: underline;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: inherit
+}
+
+p {
+    font-size: inherit;
+    line-height: 1.5;
+}
+
+/*===============================================
+navigation menu
+===============================================*/
+@media only screen and (min-device-width: 768px){
+    .navbar{ 
+        background-color: #088c4a;
+    }
+}
+
+.navbar .navbar-toggle {
+    border-color: #ffffff;
+}
+
+.navbar .navbar-toggle:hover,
+.navbar .navbar-toggle:focus {
+    background-color: #ffffff;
+}
+
+.navbar .navbar-toggle .icon-bar {
+    background-color: #088c4a;
+}
+
+.navbar-header {
+    margin: 0 auto;
+    display: table;
+    margin-right: auto !important;
+ }
+
+.navbar-brand {
+    font-weight: 600;
+    font-size: 18px;
+    text-transform: uppercase;
+    color: #ffffff;
+}
+
+.navbar-brand:hover {
+    color: #ffffff !important;
+}
+
+@media (max-width: 480px) {
+    .navbar-brand {
+        font-weight: 600;
+        font-size: 18px;
+        text-transform: uppercase;
+        text-align: center !important;
+        color: #ffffff;
+    }
+
+    .navbar-brand:hover {
+        color: #ffffff !important;
+    }
+}
+
+/*====content wrapper===*/
+.page-content {
+    width: 100%;
+    min-height: 600px;
+    height: auto;
+    color: #424242;
+}
+
+.content-wrapper {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -ms-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+
+/*===========================================
+  Page Header
+=============================================*/
+.page-header {
+    width: 100%;
+    padding: 20px;
+    background: url("../img/flag.png");
+    background-size: cover;
+    border-bottom: 1px solid #ddd;
+}
+
+.page-header-content {
+    padding: 0;
+}
+
+.page-title {
+    padding: 0;
+    position: relative;
+}
+
+.page-title .img img {
+    height: 80px !important;
+}
+
+.page-title #content {
+    margin: 0;
+    padding: 15px 0 0 10px;
+}
+
+.page-title h1 {
+    font-size: 20px;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.page-title h3 {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+@media (max-width: 480px) {
+    .page-header {
+        width: 100%;
+        padding: 10px;
+        background: url("../img/top_banner.png");
+        background-size: cover;
+        border: 0;
+    }
+
+    .page-title .img img {
+        padding: 0;
+        height: 80px !important;
+    }
+
+    .page-title #content {
+        margin: 0;
+        padding: 0;
+    }
+
+    .page-title h1 {
+        font-size: 16px;
+        font-weight: 600;
+        color: #000000;
+        text-transform: uppercase;
+        text-align: center;
+    }
+
+    .page-title h3 {
+        font-size: 12px;
+        font-weight: 600;
+        color: #000000;
+        text-align: center;
+    }
+}
+
+/*===========================================
+ content
+ ==========================================*/
+.content {
+    padding: .5rem .5rem;
+    flex-grow: 1;
+}
+
+@media (max-width: 480px) {
+    .content {
+        padding: .5rem .5rem;
+        flex-grow: 1;
+    }
+}
+
+.text-intro{
+  margin: 0 0 20px 0;
+}
+
+.text-intro p{
+    font-size: 18px;
+    font-weight: 500;
+}
+
+/*==========================================
+flex box
+==========================================*/
+.flex-container {
+    margin: 0 auto;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+  }
+
+  .flex-container > div.items {
+    margin: 10px;
+    text-align: center;
+    line-height: 10px;
+    flex: 1 1;
+  }
+
+  .flex-container > div.items p {
+    font-weight: 600;
+    display: table-cell;
+    vertical-align: middle;
+  }
+
+
+/*===========================================
+Cards
+=============================================*/
+.card {
+    border: 0;
+    padding: 10px;
+}
+
+.card .card-header {
+    width: 100%;
+    border: 0;
+    margin: 0;
+    padding: 0;
+    background-color: #ffffff;
+}
+
+    .card-header h5.card-title {
+        padding: 0;
+        font-weight: 600;
+        text-transform: uppercase;
+    }
+
+.card .card-body {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+.card .card-footer {
+    border-radius: 0 !important;
+    margin: 0;
+    padding: 0;
+    background-color: #ffffff;
+    border: 0;
+}
+
+@media (max-width: 480px) {
+    .card {
+        border-radius: 0 !important;
+        box-shadow: none !important;
+        padding: 0 8px 0 8px;
+        margin: 0;
+    }
+
+    .card-header {
+        padding: 0;
+        margin: 0;
+    }
+
+    .card-header h5.card-title {
+        padding: 0;
+        font-weight: 600;
+        text-transform: uppercase;
+    }
+
+    .card-body {
+        padding: 0;
+    }
+}
+
+/*===========================================
+Text sizes and colors
+=============================================*/
+.text-primary {
+    color: #088c4a;
+}
+
+.text-primary[href]:hover, .text-primary[href]:focus {
+    color: #088c4a;
+}
+
+.text-white {
+    color: #ffffff;
+}
+
+.text-black {
+    color: #000000;
+}
+
+.text-faded {
+    color: rgba(255, 255, 255, .7);
+}
+
+/*===============================================
+Background colors
+===============================================*/
+.bg-primary {
+    background-color: #088c4a !important;
+    color: #ffffff;
+}
+
+.bg-secondary {
+    background-color: #2f4050 !important;
+    color: #ffffff;
+}
+
+.bg-black {
+    color: #fff;
+    background-color: #000000;
+}
+
+.bg-dark {
+    color: #fff;
+    background-color: #222;
+}
+
+.bg-white {
+    background-color: #ffffff;
+}
+
+.bg-grey {
+    background-color: #eeeeee;
+}
+
+.bg-light-grey {
+    background-color: #fafafa;
+}
+
+/*===============================================
+Buttons
+===============================================*/
+.btn {
+    border-radius: 0 !important;
+    font-size: 13px !important;
+    font-weight: 600;
+}
+
+.btn-primary {
+    color: #ffffff;
+    background-color: #088c4a;
+    border-color: #088c4a;
+}
+
+.btn-outline-primary {
+    color: #088c4a;
+    background-color: transparent;
+    background-image: none;
+    border-color: #088c4a;
+}
+
+.btn-outline-primary:hover {
+    color: #fff;
+    background-color: #088c4a;
+    border-color: #088c4a;
+}
+
+.btn-secondary {
+    color: #ffffff;
+    background-color: #2f4050;
+    border-color: #2f4050;
+}
+
+.btn-outline-secondary {
+    color: #2f4050;
+    background-color: transparent;
+    background-image: none;
+    border-color: #2f4050;
+}
+
+.btn-outline-secondary:hover {
+    color: #fff;
+    background-color: #2f4050;
+    border-color: #2f4050;
+}
+
+.btn-tertiary {
+    color: #3F3F3F;
+    font-weight: 600;
+    background-color: #f1f1f1;
+    border-color: #f1f1f1;
+}
+
+/*===============================================
+Forms
+===============================================*/
+.form-group label {
+    font-weight: 600;
+    font-size: 13px;
+}
+
+.form-group ul{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.form-group ul li{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.form-group span.red {
+    color: #CC0000;
+}
+
+.asteriskField {
+    color: #CC0000;
+    padding-left: 5px;
+}
+
+/*===============================================
+Icons
+===============================================*/
+i.fa-coat-of-arm {
+    content: "";
+    background-image: url("../img/CoatofArms_Lg.png");
+    width: 36px;
+    height: 36px;
+    display: inline-block;
+    background-size: cover;
+}
+
+/*====================================================
+  Form Wizard tabs
+ ===================================================*/
+/* Mark input boxes that gets an error on validation: */
+.invalid {
+    background-color: #ffdddd;
+}
+
+/* Hide all steps by default: */
+.tab {
+    display: none;
+}
+
+/* Make circles that indicate the steps of the form: */
+.step {
+    height: 15px;
+    width: 15px;
+    margin: 0 2px;
+    background-color: #bbbbbb;
+    border: none;
+    border-radius: 50%;
+    display: inline-block;
+    opacity: 0.5;
+}
+
+/* Mark the active step: */
+.step.active {
+    opacity: 1;
+}
+
+/* Mark the steps that are finished and valid: */
+.step.finish {
+    background-color: #4CAF50;
+}
+

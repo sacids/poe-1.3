@@ -114,9 +114,10 @@ navigation menu
 =============================================*/
 .page-header {
     width: 100%;
-    padding: 10px;
-    background-color: #eeeded;
-    border: 1px solid #ddd;
+    padding: 20px;
+    background: url("../img/flag.png");
+    background-size: cover;
+    border-bottom: 1px solid #ddd;
 }
 
 .page-header-content {
@@ -151,12 +152,14 @@ navigation menu
 @media (max-width: 480px) {
     .page-header {
         width: 100%;
+        padding: 10px;
         background: url("../img/top_banner.png");
         background-size: cover;
         border: 0;
     }
 
     .page-title .img img {
+        padding: 0;
         height: 80px !important;
     }
 
@@ -227,7 +230,6 @@ flex box
     display: table-cell;
     vertical-align: middle;
   }
-
 
 /*===========================================
 Cards
@@ -477,3 +479,31 @@ i.fa-coat-of-arm {
     background-color: #4CAF50;
 }
 
+/*====================================================
+  Form Control
+ ===================================================*/
+ @media (max-width: 480px) {
+    .select2-container{
+        box-sizing:border-box;
+        display:inline-block;
+        margin:0;
+        position:relative;
+        vertical-align:middle
+    }
+
+    .select2-container .select2-selection--single{
+        display:block;
+        width:100%;
+        height:calc(1.5em + .75rem + 2px);
+        padding:.375rem .75rem;
+        font-size:1rem;font-weight:400;
+        line-height:1.5; 
+        color:#495057;
+        background-color:#fff;
+        background-clip:padding-box;
+        border:1px solid #ced4da;
+        border-radius:.25rem;
+        transition:border-color .15s ease-in-out;
+        user-select:none;-webkit-user-select:none
+    }
+}

@@ -123,11 +123,20 @@
             if (age === "") {
                 printError("errorAge", "{% trans 'Age is required' %}");
             } else {
-                if (age < 0 || age > 150) {
-                    printError("errorAge", "{% trans 'Invalid age' %}");
-                } else {
-                    printError("errorAge", "");
-                    errorAge = false;
+                if (age_category === 'above') {
+                    if (age < 0 || age > 150) {
+                        printError("errorAge", "{% trans 'Age should be between 1 and 150 years' %}");
+                    } else {
+                        printError("errorAge", "");
+                        errorAge = false;
+                    }
+                } else if (age_category === 'below') {
+                    if (age < 0 || age > 12) {
+                        printError("errorAge", "{% trans 'Age should be between 1 and 12 months' %}");
+                    } else {
+                        printError("errorAge", "");
+                        errorAge = false;
+                    }
                 }
             }
 

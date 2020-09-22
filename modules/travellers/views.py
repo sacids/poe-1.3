@@ -98,18 +98,20 @@ def arrival(request):
         if form.is_valid():
             # process form data
             traveller = Traveller()  # gets new object
-            traveller.type = "international"
+            traveller.category = "arrival"
             traveller.id_type = "passport-number"
-            traveller.full_name = form.cleaned_data['full_name']
+            traveller.surname = form.cleaned_data['surname']
+            traveller.other_names = form.cleaned_data['other_names']
+            traveller.age_category = form.cleaned_data['age_category']
             traveller.age = form.cleaned_data['age']
             traveller.sex = form.cleaned_data['sex']
-            traveller.nationality = request.POST.get('nationality')
+            traveller.nationality_id = request.POST.get('nationality')
             traveller.id_number = form.cleaned_data['id_number']
             traveller.arrival_date = form.cleaned_data['arrival_date']
             traveller.point_of_entry_id = request.POST.get('point_of_entry')
             traveller.mode_of_transport = form.cleaned_data['mode_of_transport']
             traveller.name_of_transport = form.cleaned_data['name_of_transport']
-            traveller.seat_no = form.cleaned_data['seat_no']
+            traveller.seat_number = form.cleaned_data['seat_number']
 
             traveller.visiting_purpose = form.cleaned_data['visiting_purpose']
             traveller.other_purpose = form.cleaned_data['other_purpose']
@@ -174,18 +176,17 @@ def arrival(request):
                 score = calculate_score(traveller.id)
 
                 if score is not None:
-                    action_taken = 'Allowed'
+                    action_taken = 1
                 else:
-                    action_taken = 'Screening'
+                    action_taken = 2
                     
                 # update traveller
                 traveller_up = Traveller.objects.get(pk=traveller.id)
                 traveller_up.disease_to_screen = score
-                traveller_up.action_taken = action_taken
+                traveller_up.action_taken_id = action_taken
                 traveller_up.save()
 
-            messages.add_message(request, messages.SUCCESS,
-                                 'Success! Saved Successfully!')
+            messages.add_message(request, messages.SUCCESS,'Success! Saved Successfully!')
             if translation.get_language() == 'en-us':
                 redirectpath = "/success"
             elif translation.get_language() == "sw":
@@ -193,10 +194,9 @@ def arrival(request):
 
             return redirect(redirectpath)
         else:
-            messages.add_message(request, messages.WARNING,
-                                 'Warning! Please check all the fields!')
+            messages.add_message(request, messages.WARNING,'Warning! Please check all the fields!')
 
-        return render(request, 'travellers/international.html', attr)
+        return render(request, 'travellers/arrival.html', attr)
 
     else:
         form = TravellerForm()
@@ -377,8 +377,13 @@ def auto_point_of_entries(request):
 
     if request.method == 'GET':
         mode_of_transport = request.GET.get('mode_of_transport')
-        point_of_entries = PointOfEntry.objects.filter(
-            mode_of_transport=mode_of_transport)
+        #check for mode of transport
+        if(mode_of_transport == 'truck'):
+            mode_of_transport = 'vehicle'
+        elif(mode_of_transport == 'bus'):
+            mode_of_transport = 'vehicle';    
+
+        point_of_entries = PointOfEntry.objects.filter(mode_of_transport=mode_of_transport)
 
         # return response
         return render_to_response('travellers/auto_point_of_entries.html', {'point_of_entries': point_of_entries})

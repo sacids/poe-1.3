@@ -73,7 +73,7 @@ class TravellerForm(forms.Form):
         attrs={'class': 'form-control', 'id': 'age_category'}), required=True)
 
     age = forms.CharField(
-        label=_('Age <span id="age_category"></span>'),
+        label=_('Age')+ '<span id="age_cat"></span>',
         widget=forms.TextInput(attrs={'class': 'form-control', 'id': 'age', 'type': 'number', 'min': 1, 'max': 120,
                                       'placeholder': _('Write age...')}), required=True)
 
@@ -106,8 +106,8 @@ class TravellerForm(forms.Form):
         attrs={'class': 'form-control', 'id': 'name_of_transport',
                'placeholder': _('Write Vessel/Flight/Vehicle Name...')}), required=True)
 
-    seat_no = forms.CharField(label=_('Seat Number'), widget=forms.TextInput(
-        attrs={'class': 'form-control', 'id': 'seat_no', 'placeholder': _('Write your seat number...')}), required=False)
+    seat_number = forms.CharField(label=_('Seat Number') + ' <span id="seat_astr" class="asteriskField"></span>', widget=forms.TextInput(
+        attrs={'class': 'form-control', 'id': 'seat_number', 'placeholder': _('Write your seat number...')}), required=False)
 
     # tab 2
     visiting_purpose = forms.ChoiceField(label=_('Visiting Purpose'), choices=PURPOSE,
@@ -119,7 +119,7 @@ class TravellerForm(forms.Form):
         attrs={'class': 'form-control', 'id': 'other_purpose', 'rows': 3,
                'placeholder': _('Write other visiting purpose, if any )')}), required=False)
 
-    duration_of_stay = forms.CharField(label=_('Duration of stay (In days)'), widget=forms.TextInput(
+    duration_of_stay = forms.CharField(label=_('Duration of stay (In days)') + '<span id="dur_stay_astr" class="asteriskField"></span>', widget=forms.TextInput(
         attrs={'class': 'form-control', 'id': 'duration_of_stay', 'type': 'number', 'min': 1,
                'placeholder': _('Write duration of stay...')}), required=False)
 
@@ -155,7 +155,7 @@ class TravellerForm(forms.Form):
         attrs={'class': 'form-control', 'id': 'street_or_ward', 'placeholder': _('Write street or ward...')}),
         required=False)
 
-    phone = forms.CharField(label=_('Phone'), widget=forms.TextInput(
+    phone = forms.CharField(label=_('Phone (Start with country code e.g 255)'), widget=forms.TextInput(
         attrs={'class': 'form-control', 'id': 'phone', 'placeholder': _('Write phone...')}), required=True)
 
     email = forms.CharField(label=_('Email'), widget=forms.EmailInput(
@@ -177,7 +177,7 @@ class TravellerForm(forms.Form):
     location = forms.ModelChoiceField(label=_('Country'), queryset=Location.objects.filter(parent=0),
                                       empty_label=_('-- Select --'),
                                       widget=forms.Select(
-                                          attrs={'class': 'form-control', 'id': 'location'}), required=False)
+                                          attrs={'class': 'form-control', 'id': 'location'}), required=True)
 
     location_visited = forms.CharField(label=_('Location/Province'), widget=forms.TextInput(
         attrs={'class': 'form-control', 'id': 'location_visited',
@@ -185,11 +185,11 @@ class TravellerForm(forms.Form):
 
     date = forms.DateField(label=_('Date'), widget=forms.DateInput(
         attrs={'type': 'date', 'class': 'form-control', 'max': date.today() - timedelta(days=3), 'min': date.today() - timedelta(days=24)}),
-        required=False)
+        required=True)
 
     days = forms.CharField(label=_('Number of days'), widget=forms.TextInput(
         attrs={'class': 'form-control', 'id': 'days', 'placeholder': _('Write number of days...'),
-               'type': 'number', 'min': 1, 'max': 21}), required=False)
+               'type': 'number', 'min': 1, 'max': 21}), required=True)
 
     # tab 5
     other_symptoms = forms.CharField(label=_('Other Symptoms (comma separated)'), widget=forms.Textarea(

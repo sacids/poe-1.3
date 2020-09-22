@@ -5,13 +5,14 @@
         let fieldHTML = '<div class="row mt-2">' +
             '<div class="col-lg-6 col-md-6 col-sm-12 col-12">' +
             '<div class="form-group">' +
-            '<label>{% trans "Country Visited" %}</label>' +
+            '<label>{% trans "Country Visited" %} <span class="asteriskField">*</span></label>' +
             '<select name="location" id="location" class="form-control">' +
             '<option value="">{% trans "-- Select --" %}</option>' +
             "{% for country in countries %}" +
             "<option value='{{ country.id }}'>{{ country.title }}</option>" +
             "{% endfor %}" +
             '</select>' +
+            '<span id="errorLocation" style="color: red;"></span>' +
             '</div>' +
             '</div>' +
             '<div class="col-lg-6 col-md-6 col-sm-12 col-12">' +
@@ -22,14 +23,14 @@
             '</div>' +
             '<div class="col-lg-6 col-md-6 col-sm-12 col-12">' +
             '<div class="form-group">' +
-            '<label>{% trans "Entry Date" %}</label>' +
+            '<label>{% trans "Entry Date" %} <span class="asteriskField">*</span></label>' +
             '<input type="date" name="date" min="{{ last_21_days }}" max="{{ today }}" id="date" class="form-control dateinput" placeholder="{% trans "Pick date..." %}"/>' +
             '<span id="errorDate" style="color: red;"></span>' +
             '</div>' +
             '</div>' +
             '<div class="col-lg-6 col-md-6 col-sm-12 col-12">' +
             '<div class="form-group">' +
-            '<label>{% trans "Number of Days" %}</label>' +
+            '<label>{% trans "Number of Days" %} <span class="asteriskField">*</span></label>' +
             '<input type="number" min="1" name="days" id="days" min="1" max="21" class="form-control" placeholder="{% trans "Write number of days..." %}" />' +
             '<span id="errorDays" style="color: red;"></span>' +
             '</div>' +

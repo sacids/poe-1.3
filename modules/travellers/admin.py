@@ -22,7 +22,7 @@ class TravellerAdmin(admin.ModelAdmin):
 @admin.register(PointOfEntry)
 class PointOfEntryAdmin(admin.ModelAdmin):
     list_display = ['id', 'title', 'code', 'mode_of_transport', 'category']
-    list_filter = ['mode_of_transport', 'category']
+    list_filter = ['category']
     search_fields = ['title__startwith']
     ordering = ("id",)
 

@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .models import *
-from modules.travellers.models import Traveller, Disease, TravellerSymptom, TravellerVisitedArea, Location
+from modules.travellers.models import *
 from django.db.models import Q
 from datetime import datetime, date
 from .forms import RiskAssessmentForm

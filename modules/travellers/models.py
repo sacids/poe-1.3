@@ -209,6 +209,7 @@ class Traveller(BaseModel):
     temp                = models.FloatField(null=True)
     disease_to_screen   = models.CharField(max_length=150, default='0')
     action_taken        = models.ForeignKey(ActionTaken, default=1, on_delete=models.DO_NOTHING)
+    symptoms            = models.ManyToManyField(Symptom, blank=True)
     other_symptoms      = models.TextField(null=True)
     accept              = models.IntegerField(default=0, null=True)
     updated_at          = models.DateTimeField("Updated At Date", null=True)
@@ -217,7 +218,7 @@ class Traveller(BaseModel):
         db_table = "et_travellers"
 
     def __str__(self):
-        return self.id
+        return str(self.id)
 
 
 # Traveller visited area
@@ -237,6 +238,7 @@ class TravellerVisitedArea(models.Model):
 
 
 # Traveller symptoms
+'''
 class TravellerSymptom(models.Model):
     """A class to create traveller symptoms table."""
     traveller = models.ForeignKey(Traveller, on_delete=models.PROTECT)
@@ -244,3 +246,4 @@ class TravellerSymptom(models.Model):
 
     class Meta:
         db_table = "et_traveller_symptoms"
+'''

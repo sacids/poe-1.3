@@ -9,6 +9,15 @@ class LocationAdmin(admin.ModelAdmin):
     search_fields = ['title__startwith']
     ordering = ("id",)
 
+@admin.register(TravellerVisitedArea)
+class TravellerVisitedAreaAdmin(admin.ModelAdmin):
+    list_display = ['id', 'location', 'location_visited', 'date','days']
+    search_fields = ['title__startwith']
+    ordering = ("id",)
+
+@admin.register(Traveller)
+class TravellerAdmin(admin.ModelAdmin):
+    list_display    = ['id','other_names','surname']
 
 @admin.register(PointOfEntry)
 class PointOfEntryAdmin(admin.ModelAdmin):

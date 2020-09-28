@@ -3,10 +3,11 @@ from django.http import HttpResponse
 from django.core import serializers
 from datetime import datetime, date
 from modules.common.models import Module
-from modules.travellers.models import Traveller, TravellerSymptom, TravellerVisitedArea, ScreenCriteria
+from modules.travellers.models import *
 from django.contrib.auth.decorators import login_required
 from modules.travellers.views import calculate_score
 from django.db import models
+from django.db.models import Prefetch
 
 
 @login_required
@@ -17,12 +18,11 @@ def screen(request):
     travellers = (Traveller.objects
                   .select_related('location_origin')
                   .filter(arrival_date=date.today())
-                  .values('id', 'full_name', 'id_number', 'temp', 'name_of_transport', 'disease_to_screen',
-                          'location_origin__title')
                   )
     if poe_id != 0:
         travellers  = travellers.filter(point_of_entry_id=poe_id)
 
+    
 
     temp_a = range(34, 41)
     temp_b = range(1, 10)

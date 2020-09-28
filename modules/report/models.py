@@ -8,9 +8,6 @@ class Reports(models.Model):
     title           = models.CharField(max_length=50)
     description     = models.TextField(null=True)
     query           = models.TextField()
-    poe             = models.ForeignKey(PointOfEntry, on_delete=models.CASCADE)
-    start_date      = models.DateField(auto_now=False, auto_now_add=False)
-    end_date        = models.DateField(auto_now=False, auto_now_add=False)
 
     class Meta:
         db_table = "et_reports"

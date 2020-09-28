@@ -1,42 +1,59 @@
 {% extends 'backend/base.html' %}
+{% load poe_tags %}
 
 {% block navarea %}
-    <form method="post">
+    
+{% endblock %}
+{% block content %}
+<form method="post">
     <div class="p-1 d-flex flex-row">
         {% csrf_token %}
         <div class="p-2">
-            <h6>Report</h6>
-            <select name="report_id" style="padding:2px;font-size:1.15em">
-                <option value='1'>Report 1 a longer name for display</option>
-                <option value='1'>Report 1</option>
-                <option value='1'>Report 1</option>
-                <option value='1'>Report 1</option>
+            <h6>Chart</h6>
+            <select multiple name="summary" style="padding:2px;font-size:1.15em">
+                {% for field in smr_options %}
+                <option value='{{ field }}'>{{ field|replace_underscore }}</option>
+                {% endfor %}
             </select>
         </div>
+
         <div class="p-2">
-            <h6>From</h6>
-            <input name="from_date" type="date" id="from_date" style="width:150px;">
+            <h6>PoE</h6>
+            <select multiple name="poe_id" style="padding:2px;font-size:1.15em">
+                {% for poe in poes %}
+                <option value="{{ poe.id }}"> {{ poe.code }}</option>
+                {% endfor %}
+            </select>
         </div>
+
         <div class="p-2">
-            <h6>To</h6>
-            <input name="to_date" type="date" id="to_date" style="width:150px;">
+            <h6>Action Taken</h6>
+            <select multiple name="action_taken" style="padding:2px;font-size:1.15em">
+                {% for action in action_taken %}
+                <option value="{{ action.id }}"> {{ action.title }}</option>
+                {% endfor %}
+            </select>
         </div>
-        <div class="p-1">
-            <input type="submit" class="btn btn-info btn-block" id="get_report" style="font-size: 1.8em;margin-top:3px" value="SHOW">
+
+        <div class="p-2">
+            <h6>Sex</h6>
+            <select multiple name="sex" style="padding:2px;font-size:1.15em">
+                <option value="M"> Male </option>
+                <option value="F"> Female </option>
+            </select>
         </div>
+
+         <div class="p-2">
+            <h6>From Date</h6>
+            <input name="from_date" type="date" value="0">
+            <h6 class="mt-2">To Date</h6>
+            <input name="to_date" type="date" value="0">
+        </div>
+
+        <input type="submit" value="submit">
+
     </div>
     </form>
-{% endblock %}
-{% block content %}
-    <div class="report_wrp" id="report_wrp">
-        {% if not report_id %}
-            <h6> Please select required report above </h6>
-        {% else %}
-            {{ report_id }}
-            {{ from_date }}
-            {{ to_date }}
-        {% endif %}
-    </div>
 {% endblock %}
 
 {% block script %}

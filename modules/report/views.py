@@ -55,16 +55,24 @@ def exec_report(summary,poes,action_taken,sex,from_date,to_date):
     qs      = Traveller.objects.filter(f_poe & f_action_taken & f_sex & a_date)
     #qs      = Traveller.objects.all()
 
+    values1     = [str(element) for element in summary]
+    values2     = ",".join(values1)
+
+    qs          = qs.values(values2)
+    
     for group_by in summary:
         qs      = qs.annotate(Count(group_by))
 
 
     print(qs.query)
-
     for i in qs:
         for group_by in summary:
+            print(i)
             tmp     = group_by+'__count'
-            print(str(i.action_taken.title)+' '+str(i.point_of_entry.title)+' '+str(i.point_of_entry__count))
+            #attr1   = getattr(i,tmp)
+            #attr3   = getattr(i,'point_of_entry__count')
+            attr2   = group_by
+            #print(str(attr2)+' '+str(attr3)+' '+str(attr1))
     
     '''
     arrival_date        = models.Q()

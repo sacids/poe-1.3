@@ -190,9 +190,9 @@ class Traveller(BaseModel):
 
     mode_of_transport   = models.CharField(choices=TRANSPORT_MODE, max_length=30, default='none')
     name_of_transport   = models.CharField(max_length=30)
-    seat_no             = models.CharField(max_length=30, null=True)
+    seat_number         = models.CharField(max_length=30, null=True)
     arrival_date        = models.DateField(verbose_name="Arrival Date")
-    point_of_entry      = models.ForeignKey(PointOfEntry, on_delete=models.DO_NOTHING)
+    point_of_entry      = models.ForeignKey(PointOfEntry, related_name="point_of_entry", on_delete=models.DO_NOTHING)
 
     visiting_purpose    = models.CharField(choices=PURPOSE, max_length=45, default='none')  # to look around
     other_purpose       = models.TextField(null=True)
@@ -200,8 +200,7 @@ class Traveller(BaseModel):
     location_origin     = models.ForeignKey(Location, related_name="location_origin", on_delete=models.DO_NOTHING)
 
     physical_address    = models.TextField(null=True)
-    hotel_name          = models.CharField(max_length=255, null=True)
-    region_id           = models.ForeignKey(Location, related_name="region", default=0, on_delete=models.DO_NOTHING)  # to look around
+    region              = models.ForeignKey(Location, related_name="region", default=0, on_delete=models.DO_NOTHING)  # to look around
     district_id         = models.IntegerField(default=0, null=True)  # to look around
     street_or_ward      = models.CharField(max_length=100, null=True)  # to look around
     phone               = models.CharField(max_length=25, default='None')

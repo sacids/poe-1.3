@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import login_required
 from modules.travellers.views import calculate_score
 from django.db import models
 from django.db.models import Prefetch
+from django.http import JsonResponse
 
 
 @login_required
@@ -17,6 +18,7 @@ def screen(request):
     # travellers  = Traveller.objects.raw("SELECT id,full_name, id_number, name_of_transport, disease_to_screen FROM et_travellers WHERE arrival_date = '"+str(datetime.today().strftime('%Y-%m-%d')+"'"))
     travellers = (Traveller.objects
                   .select_related('location_origin')
+                  .prefetch_related('visited_area')
                   .filter(arrival_date=date.today())
                   )
     if poe_id != 0:
@@ -30,6 +32,7 @@ def screen(request):
 
     context = {
         "travellers": travellers,
+        "symptoms": Symptom.objects.all(),
         "temp_a": temp_a,
         "temp_b": temp_b,
     }
@@ -45,6 +48,21 @@ def travellers_asJson(request):
     json = serializers.serilize('json', object_list)
     return HttpResponse(json, content_type='application/json')
 
+def update_symptoms(request):
+    saved           = 1
+    symptoms        = request.GET.getlist('symptoms[]')
+    tid             = int(request.GET.get("traveller_id", 0))
+
+    # delete relation
+    Traveller.symptoms.through.objects.filter(traveller_id=tid).all().delete()
+
+    Trav            = Traveller.objects.get(pk=tid)
+
+    for symptom_id in symptoms:
+        symptom     = Symptom.objects.get(pk=symptom_id)
+        Trav.symptoms.add(symptom)
+    
+    return JsonResponse(saved, safe=False)
 
 def set_temp(request):
     if request.method == 'GET':
@@ -70,3 +88,20 @@ def score(request):
         #score = calculate_score(id)
 
     return HttpResponse(score)
+
+
+def setPaymentMethod(request):
+    payment_method          = int(request.GET.get("payment_method", 1))
+    order_id                = int(request.GET.get("order_id", 0))
+    saved                   = 0
+
+    try:
+        CurOrder            = Order.objects.get(pk=order_id)
+        CurOrder.payment_method = payment_method
+        CurOrder.save()
+        saved               = 1
+    except Exception as e:
+        print(e)
+        saved               = 0
+
+    return JsonResponse(saved, safe=False)  

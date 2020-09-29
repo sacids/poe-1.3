@@ -4,6 +4,7 @@ from django.contrib.postgres.fields import ArrayField
 from modules.common.models import BaseModel
 from django.contrib.auth.models import User
 from multiselectfield import MultiSelectField
+from django.forms.models import model_to_dict
 
 FORM_CATEGORY = (
     ('arrival', "ARRIVAL"),
@@ -116,7 +117,7 @@ class Location(models.Model):
         verbose_name_plural = "Locations"
 
     def __str__(self):
-        return self.title
+        return str(self.title)
 
 
 class ScreenCriteria(models.Model):
@@ -221,11 +222,14 @@ class Traveller(BaseModel):
     def __str__(self):
         return str(self.id)
 
+    def instance(self):
+        return model_to_dict(self)
+
 
 # Traveller visited area
 class TravellerVisitedArea(models.Model):
     """A class to create traceller visited areas table."""
-    traveller = models.ForeignKey(Traveller, on_delete=models.PROTECT, default=1)
+    traveller = models.ForeignKey(Traveller, related_name="visited_area", on_delete=models.PROTECT, default=1)
     location = models.ForeignKey(Location, on_delete=models.DO_NOTHING)
     location_visited = models.CharField(max_length=250, null=True)
     date = models.DateField(verbose_name="Date", null=True)
@@ -235,7 +239,10 @@ class TravellerVisitedArea(models.Model):
         db_table = "et_traveller_visited_areas"
 
     def __str__(self):
-        return self.location
+        return str(self.location)
+
+    def instance(self):
+        return model_to_dict(self)
 
 
 # Traveller symptoms

@@ -54,7 +54,6 @@
                         {% endifnotequal %}
 
                         data="{{traveller.instance}}" 
-                        
                         symptoms='{ {% for symptom in traveller.symptoms.all %} "{{ symptom.id }}":"{{symptom.title}}" {% if not forloop.last %},{% endif %} {% endfor %} }'
                         v_areas='{ {% for area in traveller.visited_area.all %} "{{ area.id }}":{ "location_visited":"{{area.location_visited}}","date":"{{area.date}}","days":"{{area.days}}","location":"{{area.location.title}}" } {% if not forloop.last %},{% endif %} {% endfor %} }'
                     >
@@ -120,6 +119,7 @@
                 </div>
             </div>
             <div id="info" class="tab-pane fade">
+
             </div>
         </div>
     </div>
@@ -166,8 +166,9 @@
             l.remove();
             $('#location_origin_title').html(l_text);
             
-            var symptoms     = $(this).attr('symptoms');
-            var v_areas     = $(this).attr('v_areas');
+            var symptoms        = $(this).attr('symptoms');
+            var v_areas         = $(this).attr('v_areas');
+            var data            = $(this).attr('data');
 
 
             // Manage Sysmptoms
@@ -195,7 +196,20 @@
             tmp     += "</tbody></table>"
             $('#travel_history').html(tmp);
 
+/*
+            // Manage travell info
+            var obj = jQuery.parseJSON(data.replace(/'/g, '"'));
+            // empty travel history div
+            $('#info').html('');
+            var tmp     = "<table cellpadding='2' cellspacing='2' width='80%'><tbody>"
+            $.each(obj, function(key,value) {
+                // set specific sysmptoms only
+                tmp     += '<tr><td>'+key+'</td><td>'+value[key]+'</td></tr>';
+            });
+            tmp     += "</tbody></table>"
+             $('#info').html(tmp);
 
+*/
 
 
             // set temperature

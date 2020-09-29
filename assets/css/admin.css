@@ -250,8 +250,8 @@
 
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1028px) {
   #traveller_data{
-    width: 95%;
+    width: calc(100% - 67px);
   }
 }

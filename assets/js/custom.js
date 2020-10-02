@@ -8,7 +8,7 @@
 //chosen select
 // In your Javascript (external .js resource or <script> tag)
 $(document).ready(function() {
-    $('.form-control-select').select2();
+
 });
 
 //suggest districts

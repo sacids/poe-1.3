@@ -105,10 +105,10 @@ def arrival(request):
             traveller.age_category = form.cleaned_data['age_category']
             traveller.age = form.cleaned_data['age']
             traveller.sex = form.cleaned_data['sex']
-            traveller.nationality_id = request.POST.get('nationality')
+            traveller.nationality = form.cleaned_data['nationality']
             traveller.id_number = form.cleaned_data['id_number']
             traveller.arrival_date = form.cleaned_data['arrival_date']
-            traveller.point_of_entry_id = request.POST.get('point_of_entry')
+            traveller.point_of_entry = form.cleaned_data['point_of_entry']
             traveller.mode_of_transport = form.cleaned_data['mode_of_transport']
             traveller.name_of_transport = form.cleaned_data['name_of_transport']
             traveller.seat_number = form.cleaned_data['seat_number']
@@ -123,17 +123,17 @@ def arrival(request):
             traveller.other_employment = form.cleaned_data['other_employment']
 
             traveller.physical_address = form.cleaned_data['physical_address']
-            traveller.hotel_name = form.cleaned_data['hotel_name']
-            traveller.region_id = request.POST.get('region_id')
+            traveller.region = form.cleaned_data['region_id']
 
             if request.POST.get('district_id') != '':
                 traveller.district_id = request.POST.get('district_id')
 
             traveller.street_or_ward = form.cleaned_data['street_or_ward']
-            traveller.phone = form.cleaned_data['phone']
+            traveller.phone = request.POST.get(
+                'calling_code') + cast_phone(form.cleaned_data['phone'])
             traveller.email = form.cleaned_data['email'].lower()
 
-            traveller.location_origin_id = request.POST.get('location_origin')
+            traveller.location_origin = form.cleaned_data['location_origin']
             traveller.other_symptoms = request.POST.get('other_symptoms')
             traveller.accept = request.POST.get('accept')
 
@@ -164,29 +164,29 @@ def arrival(request):
             # insert into traveller symptoms
             symptoms = request.POST.getlist('symptoms')
 
+            traveller_sym = Traveller.objects.get(pk=traveller.id)
             for symptom_id in symptoms:
-                traveller_symptom = TravellerSymptom()  # traveller symptom object
-                traveller_symptom.traveller_id = traveller.id
-                traveller_symptom.symptom_id = symptom_id
-
+                symptom = Symptom.objects.get(pk=symptom_id)
                 # finally save traveller symptoms
-                traveller_symptom.save()
+                traveller_sym.symptoms.add(symptom)
 
                 # todo: call function to calculate score
                 score = calculate_score(traveller.id)
+                print("Score => " + str(score))
 
-                if score is not None:
+                if score == 0:
                     action_taken = 1
                 else:
                     action_taken = 2
-                    
+
                 # update traveller
                 traveller_up = Traveller.objects.get(pk=traveller.id)
                 traveller_up.disease_to_screen = score
                 traveller_up.action_taken_id = action_taken
                 traveller_up.save()
 
-            messages.add_message(request, messages.SUCCESS,'Success! Saved Successfully!')
+            messages.add_message(request, messages.SUCCESS,
+                                 'Success! Saved Successfully!')
             if translation.get_language() == 'en-us':
                 redirectpath = "/success"
             elif translation.get_language() == "sw":
@@ -194,7 +194,8 @@ def arrival(request):
 
             return redirect(redirectpath)
         else:
-            messages.add_message(request, messages.WARNING,'Warning! Please check all the fields!')
+            messages.add_message(request, messages.WARNING,
+                                 'Warning! Please check all the fields!')
 
         return render(request, 'travellers/arrival.html', attr)
 
@@ -245,9 +246,12 @@ def calculate_score(traveller_id):
 
     queryset = ScreenCriteria.objects.filter(fc & fs).distinct()
 
-    #if count is more than one join otherwise set zero
-    score = ', '.join(str(id.disease_id) for id in queryset)
-    return score
+    # if count is more than one join otherwise set zero
+    if queryset.count() > 0:
+        score = ', '.join(str(id.disease_id) for id in queryset)
+        return score
+    else:
+        return 0
 
 
 def calculate_score1(traveller_id):
@@ -338,8 +342,9 @@ def get_travellers_symptoms(tv_id):
     array: list of symptoms
 
     """
+    symptoms = Traveller.symptoms.through.objects.filter(
+        traveller_id=tv_id).all()
 
-    symptoms = TravellerSymptom.objects.filter(traveller_id=tv_id)
     return symptoms
 
 
@@ -377,13 +382,22 @@ def auto_point_of_entries(request):
 
     if request.method == 'GET':
         mode_of_transport = request.GET.get('mode_of_transport')
-        #check for mode of transport
+        # check for mode of transport
         if(mode_of_transport == 'truck'):
             mode_of_transport = 'vehicle'
         elif(mode_of_transport == 'bus'):
-            mode_of_transport = 'vehicle';    
+            mode_of_transport = 'vehicle'
 
-        point_of_entries = PointOfEntry.objects.filter(mode_of_transport=mode_of_transport)
+        point_of_entries = PointOfEntry.objects.filter(
+            mode_of_transport=mode_of_transport)
 
         # return response
         return render_to_response('travellers/auto_point_of_entries.html', {'point_of_entries': point_of_entries})
+
+
+# cast mobile
+def cast_phone(phone):
+    if phone.startswith('0'):
+        return phone[1:]
+    else:
+        return phone

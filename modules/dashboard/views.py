@@ -27,18 +27,15 @@ def dashboard(request):
     if poe_id is not None and poe_id != 0:
         # dictionaries
         point_of_entries = PointOfEntry.objects.filter(pk=poe_id)
-
-        traveller_symptoms = (TravellerSymptom.objects
-                              .prefetch_related('traveller')
-                              .filter(traveller__point_of_entry_id=poe_id)
-                              .values('id', 'symptom_id'))
+        traveller_symptoms = (Traveller.symptoms.through.objects.filter(
+            traveller__point_of_entry_id=poe_id).values('id', 'symptom_id'))
 
         # stats
         total_passengers = travellers.filter(point_of_entry_id=poe_id)
-        allowed_to_proceed = travellers.filter(point_of_entry_id=poe_id, action_taken_id=1)
-        secondary_screening = travellers.filter(point_of_entry_id=poe_id, action_taken_id=2)
-
-
+        allowed_to_proceed = travellers.filter(
+            point_of_entry_id=poe_id, action_taken_id=1)
+        secondary_screening = travellers.filter(
+            point_of_entry_id=poe_id, action_taken_id=2)
 
         passenger_with_normal_temp = travellers.filter(
             point_of_entry_id=poe_id, temp__gte=35, temp__lte=36.9)
@@ -54,13 +51,12 @@ def dashboard(request):
     elif poe_id == 0 or poe_id is None:
         # dictionaries
         point_of_entries = PointOfEntry.objects.all()
-        traveller_symptoms = TravellerSymptom.objects
+        traveller_symptoms = Traveller.symptoms
 
         # stats
         total_passengers = travellers
         allowed_to_proceed = travellers.filter(action_taken_id=1)
         secondary_screening = travellers.filter(action_taken_id=2)
-
 
         passenger_with_normal_temp = travellers.filter(
             temp__gte=35, temp__lte=36.9)
@@ -81,8 +77,10 @@ def dashboard(request):
             # queries
             total_passengers = total_passengers.filter(
                 arrival_date=today).count()
-            allowed_to_proceed = travellers.filter(arrival_date=today, action_taken_id=1).count()
-            secondary_screening = travellers.filter(arrival_date=today, action_taken_id=2).count()
+            allowed_to_proceed = travellers.filter(
+                arrival_date=today, action_taken_id=1).count()
+            secondary_screening = travellers.filter(
+                arrival_date=today, action_taken_id=2).count()
 
             passenger_with_normal_temp = passenger_with_normal_temp.filter(
                 arrival_date=today).count()
@@ -105,7 +103,7 @@ def dashboard(request):
             for value in symptoms:
                 symptom_series_data.append(value.title)
                 symptom_occurrence_data.append(
-                    traveller_symptoms.filter(symptom_id=value.id, traveller__arrival_date=today).count())
+                    traveller_symptoms.through.objects.filter(symptom_id=value.id, traveller__arrival_date=today).count())
 
         elif day == 'yesterday':
             yesterday = datetime.date.today() - datetime.timedelta(days=1)
@@ -114,8 +112,10 @@ def dashboard(request):
             total_passengers = total_passengers.filter(
                 arrival_date=yesterday).count()
 
-            allowed_to_proceed = travellers.filter(arrival_date=yesterday, action_taken_id=1).count()
-            secondary_screening = travellers.filter(arrival_date=yesterday, action_taken_id=2).count()    
+            allowed_to_proceed = travellers.filter(
+                arrival_date=yesterday, action_taken_id=1).count()
+            secondary_screening = travellers.filter(
+                arrival_date=yesterday, action_taken_id=2).count()
 
             passenger_with_normal_temp = passenger_with_normal_temp.filter(
                 arrival_date=yesterday).count()
@@ -138,7 +138,7 @@ def dashboard(request):
             for value in symptoms:
                 symptom_series_data.append(value.title)
                 symptom_occurrence_data.append(
-                    traveller_symptoms.filter(symptom_id=value.id, traveller__arrival_date=yesterday).count())
+                    traveller_symptoms.through.objects.filter(symptom_id=value.id, traveller__arrival_date=yesterday).count())
 
         elif day == 'last_week':
             start_at = datetime.date.today() - datetime.timedelta(days=6)
@@ -148,9 +148,10 @@ def dashboard(request):
             total_passengers = total_passengers.filter(
                 arrival_date__range=[start_at, end_at]).count()
 
-            allowed_to_proceed = travellers.filter(arrival_date__range=[start_at, end_at], action_taken_id=1).count()
-            secondary_screening = travellers.filter(arrival_date__range=[start_at, end_at], action_taken_id=2).count()
-
+            allowed_to_proceed = travellers.filter(
+                arrival_date__range=[start_at, end_at], action_taken_id=1).count()
+            secondary_screening = travellers.filter(
+                arrival_date__range=[start_at, end_at], action_taken_id=2).count()
 
             passenger_with_normal_temp = passenger_with_normal_temp.filter(
                 arrival_date__range=[start_at, end_at]).count()
@@ -173,7 +174,7 @@ def dashboard(request):
             for value in symptoms:
                 symptom_series_data.append(value.title)
                 symptom_occurrence_data.append(
-                    traveller_symptoms.filter(symptom_id=value.id, traveller__arrival_date__range=[start_at, end_at]).count())
+                    traveller_symptoms.through.objects.filter(symptom_id=value.id, traveller__arrival_date__range=[start_at, end_at]).count())
 
         elif day == 'last_month':
             this_year = today.year
@@ -183,8 +184,10 @@ def dashboard(request):
             total_passengers = total_passengers.filter(
                 arrival_date__month=last_month, arrival_date__year=this_year).count()
 
-            allowed_to_proceed = travellers.filter(arrival_date__month=last_month, arrival_date__year=this_year, action_taken_id=1).count()
-            secondary_screening = travellers.filter(arrival_date__month=last_month, arrival_date__year=this_year, action_taken_id=2).count()   
+            allowed_to_proceed = travellers.filter(
+                arrival_date__month=last_month, arrival_date__year=this_year, action_taken_id=1).count()
+            secondary_screening = travellers.filter(
+                arrival_date__month=last_month, arrival_date__year=this_year, action_taken_id=2).count()
 
             passenger_with_normal_temp = passenger_with_normal_temp.filter(
                 arrival_date__month=last_month, arrival_date__year=this_year).count()
@@ -207,13 +210,13 @@ def dashboard(request):
             for value in symptoms:
                 symptom_series_data.append(value.title)
                 symptom_occurrence_data.append(
-                    traveller_symptoms.filter(symptom_id=value.id, traveller__arrival_date__month=last_month, traveller__arrival_date__year=this_year).count())
+                    traveller_symptoms.through.objects.filter(symptom_id=value.id, traveller__arrival_date__month=last_month, traveller__arrival_date__year=this_year).count())
 
         elif day == 'overall':
             total_passengers = total_passengers.count()
 
             allowed_to_proceed = travellers.filter(action_taken_id=1).count()
-            secondary_screening = travellers.filter(action_taken_id=2).count()  
+            secondary_screening = travellers.filter(action_taken_id=2).count()
 
             passenger_with_normal_temp = passenger_with_normal_temp.count()
             passenger_with_below_normal_temp = passenger_with_below_normal_temp.count()
@@ -231,14 +234,14 @@ def dashboard(request):
             for value in symptoms:
                 symptom_series_data.append(value.title)
                 symptom_occurrence_data.append(
-                    traveller_symptoms.filter(symptom_id=value.id).count())
+                    traveller_symptoms.through.objects.filter(symptom_id=value.id).count())
 
     else:
         # total passengers
         total_passengers = total_passengers.count()
 
         allowed_to_proceed = travellers.filter(action_taken_id=1).count()
-        secondary_screening = travellers.filter(action_taken_id=2).count() 
+        secondary_screening = travellers.filter(action_taken_id=2).count()
 
         # total passenger with normal temp
         passenger_with_normal_temp = passenger_with_normal_temp.count()
@@ -265,7 +268,7 @@ def dashboard(request):
         for value in symptoms:
             symptom_series_data.append(value.title)
             symptom_occurrence_data.append(
-                traveller_symptoms.filter(symptom_id=value.id).count())
+                traveller_symptoms.through.objects.filter(symptom_id=value.id).count())
 
     # male percentage
     male_percent = calc_percentage(

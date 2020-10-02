@@ -49,15 +49,23 @@ PURPOSE = (
     ('tourist', 'Tourist'),
     ('transit', 'Transit'),
     ('business', 'Business'),
+    ('conference', 'Conference'),
+    ('studies', 'Studies'),
+    ('other', 'Other'),
 )
 EMPLOYMENT = (
     ('government', 'Government'),
     ('non-government', 'Non-Government'),
-    ('non-profit', 'Non-Profit'),
     ('student', 'Student'),
-    ('business', 'Business'),
     ('religious', 'Religious'),
-    ('farmers', 'Farmer'),
+    ('farmer', 'Farmer'),
+    ('hunter', 'Hunter'),
+    ('nurse', 'Nurse'),
+    ('clinician', 'Clinician'),
+    ('engineer', 'Engineer'),
+    ('sports', 'Sports'),
+    ('business', 'Business'),
+    ('other', 'Other'),
 )
 
 ACTION_TAKEN = (
@@ -110,6 +118,7 @@ class Location(models.Model):
     title = models.CharField(max_length=100)
     code = models.CharField(max_length=10, null=True)
     parent = models.PositiveIntegerField()
+    calling_code = models.CharField(max_length=5, null=True, verbose_name="Calling Code")
 
     class Meta:
         db_table = "et_locations"

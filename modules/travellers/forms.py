@@ -35,17 +35,25 @@ PURPOSE = (
     ('tourist', _('Tourist')),
     ('transit', _('Transit')),
     ('business', _('Business')),
+    ('conference', _('Conference')),
+    ('studies', _('Studies')),
+    ('other', _('Other')),
 )
 
 EMPLOYMENT = (
     ('', _('-- Select --')),
     ('government', _('Government')),
     ('non-government', _('Non-Government')),
-    ('non-profit', _('Non-Profit')),
     ('student', _('Student')),
-    ('business', _('Business')),
     ('religious', _('Religious')),
-    ('farmers', _('Farmer')),
+    ('farmer', _('Farmer')),
+    ('hunter', _('Hunter')),
+    ('nurse', _('Nurse')),
+    ('clinician', _('Clinician')),
+    ('engineer', _('Engineer')),
+    ('sports', _('Sports')),
+    ('business', _('Business')),
+    ('other', _('Other')),
 )
 
 
@@ -83,8 +91,8 @@ class TravellerForm(forms.Form):
 
     nationality = forms.ModelChoiceField(label=_('Nationality'), queryset=Location.objects.filter(parent=0), empty_label=_('-- Select --'),
                                          widget=forms.Select(
-                                             attrs={'class': 'form-control form-control-select', 'id': 'nationality'}),
-                                         required=True)  # todo: review it
+                                             attrs={'class': 'form-control chosen-select', 'id': 'nationality'}),
+                                         required=True)
 
     id_number = forms.CharField(label=_('Passport Number'),
                                 widget=forms.TextInput(
@@ -115,7 +123,7 @@ class TravellerForm(forms.Form):
                                              attrs={'class': 'form-control', 'id': 'visiting_purpose'}),
                                          required=False)
 
-    other_purpose = forms.CharField(label=_('Other Purposes (If any)'), widget=forms.Textarea(
+    other_purpose = forms.CharField(label=_('Other Purposes (If any) <span id="other_purpose_astr" class="asteriskField"></span>'), widget=forms.Textarea(
         attrs={'class': 'form-control', 'id': 'other_purpose', 'rows': 3,
                'placeholder': _('Write other visiting purpose, if any )')}), required=False)
 
@@ -128,22 +136,19 @@ class TravellerForm(forms.Form):
                                        attrs={'class': 'form-control', 'id': 'employment'}),
                                    required=False)
 
-    other_employment = forms.CharField(label=_('Other occupation (If any)'), widget=forms.Textarea(
+    other_employment = forms.CharField(label=_('Other occupation (If any) <span id="other_employment_astr" class="asteriskField"></span>'), widget=forms.Textarea(
         attrs={'class': 'form-control', 'id': 'other_employment', 'rows': 3,
                'placeholder': _('Write other occupation...')}), required=False)
 
     # tab 3
-    physical_address = forms.CharField(label=_('Physical address'), widget=forms.Textarea(
+    physical_address = forms.CharField(label=_('Physical address/Hotel Name'), widget=forms.Textarea(
         attrs={'class': 'form-control', 'id': 'physical_address', 'rows': 3,
-               'placeholder': _('Write address...')}), required=False)
-
-    hotel_name = forms.CharField(label=_('Hotel Name'), widget=forms.TextInput(
-        attrs={'class': 'form-control', 'id': 'hotel_name', 'placeholder': _('Write hotel name...')}), required=False)
+               'placeholder': _('Write physical address/hotel name...')}), required=True)
 
     region_id = forms.ModelChoiceField(label=_('Region'),
                                        queryset=Location.objects.filter(code="TZR"), empty_label=_('-- Select --'),
                                        widget=forms.Select(
-                                           attrs={'class': 'form-control', 'id': 'region_id',
+                                           attrs={'class': 'form-control chosen-select2', 'id': 'region_id',
                                                   'onChange': 'suggest_districts()'}))
 
     district_id = forms.ModelChoiceField(label=_('District'), queryset=Location.objects.filter(code="TZD"), empty_label=_('-- Select --'),
@@ -155,7 +160,7 @@ class TravellerForm(forms.Form):
         attrs={'class': 'form-control', 'id': 'street_or_ward', 'placeholder': _('Write street or ward...')}),
         required=False)
 
-    phone = forms.CharField(label=_('Phone (Start with country code e.g 255)'), widget=forms.TextInput(
+    phone = forms.CharField(label=_('Phone'), widget=forms.TextInput(
         attrs={'class': 'form-control', 'id': 'phone', 'placeholder': _('Write phone...')}), required=True)
 
     email = forms.CharField(label=_('Email'), widget=forms.EmailInput(
@@ -167,7 +172,7 @@ class TravellerForm(forms.Form):
     location_origin = forms.ModelChoiceField(label=_('Country where journey started'),
                                              queryset=Location.objects.filter(parent=0), empty_label=_('-- Select --'),
                                              widget=forms.Select(
-                                                 attrs={'class': 'form-control', 'id': 'location_origin'}))
+                                                 attrs={'class': 'form-control chosen-select', 'id': 'location_origin'}))
 
     number_countries = forms.CharField(label=_('Number of countries'),
                                        widget=forms.TextInput(
@@ -177,7 +182,7 @@ class TravellerForm(forms.Form):
     location = forms.ModelChoiceField(label=_('Country'), queryset=Location.objects.filter(parent=0),
                                       empty_label=_('-- Select --'),
                                       widget=forms.Select(
-                                          attrs={'class': 'form-control', 'id': 'location'}), required=True)
+                                          attrs={'class': 'form-control chosen-select', 'id': 'location'}), required=True)
 
     location_visited = forms.CharField(label=_('Location/Province'), widget=forms.TextInput(
         attrs={'class': 'form-control', 'id': 'location_visited',

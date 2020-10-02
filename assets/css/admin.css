@@ -224,3 +224,34 @@
     .sidenav {padding-top: 15px;}
     .sidenav a {font-size: 18px;}
   }
+
+
+
+#close_traveller_data{
+  font-size: 2em;
+  cursor: pointer;
+
+}
+#traveller_data{
+  
+  padding: 40px 20px;
+  top: 81px;
+  right: 0px;
+  position: fixed;
+  z-index: 2;
+  background-color: #f5f5f5;
+  width: 50vw;
+  margin-right: -50vw;
+  height: calc(100% - 81px);
+
+  -webkit-box-shadow: -3px 0 25px 0 rgba(47, 56, 68, 0.22);
+    -moz-box-shadow: -3px 0  25px 0 rgba(47, 56, 68, 0.22);
+    box-shadow: -3px 0  25px 0 rgba(47, 56, 68, 0.22);
+
+}
+
+@media screen and (max-width: 1028px) {
+  #traveller_data{
+    width: calc(100% - 67px);
+  }
+}

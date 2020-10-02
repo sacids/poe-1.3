@@ -1,33 +1,9 @@
 {% extends 'backend/base.html' %}
 {% load json_tag %}
+{% load poe_tags %}
 
 {% block navarea %}
-    <div class="p-1">
-        <div class="float-left pl-2">
-            <div style="font-size: 1.2em" id="full_name" class="font-weight-bold"></div>
-            <div id="id_number" style="font-size: 0.8em"></div>
-            <div id="name_of_transport" style="font-size: 0.8em"></div>
-        </div>
-        <div class="float-right mx-2">
-            <input type="hidden" id="travellers_id" name="id">
-            <button type="button" class="btn btn-info btn-block" id="set_temp" style="font-size: 1.7em;margin-top:5px;margin-right:30px;">SET</button>
-        </div>
-        <div class="float-right" style="font-size: 2.7em" >               
-            <select class="" id="temp_b">
-            {% for i in temp_b %}
-                <option value="{{i}}">{{i}}</option>
-            {% endfor %}
-            </select>
-        </div>
-        <div class="float-right" style="font-size: 2.7em">.</div>
-        <div class="float-right" style="font-size: 2.7em">
-            <select class="" id="temp_a">
-            {% for i in temp_a %}
-                <option value="{{i}}">{{i}}</option>
-            {% endfor %}
-            </select>
-        </div>
-    </div>
+
 {% endblock %}
 {% block content %}
     <div class="row">
@@ -50,10 +26,32 @@
                             class="screen"     
                         {% endifnotequal %}
 
-                        data="{{traveller}}" 
+                        data='{ 
+                        "sex":"{{traveller.sex}}",
+                        "age":"{{traveller.age}}",
+                        "age_category":"{{traveller.age_category}}",
+                        "nationality":"{{traveller.nationality.title}}",
+                        "ID Type":"{{traveller.id_type}}",
+                        "ID Number":"{{traveller.id_number}}",
+                        "employment":"{{traveller.employment}}",
+                        "other employment":"{{traveller.other_employment}}",
+                        "mode of transport":"{{traveller.mode_of_transport}}",
+                        "name of transport":"{{traveller.name_of_transport}}",
+                        "seat no":"{{traveller.seat_no}}",
+                        "visiting purpose":"{{traveller.visiting_purpose}}",
+                        "other purpose":"{{traveller.other_purpose}}",
+                        "duration of stay":"{{traveller.duration_of_stay}}",
+                        "physical address":"{{ traveller.physical_address|remove_newlines }}",
+                        "hotel name":"{{traveller.hotel_name}}",
+                        "region":"{{traveller.region_id.title}}",
+                        "district":"{{traveller.district_id.title}}",
+                        "street_or_ward":"{{traveller.street_or_ward|remove_newlines}}",
+                        "phone":"{{traveller.phone}}",
+                        "email":"{{traveller.email}}"
+                        }' 
                         
-                        symptoms='{ {% for symptom in traveller.symptoms.all %}"{{ symptom.id }}":"{{symptom.title}}", {% endfor %} }'
-
+                        symptoms='[{% for symptom in traveller.symptoms.all %}{{ symptom.id }}{% if not forloop.last %},{% endif %}{% endfor %}]'
+                        v_areas='{ {% for area in traveller.visited_area.all %} "{{ area.id }}":{ "location_visited":"{{area.location_visited}}","date":"{{area.date}}","days":"{{area.days}}","location":"{{area.location.title}}" } {% if not forloop.last %},{% endif %} {% endfor %} }'
                     >
                         <td class="full_name">{{traveller.surname}} {{traveller.other_names}}</td>
                         <td class="id_number">{{traveller.id_number}}</td>
@@ -66,6 +64,62 @@
             </table>
         </div>
     </div>
+    <div id="traveller_data">
+        <div id="close_traveller_data">>></div>
+        <div class="clearfix">
+            <div class="float-left">
+                <div style="font-size: 1.2em" id="full_name" class="font-weight-bold"></div>
+                <div id="id_number" style="font-size: 0.8em"></div>
+                <div id="name_of_transport" style="font-size: 0.8em"></div>
+            </div>
+            <div class="float-right mx-2">
+                <input type="hidden" id="travellers_id" name="id">
+                <button type="button" class="btn btn-info btn-block" id="set_temp" style="font-size: 1.7em;margin-top:5px;margin-right:30px;">SET</button>
+            </div>
+            <div class="float-right" style="font-size: 2.7em" >               
+                <select class="" id="temp_b">
+                {% for i in temp_b %}
+                    <option value="{{i}}">{{i}}</option>
+                {% endfor %}
+                </select>
+            </div>
+            <div class="float-right" style="font-size: 2.7em">.</div>
+            <div class="float-right" style="font-size: 2.7em">
+                <select class="" id="temp_a">
+                {% for i in temp_a %}
+                    <option value="{{i}}">{{i}}</option>
+                {% endfor %}
+                </select>
+            </div>
+        </div>
+        <ul class="nav nav-tabs">
+            <li class="active"><a data-toggle="tab" href="#check">Check</a></li>
+            <li><a data-toggle="tab" href="#info">Info</a></li>
+        </ul>
+        <div class="tab-content">
+            <div id="check" class="tab-pane fade in active py-3">
+                <h5>Symptoms</h5> 
+                <div class="border-bottom pb-3">
+                    <form id="form_edit_traveller_symptoms">
+                        <div class="row">
+                        {% for s in symptoms %}
+                            <div class="col-6"><label><input type="checkbox" id="chk_symptom_{{s.id}}" value="{{s.id}}" name="symptoms[]" disabled> {{s.title}} </label></div>
+                        {% endfor %}
+                        </div>
+                        <input type="hidden" value="" name="traveller_id" id="traveller_id">
+                        <input class="btn btn-primary"  type="submit" value="Edit" id="edit_traveller_symptoms">
+                    </form>
+                </div>
+                <h5 class="mt-2">Travel History</h5> 
+                <div id="travel_history">
+                </div>
+            </div>
+            <div id="info" class="tab-pane fade">
+
+            </div>
+        </div>
+    </div>
+    
 {% endblock %}
 
 {% block script %}
@@ -89,11 +143,10 @@
             oTable.search($(this).val()).draw() ;
         })
 
-        $(document).on('click','#travellers_table tr',function(event){
+        $(document).on('click','#travellers_table tbody tr',function(event){
 
             // hide search
             $(".site-search").removeClass('search-visible');
-
 
             var row_id = $(this).attr('id');
             var id      = row_id.substring(4);
@@ -109,6 +162,49 @@
             l.remove();
             $('#location_origin_title').html(l_text);
             
+            var symptoms        = $(this).attr('symptoms');
+            var v_areas         = $(this).attr('v_areas');
+            var data            = $(this).attr('data');
+
+
+            // Manage Sysmptoms
+            // console.log(symptoms);
+            var arr = jQuery.parseJSON(symptoms);
+            // unselect all checkboxes in form 
+            console.log('removing checked');
+            $('#form_edit_traveller_symptoms input:checkbox').prop('checked',false)
+            for (var item of arr) {
+                $('#chk_symptom_'+item).prop('checked',true)
+            }
+            $('#traveller_id').val(id);
+
+
+            // Manage travel history
+            var obj = jQuery.parseJSON(v_areas);
+            // empty travel history div
+            $('#travel_history').html('');
+            var tmp     = "<table cellpadding='2' cellspacing='2' width='80%'><thead><tr><td>Country</td><td>Area</td><td>Date</td><td>Days</td></tr></thead><tbody>"
+            $.each(obj, function(key,value) {
+                // set specific sysmptoms only
+                tmp     += '<tr><td>'+value.location+'</td><td>'+value.location_visited+'</td><td>'+value.date+'</td><td>'+value.days+'</td></tr>';
+            });
+            tmp     += "</tbody></table>"
+            $('#travel_history').html(tmp);
+
+
+            // Manage travell info
+            var obj = jQuery.parseJSON(data);
+            // empty travel history div
+            $('#info').html('');
+            var tmp     = "<table cellpadding='2' cellspacing='2' width='80%'><tbody>"
+            for(x in obj){
+                tmp     += '<tr><td>'+x+'</td><td>'+obj[x]+'</td></tr>';
+            }
+            tmp     += "</tbody></table>"
+            $('#info').html(tmp);
+
+
+
 
             // set temperature
             var temp    = $('#'+row_id+' .temp').html();
@@ -121,6 +217,70 @@
 
             // set id
             $('#travellers_id').val(id);
+
+
+            // show travellers data
+            $('#traveller_data').animate({
+                marginRight: '0px'
+            }, 500);
+
+
+
+        });
+
+        $(document).on('click','#close_traveller_data',function(e){
+            $('#traveller_data').animate({
+                marginRight: '-50vw'
+            }, 500);
+        });
+
+
+        $(document).on('click','#edit_traveller_symptoms', function(e){
+            
+            e.preventDefault();
+
+            var id      = $(this).attr('id');
+            var btn     = $(this).val();
+            var tid     = $('#traveller_id').val();
+            if(btn == 'Edit'){
+                // enable fields
+                $('#form_'+id+' input').prop('disabled', false);
+                $('#'+id).val('Update');
+                return
+            }
+
+            // get checked symptoms
+            var symptoms = [];
+            $.each($("input[name='symptoms[]']:checked"), function(){
+                symptoms.push($(this).val());
+            });
+            tmp     = '['+symptoms.join(",")+']';
+            $('#row_'+tid).attr('symptoms',tmp);
+
+
+
+            var data    = $('#form_'+id).serialize()
+            // submit data
+            var jqXHR = $.ajax({
+                type:"GET",
+                url:window.location.origin+'/screen/update_symptoms',
+                data: data,
+            }).done(function (data){
+                if(data){
+                    // success show 
+                    // disable fields
+                    $('#form_'+id+' input:checkbox').prop('disabled', true);
+                    $('#'+id).val('Edit');
+                    return
+                }
+            }).fail(function(jqXHR, textStatus, errorThrown){
+                alert(textStatus);
+            }).always(function() {
+
+            });
+
+
+
 
         });
 

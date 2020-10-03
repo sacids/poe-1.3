@@ -45,6 +45,16 @@
 
     <!--custom js -->
     <script src="{% static 'js/custom.js' %}"></script>
+
+    <script>
+        $(function() {
+            $('.chosen-select').chosen();
+            $('.chosen-select-deselect').chosen({
+                allow_single_deselect: true
+            });
+        });
+
+    </script>
 </head>
 
 <body>

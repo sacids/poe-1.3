@@ -6,21 +6,25 @@
             <table id="travellers_table" class="display" style="width:100%">
                 <thead>
                     <tr>
-                        <th>Name</th>
-                        <th>ID Number</th>
-                        <th>Flight Number</th>
-                        <th>Temp</th>
-                        <th>Origin</th>
+                        <th width="25%">Traveller Name</th>
+                        <th width="12%">Nationality</th>
+                        <th width="12%">ID Number</th>
+                        <th width="6%">Sex</th>
+                        <th width="15%">Transport No</th>
+                        <th width="12%">Origin Country</th>
+                        <th width="10%">Temp</th>
                     </tr>
                 </thead>
                 <tbody>
                 {% for traveller in travellers %}
                     <tr id="row_{{traveller.id}}">
-                        <td class="full_name">{{traveller.full_name}}</td>
+                        <td class="full_name">{{traveller.other_names}} {{ traveller.surname }}</td>
+                        <td class="nationality_title">{{traveller.nationality__title}}</td>
                         <td class="id_number">{{traveller.id_number}}</td>
+                        <td class="sex">{{ traveller.sex }}</td>
                         <td class="name_of_transport">{{traveller.name_of_transport}}</td>
-                        <td class="temp">{{traveller.temp}}</td>
                         <td class="location_origin_title">{{traveller.location_origin__title}}</td>
+                        <td class="temp">{{traveller.temp}}</td>
                     </tr>
                 {% endfor %}
                 </tbody>
@@ -35,7 +39,7 @@
          oTable = $('#travellers_table').DataTable( {
             "columnDefs": [
                 {
-                    "targets": [ 4 ],
+                    "targets": [ 6 ],
                     "visible": false,
                     "searchable": false
                 }

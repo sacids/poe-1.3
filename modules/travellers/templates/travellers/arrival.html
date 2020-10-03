@@ -200,6 +200,7 @@
                                         <div class="col-lg-12 col-md-12 col-sm-12 col-12">
                                             <div class="form-group">
                                                 {{ form.visiting_purpose|as_crispy_field }}
+                                                <span id="errorVisitingPurpose" style="color: red;"></span>
                                             </div>
                                             <!--./form-group -->
                                         </div>
@@ -211,6 +212,7 @@
                                         <div class="col-lg-12 col-md-12 col-sm-12 col-12">
                                             <div class="form-group">
                                                 {{ form.other_purpose|as_crispy_field }}
+                                                <span id="errorOtherPurpose" style="color: red;"></span>
                                             </div>
                                             <!--./form-group -->
                                         </div>
@@ -267,6 +269,7 @@
                                         <div class="col-lg-12 col-md-12 col-sm-12 col-12">
                                             <div class="form-group">
                                                 {{ form.physical_address|as_crispy_field }}
+                                                <span id="errorAddress" style="color: red;"></span>
                                             </div>
                                             <!--./form-group -->
                                         </div>

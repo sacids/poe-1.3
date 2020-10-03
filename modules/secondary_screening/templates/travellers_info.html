@@ -45,7 +45,8 @@
                                 <td width="20%"><span class="font-weight-bold">Full name</span>
                                 </td>
                                 <td width="80%">
-                                    <span class="text-uppercase font-weight-bold">{{traveller.full_name}}</span>
+                                    <span class="text-uppercase font-weight-bold">{{traveller.other_names}}
+                                        {{ traveller.surname}}</span>
                                 </td>
                             </tr>
 
@@ -69,7 +70,7 @@
                                 <td width="20%"><span class="font-weight-bold">Nationality</span>
                                 </td>
                                 <td width="80%">
-                                    <span class="text-uppercase font-weight-bold">{{nationality.title}}</span>
+                                    <span class="text-uppercase font-weight-bold">{{traveller.nationality.title}}</span>
                                 </td>
                             </tr>
 
@@ -103,7 +104,7 @@
                                 </td>
                                 <td width="80%">
                                     <span
-                                        class="text-uppercase font-weight-bold">{{ traveller.point_of_entry__title }}</span>
+                                        class="text-uppercase font-weight-bold">{{ traveller.point_of_entry.title }}</span>
                                 </td>
                             </tr>
 
@@ -119,7 +120,7 @@
                                 <td width="20%"><span class="font-weight-bold">Seat Number</span>
                                 </td>
                                 <td width="80%">
-                                    <span class="text-uppercase font-weight-bold">{{traveller.seat_no}}</span>
+                                    <span class="text-uppercase font-weight-bold">{{traveller.seat_number}}</span>
                                 </td>
                             </tr>
                         </table>
@@ -181,7 +182,7 @@
                     <div class="col-md-12">
                         <table class="table table-bordered">
                             <tr>
-                                <td width="20%"><span class="font-weight-bold">Physical Adrress</span>
+                                <td width="20%"><span class="font-weight-bold">Physical Adrress/Hoel Name</span>
                                 </td>
                                 <td width="80%">
                                     <span class="text-uppercase font-weight-bold">{{traveller.physical_address}}</span>
@@ -189,18 +190,10 @@
                             </tr>
 
                             <tr>
-                                <td width="20%"><span class="font-weight-bold">Hotel name</span>
-                                </td>
-                                <td width="80%">
-                                    <span class="text-uppercase font-weight-bold">{{traveller.hotel_name}}</span>
-                                </td>
-                            </tr>
-
-                            <tr>
                                 <td width="20%"><span class="font-weight-bold">Region</span>
                                 </td>
                                 <td width="80%">
-                                    <span class="text-uppercase font-weight-bold">{{ region.title }}</span>
+                                    <span class="text-uppercase font-weight-bold">{{ traveller.region.title }}</span>
                                 </td>
                             </tr>
 
@@ -239,30 +232,35 @@
                 <div class="row p-2">
                     <div class="col-md-12">
                         <p>Country Journey Started :
-                            {{traveller.location_origin__title}}</p>
+                            <b>{{traveller.location_origin.title}}</b>
+                        </p>
 
-                            <h6>Countries visited in last 21 days (3 weeks)</h6>
-                            <table class="table table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>Country</th>
-                                        <th>Location Visited</th>
-                                        <th>Date</th>
-                                        <th>Number of Days</th>
-                                    </tr>
-                                </thead>
+                        <h6>Countries visited in last 21 days (3 weeks)</h6>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Country</th>
+                                    <th>Location Visited</th>
+                                    <th>Date</th>
+                                    <th>Number of Days</th>
+                                </tr>
+                            </thead>
 
-                                <tbody>
-                                    {% for country in countries %}
-                                    <td></td>
+                            <tbody>
+                                {% with count=0  %}
+                                {% for country in countries %}
+                                <tr>
+                                    <td>{{ count|add:"1" }}</td>
                                     <td>{{ country.location__title}}</td>
                                     <td>{{ country.location_visited}}</td>
                                     <td>{{ country.date }}</td>
                                     <td>{{ country.days }}</td>
-                                    {% endfor %}
-                                </tbody>
-                            </table>
+                                </tr>
+                                {% endfor %}
+                                {% endwith %}
+                            </tbody>
+                        </table>
                     </div>
                     <!--./col-->
                 </div>

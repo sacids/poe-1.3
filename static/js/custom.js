@@ -7,9 +7,44 @@
  * ---------------------------------------------------------------------------- */
 //chosen select
 // In your Javascript (external .js resource or <script> tag)
-$(document).ready(function() {
-    $('.js-basic-single').select2();
+$(document).ready(function () {
+    //make number of coutries readonly
+    $('#location').on('input', function () {
+        $('#number_countries').attr('readonly', 'readonly');
+    });
+
+    //summation of number of days
+    $(".number_days").each(function () {
+        $(this).keyup(function () {
+            calculateSum();
+        });
+    });
 });
+
+//calculate sum
+function calculateSum() {
+    let sum = 0;
+    //iterate through each text boxes and add the values
+    $(".number_days").each(function () {
+        // Removing all the commas
+        let number_days = this.value.replace(/,/g, "");
+
+        //add only if the value is number
+        if (!isNaN(number_days) && number_days.length !== 0) {
+            sum += parseFloat(number_days);
+        }
+        console.log("sum => " + sum);
+    });
+    //comma-separated numbers
+    sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+    if (sum > 21) {
+        alert("Number of days should not exceed 21");
+        return false;
+    } else {
+        return true
+    }
+}
 
 //suggest districts
 function suggest_districts() {

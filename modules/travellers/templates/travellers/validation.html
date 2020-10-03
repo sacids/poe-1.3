@@ -64,15 +64,18 @@
         let pointOfEntry = document.getElementById("point_of_entry").value;
         let seatNumber = document.getElementById("seat_number").value;
 
-
+        let visiting_purpose = document.getElementById("visiting_purpose").value;
+        let other_purpose = document.getElementById("other_purpose").value;
         let durationOfStay = document.getElementById("duration_of_stay").value;
         let employment = document.getElementById("employment").value;
-        let locationOrigin = document.getElementById("location_origin").value;
+        let other_employment = document.getElementById("other_employment").value;
 
+        let physical_address = document.getElementById("physical_address").value;
         let regionId = document.getElementById("region_id").value;
         let phone = document.getElementById("phone").value;
         let email = document.getElementById("email").value;
 
+        let locationOrigin = document.getElementById("location_origin").value;
         let location = document.getElementsByName("location")
         let date = document.getElementsByName("date");
         let days = document.getElementsByName("days");
@@ -131,8 +134,8 @@
                         errorAge = false;
                     }
                 } else if (age_category === 'below') {
-                    if (age < 0 || age > 12) {
-                        printError("errorAge", "{% trans 'Age should be between 1 and 12 months' %}");
+                    if (age < 1 || age > 11) {
+                        printError("errorAge", "{% trans 'Age should be between 1 and 11 months' %}");
                     } else {
                         printError("errorAge", "");
                         errorAge = false;
@@ -231,7 +234,26 @@
 
             //tab 2 validation
         } else if (currentTab === 1) {
-            let errorEmployment = errorDurationOfStay = true;
+            let errorVisitingPurpose = errorOtherPurpose = errorEmployment = errorDurationOfStay = true;
+
+            //visiting purpose
+            if (visiting_purpose === "") {
+                printError("errorVisitingPurpose", "{% trans 'Visiting purpose required' %}");
+            } else {
+                printError("errorVisitingPurpose", "");
+                errorVisitingPurpose = false;
+            }
+
+            //other visiting purpose
+            if (visiting_purpose === "other") {
+                if (other_purpose === "") {
+                    printError("errorOtherPurpose", "{% trans 'Other visiting purpose required' %}");
+                } else {
+                    printError("errorOtherPurpose", "");
+                    errorOtherPurpose = false;
+                }
+            }
+
 
             //validate duration of stay
             if (nationality === '217') {
@@ -250,12 +272,28 @@
                 }
             }
 
+            //employment
+            if (employment === "") {
+                printError("errorEmployment", "{% trans 'Occupation required' %}");
+            } else {
+                printError("errorEmployment", "");
+                errorEmployment = false;
+            }
+
             //check all data in tab one
-            return (errorDurationOfStay) !== true;
+            return (errorVisitingPurpose || errorOtherPurpose || errorDurationOfStay || errorEmployment) !== true;
 
             //tab 3 validation
         } else if (currentTab === 2) {
-            let errorRegion = errorPhone = errorEmail = true;
+            let errorAddress = errorRegion = errorPhone = errorEmail = true;
+
+            //validate physical address
+            if (physical_address === "") {
+                printError("errorAddress", "{% trans 'Physical address/Hotel name required' %}")
+            } else {
+                printError("errorAddress", "");
+                errorAddress = false;
+            }
 
             //validate region
             if (regionId === "") {
@@ -297,7 +335,7 @@
             }
 
             //check all data in tab one
-            return (errorRegion || errorPhone || errorEmail) !== true;
+            return (errorAddress || errorRegion || errorPhone || errorEmail) !== true;
 
             //tab 3 validation
         } else if (currentTab === 3) {

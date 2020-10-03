@@ -14,31 +14,26 @@ from django.http import JsonResponse
 @login_required
 def screen(request):
     poe_id = request.session.get('poe_id')
-    #print(poe_id)
-    # travellers  = Traveller.objects.raw("SELECT id,full_name, id_number, name_of_transport, disease_to_screen FROM et_travellers WHERE arrival_date = '"+str(datetime.today().strftime('%Y-%m-%d')+"'"))
+    print(poe_id)
+
     travellers = (Traveller.objects
                   .select_related('location_origin')
                   .prefetch_related('visited_area')
-                  .filter(arrival_date=date.today())
-                  )
-    if poe_id != 0:
-        travellers  = travellers.filter(point_of_entry_id=poe_id)
+                  .filter(arrival_date=date.today()))
 
-    
+    if poe_id is not None and poe_id != 0:
+        travellers  = travellers.filter(point_of_entry_id=poe_id)
 
     temp_a = range(34, 41)
     temp_b = range(1, 10)
     
-
+    #context
     context = {
         "travellers": travellers,
         "symptoms": Symptom.objects.all(),
         "temp_a": temp_a,
         "temp_b": temp_b,
     }
-
-    # score   = calculate_score(8)
-    # print(score)
     
     return render(request, 'screen.html', context)
 

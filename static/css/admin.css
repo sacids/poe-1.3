@@ -67,8 +67,7 @@
   }
 
   .footer{
-    padding: 15px;
-    height: 140px;
+    height: 80px;
   }
 
   /* The sticky class is added to the navbar with JS when it reaches its scroll position */

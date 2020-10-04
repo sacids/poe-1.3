@@ -62,13 +62,22 @@
 
   /* Page content */
   .content {
+    margin: 0 0 10px 0;
     padding: 15px;
-    min-height: calc(100vh - 255px);
+    min-height: calc(100vh - 220px);
   }
 
+  /*footer */
+  footer{
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+  }
+  
   .footer{
-    padding: 15px;
-    height: 80px;
+    padding: 10px;
+    height: 70px;
   }
 
   /* The sticky class is added to the navbar with JS when it reaches its scroll position */

@@ -29,7 +29,7 @@ $(document).ready(function(){
         }
     }
     
-    $('.fa-search').on('click', function(){
+    $('#search_box').on('click', function(){
         $(".site-search").addClass('search-visible');
     });
 

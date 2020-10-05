@@ -117,7 +117,7 @@ class Location(models.Model):
     title = models.CharField(max_length=100)
     code = models.CharField(max_length=10, null=True)
     parent = models.PositiveIntegerField()
-    calling_code = models.CharField(max_length=5, null=True, verbose_name="Calling Code")
+    calling_code = models.CharField(max_length=8, null=True, verbose_name="Calling Code")
 
     class Meta:
         db_table = "et_locations"

@@ -132,7 +132,7 @@
       z-index: 5;
   }
 
-  .site-search .close-search{
+  .site-search .close-search, .search-d{
     cursor: pointer;
   }
   
@@ -294,7 +294,7 @@ table.table td i {
   cursor: pointer;
 
 }
-#traveller_data{
+#traveller_data, #report_query{
   
   padding: 40px 20px;
   top: 81px;
@@ -313,7 +313,7 @@ table.table td i {
 }
 
 @media screen and (max-width: 1028px) {
-  #traveller_data{
+  #traveller_data, #report_query{
     width: calc(100% - 67px);
   }
 }

@@ -16,10 +16,8 @@
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
         crossorigin="anonymous">
-    <link rel="stylesheet" href="{% static 'css/admin.css' %}">
+    
 
-    <!-- Custom styles for this dashboard-->
-    <link href="{% static 'css/dashboard.css' %}" rel="stylesheet">
 
     <link href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" rel="stylesheet">
 
@@ -35,9 +33,16 @@
     <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
 
 
-    <script src="{% static 'js/admin.js' %}"></script>
+    
     <!--highcharts -->
     {% block highcharts_js %}{% endblock %}
+
+    {% block extra %}{% endblock %}
+    
+    <link rel="stylesheet" href="{% static 'css/admin.css' %}">
+    <!-- Custom styles for this dashboard-->
+    <link href="{% static 'css/dashboard.css' %}" rel="stylesheet">
+    <script src="{% static 'js/admin.js' %}"></script>
 
 </head>
 
@@ -92,7 +97,7 @@
 
             <!-- Show search option if flag set in context -->
             {% if search %}
-            <div class="ml-auto nav-icons search-d"><i class="fa fa-search"></i></div>
+            <div class="ml-auto nav-icons search-d"><i class="fa fa-search" id="search_box"></i></div>
             {% endif %}
 
             <!-- Show login option if flag set in context -->

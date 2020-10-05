@@ -11,8 +11,8 @@ class ReportView(generic.TemplateView):
 
     def post(self, request, *args, **kwargs):
         context = self.get_context_data()
-        print(request.POST.get)
-
+        #print(request.POST.get)
+        '''
         j = exec_report(request.POST.getlist('summary'),
             request.POST.getlist('poe_id'),
             request.POST.getlist('action_taken'),
@@ -20,14 +20,59 @@ class ReportView(generic.TemplateView):
             request.POST.get('from_date'),
             request.POST.get('to_date')
         )
+        '''
 
+        report_type     = request.POST.get('report_type')
+        if report_type == "0":
+            #Line list
+            j = exec_line_list(request.POST.get('from_date'),request.POST.get('to_date'))
+            context['line_list']    = j
+            context['report_type']  = 'line_list'
+            context['search']       = 0
+        else:
+            j = exec_chart(request.POST.get('chart'),request.POST.get('group_by'),request.POST.get('from_date'),request.POST.get('to_date'))
+        
+        
         return super(ReportView, self).render_to_response(context)
 
     def get_context_data(self, **kwargs):
         context                 = super(ReportView, self).get_context_data(**kwargs)
-        context['smr_options']  = {'point_of_entry','nationality','location_origin','action_taken','sex','age','temp'}
+        context['symptoms']     = Symptom.objects.all().order_by('-id')
         context['action_taken'] = ActionTaken.objects.all()
         return context
+
+
+def exec_line_list(from_date, to_date):
+
+    '''
+    f_poe               = models.Q()
+    for poe_id in poes:
+        f_poe   |= models.Q(point_of_entry=poe_id)
+    '''
+
+
+    a_date              = models.Q()
+    if from_date is not None:
+        a_date          &= models.Q(arrival_date__gte=from_date)
+    if to_date is not None:
+        a_date          &= models.Q(arrival_date__lte=to_date)
+
+    qs      = Traveller.objects.filter(a_date).order_by('-id')
+    #print(qs.query)
+    return qs
+
+def exec_chart(chart, group_by,from_date, to_date):
+
+    a_date              = models.Q()
+    if from_date is not None:
+        a_date          &= models.Q(arrival_date__gte=from_date)
+    if to_date is not None:
+        a_date          &= models.Q(arrival_date__lte=to_date)
+
+    qs      = Traveller.objects.filter(a_date).order_by('-id')
+
+    return qs
+
 
 def exec_report(summary,poes,action_taken,sex,from_date,to_date):
 
@@ -36,7 +81,7 @@ def exec_report(summary,poes,action_taken,sex,from_date,to_date):
 
     f_poe               = models.Q()
     for poe_id in poes:
-        f_poe   != models.Q(point_of_entry=poe_id)
+        f_poe   |= models.Q(point_of_entry=poe_id)
 
     f_action_taken      = models.Q()
     for action in action_taken:
@@ -56,12 +101,12 @@ def exec_report(summary,poes,action_taken,sex,from_date,to_date):
     #qs      = Traveller.objects.all()
 
     values1     = [str(element) for element in summary]
-    values2     = ",".join(values1)
-
-    qs          = qs.values(values2)
+    values2     = ", ".join(values1)
+    print(values2)
+    #qs          = qs.values(values2)
     
-    for group_by in summary:
-        qs      = qs.annotate(Count(group_by))
+    #for group_by in summary:
+    #    qs      = qs.annotate(Count(group_by))
 
 
     print(qs.query)

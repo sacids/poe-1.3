@@ -16,12 +16,8 @@ def dashboard(request):
     # number of passenger per poe
     poe_id = request.session.get('poe_id')
 
-    # all queries
     # traveller objects
     travellers = Traveller.objects
-
-    # reported symptoms
-    symptoms = Symptom.objects.all()
 
     # filter per point of entry
     if poe_id is None or poe_id == 0:
@@ -66,6 +62,8 @@ def dashboard(request):
         female_passenger_with_above_normal_temp = travellers.filter(
             point_of_entry_id=poe_id, sex='F', temp__gte=38)
 
+    # reported symptoms
+    symptoms = Symptom.objects.all()
 
     # filter
     if request.method == 'POST':

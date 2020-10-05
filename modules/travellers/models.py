@@ -217,8 +217,8 @@ class Traveller(BaseModel):
     temp                = models.FloatField(null=True)
     disease_to_screen   = models.CharField(max_length=150, default='0')
     action_taken        = models.ForeignKey(ActionTaken, default=1, on_delete=models.DO_NOTHING)
-    symptoms            = models.ManyToManyField(Symptom, blank=True)
-    other_symptoms      = models.TextField(null=True)
+    #symptoms            = models.ManyToManyField(Symptom, blank=True)
+    #other_symptoms      = models.TextField(null=True)
     accept              = models.IntegerField(default=0, null=True)
     updated_at          = models.DateTimeField(verbose_name="Updated date", null=True)
 

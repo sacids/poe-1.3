@@ -14,15 +14,17 @@ from django.http import JsonResponse
 @login_required
 def screen(request):
     poe_id = request.session.get('poe_id')
-    print(poe_id)
 
     travellers = (Traveller.objects
-                  .select_related('location_origin')
+                  .select_related('location_origin', 'point_of_entry')
                   .prefetch_related('visited_area')
                   .filter(arrival_date=date.today()))
 
-    if poe_id is not None and poe_id != 0:
-        travellers  = travellers.filter(point_of_entry_id=poe_id)
+    #check for poe
+    if poe_id is None or poe_id == 0:
+        travellers = travellers.all()
+    else:
+        travellers = travellers.filter(point_of_entry_id=poe_id)       
 
     temp_a = range(34, 41)
     temp_b = range(1, 10)

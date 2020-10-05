@@ -57,6 +57,7 @@ INSTALLED_APPS = [
     'modules.user_management',
     'modules.common',
     'modules.report',
+    'modules.reports',
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'

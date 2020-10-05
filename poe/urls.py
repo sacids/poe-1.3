@@ -25,7 +25,7 @@ urlpatterns = i18n_patterns(
     path('common/', include("modules.common.urls")),
     path('accounts/', include("django.contrib.auth.urls")),
     path('sec_screen/', include("modules.secondary_screening.urls")),
-    path('reports/', include("modules.report.urls")),
+    path('reports/', include("modules.reports.urls")),
     path('', include("modules.travellers.urls")),
     prefix_default_language=False
 )

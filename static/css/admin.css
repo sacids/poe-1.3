@@ -307,3 +307,9 @@ table.table td i {
     width: calc(100% - 67px);
   }
 }
+
+/*search-form */
+.search-form .input-group {
+  width: 370px !important;
+  margin-right: 10px;
+}

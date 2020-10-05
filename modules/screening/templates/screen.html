@@ -10,14 +10,15 @@
         <table id="travellers_table" class="display" style="width:100%">
             <thead>
                 <tr>
-                    <th width="25%">Traveller Name</th>
+                    <th width="20%">Traveller Name</th>
                     <th width="12%">Nationality</th>
                     <th width="12%">ID Number</th>
-                    <th width="10%">Age</th>
+                    <th width="8%">Age</th>
                     <th width="8%">Sex</th>
+                    <th width="15%">Point of Entry</th>
                     <th width="15%">Transport No</th>
-                    <th width="12%">Origin Country</th>
-                    <th width="30%">Temp</th>
+                    <th width="15%">Origin Country</th>
+                    <th width="10%">Temp</th>
                 </tr>
             </thead>
             <tbody>
@@ -58,6 +59,7 @@
                         {% endif %}
                     </td>
                     <td class="sex">{{traveller.sex}}</td>
+                    <td class="point_of_entry">{{traveller.point_of_entry.code}}</td>
                     <td class="name_of_transport">{{traveller.name_of_transport}}</td>
                     <td class="location_origin_title">{{traveller.location_origin.title}}</td>
                     <td class="temp">{{traveller.temp}}</td>

@@ -84,8 +84,8 @@ def arrival(request):
     symptoms = Symptom.objects.all()  # symptoms
     countries = Location.objects.filter(parent=0)  # countries
     today = datetime.date.today().strftime("%Y-%m-%d")
-    last_21_days = (datetime.date.today() -
-                    timedelta(days=21)).strftime("%Y-%m-%d")
+    yesterday = (datetime.date.today() - timedelta(days=1)).strftime("%Y-%m-%d")
+    last_21_days = (datetime.date.today() - timedelta(days=21)).strftime("%Y-%m-%d")
 
     # if POST
     if request.method == "POST":
@@ -93,7 +93,7 @@ def arrival(request):
 
         # attributes
         attr = {'form': form, 'countries': countries, 'symptoms': symptoms,
-                'today': today, 'last_21_days': last_21_days}
+                'today': today, 'yesterday': yesterday, 'last_21_days': last_21_days}
 
         if form.is_valid():
             # process form data
@@ -117,7 +117,8 @@ def arrival(request):
             traveller.other_purpose = form.cleaned_data['other_purpose']
 
             if request.POST.get('duration_of_stay') != '':
-                traveller.duration_of_stay = request.POST.get('duration_of_stay')
+                traveller.duration_of_stay = request.POST.get(
+                    'duration_of_stay')
 
             traveller.employment = form.cleaned_data['employment']
             traveller.other_employment = form.cleaned_data['other_employment']
@@ -202,7 +203,7 @@ def arrival(request):
     else:
         form = TravellerForm()
         return render(request, 'travellers/arrival.html',
-                      {'form': form, 'countries': countries, 'symptoms': symptoms, 'today': today, 'last_21_days': last_21_days})
+                      {'form': form, 'countries': countries, 'symptoms': symptoms, 'today': today, 'yesterday': yesterday, 'last_21_days': last_21_days})
 
 
 def departure(request):

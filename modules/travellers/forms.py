@@ -123,7 +123,7 @@ class TravellerForm(forms.Form):
                                              attrs={'class': 'form-control', 'id': 'visiting_purpose'}),
                                          required=True)
 
-    other_purpose = forms.CharField(label=_('Other Purposes (If any) <span id="other_purpose_astr" class="asteriskField"></span>'), widget=forms.Textarea(
+    other_purpose = forms.CharField(label=_('Other Purposes <span id="other_purpose_astr" class="asteriskField"></span>'), widget=forms.Textarea(
         attrs={'class': 'form-control', 'id': 'other_purpose', 'rows': 3,
                'placeholder': _('Write other visiting purpose....')}), required=False)
 
@@ -136,7 +136,7 @@ class TravellerForm(forms.Form):
                                        attrs={'class': 'form-control', 'id': 'employment'}),
                                    required=True)
 
-    other_employment = forms.CharField(label=_('Other occupation (If any) <span id="other_employment_astr" class="asteriskField"></span>'), widget=forms.Textarea(
+    other_employment = forms.CharField(label=_('Other occupation <span id="other_employment_astr" class="asteriskField"></span>'), widget=forms.Textarea(
         attrs={'class': 'form-control', 'id': 'other_employment', 'rows': 3,
                'placeholder': _('Write other occupation...')}), required=False)
 
@@ -148,7 +148,7 @@ class TravellerForm(forms.Form):
     region_id = forms.ModelChoiceField(label=_('Region'),
                                        queryset=Location.objects.filter(code="TZR"), empty_label=_('-- Select --'),
                                        widget=forms.Select(
-                                           attrs={'class': 'form-control chosen-select2', 'id': 'region_id',
+                                           attrs={'class': 'form-control chosen-select', 'id': 'region_id',
                                                   'onChange': 'suggest_districts()'}))
 
     district_id = forms.ModelChoiceField(label=_('District'), queryset=Location.objects.filter(code="TZD"), empty_label=_('-- Select --'),
@@ -172,29 +172,29 @@ class TravellerForm(forms.Form):
     location_origin = forms.ModelChoiceField(label=_('Country where journey started'),
                                              queryset=Location.objects.filter(parent=0), empty_label=_('-- Select --'),
                                              widget=forms.Select(
-                                                 attrs={'class': 'form-control', 'id': 'location_origin'}))
+                                                 attrs={'class': 'form-control chosen-select', 'id': 'location_origin'}))
 
     number_countries = forms.CharField(label=_('Number of countries'),
                                        widget=forms.TextInput(
         attrs={'class': 'form-control', 'id': 'number_countries',
                'placeholder': _('Write number of countries...'), 'type': 'number', 'min': 1, 'max': 5}), required=True)
 
-    location = forms.ModelChoiceField(label=_('Country'), queryset=Location.objects.filter(parent=0),
-                                      empty_label=_('-- Select --'),
-                                      widget=forms.Select(
-                                          attrs={'class': 'form-control chosen-select', 'id': 'location'}), required=True)
+    # location = forms.ModelChoiceField(label=_('Country'), queryset=Location.objects.filter(parent=0),
+    #                                   empty_label=_('-- Select --'),
+    #                                   widget=forms.Select(
+    #                                       attrs={'class': 'form-control chosen-select', 'id': 'location'}), required=True)
 
-    location_visited = forms.CharField(label=_('Location/Province'), widget=forms.TextInput(
-        attrs={'class': 'form-control', 'id': 'location_visited',
-               'placeholder': _('Write location/province visited...')}), required=False)
+    # location_visited = forms.CharField(label=_('Location/Province'), widget=forms.TextInput(
+    #     attrs={'class': 'form-control', 'id': 'location_visited',
+    #            'placeholder': _('Write location/province visited...')}), required=False)
 
-    date = forms.DateField(label=_('Date'), widget=forms.DateInput(
-        attrs={'type': 'date', 'class': 'form-control', 'max': date.today() - timedelta(days=3), 'min': date.today() - timedelta(days=24)}),
-        required=True)
+    # date = forms.DateField(label=_('Date'), widget=forms.DateInput(
+    #     attrs={'type': 'date', 'class': 'form-control', 'max': date.today() - timedelta(days=3), 'min': date.today() - timedelta(days=24)}),
+    #     required=True)
 
-    days = forms.CharField(label=_('Number of days'), widget=forms.TextInput(
-        attrs={'class': 'number_days form-control', 'id': 'days', 'placeholder': _('Write number of days...'),
-               'type': 'number', 'min': 1, 'max': 21}), required=True)
+    # days = forms.CharField(label=_('Number of days'), widget=forms.TextInput(
+    #     attrs={'class': 'form-control number_days', 'id': 'days', 'placeholder': _('Write number of days...'),
+    #            'type': 'number', 'min': 1, 'max': 21}), required=True)
 
     # tab 5
     other_symptoms = forms.CharField(label=_('Other Symptoms (comma separated)'), widget=forms.Textarea(

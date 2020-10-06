@@ -1,10 +1,14 @@
 <div class="navarea clearfix p-2">
     <div class="text-info px-2"><h3>{{ traveller.full_name }}</h3></div>
     <div class="">
-        <div class="float-left px-2 "><a href="{% url 'traveller_info' travellers.id %}" class="{% if segment_3 == 'info' %}text-danger{% endif %}">General</a></div>
+        <div class="float-left px-2 "><a href="{% url 'traveller_info' travellers.id %}"
+                                         class="{% if segment_3 == 'info' %}text-danger{% endif %}">General</a></div>
         {% for disease in diseases %}
-            <div class="float-left px-2"><a href="{% url 'survey' travellers.id disease.id %}" class="{% if segment_3 == disease.id|stringformat:"i" %}text-danger{% endif %}">{{ disease.title }}</a></div>
+            <div class="float-left px-2"><a href="{% url 'survey' travellers.id disease.id %}"
+                                            class="{% if segment_3 == disease.id|stringformat:"i" %}text-danger{% endif %}">{{ disease.title }}</a>
+            </div>
         {% endfor %}
-        <div class="float-left px-2"><a href="{% url 'risk_assessment' travellers.id %}" class="{% if segment_3 == 'action' %}text-danger{% endif %}">Action</a></div>
+        <div class="float-left px-2"><a href="{% url 'risk_assessment' travellers.id %}"
+                                        class="{% if segment_3 == 'action' %}text-danger{% endif %}">Action</a></div>
     </div>
 </div>

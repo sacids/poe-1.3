@@ -1,6 +1,6 @@
 from django.urls import path
 
-from .views import *
+from .views import set_poe
 
 urlpatterns = [
     path('set_poe', set_poe, name='set_poe')

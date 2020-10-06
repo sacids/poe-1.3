@@ -29,6 +29,7 @@ from setuptools import setup, find_packages
 
 try:
     import pypandoc
+
     long_description = pypandoc.convert('README.md', 'rst')
 except(IOError, ImportError):
     long_description = open('README.md').read()
@@ -56,8 +57,8 @@ setup(
         'License :: OSI Approved :: MIT License',
     ],
     install_requires=[
-          'django-cuser', 'django-tinymce' 
-      ],
+        'django-cuser', 'django-tinymce'
+    ],
     license="MIT",
     keywords="modeltranslation translations",
     url='https://github.com/intelligenia/modeltranslation',

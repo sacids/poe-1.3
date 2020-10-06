@@ -19,6 +19,7 @@ django-phone-field = "*"
 django-formtools = "*"
 django-multiselectfield = "*"
 faker = "*"
+django-reset-migrations = "*"
 
 [requires]
 python_version = "3.8"

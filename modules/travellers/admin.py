@@ -52,3 +52,5 @@ class SymptomAdmin(admin.ModelAdmin):
     list_display = ['id', 'title', 'title_sw']
     search_fields = ['title__startwith']
     ordering = ("id",)
+
+admin.site.register(ActionTaken)

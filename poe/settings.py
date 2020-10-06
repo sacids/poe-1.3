@@ -33,7 +33,6 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
-    # 'modeltranslation',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -165,6 +164,5 @@ MESSAGE_TAGS = {
     messages.ERROR: 'alert-danger',
 }
 
-# SWEETIFY_SWEETALERT_LIBRARY = 'sweetalert2'
 # Redirect to home URL after login (Default redirects to /accounts/profile/)
 LOGIN_REDIRECT_URL = '/dashboard/'

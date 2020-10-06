@@ -37,6 +37,7 @@ class ScreenCriteriaInline(admin.TabularInline):
 
 class DiseaseSurveyAnsInline(admin.StackedInline):
     model = DiseaseSurveyQns
+    extra = 0
 
 
 @admin.register(Disease)

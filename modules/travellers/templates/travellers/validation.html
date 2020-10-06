@@ -28,7 +28,7 @@
         let x = document.getElementsByClassName("tab");
 
         // Exit the function if any field in the current tab is invalid:
-        //if (n === 1 && !validateForm()) return false;
+        if (n === 1 && !validateForm()) return false;
         // Hide the current tab:
         x[currentTab].style.display = "none";
         // Increase or decrease the current tab by 1:
@@ -230,11 +230,11 @@
             // }
 
             //check all data in tab one
-            return (errorSurname || errorOtherNames || errorAgeCategory || errorAge || errorSex || errorNationality || errorIdNumber || errorModeOfTransport || errorNameOfTransport || errorArrivalDate || errorPointOfEntry || errorSeatNumber) !== true;
+            return (errorSurname || errorOtherNames || errorAgeCategory || errorAge || errorSex || errorNationality || errorIdNumber || errorModeOfTransport || errorNameOfTransport || errorArrivalDate || errorPointOfEntry) !== true;
 
             //tab 2 validation
         } else if (currentTab === 1) {
-            let errorVisitingPurpose = errorOtherPurpose = errorEmployment = errorDurationOfStay = true;
+            let errorVisitingPurpose = errorOtherPurpose = errorDurationOfStay = errorEmployment = errorOtherEmployment = true;
 
             //visiting purpose
             if (visiting_purpose === "") {
@@ -252,8 +252,10 @@
                     printError("errorOtherPurpose", "");
                     errorOtherPurpose = false;
                 }
+            } else {
+                printError("errorOtherPurpose", "");
+                errorOtherPurpose = false;
             }
-
 
             //validate duration of stay
             if (nationality === '217') {
@@ -280,8 +282,21 @@
                 errorEmployment = false;
             }
 
+            //other visiting purpose
+            if (employment === "other") {
+                if (other_employment === "") {
+                    printError("errorOtherEmployment", "{% trans 'Other occupation required' %}");
+                } else {
+                    printError("errorOtherEmployment", "");
+                    errorOtherEmployment = false;
+                }
+            } else {
+                printError("errorOtherEmployment", "");
+                errorOtherEmployment = false;
+            }
+
             //check all data in tab one
-            return (errorVisitingPurpose || errorOtherPurpose || errorDurationOfStay || errorEmployment) !== true;
+            return (errorVisitingPurpose || errorOtherPurpose || errorEmployment || errorOtherEmployment || errorDurationOfStay) !== true;
 
             //tab 3 validation
         } else if (currentTab === 2) {
@@ -307,9 +322,9 @@
             if (phone === "") {
                 printError("errorPhone", "{% trans 'Phone is required' %}");
             } else {
-                let regex = /^\d{12}$/;
+                let regex = /^\d{10}$/;
                 if (regex.test(phone) === false) {
-                    printError("errorPhone", "{% trans 'Invalid phone. e.g 255717000000' %}");
+                    printError("errorPhone", "{% trans 'Invalid phone. e.g 0717000000' %}");
                 } else {
                     printError("errorPhone", "");
                     errorPhone = false;
@@ -339,7 +354,7 @@
 
             //tab 3 validation
         } else if (currentTab === 3) {
-            let errorLocationOrigin = errorLocation = errorDate = errorDays = true;
+            let errorLocationOrigin = errorLocation = errorDate = errorDays = errorSumDays = true;
 
             if (locationOrigin === "") {
                 printError("errorLocationOrigin", "{% trans 'Country journey started is required' %}");
@@ -391,6 +406,7 @@
 
             //no of days
             if (days.length > 0) {
+                let sum = 0;
                 for (let i = 0; i < days.length; i++) {
                     if (days[i].value === "") {
                         printError("errorDays", "{% trans 'Number of days required' %}")
@@ -402,12 +418,24 @@
                             errorDays = false;
                         }
                     }
+                    let number_days = days[i].value.replace(/,/g, "");
+                    //add only if the value is number
+                    if (!isNaN(number_days) && number_days.length !== 0) {
+                        sum += parseFloat(number_days);
+                    }
+                }
+
+                //check for sum
+                if (sum > 21) {
+                    printError("errorSumDays", "{% trans 'Sum of number of days should not exceed 21' %}")
+                } else {
+                    printError("errorSumDays", "");
+                    errorSumDays = false;
                 }
             }
 
-
             //check all data in tab 3
-            return (errorLocationOrigin || errorDate || errorDays) !== true;
+            return (errorLocationOrigin || errorDate || errorDays || errorSumDays) !== true;
 
         } else if (currentTab === 4) {
             let errorSymptoms = true;
@@ -452,5 +480,19 @@
         }
         //... and adds the "active" class to the current step:
         x[n].className += " active";
+    }
+
+    //calculate number of days
+    const numberOfDays = (startDate, endDate) => {
+        const start = new Date(startDate) //clone
+        const end = new Date(endDate) //clone
+        let dayCount = 0
+
+        while (end > start) {
+            dayCount++
+            start.setDate(start.getDate() + 1)
+        }
+
+        return dayCount
     }
 </script>

@@ -24,7 +24,7 @@
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
     <!--chosen select -->
-    <link href="{% static 'plugins/chosen/chosen.min.css' %}" rel="stylesheet" />
+    <link href="{% static 'libs/css/component-chosen.css' %}" rel="stylesheet" />
 
     <!-- Custom styles for this template-->
     <link href="{% static 'css/styles.css' %}" rel="stylesheet">
@@ -41,20 +41,10 @@
         crossorigin="anonymous"></script>
 
     <!-- Chosen JavaScript -->
-    <script src="{% static 'plugins/chosen/chosen.jquery.js' %}"></script>
+    <script src="{% static 'libs/js/chosen.jquery.min.js' %}"></script>
 
     <!--custom js -->
     <script src="{% static 'js/custom.js' %}"></script>
-
-    <script>
-        $(function() {
-            $('.chosen-select').chosen();
-            $('.chosen-select-deselect').chosen({
-                allow_single_deselect: true
-            });
-        });
-
-    </script>
 </head>
 
 <body>
@@ -84,5 +74,12 @@
     {% block content %}{% endblock %}
 </body>
 
+
+<script>
+    $('.chosen-select').chosen({
+        allow_single_deselect: true,
+        width: '100%'
+    });
+</script>
 
 </html>

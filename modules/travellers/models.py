@@ -55,8 +55,6 @@ PURPOSE = (
     ('other', 'Other'),
 )
 EMPLOYMENT = (
-    ('government', 'Government'),
-    ('non-government', 'Non-Government'),
     ('student', 'Student'),
     ('religious', 'Religious'),
     ('farmer', 'Farmer'),
@@ -119,7 +117,7 @@ class Location(models.Model):
     title = models.CharField(max_length=100)
     code = models.CharField(max_length=10, null=True)
     parent = models.PositiveIntegerField()
-    calling_code = models.CharField(max_length=5, null=True, verbose_name="Calling Code")
+    calling_code = models.CharField(max_length=5, null=True, verbose_name="Calling code")
 
     class Meta:
         db_table = "et_locations"
@@ -186,25 +184,25 @@ class ActionTaken(models.Model):
 # travellers
 class Traveller(BaseModel):
     """A class to create travellers table."""
-    surname         = models.CharField(max_length=30, null=True)
-    other_names     = models.CharField(max_length=150, null=True)
-    category        = models.CharField(choices=FORM_CATEGORY, max_length=30, default='none')
-    sex             = models.CharField(choices=SEX, max_length=15, default='none')
+    surname         = models.CharField(max_length=50, null=True)
+    other_names     = models.CharField(max_length=100, null=True)
+    category        = models.CharField(choices=FORM_CATEGORY, max_length=30, default='None')
+    sex             = models.CharField(choices=SEX, max_length=15, default='None')
     age_category    = models.CharField(choices=AGE_CATEGORY, max_length=30, null=True)
-    age             = models.IntegerField(default=0, null=True)
+    age             = models.IntegerField(default=1, null=True)
     nationality     = models.ForeignKey(Location, related_name="nationality", default=0, on_delete=models.DO_NOTHING)
-    id_type         = models.CharField(choices=ID_TYPE, max_length=50, default='none')
+    id_type         = models.CharField(choices=ID_TYPE, max_length=50, default='None')
     id_number       = models.CharField(max_length=50)
-    employment      = models.CharField(choices=EMPLOYMENT, max_length=45, default='none')
+    employment      = models.CharField(choices=EMPLOYMENT, max_length=50, default='None')
     other_employment    = models.CharField(max_length=255, blank=True, null=True)
 
-    mode_of_transport   = models.CharField(choices=TRANSPORT_MODE, max_length=30, default='none')
-    name_of_transport   = models.CharField(max_length=30)
-    seat_number         = models.CharField(max_length=30, null=True)
+    mode_of_transport   = models.CharField(choices=TRANSPORT_MODE, max_length=50, default='None')
+    name_of_transport   = models.CharField(max_length=50)
+    seat_number         = models.CharField(max_length=25, null=True)
     arrival_date        = models.DateField(verbose_name="Arrival Date")
     point_of_entry      = models.ForeignKey(PointOfEntry, related_name="point_of_entry", on_delete=models.DO_NOTHING)
 
-    visiting_purpose    = models.CharField(choices=PURPOSE, max_length=45, default='none')  # to look around
+    visiting_purpose    = models.CharField(choices=PURPOSE, max_length=50, default='None')  # to look around
     other_purpose       = models.TextField(null=True)
     duration_of_stay    = models.PositiveIntegerField(default=0, null=True)
     location_origin     = models.ForeignKey(Location, related_name="location_origin", on_delete=models.DO_NOTHING)
@@ -222,7 +220,7 @@ class Traveller(BaseModel):
     symptoms            = models.ManyToManyField(Symptom, blank=True)
     other_symptoms      = models.TextField(null=True)
     accept              = models.IntegerField(default=0, null=True)
-    updated_at          = models.DateTimeField("Updated At Date", null=True)
+    updated_at          = models.DateTimeField(verbose_name="Updated date", null=True)
 
     class Meta(BaseModel.Meta):
         db_table = "et_travellers"

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Location, TravellerVisitedArea, PointOfEntry, ScreenCriteria
+from .models import Location, TravellerVisitedArea, PointOfEntry, ScreenCriteria, ActionTaken
 from modules.secondary_screening.models import Traveller, Disease, Symptom, DiseaseSurveyQns
 
 
@@ -52,5 +52,6 @@ class SymptomAdmin(admin.ModelAdmin):
     list_display = ['id', 'title', 'title_sw']
     search_fields = ['title__startwith']
     ordering = ("id",)
+
 
 admin.site.register(ActionTaken)

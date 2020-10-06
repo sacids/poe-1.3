@@ -8,7 +8,7 @@ autopep8 = "*"
 pylint = "*"
 
 [packages]
-django = "==2.2.*"
+django = "==3.1.*"
 django-admin = "*"
 python-decouple = "*"
 psycopg2-binary = "*"
@@ -19,6 +19,7 @@ django-phone-field = "*"
 django-formtools = "*"
 django-multiselectfield = "*"
 faker = "*"
+django-reset-migrations = "*"
 
 [requires]
 python_version = "3.8"

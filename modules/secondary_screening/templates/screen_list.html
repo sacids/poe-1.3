@@ -5,26 +5,26 @@
         <div class="col-md-12">
             <table id="travellers_table" class="display" style="width:100%">
                 <thead>
-                    <tr>
-                        <th width="25%">Traveller Name</th>
-                        <th width="12%">Nationality</th>
-                        <th width="12%">ID Number</th>
-                        <th width="6%">Sex</th>
-                        <th width="15%">Transport No</th>
-                        <th width="12%">Origin Country</th>
-                        <th width="10%">Temp</th>
-                    </tr>
+                <tr>
+                    <th width="25%">Traveller Name</th>
+                    <th width="12%">Nationality</th>
+                    <th width="12%">ID Number</th>
+                    <th width="6%">Sex</th>
+                    <th width="15%">Transport No</th>
+                    <th width="12%">Origin Country</th>
+                    <th width="10%">Temp</th>
+                </tr>
                 </thead>
                 <tbody>
                 {% for traveller in travellers %}
-                    <tr id="row_{{traveller.id}}">
-                        <td class="full_name">{{traveller.other_names}} {{ traveller.surname }}</td>
-                        <td class="nationality_title">{{traveller.nationality__title}}</td>
-                        <td class="id_number">{{traveller.id_number}}</td>
+                    <tr id="row_{{ traveller.id }}">
+                        <td class="full_name">{{ traveller.other_names }} {{ traveller.surname }}</td>
+                        <td class="nationality_title">{{ traveller.nationality__title }}</td>
+                        <td class="id_number">{{ traveller.id_number }}</td>
                         <td class="sex">{{ traveller.sex }}</td>
-                        <td class="name_of_transport">{{traveller.name_of_transport}}</td>
-                        <td class="location_origin_title">{{traveller.location_origin__title}}</td>
-                        <td class="temp">{{traveller.temp}}</td>
+                        <td class="name_of_transport">{{ traveller.name_of_transport }}</td>
+                        <td class="location_origin_title">{{ traveller.location_origin__title }}</td>
+                        <td class="temp">{{ traveller.temp }}</td>
                     </tr>
                 {% endfor %}
                 </tbody>
@@ -34,29 +34,29 @@
 {% endblock %}
 
 {% block script %}
-<script type="text/javascript" language="javascript" class="init">
-    $(document).ready(function() {
-         oTable = $('#travellers_table').DataTable( {
-            "columnDefs": [
-                {
-                    "targets": [ 6 ],
-                    "visible": false,
-                    "searchable": false
-                }
-            ],
-            "paging":   false,
-            "info":     false,
-        } );
+    <script type="text/javascript" language="javascript" class="init">
+        $(document).ready(function () {
+            oTable = $('#travellers_table').DataTable({
+                "columnDefs": [
+                    {
+                        "targets": [6],
+                        "visible": false,
+                        "searchable": false
+                    }
+                ],
+                "paging": false,
+                "info": false,
+            });
 
-        $('#site_search').keyup(function(){
-            oTable.search($(this).val()).draw() ;
-        })
+            $('#site_search').keyup(function () {
+                oTable.search($(this).val()).draw();
+            })
 
-        $('#travellers_table').on( 'click', 'tr', function () {
-            var id = oTable.row( this ).id().substring(4);
-            window.location.href = window.location.origin+'/sec_screen/'+id+'/info';
-        } );
+            $('#travellers_table').on('click', 'tr', function () {
+                var id = oTable.row(this).id().substring(4);
+                window.location.href = window.location.origin + '/sec_screen/' + id + '/info';
+            });
 
-    } );
- </script>
+        });
+    </script>
 {% endblock %}

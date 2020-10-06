@@ -1,33 +1,30 @@
 from django.db import models
-from phone_field import PhoneField
-from django.contrib.postgres.fields import ArrayField
 from modules.common.models import BaseModel
 from django.contrib.auth.models import User
-from multiselectfield import MultiSelectField
 from django.forms.models import model_to_dict
 
 FORM_CATEGORY = (
-    ('arrival', "ARRIVAL"),
-    ('departure', "DEPARTURE"),
+    ('arrival', 'ARRIVAL'),
+    ('departure', 'DEPARTURE'),
 )
 
 AGE_CATEGORY = (
-    ('above', "ABOVE 1"),
-    ('below', "BELOW 1"),
+    ('above', 'ABOVE 1'),
+    ('below', 'BELOW 1'),
 )
 
 SEX = (
-    ('M', "Male"),
-    ('F', "Female"),
+    ('M', 'Male'),
+    ('F', 'Female'),
 )
 ACTIVE = (
-    ('1', "1"),
-    ('0', "0"),
+    ('1', '1'),
+    ('0', '0'),
 )
 ID_TYPE = (
-    ('passport-number', "PASSPORT NUMBER"),
-    ('national-id', "NATIONAL ID"),
-    ('voter-id', "VOTER ID"),
+    ('passport-number', 'PASSPORT NUMBER'),
+    ('national-id', 'NATIONAL ID'),
+    ('voter-id', 'VOTER ID'),
 )
 TRANSPORT_MODE = (
     ('flight', 'Flight'),
@@ -68,9 +65,10 @@ EMPLOYMENT = (
 )
 
 ACTION_TAKEN = (
-    ('Allowed','Allowed to Proceed with entry/Exit formalities'),
-    ('Screening','Sent to secondary screening'),
+    ('Allowed', 'Allowed to Proceed with entry/Exit formalities'),
+    ('Screening', 'Sent to secondary screening'),
 )
+
 
 # diseases
 class Disease(models.Model):
@@ -81,8 +79,8 @@ class Disease(models.Model):
         return self.title
 
     class Meta:
-        db_table = "et_diseases"
-        verbose_name_plural = "Diseases"
+        db_table = 'et_diseases'
+        verbose_name_plural = 'Diseases'
 
 
 # symptoms
@@ -93,8 +91,8 @@ class Symptom(models.Model):
     alias = models.CharField(max_length=150, null=True)
 
     class Meta:
-        db_table = "et_symptoms"
-        verbose_name_plural = "Symptoms"
+        db_table = 'et_symptoms'
+        verbose_name_plural = 'Symptoms'
 
     def __str__(self):
         return self.title
@@ -108,7 +106,10 @@ class DiseaseSymptom(models.Model):
 
     class Meta:
         db_table = 'et_disease_symptoms'
-        verbose_name_plural = "Disease Sysmptoms"
+        verbose_name_plural = 'Disease Symptoms'
+
+    def __str__(self):
+        return self.disease.title
 
 
 # locations
@@ -120,8 +121,8 @@ class Location(models.Model):
     calling_code = models.CharField(max_length=5, null=True, verbose_name="Calling code")
 
     class Meta:
-        db_table = "et_locations"
-        verbose_name_plural = "Locations"
+        db_table = 'et_locations'
+        verbose_name_plural = 'Locations'
 
     def __str__(self):
         return str(self.title)
@@ -130,14 +131,17 @@ class Location(models.Model):
 class ScreenCriteria(models.Model):
     """A class to create screening criteria table."""
     disease = models.ForeignKey(Disease, on_delete=models.PROTECT)
-    countries = models.ManyToManyField(Location,related_name='countries',blank=True)
-    symptoms = models.ManyToManyField(Symptom,related_name='symptoms',blank=True)
-    temp = models.CharField(max_length=250,blank=True, null=True)
+    countries = models.ManyToManyField(Location, related_name='countries', blank=True)
+    symptoms = models.ManyToManyField(Symptom, related_name='symptoms', blank=True)
+    temp = models.CharField(max_length=250, blank=True, null=True)
     active = models.CharField(choices=ACTIVE, max_length=1, default='0')
 
     class Meta:
-        db_table = "et_ss_criteria"
-        verbose_name_plural = "Screening Criteria"
+        db_table = 'et_ss_criteria'
+        verbose_name_plural = 'Screening Criteria'
+
+    def __str__(self):
+        return self.disease.title
 
 
 class LocationDisease(models.Model):
@@ -149,81 +153,84 @@ class LocationDisease(models.Model):
     class Meta:
         db_table = "et_location_diseases"
 
+    def __str__(self):
+        return self.location.title
+
 
 # point of entries
 class PointOfEntry(models.Model):
     """A class to create point of entries table."""
-    title               = models.CharField(max_length=100)
-    code                = models.CharField(max_length=100, null=True)
-    mode_of_transport   = models.CharField(choices=TRANSPORT_MODE, max_length=255,  null=True)
-    category            = models.CharField(choices=TRANSPORT_CATEGORY, max_length=50,null=True)
-    agents              = models.ManyToManyField(User, blank=True)
+    title = models.CharField(max_length=100)
+    code = models.CharField(max_length=100, null=True)
+    mode_of_transport = models.CharField(choices=TRANSPORT_MODE, max_length=255, null=True)
+    category = models.CharField(choices=TRANSPORT_CATEGORY, max_length=50, null=True)
+    agents = models.ManyToManyField(User, blank=True)
 
     class Meta:
-        db_table = "et_point_of_entries"
-        verbose_name_plural = "Point of Entries"
+        db_table = 'et_point_of_entries'
+        verbose_name_plural = 'Point of Entries'
 
     def __str__(self):
         return self.title
 
 
-#action taken
-
+# action taken
 class ActionTaken(models.Model):
-    title               = models.CharField(max_length=255, null=False)
-    description         = models.TextField(null=True)
+    title = models.CharField(max_length=255, null=False)
+    description = models.TextField(null=True)
 
-    class Meta: 
-        db_table = "et_action_taken"
-        verbose_name_plural = "Action Taken"
+    class Meta:
+        db_table = 'et_action_taken'
+        verbose_name_plural = 'Action Taken'
 
     def __str__(self):
-        return self.title;    
+        return self.title
 
 
 # travellers
 class Traveller(BaseModel):
     """A class to create travellers table."""
-    surname         = models.CharField(max_length=50, null=True)
-    other_names     = models.CharField(max_length=100, null=True)
-    category        = models.CharField(choices=FORM_CATEGORY, max_length=30, default='None')
-    sex             = models.CharField(choices=SEX, max_length=15, default='None')
-    age_category    = models.CharField(choices=AGE_CATEGORY, max_length=30, null=True)
-    age             = models.IntegerField(default=1, null=True)
-    nationality     = models.ForeignKey(Location, related_name="nationality", default=0, on_delete=models.DO_NOTHING)
-    id_type         = models.CharField(choices=ID_TYPE, max_length=50, default='None')
-    id_number       = models.CharField(max_length=50)
-    employment      = models.CharField(choices=EMPLOYMENT, max_length=50, default='None')
-    other_employment    = models.CharField(max_length=255, blank=True, null=True)
+    surname = models.CharField(max_length=50, null=True)
+    other_names = models.CharField(max_length=100, null=True)
+    category = models.CharField(choices=FORM_CATEGORY, max_length=30, default='None')
+    sex = models.CharField(choices=SEX, max_length=15, default='None')
+    age_category = models.CharField(choices=AGE_CATEGORY, max_length=30, null=True)
+    age = models.IntegerField(default=1, null=True)
+    nationality = models.ForeignKey(Location, related_name="nationality", default=0, on_delete=models.DO_NOTHING)
+    id_type = models.CharField(choices=ID_TYPE, max_length=50, default='None')
+    id_number = models.CharField(max_length=50)
+    employment = models.CharField(choices=EMPLOYMENT, max_length=50, default='None')
+    other_employment = models.CharField(max_length=255, blank=True, null=True)
 
-    mode_of_transport   = models.CharField(choices=TRANSPORT_MODE, max_length=50, default='None')
-    name_of_transport   = models.CharField(max_length=50)
-    seat_number         = models.CharField(max_length=25, null=True)
-    arrival_date        = models.DateField(verbose_name="Arrival Date")
-    point_of_entry      = models.ForeignKey(PointOfEntry, related_name="point_of_entry", on_delete=models.DO_NOTHING)
+    mode_of_transport = models.CharField(choices=TRANSPORT_MODE, max_length=50, default='None')
+    name_of_transport = models.CharField(max_length=50)
+    seat_number = models.CharField(max_length=25, null=True)
+    arrival_date = models.DateField(verbose_name="Arrival Date")
+    point_of_entry = models.ForeignKey(PointOfEntry, related_name="point_of_entry", on_delete=models.DO_NOTHING)
 
-    visiting_purpose    = models.CharField(choices=PURPOSE, max_length=50, default='None')  # to look around
-    other_purpose       = models.TextField(null=True)
-    duration_of_stay    = models.PositiveIntegerField(default=0, null=True)
-    location_origin     = models.ForeignKey(Location, related_name="location_origin", on_delete=models.DO_NOTHING)
+    visiting_purpose = models.CharField(choices=PURPOSE, max_length=50, default='None')  # to look around
+    other_purpose = models.TextField(null=True)
+    duration_of_stay = models.PositiveIntegerField(default=0, null=True)
+    location_origin = models.ForeignKey(Location, related_name="location_origin", on_delete=models.DO_NOTHING)
 
-    physical_address    = models.TextField(null=True)
-    region              = models.ForeignKey(Location, related_name="region", default=0, on_delete=models.DO_NOTHING)  # to look around
-    district_id         = models.IntegerField(default=0, null=True)  # to look around
-    street_or_ward      = models.CharField(max_length=100, null=True)  # to look around
-    phone               = models.CharField(max_length=25, default='None')
-    email               = models.EmailField(max_length=255, default='None')
+    physical_address = models.TextField(null=True)
+    region = models.ForeignKey(Location, related_name="region", default=0,
+                               on_delete=models.DO_NOTHING)  # to look around
+    district_id = models.IntegerField(default=0, null=True)  # to look around
+    street_or_ward = models.CharField(max_length=100, null=True)  # to look around
+    phone = models.CharField(max_length=25, default='None')
+    email = models.EmailField(max_length=255, default='None')
 
-    temp                = models.FloatField(null=True)
-    disease_to_screen   = models.CharField(max_length=150, default='0')
-    action_taken        = models.ForeignKey(ActionTaken, default=1, on_delete=models.DO_NOTHING)
-    symptoms            = models.ManyToManyField(Symptom, blank=True)
-    other_symptoms      = models.TextField(null=True)
-    accept              = models.IntegerField(default=0, null=True)
-    updated_at          = models.DateTimeField(verbose_name="Updated date", null=True)
+    temp = models.FloatField(null=True)
+    disease_to_screen = models.CharField(max_length=150, default='0')
+    action_taken = models.ForeignKey(ActionTaken, default=1, on_delete=models.DO_NOTHING)
+    symptoms = models.ManyToManyField(Symptom, blank=True)
+    other_symptoms = models.TextField(null=True)
+    accept = models.IntegerField(default=0, null=True)
+    updated_at = models.DateTimeField(verbose_name="Updated date", null=True)
 
     class Meta(BaseModel.Meta):
-        db_table = "et_travellers"
+        db_table = 'et_travellers'
 
     def __str__(self):
         return str(self.id)
@@ -242,7 +249,7 @@ class TravellerVisitedArea(models.Model):
     days = models.PositiveIntegerField(null=True)
 
     class Meta:
-        db_table = "et_traveller_visited_areas"
+        db_table = 'et_traveller_visited_areas'
 
     def __str__(self):
         return str(self.location)
@@ -252,12 +259,12 @@ class TravellerVisitedArea(models.Model):
 
 
 # Traveller symptoms
-'''
+"""
 class TravellerSymptom(models.Model):
-    """A class to create traveller symptoms table."""
+    '''A class to create traveller symptoms table.'''
     traveller = models.ForeignKey(Traveller, on_delete=models.PROTECT)
     symptom = models.ForeignKey(Symptom, on_delete=models.DO_NOTHING)
 
     class Meta:
         db_table = "et_traveller_symptoms"
-'''
+"""

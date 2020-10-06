@@ -6,10 +6,10 @@ class Module(models.Model):
     title = models.CharField(max_length=100)
     icon = models.CharField(max_length=100)
     link = models.CharField(max_length=255)
-    #perms = models.TextField(default='')
+    # perms = models.TextField(default='')
 
     class Meta:
-        db_table = "et_modules"
+        db_table = 'et_modules'
 
     def __str__(self):
         return self.title

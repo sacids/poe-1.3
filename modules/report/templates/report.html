@@ -3,60 +3,67 @@
 
 
 {% block extra %}
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs/jszip-2.5.0/dt-1.10.22/b-1.6.4/b-colvis-1.6.4/b-html5-1.6.4/b-print-1.6.4/fh-3.1.7/r-2.2.6/sb-1.0.0/sp-1.2.0/datatables.min.css"/>
- 
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
-<script type="text/javascript" src="https://cdn.datatables.net/v/bs/jszip-2.5.0/dt-1.10.22/b-1.6.4/b-colvis-1.6.4/b-html5-1.6.4/b-print-1.6.4/fh-3.1.7/r-2.2.6/sb-1.0.0/sp-1.2.0/datatables.min.js"></script>
+    <link rel="stylesheet" type="text/css"
+          href="https://cdn.datatables.net/v/bs/jszip-2.5.0/dt-1.10.22/b-1.6.4/b-colvis-1.6.4/b-html5-1.6.4/b-print-1.6.4/fh-3.1.7/r-2.2.6/sb-1.0.0/sp-1.2.0/datatables.min.css"/>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+    <script type="text/javascript"
+            src="https://cdn.datatables.net/v/bs/jszip-2.5.0/dt-1.10.22/b-1.6.4/b-colvis-1.6.4/b-html5-1.6.4/b-print-1.6.4/fh-3.1.7/r-2.2.6/sb-1.0.0/sp-1.2.0/datatables.min.js"></script>
 
 
 
-<script src="https://code.highcharts.com/highcharts.js"></script>
-<script src="https://code.highcharts.com/modules/data.js"></script>
-<script src="https://code.highcharts.com/modules/exporting.js"></script>
-<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/data.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
 
-<style>
+    <style>
 
-    #bar_chart {
-        height: 400px;
-    }
-    
-    .highcharts-figure, .highcharts-data-table table {
-        min-width: 310px;
-        max-width: 800px;
-        margin: 1em auto;
-    }
-    
-    #datatable {
-        font-family: Verdana, sans-serif;
-        border-collapse: collapse;
-        border: 1px solid #EBEBEB;
-        margin: 10px auto;
-        text-align: center;
-        width: 100%;
-        max-width: 500px;
-    }
-    #datatable caption {
-        padding: 1em 0;
-        font-size: 1.2em;
-        color: #555;
-    }
-    #datatable th {
-        font-weight: 600;
-        padding: 0.5em;
-    }
-    #datatable td, #datatable th, #datatable caption {
-        padding: 0.5em;
-    }
-    #datatable thead tr, #datatable tr:nth-child(even) {
-        background: #f8f8f8;
-    }
-    #datatable tr:hover {
-        background: #f1f7ff;
-    }
-    
-</style>
+        #bar_chart {
+            height: 400px;
+        }
+
+        .highcharts-figure, .highcharts-data-table table {
+            min-width: 310px;
+            max-width: 800px;
+            margin: 1em auto;
+        }
+
+        #datatable {
+            font-family: Verdana, sans-serif;
+            border-collapse: collapse;
+            border: 1px solid #EBEBEB;
+            margin: 10px auto;
+            text-align: center;
+            width: 100%;
+            max-width: 500px;
+        }
+
+        #datatable caption {
+            padding: 1em 0;
+            font-size: 1.2em;
+            color: #555;
+        }
+
+        #datatable th {
+            font-weight: 600;
+            padding: 0.5em;
+        }
+
+        #datatable td, #datatable th, #datatable caption {
+            padding: 0.5em;
+        }
+
+        #datatable thead tr, #datatable tr:nth-child(even) {
+            background: #f8f8f8;
+        }
+
+        #datatable tr:hover {
+            background: #f1f7ff;
+        }
+
+    </style>
 {% endblock %}
 
 
@@ -64,136 +71,137 @@
 
 
 {% block navarea %}
-    
 
-</div><div class="ml-auto nav-icons search-d"><i class="fa fa-search" id="report_search_box" closed="1"></i>
+
+    </div>
+    <div class="ml-auto nav-icons search-d"><i class="fa fa-search" id="report_search_box" closed="1"></i>
 {% endblock %}
 {% block content %}
 
-<div class="row">
-    <div class="col-md-12">
-        <div class="search-form">
-            <form method="post">
-                {% csrf_token %}
-                <div class="row">
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            <label for="report_type">Type</label>
-                            <select class="form-control" id="report_type" name="report_type">
-                                <option value="0">Line List</option>
-                                <option value="1">Chart</option>
-                            </select>
-                        </div>
-                    </div><!--./col-md-2-->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="search-form">
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="report_type">Type</label>
+                                <select class="form-control" id="report_type" name="report_type">
+                                    <option value="0">Line List</option>
+                                    <option value="1">Chart</option>
+                                </select>
+                            </div>
+                        </div><!--./col-md-2-->
 
-                    <div class="col-md-2">
-                        <div class="form-group" id="chart_wrp">
-                            <label for="chart">Chart</label>
-                            <select class="form-control" id="chart" name="chart">
-                                <option value="action_taken">Action Taken</option>
-                                <option value="symptoms">Symptoms</option>
-                                <option value="nationality">Nationality</option>
-                            </select>
-                        </div>
-                    </div><!--./col-md-2-->
+                        <div class="col-md-2">
+                            <div class="form-group" id="chart_wrp">
+                                <label for="chart">Chart</label>
+                                <select class="form-control" id="chart" name="chart">
+                                    <option value="action_taken">Action Taken</option>
+                                    <option value="symptoms">Symptoms</option>
+                                    <option value="nationality">Nationality</option>
+                                </select>
+                            </div>
+                        </div><!--./col-md-2-->
 
-                    <div class="col-md-2">
-                        <div class="form-group" id="group_by_wrp">
-                            <label for="group_by">Group By</label>
-                            <select class="form-control" id="group_by" name="group_by"  data-live-search="true">
-                                <optgroup label="Time">
-                                    <option value="daily">Daily</option>
-                                    <option value="weekly">Weekly</option>
-                                    <option value="monthly">Monthly</option>
-                                    <option value="yearly">Yearly</option>
-                                </optgroup>
-                                <optgroup label="PoE's">
-                                    {% for poe in poes %}
-                                    <option value="{{poe.id}}">{{poe.title}}</option>
-                                    {% endfor %}
-                                </optgroup>
-                            </select>
-                        </div>
-                    </div><!--./col-md-2-->
+                        <div class="col-md-2">
+                            <div class="form-group" id="group_by_wrp">
+                                <label for="group_by">Group By</label>
+                                <select class="form-control" id="group_by" name="group_by" data-live-search="true">
+                                    <optgroup label="Time">
+                                        <option value="daily">Daily</option>
+                                        <option value="weekly">Weekly</option>
+                                        <option value="monthly">Monthly</option>
+                                        <option value="yearly">Yearly</option>
+                                    </optgroup>
+                                    <optgroup label="PoE's">
+                                        {% for poe in poes %}
+                                            <option value="{{ poe.id }}">{{ poe.title }}</option>
+                                        {% endfor %}
+                                    </optgroup>
+                                </select>
+                            </div>
+                        </div><!--./col-md-2-->
 
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            <label for="from_date">From Date</label>
-                            <input class="form-control" id="from_date" name="from_date" type="date" value="0">
-                        </div>
-                    </div><!--./col-md-2-->
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="from_date">From Date</label>
+                                <input class="form-control" id="from_date" name="from_date" type="date" value="0">
+                            </div>
+                        </div><!--./col-md-2-->
 
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            <label for="to_date">To Date</label>
-                            <input class="form-control" id="to_date" name="to_date" type="date" value="0">
-                        </div>
-                    </div><!--./col-md-2-->
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="to_date">To Date</label>
+                                <input class="form-control" id="to_date" name="to_date" type="date" value="0">
+                            </div>
+                        </div><!--./col-md-2-->
 
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            <label for="to_date">&nbsp;</label>
-                            <input  class="btn btn-primary form-control"type="submit" value="submit"></div>
-                    </div><!--./col-md-2-->
-                </div><!--./row-->
-            </form>
-        </div><!--./search-form-->
-    </div><!--./col-md-12-->
-</div><!--./row-->
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="to_date">&nbsp;</label>
+                                <input class="btn btn-primary form-control" type="submit" value="submit"></div>
+                        </div><!--./col-md-2-->
+                    </div><!--./row-->
+                </form>
+            </div><!--./search-form-->
+        </div><!--./col-md-12-->
+    </div><!--./row-->
     {% if report_type == 'line_list' %}
-        <table id="line_list"  class="display nowrap responsive" style="width:100%">
+        <table id="line_list" class="display nowrap responsive" style="width:100%">
             <thead>
-                <tr rowspan="2">
-                    <th>PoE</th>
-                    <th>Full Name</th>
-                    <th>Sex</th>
-                    <th>Age</th>
-                    <th>Age Category</th>
-                    <th>Occupation</th>
-                    <th>Purpose</th>
-                    <th>Nationality</th>
-                    <th>Passport No</th>
-                    <th>Arrival Date</th>
-                    <th>Departure Date</th>
-                    <th>Country of Origin</th>
-                    <th>Address & Place of Destination</th>
-                    <th>Phone number</th>
-                    <th>Email</th>
-                    <th>Temperature reading</th>
-                    <th>Symptoms</th>
-                    <th>Action Taken</th>
-                    <th>Quarantine Hotel</th>
-                </tr>
+            <tr rowspan="2">
+                <th>PoE</th>
+                <th>Full Name</th>
+                <th>Sex</th>
+                <th>Age</th>
+                <th>Age Category</th>
+                <th>Occupation</th>
+                <th>Purpose</th>
+                <th>Nationality</th>
+                <th>Passport No</th>
+                <th>Arrival Date</th>
+                <th>Departure Date</th>
+                <th>Country of Origin</th>
+                <th>Address & Place of Destination</th>
+                <th>Phone number</th>
+                <th>Email</th>
+                <th>Temperature reading</th>
+                <th>Symptoms</th>
+                <th>Action Taken</th>
+                <th>Quarantine Hotel</th>
+            </tr>
             </thead>
             <tbody>
-                {% for line in line_list %}
-                    <td>{{line.point_of_entry.title}}</td>
-                    <td>{{line.surname}}, {{line.other_names}}</td>
-                    <td>{{line.sex}}</td>
-                    <td>{{line.age}}</td>
-                    <td>{{line.age_category}}</td>
-                    <td>{{line.employment}}</td>
-                    <td>{{line.visiting_purpose}}</td>
-                    <td>{{line.nationality.title}}</td>
-                    <td>{{line.id_number}}</td>
-                    <td>{{line.arrival_date}}</td>
-                    <td>{{line.duration_of_stay}}</td>
-                    <td>{{line.location_origin.title}}</td>
-                    <td>{{line.physical_address}}</td>
-                    <td>{{line.phone}}</td>
-                    <td>{{line.email}}</td>
-                    <td>{{line.temp}}</td>
+            {% for line in line_list %}
+                <td>{{ line.point_of_entry.title }}</td>
+                <td>{{ line.surname }}, {{ line.other_names }}</td>
+                <td>{{ line.sex }}</td>
+                <td>{{ line.age }}</td>
+                <td>{{ line.age_category }}</td>
+                <td>{{ line.employment }}</td>
+                <td>{{ line.visiting_purpose }}</td>
+                <td>{{ line.nationality.title }}</td>
+                <td>{{ line.id_number }}</td>
+                <td>{{ line.arrival_date }}</td>
+                <td>{{ line.duration_of_stay }}</td>
+                <td>{{ line.location_origin.title }}</td>
+                <td>{{ line.physical_address }}</td>
+                <td>{{ line.phone }}</td>
+                <td>{{ line.email }}</td>
+                <td>{{ line.temp }}</td>
 
-                    <td>
-                        {% for symptom in sympoms_set %}
-                            {{ symptom.title }}, 
-                        {% endfor %}
-                    </td>
-                    
-                    <td>{{line.action_taken.title}}</td>
-                    <td></td>
+                <td>
+                    {% for symptom in sympoms_set %}
+                        {{ symptom.title }},
+                    {% endfor %}
+                </td>
+
+                <td>{{ line.action_taken.title }}</td>
+                <td></td>
                 </tr>
-                {% endfor %}
+            {% endfor %}
             </tbody>
 
         </table>
@@ -201,21 +209,21 @@
         <div id="bar_chart"></div>
         <table id="datatable">
             <thead>
-                <tr>
-                    <th></th>
-                    {% for s in series %}
-                        <th>{{s.title}}</th>
-                    {% endfor %}
-                </tr>
+            <tr>
+                <th></th>
+                {% for s in series %}
+                    <th>{{ s.title }}</th>
+                {% endfor %}
+            </tr>
             </thead>
             <tbody>
-                {% for line in line_list %}    
-                    <tr>
-                        {% for row in line %}
-                            <td>{{row}}</td>
-                        {% endfor %}
-                    </tr>             
-                {% endfor %}
+            {% for line in line_list %}
+                <tr>
+                    {% for row in line %}
+                        <td>{{ row }}</td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
             </tbody>
         </table>
     {% endif %}
@@ -223,74 +231,74 @@
 {% endblock %}
 
 {% block script %}
-<script type="text/javascript" language="javascript" class="init">
-    $(document).ready(function() {
+    <script type="text/javascript" language="javascript" class="init">
+        $(document).ready(function () {
 
 
-        oTable = $('#line_list').DataTable( {    
-            responsive: true,
-            dom: '<Blfrtip><"#report_query" Q>',
-            buttons: [
-                'copy', 'csv', 'excel', 'pdf', 'print'
-            ]
-        } );
+            oTable = $('#line_list').DataTable({
+                responsive: true,
+                dom: '<Blfrtip><"#report_query" Q>',
+                buttons: [
+                    'copy', 'csv', 'excel', 'pdf', 'print'
+                ]
+            });
 
-        $('#chart_wrp, #group_by_wrp').hide();
-        $('#report_type').on('change',function(e){
+            $('#chart_wrp, #group_by_wrp').hide();
+            $('#report_type').on('change', function (e) {
 
-            if($(this).val() == "0"){
-                // line list 
-                $('#chart_wrp, #group_by_wrp').hide();
-            }else{
-                $('#chart_wrp, #group_by_wrp').show();
-            }
-        });
+                if ($(this).val() == "0") {
+                    // line list
+                    $('#chart_wrp, #group_by_wrp').hide();
+                } else {
+                    $('#chart_wrp, #group_by_wrp').show();
+                }
+            });
 
 
-        $('#report_search_box').on('click',function(e){
+            $('#report_search_box').on('click', function (e) {
 
-            var closed = $(this).attr('closed');
-            if( closed == '1'){
+                var closed = $(this).attr('closed');
+                if (closed == '1') {
 
-                $(this).attr('closed',0);
-                $('#report_query').animate({
-                    marginRight: '0px'
-                }, 500);
+                    $(this).attr('closed', 0);
+                    $('#report_query').animate({
+                        marginRight: '0px'
+                    }, 500);
 
-            }else{
+                } else {
 
-                $(this).attr('closed',1);
-                $('#report_query').animate({
-                    marginRight: '-50vw'
-                }, 500);
-            }
-        })
+                    $(this).attr('closed', 1);
+                    $('#report_query').animate({
+                        marginRight: '-50vw'
+                    }, 500);
+                }
+            })
 
-        Highcharts.chart('bar_chart', {
-            data: {
-                table: 'datatable'
-            },
-            chart: {
-                type: 'column'
-            },
-            title: {
-                text: 'Action Taken per PoE'
-            },
-            yAxis: {
-                allowDecimals: false,
+            Highcharts.chart('bar_chart', {
+                data: {
+                    table: 'datatable'
+                },
+                chart: {
+                    type: 'column'
+                },
                 title: {
-                    text: 'Units'
+                    text: 'Action Taken per PoE'
+                },
+                yAxis: {
+                    allowDecimals: false,
+                    title: {
+                        text: 'Units'
+                    }
+                },
+                tooltip: {
+                    formatter: function () {
+                        return '<b>' + this.series.name + '</b><br/>' +
+                            this.point.y + ' ' + this.point.name.toLowerCase();
+                    }
                 }
-            },
-            tooltip: {
-                formatter: function () {
-                    return '<b>' + this.series.name + '</b><br/>' +
-                        this.point.y + ' ' + this.point.name.toLowerCase();
-                }
-            }
+            });
+
+
         });
-
-
-    } );
- </script>
+    </script>
 {% endblock %}

@@ -9,8 +9,8 @@
             '<select name="location" id="location" class="form-control chosen-select">' +
             '<option value="">{% trans "-- Select --" %}</option>' +
             "{% for country in countries %}" +
-            "<option value='{{ country.id }}'>{{ country.title }}</option>" +
-            "{% endfor %}" +
+                "<option value='{{ country.id }}'>{{ country.title }}</option>" +
+                "{% endfor %}" +
             '</select>' +
             '<span id="errorLocation" style="color: red;"></span>' +
             '</div>' +

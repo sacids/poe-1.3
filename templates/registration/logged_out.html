@@ -1,24 +1,20 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<section class="bg-white">
-  <div class="container" style="min-height: 600px;">
-    <div class="row">
-      <div class="col-md-4 col-sm-3 col-xs-12 col-lg-4"></div>
-      <div class="col-md-4 col-sm-6 col-xs-12 col-lg-4">
-        <div style="margin-top: 50px;"></div>
-
-        <p class="badge badge-danger">Logged out!</p>
-
-        <p><a href="{% url 'login'%}">Click here to login again.</a></p>
-        
-
-      </div>
-      <!--./col-md-4 -->
-      <div class="col-md-3"></div>
-    </div>
-    <!--./row -->
-  </div>
-  <!--./container -->
-</section>
+    <section class="bg-white">
+        <div class="container" style="min-height: 600px;">
+            <div class="row">
+                <div class="col-md-4 col-sm-3 col-xs-12 col-lg-4"></div>
+                <div class="col-md-4 col-sm-6 col-xs-12 col-lg-4">
+                    <div style="margin-top: 50px;"></div>
+                    <p class="badge badge-danger">Logged out!</p>
+                    <p><a href="{% url 'login' %}">Click here to login again.</a></p>
+                </div>
+                <!--./col-md-4 -->
+                <div class="col-md-3"></div>
+            </div>
+            <!--./row -->
+        </div>
+        <!--./container -->
+    </section>
 {% endblock %}

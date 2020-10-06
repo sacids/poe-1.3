@@ -8,16 +8,16 @@
 {% block content %}
     {% if not form_submitted %}
         <form method="post" action="">
-        {% csrf_token %}
-        
-        <div class="row">
-            <div class="col-lg-6">
-            {{form|crispy }}
-            <input type="submit" value="Submit Form"/>
+            {% csrf_token %}
+
+            <div class="row">
+                <div class="col-lg-6">
+                    {{ form|crispy }}
+                    <input type="submit" value="Submit Form"/>
+                </div>
             </div>
-        </div>
         </form>
     {% else %}
-        <span>Data Received</div>
+        <span>Data Received</span>
     {% endif %}
 {% endblock %}

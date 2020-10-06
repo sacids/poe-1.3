@@ -9,6 +9,8 @@ from modules.travellers.views import calculate_score
 from django.db import models
 from django.db.models import Prefetch
 from django.http import JsonResponse
+from django.db.models.functions import Concat
+from django.db.models import CharField, Value as V
 
 
 @login_required
@@ -69,12 +71,21 @@ def set_temp(request):
 
         if Temp > 38:
             res     = 2
+            screen  = '100'
         elif Temp < 36:
             res     = 2
+            screen  = '100'
         else:
             res     = 1
+            screen  = ''
 
+        score   = calculate_score(Trav.id)
+        if score != 0:
+            Trav.disease_to_screen = score+','+screen
+        #Trav.update(temp=Temp,disease_to_screen=Concat('disease_to_screen',V(','),screen))
+        #Trav.update(disease_to_screen  = screen
         Trav.save()
+
 
     return HttpResponse(res)
 

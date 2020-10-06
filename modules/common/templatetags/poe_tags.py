@@ -25,3 +25,12 @@ def remove_newlines(text):
 remove_newlines.is_safe = True
 remove_newlines = stringfilter(remove_newlines)
 register.filter(remove_newlines)
+
+
+@register.filter
+def get_item(dictionary, key):
+    if key in dictionary:
+        return dictionary.get(key)
+    else:
+        return 0
+

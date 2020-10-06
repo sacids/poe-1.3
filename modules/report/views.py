@@ -4,6 +4,7 @@ from django.db import models
 from modules.travellers.models import *
 from django.db.models import Count
 from .models import *
+from django.db.models import F
 
 # Create your views here.
 class ReportView(generic.TemplateView):
@@ -30,8 +31,46 @@ class ReportView(generic.TemplateView):
             context['report_type']  = 'line_list'
             context['search']       = 0
         else:
-            j = exec_chart(request.POST.get('chart'),request.POST.get('group_by'),request.POST.get('from_date'),request.POST.get('to_date'))
-        
+            series                  = request.POST.get('chart')
+            category                = request.POST.get('group_by')
+            from_date               = request.POST.get('from_date')
+            to_date                 = request.POST.get('to_date')
+            poes                    = PointOfEntry.objects.filter(agents__id=request.user.id)
+
+            
+
+            j = exec_chart(series,category,from_date,to_date)
+
+            
+            context['report_type']  = 'chart'
+            context['search']       = 0
+
+            if series == 'action_taken':
+                series       = ActionTaken.objects.all()
+            else:
+                series       = Symptom.objects.all()
+
+            line_list               = []
+            for poe in poes:
+                row     = []
+                row.append(poe.title)
+                for s in series:
+                    if poe.id in j:
+                        tmp     = j[poe.id]
+                        if s.id in tmp:
+                            row.append(tmp[s.id])
+                        else:
+                            row.append(0)
+                    else:
+                        row.append(0)
+                line_list.append(row)
+
+            print(line_list)    
+            context['line_list']    = line_list
+            context['series']       = series
+                
+            
+            #print(context['series'])
         
         return super(ReportView, self).render_to_response(context)
 
@@ -50,7 +89,6 @@ def exec_line_list(from_date, to_date):
         f_poe   |= models.Q(point_of_entry=poe_id)
     '''
 
-
     a_date              = models.Q()
     if from_date is not None:
         a_date          &= models.Q(arrival_date__gte=from_date)
@@ -61,7 +99,8 @@ def exec_line_list(from_date, to_date):
     #print(qs.query)
     return qs
 
-def exec_chart(chart, group_by,from_date, to_date):
+def exec_chart(series, category,from_date, to_date):
+
 
     a_date              = models.Q()
     if from_date is not None:
@@ -69,9 +108,30 @@ def exec_chart(chart, group_by,from_date, to_date):
     if to_date is not None:
         a_date          &= models.Q(arrival_date__lte=to_date)
 
-    qs      = Traveller.objects.filter(a_date).order_by('-id')
+    qs      = Traveller.objects.filter(a_date)
+    l       = []
+    if(category == 'day'):
+        qs  = qs.extra(select={'gb': 'date( arrival_date )'})
+        l.append('gb')
+    else:
+        qs  = qs.annotate(gb=F('point_of_entry'))
+        l.append('gb')
 
-    return qs
+    qs  = qs.annotate(cat=F(series))
+    l.append('cat')
+
+    qs      = qs.values(*l).annotate(cnt=Count('cat'))
+
+    #print(qs.query)
+    graph     = {}
+    for item in qs:
+        print(item)
+        graph[item['gb']] = {item['cat']:item['cnt']}
+
+    print(graph)
+
+    
+    return graph
 
 
 def exec_report(summary,poes,action_taken,sex,from_date,to_date):

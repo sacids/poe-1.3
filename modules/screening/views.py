@@ -79,6 +79,7 @@ def set_temp(request):
             screen = ''
 
         score = calculate_score(Trav.id)
+
         if score != 0:
             Trav.disease_to_screen = score+','+screen
             Trav.action_taken   = ActionTaken.objects.get(pk=2)

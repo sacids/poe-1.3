@@ -161,9 +161,9 @@ class LocationDisease(models.Model):
 class PointOfEntry(models.Model):
     """A class to create point of entries table."""
     title = models.CharField(max_length=100)
-    code = models.CharField(max_length=100, null=True)
-    mode_of_transport = models.CharField(choices=TRANSPORT_MODE, max_length=255, null=True)
-    category = models.CharField(choices=TRANSPORT_CATEGORY, max_length=50, null=True)
+    code = models.CharField(max_length=100, null=True, blank=True)
+    mode_of_transport = models.CharField(choices=TRANSPORT_MODE, max_length=255, null=True, blank=True)
+    category = models.CharField(choices=TRANSPORT_CATEGORY, max_length=50, null=True, blank=True)
     agents = models.ManyToManyField(User, blank=True)
 
     class Meta:

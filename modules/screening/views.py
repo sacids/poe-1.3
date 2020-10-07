@@ -60,7 +60,7 @@ def update_symptoms(request):
     
 
     score = calculate_score(tid)
-
+    print(score)
     if score != 0:
         Trav.disease_to_screen = score
         Trav.action_taken_id = 2

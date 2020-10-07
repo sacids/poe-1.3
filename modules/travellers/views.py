@@ -132,8 +132,7 @@ def arrival(request):
                 traveller.district_id = request.POST.get('district_id')
 
             traveller.street_or_ward = form.cleaned_data['street_or_ward']
-            traveller.phone = request.POST.get(
-                'calling_code') + cast_phone(form.cleaned_data['phone'])
+            traveller.phone = '+255' + cast_phone(form.cleaned_data['phone'])
             traveller.email = form.cleaned_data['email'].lower()
 
             traveller.location_origin = form.cleaned_data['location_origin']
@@ -247,11 +246,11 @@ def calculate_score(traveller_id):
     for s in symptoms:
         fs |= Q(symptoms__id=s.id, )
 
-    queryset = ScreenCriteria.objects.filter(fc & fs).distinct()
-
+    queryset = ScreenCriteria.objects.filter(fc | fs).values('disease_id').distinct()
+    #print(queryset)
     # if count is more than one join otherwise set zero
     if queryset.count() > 0:
-        score = ', '.join(str(id.disease_id) for id in queryset)
+        score = ', '.join(str(id['disease_id']) for id in queryset)
         return score
     else:
         return 0

@@ -25,7 +25,7 @@ def screen(request):
         travellers = travellers.filter(point_of_entry_id=poe_id)
 
     temp_a = range(34, 41)
-    temp_b = range(1, 10)
+    temp_b = range(0, 10)
 
     # context
     context = {
@@ -82,10 +82,10 @@ def set_temp(request):
 
         if score != 0:
             Trav.disease_to_screen = score + screen
-            Trav.action_taken = ActionTaken.objects.get(pk=2)
+            Trav.action_taken_id = 2
         else:
             Trav.disease_to_screen = str(score) + screen
-            Trav.action_taken = ActionTaken.objects.get(pk=1)
+            Trav.action_taken_id = 1
         # Trav.update(temp=Temp,disease_to_screen=Concat('disease_to_screen',V(','),screen))
         # Trav.update(disease_to_screen  = screen
         Trav.save()

@@ -4,7 +4,7 @@
     <div class="set_poe_div">
         <div><h5>SET POINT OF ENTRY</h5></div>
         <select name="poe" id="set_poe">
-            <option value="0">ALL</option>
+            <option>-- Select --</option>
             {% for poe in poes %}
                 <option value="{{ poe.id }}"> {{ poe.code }}</option>
             {% endfor %}

@@ -12,6 +12,7 @@ class ReportView(generic.TemplateView):
 
     def post(self, request, *args, **kwargs):
         context = self.get_context_data()
+        current_poe_id  = request.session.get('poe_id',-1)
         # print(request.POST.get)
         '''
         j = exec_report(request.POST.getlist('summary'),
@@ -26,7 +27,7 @@ class ReportView(generic.TemplateView):
         report_type = request.POST.get('report_type')
         if report_type == "0":
             # Line list
-            j = exec_line_list(request.POST.get('from_date'), request.POST.get('to_date'))
+            j = exec_line_list(request.POST.get('from_date'), request.POST.get('to_date'),current_poe_id)
             context['line_list'] = j
             context['report_type'] = 'line_list'
             context['search'] = 0
@@ -62,7 +63,7 @@ class ReportView(generic.TemplateView):
                         row.append(0)
                 line_list.append(row)
 
-            print(line_list)
+            #print(line_list)
             context['line_list'] = line_list
             context['series'] = series
 
@@ -77,7 +78,7 @@ class ReportView(generic.TemplateView):
         return context
 
 
-def exec_line_list(from_date, to_date):
+def exec_line_list(from_date, to_date, poe_id):
     """
     f_poe               = Q()
     for poe_id in poes:
@@ -90,7 +91,16 @@ def exec_line_list(from_date, to_date):
     if to_date is not None:
         a_date &= Q(arrival_date__lte=to_date)
 
-    qs = Traveller.objects.filter(a_date).order_by('-id')
+    q_poe     = Q()
+    if poe_id == 0:
+        # do not return result
+        q_poe = Q()
+    elif poe_id > 0:
+        q_poe = Q(point_of_entry__id=poe_id)
+    else:
+        q_poe = Q(point_of_entry__id=-1)
+
+    qs = Traveller.objects.filter(a_date & q_poe).order_by('-id')
     # print(qs.query)
     return qs
 
@@ -119,7 +129,7 @@ def exec_chart(series, category, from_date, to_date):
     # print(qs.query)
     graph = {}
     for item in qs:
-        print(item)
+        #print(item)
         graph[item['gb']] = {item['cat']: item['cnt']}
 
     print(graph)

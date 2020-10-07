@@ -11,6 +11,7 @@ from django.contrib import messages
 from django.conf import settings
 from django.db import connection
 from django.db.models import Q
+from modules.dashboard.views import dashboard
 
 
 def default(request):
@@ -25,6 +26,8 @@ def default(request):
     Returns: 
     None
     """
+    if request.user.is_authenticated:
+        return redirect(dashboard)
     return render(request, 'travellers/home.html', {})
 
 
@@ -130,8 +133,7 @@ def arrival(request):
                 traveller.district_id = request.POST.get('district_id')
 
             traveller.street_or_ward = form.cleaned_data['street_or_ward']
-            traveller.phone = request.POST.get(
-                'calling_code') + cast_phone(form.cleaned_data['phone'])
+            traveller.phone = '+255' + cast_phone(form.cleaned_data['phone'])
             traveller.email = form.cleaned_data['email'].lower()
 
             traveller.location_origin = form.cleaned_data['location_origin']
@@ -246,7 +248,7 @@ def calculate_score(traveller_id):
         fs |= Q(symptoms__id=s.id, )
 
     queryset = ScreenCriteria.objects.filter(fc | fs).values('disease_id').distinct()
-    #print(queryset)
+    # print(queryset)
     # if count is more than one join otherwise set zero
     if queryset.count() > 0:
         score = ', '.join(str(id['disease_id']) for id in queryset)

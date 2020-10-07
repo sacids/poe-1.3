@@ -11,8 +11,6 @@
     <script type="text/javascript"
             src="https://cdn.datatables.net/v/bs/jszip-2.5.0/dt-1.10.22/b-1.6.4/b-colvis-1.6.4/b-html5-1.6.4/b-print-1.6.4/fh-3.1.7/r-2.2.6/sb-1.0.0/sp-1.2.0/datatables.min.js"></script>
 
-
-
     <script src="https://code.highcharts.com/highcharts.js"></script>
     <script src="https://code.highcharts.com/modules/data.js"></script>
     <script src="https://code.highcharts.com/modules/exporting.js"></script>
@@ -66,16 +64,12 @@
     </style>
 {% endblock %}
 
-
-
-
-
 {% block navarea %}
-
-
+    <div class="ml-auto nav-icons search-d">
+        <i class="fa fa-search" id="report_search_box" closed="1"></i>
     </div>
-    <div class="ml-auto nav-icons search-d"><i class="fa fa-search" id="report_search_box" closed="1"></i>
 {% endblock %}
+
 {% block content %}
 
     <div class="row">
@@ -92,10 +86,11 @@
                                     <option value="1">Chart</option>
                                 </select>
                             </div>
-                        </div><!--./col-md-2-->
+                        </div>
+                        <!--./col-md-2-->
 
-                        <div class="col-md-2">
-                            <div class="form-group" id="chart_wrp">
+                        <div class="col-md-2" id="chart_wrp">
+                            <div class="form-group">
                                 <label for="chart">Chart</label>
                                 <select class="form-control" id="chart" name="chart">
                                     <option value="action_taken">Action Taken</option>
@@ -103,10 +98,11 @@
                                     <option value="nationality">Nationality</option>
                                 </select>
                             </div>
-                        </div><!--./col-md-2-->
+                        </div>
+                        <!--./col-md-2-->
 
-                        <div class="col-md-2">
-                            <div class="form-group" id="group_by_wrp">
+                        <div class="col-md-2" id="group_by_wrp">
+                            <div class="form-group">
                                 <label for="group_by">Group By</label>
                                 <select class="form-control" id="group_by" name="group_by" data-live-search="true">
                                     <optgroup label="Time">
@@ -122,111 +118,127 @@
                                     </optgroup>
                                 </select>
                             </div>
-                        </div><!--./col-md-2-->
+                        </div>
+                        <!--./col-md-2-->
 
                         <div class="col-md-2">
                             <div class="form-group">
                                 <label for="from_date">From Date</label>
                                 <input class="form-control" id="from_date" name="from_date" type="date" value="0">
                             </div>
-                        </div><!--./col-md-2-->
+                        </div>
+                        <!--./col-md-2-->
 
                         <div class="col-md-2">
                             <div class="form-group">
                                 <label for="to_date">To Date</label>
                                 <input class="form-control" id="to_date" name="to_date" type="date" value="0">
                             </div>
-                        </div><!--./col-md-2-->
+                        </div>
+                        <!--./col-md-2-->
 
                         <div class="col-md-2">
                             <div class="form-group">
                                 <label for="to_date">&nbsp;</label>
-                                <input class="btn btn-primary form-control" type="submit" value="submit"></div>
-                        </div><!--./col-md-2-->
-                    </div><!--./row-->
+                                <input class="btn btn-primary form-control" type="submit" value="submit">
+                            </div>
+                        </div>
+                        <!--./col-md-2-->
+                    </div>
+                    <!--./row-->
                 </form>
-            </div><!--./search-form-->
-        </div><!--./col-md-12-->
-    </div><!--./row-->
-    {% if report_type == 'line_list' %}
-        <table id="line_list" class="display nowrap responsive" style="width:100%">
-            <thead>
-            <tr rowspan="2">
-                <th>PoE</th>
-                <th>Full Name</th>
-                <th>Sex</th>
-                <th>Age</th>
-                <th>Age Category</th>
-                <th>Occupation</th>
-                <th>Purpose</th>
-                <th>Nationality</th>
-                <th>Passport No</th>
-                <th>Arrival Date</th>
-                <th>Departure Date</th>
-                <th>Country of Origin</th>
-                <th>Address & Place of Destination</th>
-                <th>Phone number</th>
-                <th>Email</th>
-                <th>Temperature reading</th>
-                <th>Symptoms</th>
-                <th>Action Taken</th>
-                <th>Quarantine Hotel</th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for line in line_list %}
-                <td>{{ line.point_of_entry.title }}</td>
-                <td>{{ line.surname }}, {{ line.other_names }}</td>
-                <td>{{ line.sex }}</td>
-                <td>{{ line.age }}</td>
-                <td>{{ line.age_category }}</td>
-                <td>{{ line.employment }}</td>
-                <td>{{ line.visiting_purpose }}</td>
-                <td>{{ line.nationality.title }}</td>
-                <td>{{ line.id_number }}</td>
-                <td>{{ line.arrival_date }}</td>
-                <td>{{ line.duration_of_stay }}</td>
-                <td>{{ line.location_origin.title }}</td>
-                <td>{{ line.physical_address }}</td>
-                <td>{{ line.phone }}</td>
-                <td>{{ line.email }}</td>
-                <td>{{ line.temp }}</td>
+            </div>
+            <!--./search-form-->
+        </div>
+        <!--./col-md-12-->
+    </div>
+    <!--./row-->
 
-                <td>
-                    {% for symptom in sympoms_set %}
-                        {{ symptom.title }},
+    <div class="row">
+        <div class="col-md-12">
+            {% if report_type == 'line_list' %}
+                <table id="line_list" class="display nowrap responsive" style="width:100%">
+                    <thead>
+                    <tr rowspan="2">
+                        <th>PoE</th>
+                        <th>Full Name</th>
+                        <th>Sex</th>
+                        <th>Age</th>
+                        <th>Age Category</th>
+                        <th>Occupation</th>
+                        <th>Purpose</th>
+                        <th>Nationality</th>
+                        <th>Passport No</th>
+                        <th>Arrival Date</th>
+                        <th>Departure Date</th>
+                        <th>Country of Origin</th>
+                        <th>Address & Place of Destination</th>
+                        <th>Phone number</th>
+                        <th>Email</th>
+                        <th>Temperature reading</th>
+                        <th>Symptoms</th>
+                        <th>Action Taken</th>
+                        <th>Quarantine Hotel</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for line in line_list %}
+                        <td>{{ line.point_of_entry.title }}</td>
+                        <td>{{ line.surname }}, {{ line.other_names }}</td>
+                        <td>{{ line.sex }}</td>
+                        <td>{{ line.age }}</td>
+                        <td>{{ line.age_category }}</td>
+                        <td>{{ line.employment }}</td>
+                        <td>{{ line.visiting_purpose }}</td>
+                        <td>{{ line.nationality.title }}</td>
+                        <td>{{ line.id_number }}</td>
+                        <td>{{ line.arrival_date }}</td>
+                        <td>{{ line.duration_of_stay }}</td>
+                        <td>{{ line.location_origin.title }}</td>
+                        <td>{{ line.physical_address }}</td>
+                        <td>{{ line.phone }}</td>
+                        <td>{{ line.email }}</td>
+                        <td>{{ line.temp }}</td>
+
+                        <td>
+                            {% for symptom in sympoms_set %}
+                                {{ symptom.title }},
+                            {% endfor %}
+                        </td>
+
+                        <td>{{ line.action_taken.title }}</td>
+                        <td></td>
+                        </tr>
                     {% endfor %}
-                </td>
+                    </tbody>
 
-                <td>{{ line.action_taken.title }}</td>
-                <td></td>
-                </tr>
-            {% endfor %}
-            </tbody>
-
-        </table>
-    {% else %}
-        <div id="bar_chart"></div>
-        <table id="datatable">
-            <thead>
-            <tr>
-                <th></th>
-                {% for s in series %}
-                    <th>{{ s.title }}</th>
-                {% endfor %}
-            </tr>
-            </thead>
-            <tbody>
-            {% for line in line_list %}
-                <tr>
-                    {% for row in line %}
-                        <td>{{ row }}</td>
+                </table>
+            {% else %}
+                <div id="bar_chart"></div>
+                <table id="datatable">
+                    <thead>
+                    <tr>
+                        <th></th>
+                        {% for s in series %}
+                            <th>{{ s.title }}</th>
+                        {% endfor %}
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for line in line_list %}
+                        <tr>
+                            {% for row in line %}
+                                <td>{{ row }}</td>
+                            {% endfor %}
+                        </tr>
                     {% endfor %}
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
-    {% endif %}
+                    </tbody>
+                </table>
+            {% endif %}
+        </div>
+        <!--./col-md-12-->
+    </div>
+    <!--./row-->
 
 {% endblock %}
 
@@ -247,7 +259,7 @@
             $('#report_type').on('change', function (e) {
 
                 if ($(this).val() == "0") {
-                    // line list
+                    // line list 
                     $('#chart_wrp, #group_by_wrp').hide();
                 } else {
                     $('#chart_wrp, #group_by_wrp').show();

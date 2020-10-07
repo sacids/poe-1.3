@@ -286,15 +286,19 @@ table.table td i {
     .sidenav a {font-size: 18px;}
   }
 
-
+/* travellers-data */
 
 #close_traveller_data{
   font-size: 2em;
   cursor: pointer;
 
 }
+
+#traveller_data{
+  overflow-y: auto;
+}
+
 #traveller_data, #report_query{
-  
   padding: 40px 20px;
   top: 81px;
   right: 0px;
@@ -304,20 +308,14 @@ table.table td i {
   width: 50vw;
   margin-right: -50vw;
   height: calc(100% - 81px);
-
   -webkit-box-shadow: -3px 0 25px 0 rgba(47, 56, 68, 0.22);
     -moz-box-shadow: -3px 0  25px 0 rgba(47, 56, 68, 0.22);
     box-shadow: -3px 0  25px 0 rgba(47, 56, 68, 0.22);
-
 }
 
-@media screen and (max-width: 1028px) {
-  #traveller_data, #report_query{
-    width: calc(100% - 67px);
-  }
+@media screen and (max-width: 320px) {
+  /* #traveller_data, #report_query{
+    width: 320px;
+  } */
 }
 
-.tab-content{
-  height: calc(100vh - 300px);
-  overflow-y: auto;
-}

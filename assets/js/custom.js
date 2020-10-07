@@ -10,7 +10,7 @@
 $(document).ready(function () {
     //make number of coutries readonly
     $('#number_countries').on('input', function () {
-        $('#number_countries').attr('readonly', 'readonly');
+        //$('#number_countries').attr('readonly', 'readonly');
     });
 });
 

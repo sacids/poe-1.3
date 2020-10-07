@@ -25,8 +25,6 @@ def default(request):
     Returns: 
     None
     """
-
-    calculate_score(13)
     return render(request, 'travellers/home.html', {})
 
 
@@ -132,8 +130,7 @@ def arrival(request):
                 traveller.district_id = request.POST.get('district_id')
 
             traveller.street_or_ward = form.cleaned_data['street_or_ward']
-            traveller.phone = request.POST.get(
-                'calling_code') + cast_phone(form.cleaned_data['phone'])
+            traveller.phone = '+255' + cast_phone(form.cleaned_data['phone'])
             traveller.email = form.cleaned_data['email'].lower()
 
             traveller.location_origin = form.cleaned_data['location_origin']

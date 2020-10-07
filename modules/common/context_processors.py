@@ -16,6 +16,7 @@ def poe_defaults(request):
    
    
     if poes.count() > 0:
+        print(poes[0].title)
         default_poe_id     = poes[0].id
         default_poe_title  = poes[0].title
     

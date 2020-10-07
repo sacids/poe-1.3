@@ -11,7 +11,7 @@ from django.contrib import messages
 from django.conf import settings
 from django.db import connection
 from django.db.models import Q
-
+from modules.dashboard.views import dashboard
 
 def default(request):
     """ 
@@ -25,6 +25,8 @@ def default(request):
     Returns: 
     None
     """
+    if request.user.is_authenticated:
+        return redirect(dashboard)
     return render(request, 'travellers/home.html', {})
 
 

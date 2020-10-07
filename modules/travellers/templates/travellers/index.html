@@ -1,91 +1,94 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block title %}
-Home
+    Home
 {% endblock %}
 
 {% block content %}
-<div class="page-content bg-white">
-    <!-- Main content -->
-    <div class="content-wrapper">
-        <!-- Page header -->
-        <div class="page-header">
-            <div class="container-fluid">
-                <div class="page-header-content">
-                    <div class="page-title d-flex">
-                        <div class="img">
-                            <img src="{% static 'img/CoatofArms_Lg.png' %}" width="100" />
-                        </div>
-                        <!--./img -->
+    <div class="page-content bg-white">
+        <!-- Main content -->
+        <div class="content-wrapper">
+            <!-- Page header -->
+            <div class="page-header">
+                <div class="container-fluid">
+                    <div class="page-header-content">
+                        <div class="page-title d-flex">
+                            <div class="img">
+                                <img src="{% static 'img/CoatofArms_Lg.png' %}" width="100"/>
+                            </div>
+                            <!--./img -->
 
-                        <div id="content">
-                            <h1>{% trans "The United Republic of Tanzania." %} </h1>
-                            <h3 class="d-none d-md-block">MINISTRY OF HEALTH, COMMUNITY DEVELOPMENT, GENDER, ELDERLY AND
-                                CHILDREN</h3>
-                            <h4 class="d-block d-sm-none">MoHCDGEC</h4>
+                            <div id="content">
+                                <h1>{% trans "The United Republic of Tanzania." %} </h1>
+                                <h3 class="d-none d-md-block">MINISTRY OF HEALTH, COMMUNITY DEVELOPMENT, GENDER, ELDERLY
+                                    AND
+                                    CHILDREN</h3>
+                                <h4 class="d-block d-sm-none">MoHCDGEC</h4>
+                            </div>
+                            <!--./content -->
                         </div>
-                        <!--./content -->
+                        <!--./page-title -->
                     </div>
-                    <!--./page-title -->
+                    <!--./page-header-content -->
                 </div>
-                <!--./page-header-content -->
-            </div>
-            <!--./container-fluid -->
-        </div><!-- /page header -->
+                <!--./container-fluid -->
+            </div><!-- /page header -->
 
-        <!-- Content area -->
-        <div class="content">
-        <!-- Basic card -->
-            <div class="card">
-                <div class="card-header">
-                    <h5 class="card-title text-uppercase text-center">
-                        TRAVELLER SURVEILLANCE FORM
-                    </h5>
-                </div>
-                <!--./card-header -->
+            <!-- Content area -->
+            <div class="content">
+                <!-- Basic card -->
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title text-uppercase text-center">
+                            TRAVELLER SURVEILLANCE FORM
+                        </h5>
+                    </div>
+                    <!--./card-header -->
 
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-lg-12 text-center">
-                            <div class="mt-4"></div>
-                            <div class="dropdown">
-                                <button style="width: 200px;" class="btn btn-outline-primary dropdown-toggle"
-                                    type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
-                                    aria-expanded="false">
-                                    Language
-                                </button>
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item" href="#">
-                                        <img width="32" src="{% static 'img/usa_flag.png' %}" /> English
-                                    </a>
-                                    <a class="dropdown-item" href="#">
-                                        <img width="32" src="{% static 'img/tz_flag.png' %}" /> Swahili
-                                    </a>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-lg-12 text-center">
+                                <div class="mt-4"></div>
+                                <div class="dropdown">
+                                    <button style="width: 200px;" class="btn btn-outline-primary dropdown-toggle"
+                                            type="button" id="dropdownMenuButton" data-toggle="dropdown"
+                                            aria-haspopup="true"
+                                            aria-expanded="false">
+                                        Language
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <a class="dropdown-item" href="#">
+                                            <img width="32" src="{% static 'img/usa_flag.png' %}"/> English
+                                        </a>
+                                        <a class="dropdown-item" href="#">
+                                            <img width="32" src="{% static 'img/tz_flag.png' %}"/> Swahili
+                                        </a>
+                                    </div>
                                 </div>
+                                <!--./dropdown -->
+                                <div class="mt-4">
+
+
+                                    <p>an online web based system to help capturing and managing traveller’s health
+                                        details
+                                        during fighting against pandemic
+                                        diseases such as COVID-19 and Ebola</p>
+                                </div>
+
+                                <a style="width: 200px;" href="{% url 'international' %}"
+                                   class="btn btn-primary btn-sm">International</a>
+                                <div class="mt-4"></div>
+                                <a style="width: 200px;" href="{% url 'domestic' %}"
+                                   class="btn btn-secondary btn-sm">Domestic</a>
+
                             </div>
-                            <!--./dropdown -->
-                            <div class="mt-4">
-
-
-                                <p>an online web based system to help capturing and managing traveller’s health details
-                                    during fighting against pandemic
-                                    diseases such as COVID-19 and Ebola</p>
-                            </div>
-
-                            <a style="width: 200px;" href="{% url 'international' %}"
-                                class="btn btn-primary btn-sm">International</a>
-                            <div class="mt-4"></div>
-                            <a style="width: 200px;" href="{% url 'domestic' %}"
-                                class="btn btn-secondary btn-sm">Domestic</a>
-
+                            <!--./col-lg-12-->
                         </div>
-                        <!--./col-lg-12-->
+                        <!--./row -->
                     </div>
-                    <!--./row -->
-                </div>
-                <!--./card-body -->
-            </div><!-- /basic card -->
-        </div><!-- /content area -->
+                    <!--./card-body -->
+                </div><!-- /basic card -->
+            </div><!-- /content area -->
+        </div>
     </div>
-</div>
 {% endblock %}

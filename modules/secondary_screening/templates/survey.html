@@ -9,31 +9,39 @@
                         <label for="label_{{ question.id }}">
                             {{ question.title }}
                         </label>
-                        <div class="">            
+                        <div class="">
                             {% if question.category == "SELECT" %}
                                 <select name="{{ question.id }}" class="select form-control" id="qn_{{ question.id }}">
-                                    <option value="No" {% if answers|get_answer:question.id == 'No' %} selected {% endif %}>No</option>
-                                    <option value="Yes" {% if answers|get_answer:question.id == 'Yes' %} selected {% endif %}>Yes</option>
-                                    <option value="Unknown" {% if answers|get_answer:question.id == 'Unknown' %} selected {% endif %}>Unknown</option>
-                                    <option value="NA" {% if answers|get_answer:question.id == 'NA' %} selected {% endif %}>Not Applicable</option>
+                                    <option value="No" {% if answers|get_answer:question.id == 'No' %}
+                                            selected {% endif %}>No
+                                    </option>
+                                    <option value="Yes" {% if answers|get_answer:question.id == 'Yes' %}
+                                            selected {% endif %}>Yes
+                                    </option>
+                                    <option value="Unknown" {% if answers|get_answer:question.id == 'Unknown' %}
+                                            selected {% endif %}>Unknown
+                                    </option>
+                                    <option value="NA" {% if answers|get_answer:question.id == 'NA' %}
+                                            selected {% endif %}>Not Applicable
+                                    </option>
                                 </select>
                             {% elif question.category == "CHECKBOX" %}
                                 <input type="checkbox" name="{{ question.id }}" value="a">a<br>
                                 <input type="checkbox" name="{{ question.id }}" value="b">b<br>
                             {% elif question.category == "TEXTAREA" %}
-                                <textarea   rows="4" 
-                                            cols="40" 
-                                            name="{{ question.id }}" 
-                                            class="textarea form-control" 
-                                            id="qn_{{ question.id }}">{{ answers|get_answer:question.id }}</textarea>
+                                <textarea rows="4"
+                                          cols="40"
+                                          name="{{ question.id }}"
+                                          class="textarea form-control"
+                                          id="qn_{{ question.id }}">{{ answers|get_answer:question.id }}</textarea>
                             {% endif %}
                         </div>
                     </div>
-                {% endfor %}    
-                <input type="submit" value="Send" />
+                {% endfor %}
+                <input type="submit" value="Send"/>
             </div>
         </div>
-    </form>                 
+    </form>
 {% else %}
-<span>No questions</span>
+    <span>No questions</span>
 {% endif %} 

@@ -2,242 +2,243 @@
 
 
 {% block navarea %}
-{% include 'backend/navarea.html' %}
+    {% include 'backend/navarea.html' %}
 {% endblock %}
 
 {% block content %}
 
-<div class="row">
-    <div class="col-md-12">
-        <!--./tabs -->
-        <ul class="nav nav-tabs" id="myTab" role="tablist">
-            <li class="nav-item">
-                <a class="nav-link active" id="information-tab" data-toggle="tab" href="#information" role="tab"
-                    aria-controls="information" aria-selected="true">Travel Information</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" id="visiting-purpose-tab" data-toggle="tab" href="#visiting-purpose" role="tab"
-                    aria-controls="visiting-purpose" aria-selected="false">Visiting Purpose</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" id="contacts-tab" data-toggle="tab" href="#contacts" role="tab"
-                    aria-controls="contacts" aria-selected="false">Contacts</a>
-            </li>
+    <div class="row">
+        <div class="col-md-12">
+            <!--./tabs -->
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="information-tab" data-toggle="tab" href="#information" role="tab"
+                       aria-controls="information" aria-selected="true">Travel Information</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="visiting-purpose-tab" data-toggle="tab" href="#visiting-purpose" role="tab"
+                       aria-controls="visiting-purpose" aria-selected="false">Visiting Purpose</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="contacts-tab" data-toggle="tab" href="#contacts" role="tab"
+                       aria-controls="contacts" aria-selected="false">Contacts</a>
+                </li>
 
-            <li class="nav-item">
-                <a class="nav-link" id="history-tab" data-toggle="tab" href="#history" role="tab"
-                    aria-controls="history" aria-selected="false">Travel History</a>
-            </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="history-tab" data-toggle="tab" href="#history" role="tab"
+                       aria-controls="history" aria-selected="false">Travel History</a>
+                </li>
 
-            <li class="nav-item">
-                <a class="nav-link" id="symptoms-tab" data-toggle="tab" href="#symptoms" role="tab"
-                    aria-controls="symptoms" aria-selected="false">Reported Symptoms</a>
-            </li>
-        </ul>
-        <!--./tab-lists -->
+                <li class="nav-item">
+                    <a class="nav-link" id="symptoms-tab" data-toggle="tab" href="#symptoms" role="tab"
+                       aria-controls="symptoms" aria-selected="false">Reported Symptoms</a>
+                </li>
+            </ul>
+            <!--./tab-lists -->
 
-        <div class="tab-content" id="myTabContent">
-            <div class="tab-pane fade show active" id="information" role="tabpanel" aria-labelledby="information-tab">
-                <div class="row p-2">
-                    <div class="col-md-12">
-                        <table class="table table-bordered">
-                            <tr>
-                                <td width="20%"><span class="font-weight-bold">Full name</span>
-                                </td>
-                                <td width="80%">
-                                    <span class="text-uppercase font-weight-bold">{{traveller.other_names}}
-                                        {{ traveller.surname}}</span>
-                                </td>
-                            </tr>
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="information" role="tabpanel"
+                     aria-labelledby="information-tab">
+                    <div class="row p-2">
+                        <div class="col-md-12">
+                            <table class="table table-bordered">
+                                <tr>
+                                    <td width="20%"><span class="font-weight-bold">Full name</span>
+                                    </td>
+                                    <td width="80%">
+                                    <span class="text-uppercase font-weight-bold">{{ traveller.other_names }}
+                                        {{ traveller.surname }}</span>
+                                    </td>
+                                </tr>
 
-                            <tr>
-                                <td width="20%"><span class="font-weight-bold">Age</span>
-                                </td>
-                                <td width="80%">
-                                    <span class="text-uppercase font-weight-bold">{{traveller.age}}</span>
-                                </td>
-                            </tr>
+                                <tr>
+                                    <td width="20%"><span class="font-weight-bold">Age</span>
+                                    </td>
+                                    <td width="80%">
+                                        <span class="text-uppercase font-weight-bold">{{ traveller.age }}</span>
+                                    </td>
+                                </tr>
 
-                            <tr>
-                                <td width="20%"><span class="font-weight-bold">Sex</span>
-                                </td>
-                                <td width="80%">
-                                    <span class="text-uppercase font-weight-bold">{{traveller.sex}}</span>
-                                </td>
-                            </tr>
+                                <tr>
+                                    <td width="20%"><span class="font-weight-bold">Sex</span>
+                                    </td>
+                                    <td width="80%">
+                                        <span class="text-uppercase font-weight-bold">{{ traveller.sex }}</span>
+                                    </td>
+                                </tr>
 
-                            <tr>
-                                <td width="20%"><span class="font-weight-bold">Nationality</span>
-                                </td>
-                                <td width="80%">
-                                    <span class="text-uppercase font-weight-bold">{{traveller.nationality.title}}</span>
-                                </td>
-                            </tr>
+                                <tr>
+                                    <td width="20%"><span class="font-weight-bold">Nationality</span>
+                                    </td>
+                                    <td width="80%">
+                                        <span class="text-uppercase font-weight-bold">{{ traveller.nationality.title }}</span>
+                                    </td>
+                                </tr>
 
-                            <tr>
-                                <td width="20%"><span class="font-weight-bold">Passport Number </span>
-                                </td>
-                                <td width="80%">
-                                    <span class="text-uppercase font-weight-bold">{{traveller.id_number}}</span>
-                                </td>
-                            </tr>
+                                <tr>
+                                    <td width="20%"><span class="font-weight-bold">Passport Number </span>
+                                    </td>
+                                    <td width="80%">
+                                        <span class="text-uppercase font-weight-bold">{{ traveller.id_number }}</span>
+                                    </td>
+                                </tr>
 
 
-                            <tr>
-                                <td width="20%"><span class="font-weight-bold">Arrival Date</span>
-                                </td>
-                                <td width="80%">
-                                    <span class="text-uppercase font-weight-bold">{{traveller.arrival_date}}</span>
-                                </td>
-                            </tr>
+                                <tr>
+                                    <td width="20%"><span class="font-weight-bold">Arrival Date</span>
+                                    </td>
+                                    <td width="80%">
+                                        <span class="text-uppercase font-weight-bold">{{ traveller.arrival_date }}</span>
+                                    </td>
+                                </tr>
 
-                            <tr>
-                                <td width="20%"><span class="font-weight-bold">Mode of Transport</span>
-                                </td>
-                                <td width="80%">
-                                    <span class="text-uppercase font-weight-bold">{{traveller.mode_of_transport}}</span>
-                                </td>
-                            </tr>
+                                <tr>
+                                    <td width="20%"><span class="font-weight-bold">Mode of Transport</span>
+                                    </td>
+                                    <td width="80%">
+                                        <span class="text-uppercase font-weight-bold">{{ traveller.mode_of_transport }}</span>
+                                    </td>
+                                </tr>
 
-                            <tr>
-                                <td width="20%"><span class="font-weight-bold">Point of entry</span>
-                                </td>
-                                <td width="80%">
+                                <tr>
+                                    <td width="20%"><span class="font-weight-bold">Point of entry</span>
+                                    </td>
+                                    <td width="80%">
                                     <span
-                                        class="text-uppercase font-weight-bold">{{ traveller.point_of_entry.title }}</span>
-                                </td>
-                            </tr>
+                                            class="text-uppercase font-weight-bold">{{ traveller.point_of_entry.title }}</span>
+                                    </td>
+                                </tr>
 
-                            <tr>
-                                <td width="20%"><span class="font-weight-bold">Vessel/Vehicle/Flight Number</span>
-                                </td>
-                                <td width="80%">
-                                    <span class="text-uppercase font-weight-bold">{{traveller.name_of_transport}}</span>
-                                </td>
-                            </tr>
+                                <tr>
+                                    <td width="20%"><span class="font-weight-bold">Vessel/Vehicle/Flight Number</span>
+                                    </td>
+                                    <td width="80%">
+                                        <span class="text-uppercase font-weight-bold">{{ traveller.name_of_transport }}</span>
+                                    </td>
+                                </tr>
 
-                            <tr>
-                                <td width="20%"><span class="font-weight-bold">Seat Number</span>
-                                </td>
-                                <td width="80%">
-                                    <span class="text-uppercase font-weight-bold">{{traveller.seat_number}}</span>
-                                </td>
-                            </tr>
-                        </table>
+                                <tr>
+                                    <td width="20%"><span class="font-weight-bold">Seat Number</span>
+                                    </td>
+                                    <td width="80%">
+                                        <span class="text-uppercase font-weight-bold">{{ traveller.seat_number }}</span>
+                                    </td>
+                                </tr>
+                            </table>
 
+                        </div>
+                        <!--./col-->
                     </div>
-                    <!--./col-->
+                    <!--./row-->
                 </div>
-                <!--./row-->
-            </div>
-            <!--./information -->
+                <!--./information -->
 
-            <div class="tab-pane fade show" id="visiting-purpose" role="tabpanel"
-                aria-labelledby="visiting-purpose-tab">
-                <div class="row p-2">
-                    <div class="col-md-12">
-                        <table class="table table-bordered">
-                            <tr>
-                                <td width="20%"><span class="font-weight-bold">Visiting Purpose</span>
-                                </td>
-                                <td width="80%">
-                                    <span class="text-uppercase font-weight-bold">{{traveller.visiting_purpose}}</span>
-                                </td>
-                            </tr>
+                <div class="tab-pane fade show" id="visiting-purpose" role="tabpanel"
+                     aria-labelledby="visiting-purpose-tab">
+                    <div class="row p-2">
+                        <div class="col-md-12">
+                            <table class="table table-bordered">
+                                <tr>
+                                    <td width="20%"><span class="font-weight-bold">Visiting Purpose</span>
+                                    </td>
+                                    <td width="80%">
+                                        <span class="text-uppercase font-weight-bold">{{ traveller.visiting_purpose }}</span>
+                                    </td>
+                                </tr>
 
-                            <tr>
-                                <td width="20%"><span class="font-weight-bold">Other Purposes</span>
-                                </td>
-                                <td width="80%">
-                                    <span class="text-uppercase font-weight-bold">{{traveller.other_purpose}}</span>
-                                </td>
-                            </tr>
+                                <tr>
+                                    <td width="20%"><span class="font-weight-bold">Other Purposes</span>
+                                    </td>
+                                    <td width="80%">
+                                        <span class="text-uppercase font-weight-bold">{{ traveller.other_purpose }}</span>
+                                    </td>
+                                </tr>
 
-                            <tr>
-                                <td width="20%"><span class="font-weight-bold">Duration of Stay (days)</span>
-                                </td>
-                                <td width="80%">
-                                    <span class="text-uppercase font-weight-bold">{{traveller.duration_of_stay}}</span>
-                                </td>
-                            </tr>
+                                <tr>
+                                    <td width="20%"><span class="font-weight-bold">Duration of Stay (days)</span>
+                                    </td>
+                                    <td width="80%">
+                                        <span class="text-uppercase font-weight-bold">{{ traveller.duration_of_stay }}</span>
+                                    </td>
+                                </tr>
 
-                            <tr>
-                                <td width="20%"><span class="font-weight-bold">Employment</span>
-                                </td>
-                                <td width="80%">
-                                    <span class="text-uppercase font-weight-bold">{{traveller.employment}}</span>
-                                </td>
-                            </tr>
-                        </table>
+                                <tr>
+                                    <td width="20%"><span class="font-weight-bold">Employment</span>
+                                    </td>
+                                    <td width="80%">
+                                        <span class="text-uppercase font-weight-bold">{{ traveller.employment }}</span>
+                                    </td>
+                                </tr>
+                            </table>
 
+                        </div>
+                        <!--./col-->
                     </div>
-                    <!--./col-->
+                    <!--./row-->
                 </div>
-                <!--./row-->
-            </div>
-            <!--./visiting purpose -->
+                <!--./visiting purpose -->
 
-            <div class="tab-pane fade show" id="contacts" role="tabpanel" aria-labelledby="contacts-tab">
-                <div class="row p-2">
-                    <div class="col-md-12">
-                        <table class="table table-bordered">
-                            <tr>
-                                <td width="20%"><span class="font-weight-bold">Physical Adrress/Hoel Name</span>
-                                </td>
-                                <td width="80%">
-                                    <span class="text-uppercase font-weight-bold">{{traveller.physical_address}}</span>
-                                </td>
-                            </tr>
+                <div class="tab-pane fade show" id="contacts" role="tabpanel" aria-labelledby="contacts-tab">
+                    <div class="row p-2">
+                        <div class="col-md-12">
+                            <table class="table table-bordered">
+                                <tr>
+                                    <td width="20%"><span class="font-weight-bold">Physical Adrress/Hoel Name</span>
+                                    </td>
+                                    <td width="80%">
+                                        <span class="text-uppercase font-weight-bold">{{ traveller.physical_address }}</span>
+                                    </td>
+                                </tr>
 
-                            <tr>
-                                <td width="20%"><span class="font-weight-bold">Region</span>
-                                </td>
-                                <td width="80%">
-                                    <span class="text-uppercase font-weight-bold">{{ traveller.region.title }}</span>
-                                </td>
-                            </tr>
+                                <tr>
+                                    <td width="20%"><span class="font-weight-bold">Region</span>
+                                    </td>
+                                    <td width="80%">
+                                        <span class="text-uppercase font-weight-bold">{{ traveller.region.title }}</span>
+                                    </td>
+                                </tr>
 
-                            <tr>
-                                <td width="20%"><span class="font-weight-bold">Street/Ward</span>
-                                </td>
-                                <td width="80%">
-                                    <span class="text-uppercase font-weight-bold">{{traveller.street_or_ward}}</span>
-                                </td>
-                            </tr>
+                                <tr>
+                                    <td width="20%"><span class="font-weight-bold">Street/Ward</span>
+                                    </td>
+                                    <td width="80%">
+                                        <span class="text-uppercase font-weight-bold">{{ traveller.street_or_ward }}</span>
+                                    </td>
+                                </tr>
 
-                            <tr>
-                                <td width="20%"><span class="font-weight-bold">Phone</span>
-                                </td>
-                                <td width="80%">
-                                    <span class="text-uppercase font-weight-bold">{{traveller.phone}}</span>
-                                </td>
-                            </tr>
+                                <tr>
+                                    <td width="20%"><span class="font-weight-bold">Phone</span>
+                                    </td>
+                                    <td width="80%">
+                                        <span class="text-uppercase font-weight-bold">{{ traveller.phone }}</span>
+                                    </td>
+                                </tr>
 
-                            <tr>
-                                <td width="20%"><span class="font-weight-bold">Email</span>
-                                </td>
-                                <td width="80%">
-                                    <span class="font-weight-bold">{{traveller.email}}</span>
-                                </td>
-                            </tr>
-                        </table>
+                                <tr>
+                                    <td width="20%"><span class="font-weight-bold">Email</span>
+                                    </td>
+                                    <td width="80%">
+                                        <span class="font-weight-bold">{{ traveller.email }}</span>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <!--./col-->
                     </div>
-                    <!--./col-->
+                    <!--./row-->
                 </div>
-                <!--./row-->
-            </div>
-            <!--./contacts -->
+                <!--./contacts -->
 
-            <div class="tab-pane fade show" id="history" role="tabpanel" aria-labelledby="history-tab">
-                <div class="row p-2">
-                    <div class="col-md-12">
-                        <p>Country Journey Started :
-                            <b>{{traveller.location_origin.title}}</b>
-                        </p>
+                <div class="tab-pane fade show" id="history" role="tabpanel" aria-labelledby="history-tab">
+                    <div class="row p-2">
+                        <div class="col-md-12">
+                            <p>Country Journey Started :
+                                <b>{{ traveller.location_origin.title }}</b>
+                            </p>
 
-                        <h6>Countries visited in last 21 days (3 weeks)</h6>
-                        <table class="table table-bordered">
-                            <thead>
+                            <h6>Countries visited in last 21 days (3 weeks)</h6>
+                            <table class="table table-bordered">
+                                <thead>
                                 <tr>
                                     <th>#</th>
                                     <th>Country</th>
@@ -245,41 +246,41 @@
                                     <th>Date</th>
                                     <th>Number of Days</th>
                                 </tr>
-                            </thead>
+                                </thead>
 
-                            <tbody>
-                                {% with count=0  %}
-                                {% for country in countries %}
-                                <tr>
-                                    <td>{{ count|add:"1" }}</td>
-                                    <td>{{ country.location__title}}</td>
-                                    <td>{{ country.location_visited}}</td>
-                                    <td>{{ country.date }}</td>
-                                    <td>{{ country.days }}</td>
-                                </tr>
-                                {% endfor %}
+                                <tbody>
+                                {% with count=0 %}
+                                    {% for country in countries %}
+                                        <tr>
+                                            <td>{{ count|add:"1" }}</td>
+                                            <td>{{ country.location__title }}</td>
+                                            <td>{{ country.location_visited }}</td>
+                                            <td>{{ country.date }}</td>
+                                            <td>{{ country.days }}</td>
+                                        </tr>
+                                    {% endfor %}
                                 {% endwith %}
-                            </tbody>
-                        </table>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!--./col-->
                     </div>
-                    <!--./col-->
+                    <!--./row-->
                 </div>
-                <!--./row-->
-            </div>
-            <!--./history -->
+                <!--./history -->
 
-            <div class="tab-pane fade show" id="symptoms" role="tabpanel" aria-labelledby="symptoms-tab">
-                <div class="row p-2">
-                    <div class="col-md-12">
-                        <div> {% for symptom in symptoms %}{{ symptom.symptom__title }}, {% endfor %} </div>
+                <div class="tab-pane fade show" id="symptoms" role="tabpanel" aria-labelledby="symptoms-tab">
+                    <div class="row p-2">
+                        <div class="col-md-12">
+                            <div> {% for symptom in symptoms %}{{ symptom.symptom__title }}, {% endfor %} </div>
+                        </div>
+                        <!--./col-->
                     </div>
-                    <!--./col-->
+                    <!--./row-->
                 </div>
-                <!--./row-->
+                <!--./symptoms -->
             </div>
-            <!--./symptoms -->
+            <!--./tab-content-->
         </div>
-        <!--./tab-content-->
     </div>
-</div>
 {% endblock %}

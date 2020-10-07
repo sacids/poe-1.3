@@ -35,4 +35,4 @@ urlpatterns += staticfiles_urlpatterns()
 admin.site.site_header = 'POE Surveillance'
 admin.site.site_title = 'POE Surveillance'
 admin.site.index_title = 'Welcome to POE Admin Panel'
-
+admin.site.empty_value_display = '**Empty**'

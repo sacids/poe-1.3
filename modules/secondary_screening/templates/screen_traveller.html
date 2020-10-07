@@ -5,12 +5,12 @@
 {% endblock %}
 
 {% block content %}
-    
+
     <section class="survey">
-    {% if not form_submitted %}
-        {% include 'survey.html' %}
-    {% else %}
-        <span>Data Received</div>
-    {% endif %}
+        {% if not form_submitted %}
+            {% include 'survey.html' %}
+        {% else %}
+            <span>Data Received</span>
+        {% endif %}
     </section>
 {% endblock %}

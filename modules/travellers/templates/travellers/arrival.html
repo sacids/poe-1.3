@@ -10,510 +10,511 @@
 {% block title %} {% trans "Traveller's Surveillance Form" %} {% endblock %}
 
 {% block content %}
-{% include 'travellers/scripts.html' %}
-{% include 'travellers/add_countries.html' %}
-<!-- Page content -->
-<div class="page-content bg-white">
-    <!-- Main content -->
-    <div class="content-wrapper">
-        <!-- Page header -->
-        {% include 'page-header.html' %}
-        <!-- /page header -->
+    {% include 'travellers/scripts.html' %}
+    {% include 'travellers/add_countries.html' %}
+    <!-- Page content -->
+    <div class="page-content bg-white">
+        <!-- Main content -->
+        <div class="content-wrapper">
+            <!-- Page header -->
+            {% include 'page-header.html' %}
+            <!-- /page header -->
 
-        <!-- Content area -->
-        <div class="content">
-            <!-- Basic card -->
-            <div class="card">
-                <div class="card-header">
-                    <h5 class="card-title text-uppercase text-center font-weight-bold">
-                        {% trans "Traveller's Health Declaration Form" %}
-                    </h5>
-                </div>
-                <!--./card-header -->
-
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-12">
-
-                            <!-- Circles which indicates the steps of the form: -->
-                            <div style="text-align:center; margin-bottom: 10px;">
-                                <span class="step"></span>
-                                <span class="step"></span>
-                                <span class="step"></span>
-                                <span class="step"></span>
-                                <span class="step"></span>
-                                <span class="step"></span>
-                            </div>
-
-                            <form id="regForm" action="" method="post" role="form" autocomplete="off">
-                                {% csrf_token %}
-
-                                <input type="hidden" id="base_url" name="base_url" value="{{ request.get_host }}" />
-
-                                <div class="tab" id="tab1">
-                                    <div class="row">
-                                        <div class="col-lg-12 col-md-12 col-sm-12 col-12">
-                                            <h6 class="title font-weight-bold">
-                                                {% trans "Traveller Information" %}
-                                            </h6>
-                                        </div>
-                                        <!--./col-lg-6 -->
-                                    </div>
-                                    <!--./row -->
-
-                                    <div class="row">
-                                        <div class="col-lg-12 col-md-12 col-sm-12 col-12">
-                                            <p>{% trans "<b>Note:</b> Write surname and other names as appear in your passport." %}
-                                            </p>
-                                        </div>
-                                        <!--./col-lg-12 -->
-                                    </div>
-                                    <!--./row -->
-
-                                    <div class="row">
-                                        <div class="col-lg-6 col-md-6 col-sm-12 col-12">
-                                            <div class="form-group">
-                                                {{ form.surname|as_crispy_field }}
-                                                <span id="errorSurname" style="color: red;"></span>
-                                            </div>
-                                            <!--./form-group -->
-                                        </div>
-                                        <!--./col-lg-6 -->
-
-                                        <div class="col-lg-6 col-md-6 col-sm-12 col-12">
-                                            <div class="form-group">
-                                                {{ form.other_names|as_crispy_field }}
-                                                <span id="errorOtherNames" style="color: red;"></span>
-                                            </div>
-                                            <!--./form-group -->
-                                        </div>
-                                        <!--./col-lg-6 -->
-
-                                        <div class="col-lg-6 col-md-6 col-sm-12 col-12">
-                                            <div class="form-group">
-                                                {{ form.age_category|as_crispy_field }}
-                                                <span id="errorAgeCategory" style="color: red;"></span>
-                                            </div>
-                                            <!--./form-group -->
-                                        </div>
-                                        <!--./col-lg-6 -->
-
-                                        <div class="col-lg-6 col-md-6 col-sm-12 col-12">
-                                            <div class="form-group">
-                                                {{ form.age|as_crispy_field }}
-                                                <span id="errorAge" style="color: red;"></span>
-                                            </div>
-                                            <!--./form-group -->
-                                        </div>
-                                        <!--./col-lg-6 -->
-                                    </div>
-                                    <!--./row -->
-
-                                    <div class="row">
-                                        <div class="col-lg-6 col-md-6 col-sm-12 col-12">
-                                            <div class="form-group">
-                                                {{ form.sex|as_crispy_field }}
-                                                <span id="errorSex" style="color: red;"></span>
-                                            </div>
-                                            <!--./form-group -->
-                                        </div>
-                                        <!--./col-lg-6 -->
-
-                                        <div class="col-lg-6 col-md-6 col-sm-12 col-12">
-                                            <div class="form-group">
-                                                {{ form.nationality|as_crispy_field }}
-                                                <span id="errorNationality" style="color: red;"></span>
-                                            </div>
-                                            <!--./form-group -->
-                                        </div>
-                                        <!--./col-lg-6 -->
-                                    </div>
-                                    <!--./row -->
-
-                                    <div class="row">
-                                        <div class="col-lg-6 col-md-6 col-sm-12 col-12">
-                                            <div class="form-group">
-                                                {{ form.id_number|as_crispy_field }}
-                                                <span id="errorIdNumber" style="color: red;"></span>
-                                            </div>
-                                            <!--./form-group -->
-                                        </div>
-                                        <!--./col-lg-6 -->
-
-                                        <div class="col-lg-6 col-md-6 col-sm-12 col-12">
-                                            <div class="form-group">
-                                                {{ form.arrival_date|as_crispy_field }}
-                                                <span id="errorArrivalDate" style="color: red;"></span>
-                                            </div>
-                                            <!--./form-group -->
-                                        </div>
-                                        <!--./col-lg-6 -->
-                                    </div>
-                                    <!--./row -->
-
-                                    <div class="row">
-                                        <div class="col-lg-6 col-md-6 col-sm-12 col-12">
-                                            <div class="form-group">
-                                                {{ form.mode_of_transport|as_crispy_field }}
-                                                <span id="errorModeOfTransport" style="color: red;"></span>
-                                            </div>
-                                            <!--./form-group -->
-                                        </div>
-                                        <!--./col-lg-6 -->
-
-                                        <div class="col-lg-6 col-md-6 col-sm-12 col-12">
-                                            <div class="form-group">
-                                                {{ form.point_of_entry|as_crispy_field }}
-                                                <span id="errorPointOfEntry" style="color: red;"></span>
-                                            </div>
-                                            <!--./form-group -->
-                                        </div>
-                                        <!--./col-lg-6 -->
-                                    </div>
-                                    <!--./row -->
-
-                                    <div class="row">
-                                        <div class="col-lg-6 col-md-6 col-sm-12 col-12">
-                                            <div class="form-group">
-                                                {{ form.name_of_transport|as_crispy_field }}
-                                                <span id="errorNameOfTransport" style="color: red;"></span>
-                                            </div>
-                                            <!--./form-group -->
-                                        </div>
-                                        <!--./col-lg-6 -->
-
-                                        <div class="col-lg-6 col-md-6 col-sm-12 col-12">
-                                            <div class="form-group">
-                                                {{ form.seat_number|as_crispy_field }}
-                                                <span id="errorSeatNumber" style="color: red;"></span>
-                                            </div>
-                                            <!--./form-group -->
-                                        </div>
-                                        <!--./col-lg-6 -->
-                                    </div>
-                                    <!--./row -->
-                                </div>
-                                <!--./tab -->
-
-                                <div class="tab" id="tab2">
-                                    <div class="row">
-                                        <div class="col-lg-12 col-md-12 col-sm-12 col-12">
-                                            <div class="form-group">
-                                                {{ form.visiting_purpose|as_crispy_field }}
-                                                <span id="errorVisitingPurpose" style="color: red;"></span>
-                                            </div>
-                                            <!--./form-group -->
-                                        </div>
-                                        <!--./col-lg-6 -->
-                                    </div>
-                                    <!--./row -->
-
-                                    <div class="row">
-                                        <div class="col-lg-12 col-md-12 col-sm-12 col-12">
-                                            <div class="form-group">
-                                                {{ form.other_purpose|as_crispy_field }}
-                                                <span id="errorOtherPurpose" style="color: red;"></span>
-                                            </div>
-                                            <!--./form-group -->
-                                        </div>
-                                        <!--./col-lg-6 -->
-                                    </div>
-                                    <!--./row -->
-
-                                    <div class="row">
-                                        <div class="col-lg-6 col-md-6 col-sm-12 col-12">
-                                            <div class="form-group">
-                                                {{ form.duration_of_stay|as_crispy_field }}
-                                                <span id="errorDurationOfStay" style="color: red;"></span>
-                                            </div>
-                                            <!--./form-group -->
-                                        </div>
-                                        <!--./col-lg-6 -->
-
-                                        <div class="col-lg-6 col-md-6 col-sm-12 col-12">
-                                            <div class="form-group">
-                                                {{ form.employment|as_crispy_field }}
-                                                <span id="errorEmployment" style="color: red;"></span>
-                                            </div>
-                                            <!--./form-group -->
-                                        </div>
-                                        <!--./col-lg-6 -->
-                                    </div>
-                                    <!--./row -->
-
-                                    <div class="row">
-                                        <div class="col-lg-12 col-md-12 col-sm-12 col-12">
-                                            <div class="form-group">
-                                                {{ form.other_employment|as_crispy_field }}
-                                                <span id="errorOtherEmployment" style="color: red;"></span>
-                                            </div>
-                                            <!--./form-group -->
-                                        </div>
-                                        <!--./col-lg-6 -->
-                                    </div>
-                                    <!--./row -->
-                                </div>
-                                <!--./tab -->
-
-                                <div class="tab" id="tab3">
-                                    <div class="row">
-                                        <div class="col-lg-12 col-md-12 col-sm-12 col-12">
-                                            <h6 class="title">
-                                                {% trans "Contact while in Tanzania" %}
-                                            </h6>
-                                        </div>
-                                        <!--./col-lg-6 -->
-                                    </div>
-                                    <!--./row -->
-
-                                    <div class="row">
-                                        <div class="col-lg-12 col-md-12 col-sm-12 col-12">
-                                            <div class="form-group">
-                                                {{ form.physical_address|as_crispy_field }}
-                                                <span id="errorAddress" style="color: red;"></span>
-                                            </div>
-                                            <!--./form-group -->
-                                        </div>
-                                        <!--./col-lg-6 -->
-                                    </div>
-                                    <!--./row -->
-
-                                    <div class="row">
-                                        <div class="col-lg-6 col-md-6 col-sm-12 col-12">
-                                            <div class="form-group">
-                                                {{ form.region_id|as_crispy_field }}
-                                                <span id="errorRegion" style="color: red;"></span>
-                                            </div>
-                                            <!--./form-group -->
-                                        </div>
-                                        <!--./col-lg-6 -->
-
-                                        <div class="col-lg-6 col-md-6 col-sm-12 col-12">
-                                            <div class="form-group">
-                                                {{ form.district_id|as_crispy_field }}
-                                            </div>
-                                            <!--./form-group -->
-                                        </div>
-                                        <!--./col-lg-6 -->
-                                    </div>
-                                    <!--./row -->
-
-                                    <div class="row">
-                                        <div class="col-lg-6 col-md-6 col-sm-12 col-12">
-                                            <div class="form-group">
-                                                {{ form.street_or_ward|as_crispy_field }}
-                                            </div>
-                                            <!--./form-group -->
-                                        </div>
-                                        <!--./col-lg-6 -->
-
-                                        <div class="col-lg-6 col-md-6 col-sm-12 col-12">
-                                            <div class="form-group">
-                                                <label for="calling_code" class=" requiredField">
-                                                    Calling Code<span class="asteriskField">*</span>
-                                                </label>
-                                                <select name="calling_code"
-                                                    class="form-control chosen-select"
-                                                    id="calling_code" required>
-                                                    <option value="" selected>-- Select --</option>
-                                                    {% for country in countries%}
-                                                    <option value="{{ country.calling_code }}">
-                                                        {{ country.calling_code }}</option>
-                                                    {% endfor %}
-                                                </select>
-                                                <span id="errorCallingCode" style="color: red;"></span>
-                                            </div>
-                                            <!--./form-group -->
-                                        </div>
-                                        <!--./col-lg-6 -->
-                                    </div>
-                                    <!--./row -->
-
-                                    <div class="row">
-                                        <div class="col-lg-6 col-md-6 col-sm-12 col-12">
-                                            <div class="form-group">
-                                                {{ form.phone|as_crispy_field }}
-                                                <span id="errorPhone" style="color: red;"></span>
-                                            </div>
-                                            <!--./form-group -->
-                                        </div>
-                                        <!--./col-lg-6 -->
-
-                                        <div class="col-lg-6 col-md-6 col-sm-12 col-12">
-                                            <div class="form-group">
-                                                {{ form.email|as_crispy_field }}
-                                                <span id="errorEmail" style="color: red;"></span>
-                                            </div>
-                                            <!--./form-group -->
-                                        </div>
-                                        <!--./col-lg-6 -->
-                                    </div>
-                                    <!--./row -->
-                                </div>
-                                <!--./tab -->
-
-                                <div class="tab">
-                                    <div class="row">
-                                        <div class="col-lg-12 col-md-12 col-sm-12 col-12">
-                                            <div class="form-group">
-                                                {{ form.location_origin|as_crispy_field }}
-                                                <span id="errorLocationOrigin" style="color: red;"></span>
-                                            </div>
-                                            <!--./form-group -->
-                                        </div>
-                                        <!--./col-lg-12 -->
-                                    </div>
-                                    <!--./row -->
-
-                                    <div class="row">
-                                        <div class="col-lg-12 col-md-12 col-sm-12 col-12">
-                                            <h6 class="title">
-                                                {% trans "Countries visited in last 21 days (3 weeks)" %}
-                                            </h6>
-                                        </div>
-                                        <!--./col-lg-12 -->
-                                    </div>
-                                    <!--./row -->
-
-                                    <div class="row">
-                                        <div class="col-lg-12 col-md-12 col-sm-12 col-12">
-                                            <div class="form-group">
-                                                {{ form.number_countries|as_crispy_field }}
-                                                <span id="errorLocationOrigin" style="color: red;"></span>
-                                            </div>
-                                            <!--./form-group -->
-                                        </div>
-                                        <!--./col-lg-12 -->
-                                    </div>
-                                    <!--./row -->
-
-                                    <div class="row">
-                                        <div class="col-lg-12 col-md-12 col-sm-12 col-12">
-                                            <span id="errorSumDays" style="color: red;"></span>
-                                        </div>
-                                        <!--./col-lg-12 -->
-                                    </div>
-                                    <!--./row -->
-
-                                    <div class="field_wrapper">
-
-                                    </div>
-                                    <!--./row -->
-                                </div>
-                                <!--./tab-->
-
-                                <div class="tab" id="tab5">
-                                    <div class="row">
-                                        <div class="col-lg-12 col-md-12 col-sm-12 col-12">
-                                            <h6 class="title">
-                                                {% trans "Have you experienced the following conditions during the last 7 days (1 week)?" %}
-                                                <span class="asteriskField">*</span>
-                                            </h6>
-                                        </div>
-                                        <!--./col-lg-6 -->
-                                    </div>
-                                    <!--./row -->
-
-                                    <div class="row">
-                                        <div class="col-lg-12 col-md-12 col-sm-12 col-12">
-                                            <div class="form-group">
-                                                <p>
-                                                    {% trans "Please, mark/tick all the clinical manifestations that you have experienced during the last 7 days (1 week)" %}
-                                                </p>
-
-                                                <ul id="symptoms">
-                                                    {% for symptom in symptoms %}
-                                                    <li>
-                                                        <label for="symptoms_{{ symptom.id }}">
-                                                            <input type="checkbox" name="symptoms"
-                                                                value="{{ symptom.id }}" id="symptoms_{{ symptom.id }}">
-                                                            {% get_current_language as LANGUAGE_CODE %}
-                                                            {% if LANGUAGE_CODE == 'sw' %}
-                                                            {{ symptom.title_sw }}
-                                                            {% else %}
-                                                            {{ symptom.title }}
-                                                            {% endif %}
-                                                        </label>
-                                                    </li>
-                                                    {% endfor %}
-                                                </ul>
-                                                <span id="errorSymptoms" style="color: red;"></span>
-                                            </div>
-                                            <!--./form-group -->
-                                        </div>
-                                        <!--./col-lg-12 -->
-                                    </div>
-                                    <!--./row -->
-
-                                    <div class="row">
-                                        <div class="col-lg-12 col-md-12 col-sm-12 col-12">
-                                            <div class="form-group">
-                                                {{ form.other_symptoms|as_crispy_field }}
-                                            </div>
-                                            <!--./form-group -->
-                                        </div>
-                                        <!--./col-lg-2 -->
-                                    </div>
-                                    <!--./row -->
-                                </div>
-                                <!--./tab-->
-
-                                <div class="tab" id="tab5">
-                                    <div class="row">
-                                        <div class="col-lg-12 col-md-12 col-sm-12 col-12">
-                                            <h6 class="font-weight-bold">
-                                                {% trans "Declarations of filled information" %} <span
-                                                    class="asteriskField">*</span>
-                                            </h6>
-                                        </div>
-                                        <!--./col-lg-6 -->
-                                    </div>
-                                    <!--./row -->
-
-                                    <div class="row mt-2">
-                                        <div class="col-lg-12 col-md-12 col-sm-12 col-12">
-                                            <div class="form-group">
-                                                <input type="checkbox" name="accept" id="accept" value="1">
-                                                <strong>
-                                                    {% trans "I declare that the information provided is complete and correct to the best of my knowledge. I understand that any false information filled could lead to denial or prosecution in accordance to law." %}
-                                                </strong>
-                                                <br />
-                                                <span id="errorAccept" style="color: red;"></span>
-                                            </div>
-                                            <!--./form-group -->
-                                        </div>
-                                        <!--./col-lg-12 -->
-                                    </div>
-                                    <!--./row -->
-                                </div>
-                                <!--./tab-->
-
-
-                                <div class="row" style="overflow:auto;">
-                                    <div class="col-md-12 col-12">
-                                        <div class="form-group">
-                                            <button type="button" class="btn btn-primary btn-xs" id="prevBtn"
-                                                onclick="nextPrev(-1)">{% trans "Previous" %}
-                                            </button>
-                                            <button type="button" class="btn btn-secondary btn-xs" id="nextBtn"
-                                                onclick="nextPrev(1)">{% trans "Next" %}
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <!--./col-md-12 -->
-                                </div>
-                                <!--./row -->
-                            </form>
-                        </div>
-                        <!--./col-md-12 -->
+            <!-- Content area -->
+            <div class="content">
+                <!-- Basic card -->
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title text-uppercase text-center font-weight-bold">
+                            {% trans "Traveller's Health Declaration Form" %}
+                        </h5>
                     </div>
-                    <!--./row -->
-                </div>
-                <!--./card-body -->
-            </div><!-- /basic card -->
-        </div><!-- /content area -->
-    </div><!-- /main content -->
-</div><!-- /page content -->
-{% include 'travellers/validation.html' %}
+                    <!--./card-header -->
+
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-12">
+
+                                <!-- Circles which indicates the steps of the form: -->
+                                <div style="text-align:center; margin-bottom: 10px;">
+                                    <span class="step"></span>
+                                    <span class="step"></span>
+                                    <span class="step"></span>
+                                    <span class="step"></span>
+                                    <span class="step"></span>
+                                    <span class="step"></span>
+                                </div>
+
+                                <form id="regForm" action="" method="post" role="form" autocomplete="off">
+                                    {% csrf_token %}
+
+                                    <input type="hidden" id="base_url" name="base_url" value="{{ request.get_host }}"/>
+
+                                    <div class="tab" id="tab1">
+                                        <div class="row">
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                                                <h6 class="title font-weight-bold">
+                                                    {% trans "Traveller Information" %}
+                                                </h6>
+                                            </div>
+                                            <!--./col-lg-6 -->
+                                        </div>
+                                        <!--./row -->
+
+                                        <div class="row">
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                                                <p>{% trans "<b>Note:</b> Write surname and other names as appear in your passport." %}
+                                                </p>
+                                            </div>
+                                            <!--./col-lg-12 -->
+                                        </div>
+                                        <!--./row -->
+
+                                        <div class="row">
+                                            <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                                                <div class="form-group">
+                                                    {{ form.surname|as_crispy_field }}
+                                                    <span id="errorSurname" style="color: red;"></span>
+                                                </div>
+                                                <!--./form-group -->
+                                            </div>
+                                            <!--./col-lg-6 -->
+
+                                            <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                                                <div class="form-group">
+                                                    {{ form.other_names|as_crispy_field }}
+                                                    <span id="errorOtherNames" style="color: red;"></span>
+                                                </div>
+                                                <!--./form-group -->
+                                            </div>
+                                            <!--./col-lg-6 -->
+
+                                            <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                                                <div class="form-group">
+                                                    {{ form.age_category|as_crispy_field }}
+                                                    <span id="errorAgeCategory" style="color: red;"></span>
+                                                </div>
+                                                <!--./form-group -->
+                                            </div>
+                                            <!--./col-lg-6 -->
+
+                                            <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                                                <div class="form-group">
+                                                    {{ form.age|as_crispy_field }}
+                                                    <span id="errorAge" style="color: red;"></span>
+                                                </div>
+                                                <!--./form-group -->
+                                            </div>
+                                            <!--./col-lg-6 -->
+                                        </div>
+                                        <!--./row -->
+
+                                        <div class="row">
+                                            <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                                                <div class="form-group">
+                                                    {{ form.sex|as_crispy_field }}
+                                                    <span id="errorSex" style="color: red;"></span>
+                                                </div>
+                                                <!--./form-group -->
+                                            </div>
+                                            <!--./col-lg-6 -->
+
+                                            <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                                                <div class="form-group">
+                                                    {{ form.nationality|as_crispy_field }}
+                                                    <span id="errorNationality" style="color: red;"></span>
+                                                </div>
+                                                <!--./form-group -->
+                                            </div>
+                                            <!--./col-lg-6 -->
+                                        </div>
+                                        <!--./row -->
+
+                                        <div class="row">
+                                            <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                                                <div class="form-group">
+                                                    {{ form.id_number|as_crispy_field }}
+                                                    <span id="errorIdNumber" style="color: red;"></span>
+                                                </div>
+                                                <!--./form-group -->
+                                            </div>
+                                            <!--./col-lg-6 -->
+
+                                            <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                                                <div class="form-group">
+                                                    {{ form.arrival_date|as_crispy_field }}
+                                                    <span id="errorArrivalDate" style="color: red;"></span>
+                                                </div>
+                                                <!--./form-group -->
+                                            </div>
+                                            <!--./col-lg-6 -->
+                                        </div>
+                                        <!--./row -->
+
+                                        <div class="row">
+                                            <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                                                <div class="form-group">
+                                                    {{ form.mode_of_transport|as_crispy_field }}
+                                                    <span id="errorModeOfTransport" style="color: red;"></span>
+                                                </div>
+                                                <!--./form-group -->
+                                            </div>
+                                            <!--./col-lg-6 -->
+
+                                            <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                                                <div class="form-group">
+                                                    {{ form.point_of_entry|as_crispy_field }}
+                                                    <span id="errorPointOfEntry" style="color: red;"></span>
+                                                </div>
+                                                <!--./form-group -->
+                                            </div>
+                                            <!--./col-lg-6 -->
+                                        </div>
+                                        <!--./row -->
+
+                                        <div class="row">
+                                            <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                                                <div class="form-group">
+                                                    {{ form.name_of_transport|as_crispy_field }}
+                                                    <span id="errorNameOfTransport" style="color: red;"></span>
+                                                </div>
+                                                <!--./form-group -->
+                                            </div>
+                                            <!--./col-lg-6 -->
+
+                                            <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                                                <div class="form-group">
+                                                    {{ form.seat_number|as_crispy_field }}
+                                                    <span id="errorSeatNumber" style="color: red;"></span>
+                                                </div>
+                                                <!--./form-group -->
+                                            </div>
+                                            <!--./col-lg-6 -->
+                                        </div>
+                                        <!--./row -->
+                                    </div>
+                                    <!--./tab -->
+
+                                    <div class="tab" id="tab2">
+                                        <div class="row">
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                                                <div class="form-group">
+                                                    {{ form.visiting_purpose|as_crispy_field }}
+                                                    <span id="errorVisitingPurpose" style="color: red;"></span>
+                                                </div>
+                                                <!--./form-group -->
+                                            </div>
+                                            <!--./col-lg-6 -->
+                                        </div>
+                                        <!--./row -->
+
+                                        <div class="row">
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                                                <div class="form-group">
+                                                    {{ form.other_purpose|as_crispy_field }}
+                                                    <span id="errorOtherPurpose" style="color: red;"></span>
+                                                </div>
+                                                <!--./form-group -->
+                                            </div>
+                                            <!--./col-lg-6 -->
+                                        </div>
+                                        <!--./row -->
+
+                                        <div class="row">
+                                            <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                                                <div class="form-group">
+                                                    {{ form.duration_of_stay|as_crispy_field }}
+                                                    <span id="errorDurationOfStay" style="color: red;"></span>
+                                                </div>
+                                                <!--./form-group -->
+                                            </div>
+                                            <!--./col-lg-6 -->
+
+                                            <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                                                <div class="form-group">
+                                                    {{ form.employment|as_crispy_field }}
+                                                    <span id="errorEmployment" style="color: red;"></span>
+                                                </div>
+                                                <!--./form-group -->
+                                            </div>
+                                            <!--./col-lg-6 -->
+                                        </div>
+                                        <!--./row -->
+
+                                        <div class="row">
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                                                <div class="form-group">
+                                                    {{ form.other_employment|as_crispy_field }}
+                                                    <span id="errorOtherEmployment" style="color: red;"></span>
+                                                </div>
+                                                <!--./form-group -->
+                                            </div>
+                                            <!--./col-lg-6 -->
+                                        </div>
+                                        <!--./row -->
+                                    </div>
+                                    <!--./tab -->
+
+                                    <div class="tab" id="tab3">
+                                        <div class="row">
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                                                <h6 class="title">
+                                                    {% trans "Contact while in Tanzania" %}
+                                                </h6>
+                                            </div>
+                                            <!--./col-lg-6 -->
+                                        </div>
+                                        <!--./row -->
+
+                                        <div class="row">
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                                                <div class="form-group">
+                                                    {{ form.physical_address|as_crispy_field }}
+                                                    <span id="errorAddress" style="color: red;"></span>
+                                                </div>
+                                                <!--./form-group -->
+                                            </div>
+                                            <!--./col-lg-6 -->
+                                        </div>
+                                        <!--./row -->
+
+                                        <div class="row">
+                                            <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                                                <div class="form-group">
+                                                    {{ form.region_id|as_crispy_field }}
+                                                    <span id="errorRegion" style="color: red;"></span>
+                                                </div>
+                                                <!--./form-group -->
+                                            </div>
+                                            <!--./col-lg-6 -->
+
+                                            <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                                                <div class="form-group">
+                                                    {{ form.district_id|as_crispy_field }}
+                                                </div>
+                                                <!--./form-group -->
+                                            </div>
+                                            <!--./col-lg-6 -->
+                                        </div>
+                                        <!--./row -->
+
+                                        <div class="row">
+                                            <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                                                <div class="form-group">
+                                                    {{ form.street_or_ward|as_crispy_field }}
+                                                </div>
+                                                <!--./form-group -->
+                                            </div>
+                                            <!--./col-lg-6 -->
+
+                                            <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                                                <div class="form-group">
+                                                    <label for="calling_code" class=" requiredField">
+                                                        Calling Code<span class="asteriskField">*</span>
+                                                    </label>
+                                                    <select name="calling_code"
+                                                            class="form-control form-control-select1 form-control"
+                                                            id="calling_code" required>
+                                                        <option value="" selected>-- Select --</option>
+                                                        {% for country in countries %}
+                                                            <option value="{{ country.calling_code }}">
+                                                                {{ country.calling_code }}</option>
+                                                        {% endfor %}
+                                                    </select>
+                                                    <span id="errorCallingCode" style="color: red;"></span>
+                                                </div>
+                                                <!--./form-group -->
+                                            </div>
+                                            <!--./col-lg-6 -->
+                                        </div>
+                                        <!--./row -->
+
+                                        <div class="row">
+                                            <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                                                <div class="form-group">
+                                                    {{ form.phone|as_crispy_field }}
+                                                    <span id="errorPhone" style="color: red;"></span>
+                                                </div>
+                                                <!--./form-group -->
+                                            </div>
+                                            <!--./col-lg-6 -->
+
+                                            <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                                                <div class="form-group">
+                                                    {{ form.email|as_crispy_field }}
+                                                    <span id="errorEmail" style="color: red;"></span>
+                                                </div>
+                                                <!--./form-group -->
+                                            </div>
+                                            <!--./col-lg-6 -->
+                                        </div>
+                                        <!--./row -->
+                                    </div>
+                                    <!--./tab -->
+
+                                    <div class="tab">
+                                        <div class="row">
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                                                <div class="form-group">
+                                                    {{ form.location_origin|as_crispy_field }}
+                                                    <span id="errorLocationOrigin" style="color: red;"></span>
+                                                </div>
+                                                <!--./form-group -->
+                                            </div>
+                                            <!--./col-lg-12 -->
+                                        </div>
+                                        <!--./row -->
+
+                                        <div class="row">
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                                                <h6 class="title">
+                                                    {% trans "Countries visited in last 21 days (3 weeks)" %}
+                                                </h6>
+                                            </div>
+                                            <!--./col-lg-12 -->
+                                        </div>
+                                        <!--./row -->
+
+                                        <div class="row">
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                                                <div class="form-group">
+                                                    {{ form.number_countries|as_crispy_field }}
+                                                    <span id="errorLocationOrigin" style="color: red;"></span>
+                                                </div>
+                                                <!--./form-group -->
+                                            </div>
+                                            <!--./col-lg-12 -->
+                                        </div>
+                                        <!--./row -->
+
+                                        <div class="row">
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                                                <span id="errorSumDays" style="color: red;"></span>
+                                            </div>
+                                            <!--./col-lg-12 -->
+                                        </div>
+                                        <!--./row -->
+
+                                        <div class="field_wrapper">
+
+                                        </div>
+                                        <!--./row -->
+                                    </div>
+                                    <!--./tab-->
+
+                                    <div class="tab" id="tab5">
+                                        <div class="row">
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                                                <h6 class="title">
+                                                    {% trans "Have you experienced the following conditions during the last 7 days (1 week)?" %}
+                                                    <span class="asteriskField">*</span>
+                                                </h6>
+                                            </div>
+                                            <!--./col-lg-6 -->
+                                        </div>
+                                        <!--./row -->
+
+                                        <div class="row">
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                                                <div class="form-group">
+                                                    <p>
+                                                        {% trans "Please, mark/tick all the clinical manifestations that you have experienced during the last 7 days (1 week)" %}
+                                                    </p>
+
+                                                    <ul id="symptoms">
+                                                        {% for symptom in symptoms %}
+                                                            <li>
+                                                                <label for="symptoms_{{ symptom.id }}">
+                                                                    <input type="checkbox" name="symptoms"
+                                                                           value="{{ symptom.id }}"
+                                                                           id="symptoms_{{ symptom.id }}">
+                                                                    {% get_current_language as LANGUAGE_CODE %}
+                                                                    {% if LANGUAGE_CODE == 'sw' %}
+                                                                        {{ symptom.title_sw }}
+                                                                    {% else %}
+                                                                        {{ symptom.title }}
+                                                                    {% endif %}
+                                                                </label>
+                                                            </li>
+                                                        {% endfor %}
+                                                    </ul>
+                                                    <span id="errorSymptoms" style="color: red;"></span>
+                                                </div>
+                                                <!--./form-group -->
+                                            </div>
+                                            <!--./col-lg-12 -->
+                                        </div>
+                                        <!--./row -->
+
+                                        <div class="row">
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                                                <div class="form-group">
+                                                    {{ form.other_symptoms|as_crispy_field }}
+                                                </div>
+                                                <!--./form-group -->
+                                            </div>
+                                            <!--./col-lg-2 -->
+                                        </div>
+                                        <!--./row -->
+                                    </div>
+                                    <!--./tab-->
+
+                                    <div class="tab" id="tab5">
+                                        <div class="row">
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                                                <h6 class="font-weight-bold">
+                                                    {% trans "Declarations of filled information" %} <span
+                                                        class="asteriskField">*</span>
+                                                </h6>
+                                            </div>
+                                            <!--./col-lg-6 -->
+                                        </div>
+                                        <!--./row -->
+
+                                        <div class="row mt-2">
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                                                <div class="form-group">
+                                                    <input type="checkbox" name="accept" id="accept" value="1">
+                                                    <strong>
+                                                        {% trans "I declare that the information provided is complete and correct to the best of my knowledge. I understand that any false information filled could lead to denial or prosecution in accordance to law." %}
+                                                    </strong>
+                                                    <br/>
+                                                    <span id="errorAccept" style="color: red;"></span>
+                                                </div>
+                                                <!--./form-group -->
+                                            </div>
+                                            <!--./col-lg-12 -->
+                                        </div>
+                                        <!--./row -->
+                                    </div>
+                                    <!--./tab-->
+
+
+                                    <div class="row" style="overflow:auto;">
+                                        <div class="col-md-12 col-12">
+                                            <div class="form-group">
+                                                <button type="button" class="btn btn-primary btn-xs" id="prevBtn"
+                                                        onclick="nextPrev(-1)">{% trans "Previous" %}
+                                                </button>
+                                                <button type="button" class="btn btn-secondary btn-xs" id="nextBtn"
+                                                        onclick="nextPrev(1)">{% trans "Next" %}
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <!--./col-md-12 -->
+                                    </div>
+                                    <!--./row -->
+                                </form>
+                            </div>
+                            <!--./col-md-12 -->
+                        </div>
+                        <!--./row -->
+                    </div>
+                    <!--./card-body -->
+                </div><!-- /basic card -->
+            </div><!-- /content area -->
+        </div><!-- /main content -->
+    </div><!-- /page content -->
+    {% include 'travellers/validation.html' %}
 
 {% endblock %}

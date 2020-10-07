@@ -1,14 +1,16 @@
-from django import template
 from django.http import HttpResponseRedirect
 from django.utils import translation
 import datetime
 from datetime import timedelta
-from django.shortcuts import render, render_to_response, redirect
-from .models import *
+from django.shortcuts import render, redirect
+from .models import (
+    Symptom, Location, Traveller, TravellerVisitedArea, PointOfEntry, ScreenCriteria
+)
 from .forms import TravellerForm
 from django.contrib import messages
 from django.conf import settings
-from django.db import models
+from django.db import connection
+from django.db.models import Q
 
 
 def default(request):
@@ -22,7 +24,6 @@ def default(request):
 
     Returns: 
     None
-
     """
 
     calculate_score(13)
@@ -74,7 +75,6 @@ def arrival(request):
 
     Returns:
     None
-
     """
     # redirect path
     redirectpath = ""
@@ -205,7 +205,8 @@ def arrival(request):
     else:
         form = TravellerForm()
         return render(request, 'travellers/arrival.html',
-                      {'form': form, 'countries': countries, 'symptoms': symptoms, 'today': today, 'yesterday': yesterday, 'last_21_days': last_21_days})
+                      {'form': form, 'countries': countries, 'symptoms': symptoms, 'today': today,
+                       'yesterday': yesterday, 'last_21_days': last_21_days})
 
 
 def departure(request):
@@ -223,7 +224,6 @@ def success(request):
 
     Returns:
     None
-
     """
 
     # activate current language
@@ -235,25 +235,23 @@ def success(request):
 def calculate_score(traveller_id):
     countries = get_travellers_countries(traveller_id)
     symptoms = get_travellers_symptoms(traveller_id)
-    Location = Traveller.objects.get(pk=traveller_id).location_origin.id
+    location = Traveller.objects.get(pk=traveller_id).location_origin.id
 
-    fc = models.Q()
-    fs = models.Q()
+    fc = Q()
+    fs = Q()
 
-    fc |= models.Q(countries__id=Location)
+    fc |= Q(countries__id=location)
     for c in countries:
-        fc |= models.Q(countries__id=c.id,)
+        fc |= Q(countries__id=c.id, )
 
     for s in symptoms:
-        fs |= models.Q(symptoms__id=s.id,)
+        fs |= Q(symptoms__id=s.id, )
 
-    queryset = ScreenCriteria.objects.filter(fc & fs).distinct()
-
-    print(queryset.query)
-
+    queryset = ScreenCriteria.objects.filter(fc | fs).values('disease_id').distinct()
+    #print(queryset)
     # if count is more than one join otherwise set zero
     if queryset.count() > 0:
-        score = ', '.join(str(id.disease_id) for id in queryset)
+        score = ', '.join(str(id['disease_id']) for id in queryset)
         return score
     else:
         return 0
@@ -272,13 +270,13 @@ def calculate_score1(traveller_id):
     int: calculated score
 
     """
-    from django.db import connection
     cur = connection.cursor()
 
     criteria = build_criteria_query(get_travellers_countries(
         traveller_id), get_travellers_symptoms(traveller_id))
+    # query2 = ScreenCriteria.objects.values('id', 'disease_id').filter(Q(active=1) & Q(criteria=criteria))
     query = "SELECT id,disease_id FROM et_ss_criteria WHERE active = '1' AND ( " + \
-        criteria + " )"
+            criteria + " )"
 
     cur.execute(query)
     connection.commit()
@@ -305,7 +303,6 @@ def build_criteria_query(countries, symptoms):
 
     Returns:
     str: query
-
     """
 
     q = []
@@ -370,7 +367,7 @@ def auto_districts(request):
         districts = Location.objects.filter(parent=region_id)
 
         # return response.
-        return render_to_response('travellers/auto_districts.html', {'districts': districts})
+        return render(None, 'travellers/auto_districts.html', {'districts': districts})
 
 
 def auto_point_of_entries(request):
@@ -388,16 +385,16 @@ def auto_point_of_entries(request):
     if request.method == 'GET':
         mode_of_transport = request.GET.get('mode_of_transport')
         # check for mode of transport
-        if(mode_of_transport == 'truck'):
+        if (mode_of_transport == 'truck'):
             mode_of_transport = 'vehicle'
-        elif(mode_of_transport == 'bus'):
+        elif (mode_of_transport == 'bus'):
             mode_of_transport = 'vehicle'
 
         point_of_entries = PointOfEntry.objects.filter(
             mode_of_transport=mode_of_transport)
 
         # return response
-        return render_to_response('travellers/auto_point_of_entries.html', {'point_of_entries': point_of_entries})
+        return render(None, 'travellers/auto_point_of_entries.html', {'point_of_entries': point_of_entries})
 
 
 # cast mobile

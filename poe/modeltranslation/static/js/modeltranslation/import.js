@@ -1,10 +1,10 @@
-$(document).ready(function(){
+$(document).ready(function () {
 
-	$("form.import").hide();
+    $("form.import").hide();
 
-	$("a.import-link").click(function(){
-		
-		$(this).siblings("form").toggle();
-	});
+    $("a.import-link").click(function () {
+
+        $(this).siblings("form").toggle();
+    });
 
 });

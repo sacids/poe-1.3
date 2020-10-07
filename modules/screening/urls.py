@@ -1,6 +1,6 @@
 from django.urls import path
 
-from .views import *
+from .views import screen, set_temp, update_symptoms, score
 
 urlpatterns = [
     path('', screen, name='screen'),

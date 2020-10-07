@@ -59,18 +59,19 @@ def update_symptoms(request):
         Trav.symptoms.add(symptom)
     
 
-    score = calculate_score(Trav.id)
+    score = calculate_score(tid)
 
     if score != 0:
         Trav.disease_to_screen = score
         Trav.action_taken_id = 2
+        saved = 2
     else:
         Trav.disease_to_screen = score
         Trav.action_taken_id = 1
-        
+
     Trav.save()
 
-    return JsonResponse(saved, safe=False)
+    return HttpResponse(saved)
 
 
 def set_temp(request):

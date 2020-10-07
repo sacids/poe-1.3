@@ -57,6 +57,18 @@ def update_symptoms(request):
     for symptom_id in symptoms:
         symptom = Symptom.objects.get(pk=symptom_id)
         Trav.symptoms.add(symptom)
+    
+
+    score = calculate_score(Trav.id)
+
+    if score != 0:
+        Trav.disease_to_screen = score
+        Trav.action_taken_id = 2
+    else:
+        Trav.disease_to_screen = score
+        Trav.action_taken_id = 1
+        
+    Trav.save()
 
     return JsonResponse(saved, safe=False)
 

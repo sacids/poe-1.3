@@ -84,7 +84,7 @@ def set_temp(request):
             Trav.disease_to_screen = score + screen
             Trav.action_taken = ActionTaken.objects.get(pk=2)
         else:
-            Trav.disease_to_screen = score + screen
+            Trav.disease_to_screen = str(score) + screen
             Trav.action_taken = ActionTaken.objects.get(pk=1)
         # Trav.update(temp=Temp,disease_to_screen=Concat('disease_to_screen',V(','),screen))
         # Trav.update(disease_to_screen  = screen

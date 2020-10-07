@@ -24,6 +24,8 @@ def default(request):
     None
 
     """
+
+    calculate_score(13)
     return render(request, 'travellers/home.html', {})
 
 
@@ -246,6 +248,8 @@ def calculate_score(traveller_id):
         fs |= models.Q(symptoms__id=s.id,)
 
     queryset = ScreenCriteria.objects.filter(fc & fs).distinct()
+
+    print(queryset.query)
 
     # if count is more than one join otherwise set zero
     if queryset.count() > 0:

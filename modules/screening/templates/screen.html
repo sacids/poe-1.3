@@ -112,7 +112,7 @@
             </li>
         </ul>
         <div class="tab-content">
-            <div id="check" class="tab-pane fade in active py-3">
+            <div id="check" class="tab-pane fade in active show py-3">
                 <h5>Symptoms</h5>
                 <div class="border-bottom pb-3">
                     <form id="form_edit_traveller_symptoms">
@@ -236,8 +236,9 @@
             });
 
             $(document).on('click', '#close_traveller_data', function (e) {
+
                 $('#traveller_data').animate({
-                    marginRight: '-50vw'
+                    marginRight: '-50%'
                 }, 500);
             });
 

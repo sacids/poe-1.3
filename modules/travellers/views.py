@@ -173,20 +173,20 @@ def arrival(request):
                 # finally save traveller symptoms
                 traveller_sym.symptoms.add(symptom)
 
-                # todo: call function to calculate score
-                score = calculate_score(traveller.id)
-                print("Score => " + str(score))
+            # todo: call function to calculate score
+            score = calculate_score(traveller.id)
+            print("Score => " + str(score))
 
-                if score == 0:
-                    action_taken = 1
-                else:
-                    action_taken = 2
+            if score == 0:
+                action_taken = 1
+            else:
+                action_taken = 2
 
-                # update traveller
-                traveller_up = Traveller.objects.get(pk=traveller.id)
-                traveller_up.disease_to_screen = score
-                traveller_up.action_taken_id = action_taken
-                traveller_up.save()
+            # update traveller
+            traveller_up = Traveller.objects.get(pk=traveller.id)
+            traveller_up.disease_to_screen = score
+            traveller_up.action_taken_id = action_taken
+            traveller_up.save()
 
             messages.add_message(request, messages.SUCCESS,
                                  'Success! Saved Successfully!')

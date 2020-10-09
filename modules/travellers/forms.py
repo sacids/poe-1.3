@@ -85,7 +85,8 @@ class TravellerForm(forms.Form):
                             choices=SEX,
                             widget=forms.Select(attrs={'class': 'form-control', 'id': 'sex'}), required=True)
 
-    nationality = forms.ModelChoiceField(label=_('Nationality'), queryset=Location.objects.filter(parent=0),
+    nationality = forms.ModelChoiceField(label=_('Nationality'),
+                                         queryset=Location.objects.filter(parent=0).order_by('title'),
                                          empty_label=_('-- Select --'),
                                          widget=forms.Select(
                                              attrs={'class': 'form-control chosen-select', 'id': 'nationality'}),

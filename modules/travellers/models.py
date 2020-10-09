@@ -1,3 +1,4 @@
+from os import name
 from django.db import models
 from modules.common.models import BaseModel
 from django.contrib.auth.models import User
@@ -190,7 +191,7 @@ class ActionTaken(models.Model):
 # travellers
 class Traveller(BaseModel):
     """A class to create travellers table."""
-    surname = models.CharField(max_length=50, null=True)
+    surname = models.CharField("Write..", max_length=50, null=True)
     other_names = models.CharField(max_length=100, null=True)
     category = models.CharField(choices=FORM_CATEGORY, max_length=30, default='None')
     sex = models.CharField(choices=SEX, max_length=15, default='None')
@@ -204,7 +205,7 @@ class Traveller(BaseModel):
 
     mode_of_transport = models.CharField(choices=TRANSPORT_MODE, max_length=50, default='None')
     name_of_transport = models.CharField(max_length=50)
-    seat_number = models.CharField(max_length=25, null=True)
+    seat_number = models.CharField(max_length=25, null=True, blank=True)
     arrival_date = models.DateField(verbose_name="Arrival Date")
     point_of_entry = models.ForeignKey(PointOfEntry, related_name="point_of_entry", on_delete=models.DO_NOTHING)
 

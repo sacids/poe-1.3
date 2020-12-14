@@ -88,7 +88,7 @@ class TravellerForm(forms.Form):
     nationality = forms.ModelChoiceField(label=_('Nationality'), queryset=Location.objects.filter(parent=0),
                                          empty_label=_('-- Select --'),
                                          widget=forms.Select(
-                                             attrs={'class': 'form-control chosen-select', 'id': 'nationality'}),
+                                             attrs={'class': 'form-control nationality-select', 'id': 'nationality'}),
                                          required=True)
 
     id_number = forms.CharField(label=_('Passport Number'),
@@ -101,13 +101,13 @@ class TravellerForm(forms.Form):
                'max': date.today() + timedelta(days=1)}), required=True)
 
     mode_of_transport = forms.ChoiceField(label=_('Mode of Transport'), choices=TRANSPORT_MODE, widget=forms.Select(
-        attrs={'class': 'form-control', 'id': 'mode_of_transport', 'onChange': 'suggest_point_of_entries()'}),
+        attrs={'class': 'form-control mode-of-transport-select', 'id': 'mode_of_transport', 'onChange': 'suggest_point_of_entries()'}),
                                           required=True)
 
     point_of_entry = forms.ModelChoiceField(label=_('Point of Entry'), queryset=PointOfEntry.objects.all(),
                                             empty_label=_('-- Select --'),
                                             widget=forms.Select(
-                                                attrs={'class': 'form-control', 'id': 'point_of_entry'}), required=True)
+                                                attrs={'class': 'form-control point-of-entry-select', 'id': 'point_of_entry'}), required=True)
 
     name_of_transport = forms.CharField(label=_('Vessel/Flight/Vehicle Name/No'), widget=forms.TextInput(
         attrs={'class': 'form-control', 'id': 'name_of_transport',

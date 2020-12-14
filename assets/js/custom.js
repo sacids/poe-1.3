@@ -8,6 +8,10 @@
 //chosen select
 // In your Javascript (external .js resource or <script> tag)
 $(document).ready(function () {
+    // Initialize select2
+    // $(".chosen-select").select2();
+
+
     //make number of coutries readonly
     $('#number_countries').on('input', function () {
         //$('#number_countries').attr('readonly', 'readonly');

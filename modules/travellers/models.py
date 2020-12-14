@@ -33,6 +33,7 @@ TRANSPORT_MODE = (
     ('vehicle', 'Vehicle'),
     ('vessel', 'Vessel'),
     ('train', 'Train'),
+    ('by-foot', 'By Foot'),
 )
 TRANSPORT_CATEGORY = (
     ('Ground crossing', 'Ground crossing'),
@@ -43,6 +44,7 @@ TRANSPORT_CATEGORY = (
     ('Railway', 'Railway'),
 )
 PURPOSE = (
+    ('diplomat', 'Diplomat'),
     ('resident', 'Resident'),
     ('tourist', 'Tourist'),
     ('transit', 'Transit'),

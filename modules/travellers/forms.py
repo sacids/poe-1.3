@@ -14,6 +14,7 @@ class TravellerForm(forms.ModelForm):
         fields = ('__all__')
         widgets = {
             'surname': forms.TextInput(attrs={'class':'form-control', 'placeholder': 'Write surname...',}),
+            'other_names': forms.TextInput(attrs={'class':'form-control', 'placeholder': 'Write other names...',})
         
         }
 

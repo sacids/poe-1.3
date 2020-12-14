@@ -83,20 +83,54 @@ def arrival(request):
     # activate current language
     translation.activate(translation.get_language())
 
-    #if post data
+    # data
+    symptoms = Symptom.objects.all()  # symptoms
+    countries = Location.objects.filter(
+        parent=0).order_by('title')  # countries
+    today = datetime.date.today().strftime("%Y-%m-%d")
+    yesterday = (datetime.date.today() -
+                 timedelta(days=1)).strftime("%Y-%m-%d")
+    last_21_days = (datetime.date.today() -
+                    timedelta(days=21)).strftime("%Y-%m-%d")
+
+    # if post data
     if request.method == 'POST':
         form = TravellerForm(request.POST)
+        # context
+        attr = {'form': form, 'countries': countries, 'symptoms': symptoms,
+                'today': today, 'yesterday': yesterday, 'last_21_days': last_21_days}
+
         if form.is_valid():
 
             u = form.save()
-            return render(request, 'travellers/arrival.html', {})
+            return render(request, 'travellers/arrival.html', attr)
     else:
         form_class = TravellerForm
-        return render(request, 'travellers/arrival.html', {'form': form_class,})
+        form_class.base_fields["nationality"].queryset = Location.objects.filter(
+            parent=0).order_by('title')
+        form_class.base_fields["region"].queryset = Location.objects.filter(
+            code="TZR").order_by('title')
+        form_class.base_fields["district"].queryset = Location.objects.filter(
+            code="TZD").order_by('title')
+        form_class.base_fields["location_origin"].queryset = Location.objects.filter(
+            parent=0).order_by('title')
+
+        # context
+        attr = {'form': form_class, 'countries': countries, 'symptoms': symptoms,
+                'today': today, 'yesterday': yesterday, 'last_21_days': last_21_days}
+
+        # render view
+        return render(request, 'travellers/arrival.html', attr)
 
 
 def departure(request):
     return render(request, 'travellers/departure.html', {})
+
+
+# preview data
+def preview(request):
+    form_class = TravellerForm
+    return render(request, 'travellers/preview.html', {'form': form_class})
 
 
 def success(request):

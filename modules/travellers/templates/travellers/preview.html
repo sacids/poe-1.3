@@ -1,0 +1,162 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% load crispy_forms_field %}
+{% load crispy_forms_filters %}
+{% load crispy_forms_tags %}
+{% load static %}
+{#{% load sweetify %}#}
+{#{% sweetify %}#}
+{% block title %} {% trans "Traveller's Surveillance Form" %} {% endblock %}
+
+{% block content %}
+<!-- Page content -->
+<div class="page-content bg-white">
+    <!-- Main content -->
+    <div class="content-wrapper">
+        <!-- Page header -->
+        {% include 'page-header.html' %}
+        <!-- /page header -->
+
+        <!-- Content area -->
+        <div class="content">
+            <!-- Basic card -->
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title text-uppercase text-center font-weight-bold">
+                        {% trans "Traveller's Health Declaration Form" %}
+                    </h5>
+                </div>
+                <!--./card-header -->
+
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12">
+
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                                    <h6 class="title font-weight-bold">
+                                        {% trans "Traveller Information" %}
+                                    </h6>
+                                </div>
+                                <!--./col-lg-6 -->
+                            </div>
+                            <!--./row -->
+
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                                    <ul class="list-group mb-3">
+                                        <li class="list-group-item d-flex justify-content-between lh-condensed">
+                                          <div>
+                                            <h6 class="my-0">Full Name</h6>
+                                            <small class="text-muted">Brief description</small>
+                                          </div>
+                                        </li>
+
+                                        <li class="list-group-item d-flex justify-content-between lh-condensed">
+                                          <div>
+                                            <h6 class="my-0">Age</h6>
+                                            <small class="text-muted">Brief description</small>
+                                          </div>
+                                        </li>
+
+                                        <li class="list-group-item d-flex justify-content-between lh-condensed">
+                                          <div>
+                                            <h6 class="my-0">Sex</h6>
+                                            <small class="text-muted">Brief description</small>
+                                          </div>
+                                        </li>
+
+                                        <li class="list-group-item d-flex justify-content-between lh-condensed">
+                                            <div>
+                                              <h6 class="my-0">Nationality</h6>
+                                              <small class="text-muted">Brief description</small>
+                                            </div>
+                                          </li>
+
+                                          <li class="list-group-item d-flex justify-content-between lh-condensed">
+                                            <div>
+                                              <h6 class="my-0">Passport Number</h6>
+                                              <small class="text-muted">Brief description</small>
+                                            </div>
+                                          </li>
+
+                                          <li class="list-group-item d-flex justify-content-between lh-condensed">
+                                            <div>
+                                              <h6 class="my-0">Arrival Date</h6>
+                                              <small class="text-muted">Brief description</small>
+                                            </div>
+                                          </li>
+
+                                          <li class="list-group-item d-flex justify-content-between lh-condensed">
+                                            <div>
+                                              <h6 class="my-0">Mode of Transport</h6>
+                                              <small class="text-muted">Brief description</small>
+                                            </div>
+                                          </li>
+
+                                          <li class="list-group-item d-flex justify-content-between lh-condensed">
+                                            <div>
+                                              <h6 class="my-0">Point of Entry</h6>
+                                              <small class="text-muted">Brief description</small>
+                                            </div>
+                                          </li>
+
+                                          <li class="list-group-item d-flex justify-content-between lh-condensed">
+                                            <div>
+                                              <h6 class="my-0">Name of </h6>
+                                              <small class="text-muted">Brief description</small>
+                                            </div>
+                                          </li>
+                                        
+                                        
+                                      </ul>
+                                </div>
+                                <!--./col-lg-12 -->
+                            </div>
+                            <!--./row -->
+
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                                    <h6 class="title font-weight-bold">
+                                        {% trans "Contact while in Tanzania" %}
+                                    </h6>
+                                </div>
+                                <!--./col-lg-6 -->
+                            </div>
+                            <!--./row -->
+
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                                    <h6 class="title font-weight-bold">
+                                        {% trans "Countries visited in last 21 days (3 weeks)" %}
+                                    </h6>
+                                </div>
+                                <!--./col-lg-12 -->
+                            </div>
+                            <!--./row -->
+
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                                    <h6 class="title font-weight-bold">
+                                        {% trans "Conditions experienced during the last 7 days (1 week)" %}
+                                    </h6>
+                                </div>
+                                <!--./col-lg-6 -->
+                            </div>
+                            <!--./row -->
+
+
+
+
+                        </div>
+                        <!--./col-md-12 -->
+                    </div>
+                    <!--./row -->
+                </div>
+                <!--./card-body -->
+            </div><!-- /basic card -->
+        </div><!-- /content area -->
+    </div><!-- /main content -->
+</div><!-- /page content -->
+{% endblock %}

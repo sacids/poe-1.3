@@ -126,9 +126,6 @@ makemigrations
 migrate
 run
 
-
-**/migrations/*
-
 modules/config/__pycache__/__init__.cpython-38.pyc
 modules/config/__pycache__/__init__.cpython-38.pyc
 modules/config/__pycache__/admin.cpython-38.pyc

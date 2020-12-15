@@ -88,6 +88,10 @@
         <div id="openNav" class="navopt border-right"><span onclick="openNav()">&#9776; </span></div>
         <div id="poe_title" class="navopt border-right">{{ poe_title }}</div>
 
+        <div class="navopt border-right">
+        {% block filter %}{% endblock %}
+        </div>
+
         <div class="flex-grow-1">
             {% block navarea %}{% endblock %}
         </div>
@@ -96,6 +100,7 @@
         {% if search %}
             <div class="ml-auto nav-icons search-d"><i class="fa fa-search" id="search_box"></i></div>
         {% endif %}
+
 
         <!-- Show login option if flag set in context -->
         {% if login %}

@@ -141,6 +141,33 @@
     color: white;
   }
 
+  .action_taken_x td, .action_taken_x{
+    background-color:black !important;
+  }
+
+  .action_taken_1 td, .action_taken_1{
+    background-color:#84cf7d !important;
+    color: black;
+  }
+
+  .action_taken_2 td, .action_taken_2 {
+    background-color:#ef5350 !important;
+    color: white;
+  }
+
+
+  .filter_box{
+    width: 25px;
+    height: 12px;
+    margin: 3px;
+    background-color: rgb(160, 156, 156);
+    cursor: pointer;
+  }
+
+
+
+  
+
 
   /*===============================================
 Tables
@@ -318,6 +345,6 @@ table.table td i {
 }
 
 .tab-content{
-  height: calc(100vh - 300px);
+  height: calc(100vh - 230px);
   overflow-y: auto;
 }

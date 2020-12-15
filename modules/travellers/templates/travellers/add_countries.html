@@ -6,7 +6,7 @@
             '<div class="col-lg-6 col-md-6 col-sm-12 col-12">' +
             '<div class="form-group">' +
             '<label>{% trans "Country Visited" %} <span class="asteriskField">*</span></label>' +
-            '<select name="location" id="location" class="form-control chosen-select">' +
+            '<select name="location" id="location" class="form-control country-visited-select">' +
             '<option value="">{% trans "-- Select --" %}</option>' +
             "{% for country in countries %}" +
                 "<option value='{{ country.id }}'>{{ country.title }}</option>" +

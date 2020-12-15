@@ -28,7 +28,7 @@
         let x = document.getElementsByClassName("tab");
 
         // Exit the function if any field in the current tab is invalid:
-        if (n === 1 && !validateForm()) return false;
+        //if (n === 1 && !validateForm()) return false;
         // Hide the current tab:
         x[currentTab].style.display = "none";
         // Increase or decrease the current tab by 1:
@@ -509,4 +509,12 @@
         }
         return dayCount
     }
+
+    function checkNumber(event) {
+        return event.charCode === 0 || /\d/.test(String.fromCharCode(event.charCode));
+    }
+
+    const input = document.getElementById('phone');
+    input.onkeypress = checkNumber;
+    input.onpaste = event => false;
 </script>

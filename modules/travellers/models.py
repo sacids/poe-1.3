@@ -1,8 +1,11 @@
 from os import name
 from django.db import models
+from django.db.models.deletion import DO_NOTHING
 from modules.common.models import BaseModel
 from django.contrib.auth.models import User
 from django.forms.models import model_to_dict
+from django.utils.translation import ugettext_lazy as _
+import uuid
 
 FORM_CATEGORY = (
     ('arrival', 'ARRIVAL'),
@@ -10,11 +13,13 @@ FORM_CATEGORY = (
 )
 
 AGE_CATEGORY = (
+    ('', _('-- Select --')),
     ('above', 'ABOVE 1'),
     ('below', 'BELOW 1'),
 )
 
 SEX = (
+    ('', _('-- Select --')),
     ('M', 'Male'),
     ('F', 'Female'),
 )
@@ -28,12 +33,14 @@ ID_TYPE = (
     ('voter-id', 'VOTER ID'),
 )
 TRANSPORT_MODE = (
+    ('', _('-- Select --')),
     ('flight', 'Flight'),
     ('truck', 'Truck'),
     ('bus', 'Bus'),
     ('vehicle', 'Vehicle'),
     ('vessel', 'Vessel'),
     ('train', 'Train'),
+    ('by-foot', 'By Foot'),
 )
 TRANSPORT_CATEGORY = (
     ('Ground crossing', 'Ground crossing'),
@@ -44,8 +51,10 @@ TRANSPORT_CATEGORY = (
     ('Railway', 'Railway'),
 )
 PURPOSE = (
+    ('', _('-- Select --')),
     ('resident', 'Resident'),
     ('tourist', 'Tourist'),
+    ('diplomat', 'Diplomat'),
     ('transit', 'Transit'),
     ('business', 'Business'),
     ('conference', 'Conference'),
@@ -53,6 +62,7 @@ PURPOSE = (
     ('other', 'Other'),
 )
 EMPLOYMENT = (
+    ('', _('-- Select --')),
     ('student', 'Student'),
     ('religious', 'Religious'),
     ('farmer', 'Farmer'),
@@ -119,7 +129,8 @@ class Location(models.Model):
     title = models.CharField(max_length=100)
     code = models.CharField(max_length=10, null=True)
     parent = models.PositiveIntegerField()
-    calling_code = models.CharField(max_length=5, null=True, verbose_name="Calling code")
+    calling_code = models.CharField(
+        max_length=5, null=True, verbose_name="Calling code")
 
     class Meta:
         db_table = 'et_locations'
@@ -132,8 +143,10 @@ class Location(models.Model):
 class ScreenCriteria(models.Model):
     """A class to create screening criteria table."""
     disease = models.ForeignKey(Disease, on_delete=models.PROTECT)
-    countries = models.ManyToManyField(Location, related_name='countries', blank=True)
-    symptoms = models.ManyToManyField(Symptom, related_name='symptoms', blank=True)
+    countries = models.ManyToManyField(
+        Location, related_name='countries', blank=True)
+    symptoms = models.ManyToManyField(
+        Symptom, related_name='symptoms', blank=True)
     temp = models.CharField(max_length=250, blank=True, null=True)
     active = models.CharField(choices=ACTIVE, max_length=1, default='0')
 
@@ -163,8 +176,10 @@ class PointOfEntry(models.Model):
     """A class to create point of entries table."""
     title = models.CharField(max_length=100)
     code = models.CharField(max_length=100, null=True, blank=True)
-    mode_of_transport = models.CharField(choices=TRANSPORT_MODE, max_length=255, null=True, blank=True)
-    category = models.CharField(choices=TRANSPORT_CATEGORY, max_length=50, null=True, blank=True)
+    mode_of_transport = models.CharField(
+        choices=TRANSPORT_MODE, max_length=255, null=True, blank=True)
+    category = models.CharField(
+        choices=TRANSPORT_CATEGORY, max_length=50, null=True, blank=True)
     agents = models.ManyToManyField(User, blank=True)
 
     class Meta:
@@ -191,40 +206,52 @@ class ActionTaken(models.Model):
 # travellers
 class Traveller(BaseModel):
     """A class to create travellers table."""
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4,
+                          unique=True, editable=False)
     surname = models.CharField("Write..", max_length=50, null=True)
     other_names = models.CharField(max_length=100, null=True)
-    category = models.CharField(choices=FORM_CATEGORY, max_length=30, default='None')
+    category = models.CharField(
+        choices=FORM_CATEGORY, max_length=30, default='None')
     sex = models.CharField(choices=SEX, max_length=15, default='None')
-    age_category = models.CharField(choices=AGE_CATEGORY, max_length=30, null=True)
-    age = models.IntegerField(default=1, null=True)
-    nationality = models.ForeignKey(Location, related_name="nationality", default=0, on_delete=models.DO_NOTHING)
+    age_category = models.CharField(
+        choices=AGE_CATEGORY, max_length=30, null=True)
+    age = models.IntegerField(null=True)
+    nationality = models.ForeignKey(
+        Location, related_name="nationality", default=0, on_delete=models.DO_NOTHING)
     id_type = models.CharField(choices=ID_TYPE, max_length=50, default='None')
     id_number = models.CharField(max_length=50)
-    employment = models.CharField(choices=EMPLOYMENT, max_length=50, default='None')
+    employment = models.CharField(
+        choices=EMPLOYMENT, max_length=50, default='None')
     other_employment = models.CharField(max_length=255, blank=True, null=True)
 
-    mode_of_transport = models.CharField(choices=TRANSPORT_MODE, max_length=50, default='None')
+    mode_of_transport = models.CharField(
+        choices=TRANSPORT_MODE, max_length=50, default='None')
     name_of_transport = models.CharField(max_length=50)
     seat_number = models.CharField(max_length=25, null=True, blank=True)
     arrival_date = models.DateField(verbose_name="Arrival Date")
-    point_of_entry = models.ForeignKey(PointOfEntry, related_name="point_of_entry", on_delete=models.DO_NOTHING)
+    point_of_entry = models.ForeignKey(
+        PointOfEntry, related_name="point_of_entry", on_delete=models.DO_NOTHING)
 
-    visiting_purpose = models.CharField(choices=PURPOSE, max_length=50, default='None')  # to look around
+    visiting_purpose = models.CharField(
+        choices=PURPOSE, max_length=50, default='None')  # to look around
     other_purpose = models.TextField(null=True)
-    duration_of_stay = models.PositiveIntegerField(default=0, null=True)
-    location_origin = models.ForeignKey(Location, related_name="location_origin", on_delete=models.DO_NOTHING)
+    duration_of_stay = models.PositiveIntegerField(null=True)
+    location_origin = models.ForeignKey(
+        Location, related_name="location_origin", on_delete=models.DO_NOTHING)
 
     physical_address = models.TextField(null=True)
     region = models.ForeignKey(Location, related_name="region", default=0,
                                on_delete=models.DO_NOTHING)  # to look around
-    district_id = models.IntegerField(default=0, null=True)  # to look around
-    street_or_ward = models.CharField(max_length=100, null=True)  # to look around
-    phone = models.CharField(max_length=25, default='None')
-    email = models.EmailField(max_length=255, default='None')
+    district = models.ForeignKey(Location, default=0, null=True, blank=True, on_delete=DO_NOTHING)  # to look around
+    street_or_ward = models.CharField(
+        max_length=100, null=True, blank=True)  # to look around
+    phone = models.CharField(max_length=25, null=True, blank=True)
+    email = models.EmailField(max_length=255, null=True, blank=True)
 
     temp = models.FloatField(null=True)
     disease_to_screen = models.CharField(max_length=150, default='0')
-    action_taken = models.ForeignKey(ActionTaken, default=1, on_delete=models.DO_NOTHING)
+    action_taken = models.ForeignKey(
+        ActionTaken, default=1, on_delete=models.DO_NOTHING)
     symptoms = models.ManyToManyField(Symptom, blank=True)
     other_symptoms = models.TextField(null=True)
     accept = models.IntegerField(default=0, null=True)
@@ -243,7 +270,8 @@ class Traveller(BaseModel):
 # Traveller visited area
 class TravellerVisitedArea(models.Model):
     """A class to create traceller visited areas table."""
-    traveller = models.ForeignKey(Traveller, related_name="visited_area", on_delete=models.PROTECT, default=1)
+    traveller = models.ForeignKey(
+        Traveller, related_name="visited_area", on_delete=models.PROTECT, default=1)
     location = models.ForeignKey(Location, on_delete=models.DO_NOTHING)
     location_visited = models.CharField(max_length=250, null=True)
     date = models.DateField(verbose_name="Date", null=True)

@@ -137,7 +137,7 @@ def calculate_score(traveller_id):
     active = Q(active=1)
     queryset = ScreenCriteria.objects.filter(
         (fc | fs) & active).values('disease_id').distinct()
-    print(queryset.query)
+    # print(queryset.query)
     # if count is more than one join otherwise set zero
     if queryset.count() > 0:
         score = ', '.join(str(id['disease_id']) for id in queryset)

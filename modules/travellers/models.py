@@ -215,8 +215,7 @@ class Traveller(BaseModel):
     location_origin = models.ForeignKey(Location, related_name="location_origin", on_delete=models.DO_NOTHING)
 
     physical_address = models.TextField(null=True)
-    region = models.ForeignKey(Location, related_name="region", default=0,
-                               on_delete=models.DO_NOTHING)  # to look around
+    region = models.ForeignKey(Location, related_name="region", default=0,on_delete=models.DO_NOTHING)  # to look around
     district_id = models.IntegerField(default=0, null=True)  # to look around
     street_or_ward = models.CharField(max_length=100, null=True)  # to look around
     phone = models.CharField(max_length=25, default='None')
@@ -224,7 +223,7 @@ class Traveller(BaseModel):
 
     temp = models.FloatField(null=True)
     disease_to_screen = models.CharField(max_length=150, default='0')
-    action_taken = models.ForeignKey(ActionTaken, default=1, on_delete=models.DO_NOTHING)
+    action_taken = models.ForeignKey(ActionTaken, default=0, on_delete=models.DO_NOTHING)
     symptoms = models.ManyToManyField(Symptom, blank=True)
     other_symptoms = models.TextField(null=True)
     accept = models.IntegerField(default=0, null=True)

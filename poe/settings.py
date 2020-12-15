@@ -10,7 +10,6 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
-from django.utils.translation import ugettext_lazy as _
 import os
 from decouple import config
 from django.contrib.messages import constants as messages
@@ -46,6 +45,9 @@ INSTALLED_APPS = [
     'formtools',
     'multiselectfield',
     'reset_migrations',
+    'rest_framework',
+    'rest_framework.authtoken',
+    'corsheaders',
 
     # custom apps
     'modules.config',
@@ -57,6 +59,7 @@ INSTALLED_APPS = [
     'modules.common',
     'modules.report',
     'modules.reports',
+    'modules.api',
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
@@ -64,7 +67,9 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.locale.LocaleMiddleware',  # add this to determine language session
+    # add this to determine language session
+    'django.middleware.locale.LocaleMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -166,3 +171,20 @@ MESSAGE_TAGS = {
 
 # Redirect to home URL after login (Default redirects to /accounts/profile/)
 LOGIN_REDIRECT_URL = '/dashboard/'
+
+
+# restframework settings
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        #  'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication',  # new
+    ],
+}
+
+
+CORS_ORIGIN_WHITELIST = (
+    'http://localhost:8000',
+)

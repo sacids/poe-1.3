@@ -27,6 +27,7 @@ urlpatterns = i18n_patterns(
     path('sec_screen/', include("modules.secondary_screening.urls")),
     path('reports/', include("modules.report.urls")),
     path('', include("modules.travellers.urls")),
+    path('api/', include("modules.api.urls")),
     prefix_default_language=False
 )
 

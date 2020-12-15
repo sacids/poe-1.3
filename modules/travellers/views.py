@@ -101,7 +101,6 @@ def arrival(request):
                 'today': today, 'yesterday': yesterday, 'last_21_days': last_21_days}
 
         if form.is_valid():
-
             u = form.save()
             return render(request, 'travellers/arrival.html', attr)
     else:
@@ -153,7 +152,6 @@ def success(request):
 
 
 def calculate_score(traveller_id):
-
     countries = get_travellers_countries(traveller_id)
     symptoms = get_travellers_symptoms(traveller_id)
     location = Traveller.objects.get(pk=traveller_id).location_origin.id

@@ -12,6 +12,9 @@ $(document).ready(function () {
     $('#number_countries').on('input', function () {
         //$('#number_countries').attr('readonly', 'readonly');
     });
+
+
+    //hide and show
 });
 
 //suggest districts

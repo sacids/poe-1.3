@@ -13,9 +13,9 @@ function closeNav() {
 }
 
 
-$(document).ready(function(){
+$(document).ready(function () {
 
-    window.onscroll = function() {stick_nav()};
+    window.onscroll = function () { stick_nav() };
     // Get the navbar
     var navbar = document.getElementById("navbar");
     // Get the offset position of the navbar
@@ -23,46 +23,68 @@ $(document).ready(function(){
     // Add the sticky class to the navbar when you reach its scroll position. Remove "sticky" when you leave the scroll position
     function stick_nav() {
         if (window.pageYOffset >= sticky) {
-        navbar.classList.add("sticky")
+            navbar.classList.add("sticky")
         } else {
-        navbar.classList.remove("sticky");
+            navbar.classList.remove("sticky");
         }
     }
-    
-    $('#search_box').on('click', function(){
+
+    $('#search_box').on('click', function () {
         $(".site-search").addClass('search-visible');
     });
 
-    $('.fa-times-circle').on('click', function(){
+    $('.fa-times-circle').on('click', function () {
         $(".site-search").removeClass('search-visible');
         $("#site_search").val('');
-        oTable.search($(this).val()).draw() ;
+        oTable.search($(this).val()).draw();
     });
 
-    $(document).on('click','#set_poe_btn',function(event){
+    $(document).on('click', '#set_poe_btn', function (event) {
 
-        var poe_id      = $('#set_poe').val();
-        var url     = window.location.origin+'/common/set_poe?poe_id='+poe_id;
+        var poe_id = $('#set_poe').val();
+        var url = window.location.origin + '/common/set_poe?poe_id=' + poe_id;
 
         var jqXHR = $.ajax({
-            type:"GET",
-            url:url
-        }).done(function (data){
-            
+            type: "GET",
+            url: url
+        }).done(function (data) {
+
             $('#poe_title').html(data);
             location.reload();
 
-        }).fail(function(jqXHR, textStatus, errorThrown){
+        }).fail(function (jqXHR, textStatus, errorThrown) {
             alert('Failed to update PoE');
-            if ( console && console.log ) {
+            if (console && console.log) {
                 console.log("Loading Ajax: " + textStatus + ", " + errorThrown);
             }
 
-        }).always(function() {
+        }).always(function () {
 
         });
-
     });
-    
+
+    //hide and show
+    var day = $('#day').val();
+
+    if (day == 'custom') {
+        $("#start_at").show();
+        $("#end_at").show();
+    } else {
+        $("#start_at").hide();
+        $("#end_at").hide();
+    }
+
+    $("#day").change(function () {
+        var day = $('#day').val();
+
+        if (day == 'custom') {
+            $("#start_at").show();
+            $("#end_at").show();
+        } else {
+            $("#start_at").hide();
+            $("#end_at").hide();
+        }
+    });
+
 
 });

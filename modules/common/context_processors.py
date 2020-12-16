@@ -29,7 +29,7 @@ def poe_defaults(request):
     context = {
         'search': True,
         'login': True,
-        "modules": Module.objects.all(),
+        "modules": Module.objects.all().order_by('sort_order'),
         'poes': poes,
         'poe_id': request.session.get('poe_id', default_poe_id),
         'poe_title': request.session.get('poe_title', default_poe_title),

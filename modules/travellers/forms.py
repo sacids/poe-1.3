@@ -20,10 +20,11 @@ class TravellerForm(forms.ModelForm):
             'other_names': forms.TextInput(attrs={'class': 'form-control', 'id': 'other_names', 'placeholder': _('Write other names...'), }),
             'age_category': forms.Select(attrs={'class': 'form-control', 'id': 'age_category'}),
             'age': forms.NumberInput(
-                attrs={'class': 'form-control', 'min': 1, 'max': 120, 'placeholder': _('Write age...'), }),
-            'nationality': forms.Select(attrs={'class': 'form-control nationality-select', }),
+                attrs={'class': 'form-control', 'id': 'age', 'min': 1, 'max': 120, 'placeholder': _('Write age...'), }),
+            'sex': forms.Select(attrs={'id': 'sex'}),    
+            'nationality': forms.Select(attrs={'class': 'form-control nationality-select', 'id': 'nationality' }),
             'id_number': forms.TextInput(
-                attrs={'class': 'form-control', 'placeholder': _('Write passport number...'), }),
+                attrs={'class': 'form-control', 'id': 'id_number', 'placeholder': _('Write passport number...'), }),
             'arrival_date': forms.DateInput(
                 attrs={'type': 'date', 'class': 'form-control', 'id': 'arrival_date', 'min': date.today(),
                        'max': date.today() + timedelta(days=1)}),
@@ -33,9 +34,9 @@ class TravellerForm(forms.ModelForm):
             'point_of_entry': forms.Select(
                 attrs={'class': 'form-control point-of-entry-select', 'id': 'point_of_entry', }),
             'name_of_transport': forms.TextInput(
-                attrs={'class': 'form-control', 'placeholder': _('Write Vessel/Flight/Vehicle Name...'), }),
+                attrs={'class': 'form-control', 'id': 'name_of_transport', 'placeholder': _('Write Vessel/Flight/Vehicle Name...'), }),
             'seat_number': forms.TextInput(
-                attrs={'class': 'form-control', 'placeholder': _('Write your seat number...'), }),
+                attrs={'class': 'form-control', 'id':'seat_number', 'placeholder': _('Write your seat number...'), }),
 
             'visiting_purpose': forms.Select(attrs={'class': 'form-control visiting-purpose-select', 'id': 'visiting_purpose', }),
             'other_purpose': forms.Textarea(attrs={'class': 'form-control', 'id': 'other_purpose', 'rows': 3,
@@ -51,7 +52,9 @@ class TravellerForm(forms.ModelForm):
                                                       'placeholder': _('Write physical address/hotel name...')}),
             'region': forms.Select(attrs={'class': 'form-control region-select', 'id': 'region_id',
                                           'onChange': 'suggest_districts()'}),
+
             'district': forms.Select(attrs={'class': 'form-control', 'id': 'district_id'}),
+
             'street_or_ward': forms.TextInput(
                 attrs={'class': 'form-control', 'id': 'street_or_ward', 'placeholder': _('Write street or ward...')}),
             'phone': forms.TextInput(attrs={'class': 'form-control', 'id': 'phone', 'placeholder': _('Write phone...'),

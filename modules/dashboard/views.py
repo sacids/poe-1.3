@@ -208,8 +208,10 @@ def dashboard(request):
         elif day == 'overall':
             total_passengers = total_passengers.count()
 
-            allowed_to_proceed = allowed_to_proceed.filter(action_taken_id=1).count()
-            secondary_screening = secondary_screening.filter(action_taken_id=2).count()
+            allowed_to_proceed = allowed_to_proceed.filter(
+                action_taken_id=1).count()
+            secondary_screening = secondary_screening.filter(
+                action_taken_id=2).count()
 
             passenger_with_normal_temp = passenger_with_normal_temp.count()
             passenger_with_below_normal_temp = passenger_with_below_normal_temp.count()
@@ -229,13 +231,77 @@ def dashboard(request):
                 symptom_occurrence_data.append(
                     traveller_symptoms.filter(symptom_id=value.id).count())
 
+        elif day == 'custom':
+            start_at = request.POST.get('start_at')
+            end_at = request.POST.get('end_at')
+
+            if start_at is not '' and end_at is not '':
+                # queries
+                total_passengers = total_passengers.filter(
+                    arrival_date__range=[start_at, end_at]).count()
+                allowed_to_proceed = allowed_to_proceed.filter(
+                    arrival_date__range=[start_at, end_at], action_taken_id=1).count()
+                secondary_screening = secondary_screening.filter(
+                    arrival_date__range=[start_at, end_at], action_taken_id=2).count()
+                passenger_with_normal_temp = passenger_with_normal_temp.filter(
+                    arrival_date__range=[start_at, end_at]).count()
+                passenger_with_below_normal_temp = passenger_with_below_normal_temp.filter(
+                    arrival_date__range=[start_at, end_at]).count()
+                passenger_with_above_normal_temp = passenger_with_above_normal_temp.filter(
+                    arrival_date__range=[start_at, end_at]).count()
+                male_passenger_with_above_normal_temp = male_passenger_with_above_normal_temp.filter(
+                    arrival_date__range=[start_at, end_at]).count()
+                female_passenger_with_above_normal_temp = female_passenger_with_above_normal_temp.filter(
+                    arrival_date__range=[start_at, end_at]).count()
+
+                # point of entries
+                for val in point_of_entries:
+                    poe_series_data.append(val.code)
+                    passengers_series_data.append(travellers.filter(
+                        point_of_entry_id=val.id, arrival_date__range=[start_at, end_at]).count())
+
+                # reported symptoms
+                for value in symptoms:
+                    symptom_series_data.append(value.title)
+                    symptom_occurrence_data.append(
+                        traveller_symptoms.filter(symptom_id=value.id,
+                                                  traveller__arrival_date__range=[start_at, end_at]).count())
+
+            else:
+                total_passengers = total_passengers.count()
+
+                allowed_to_proceed = allowed_to_proceed.filter(
+                    action_taken_id=1).count()
+                secondary_screening = secondary_screening.filter(
+                    action_taken_id=2).count()
+
+                passenger_with_normal_temp = passenger_with_normal_temp.count()
+                passenger_with_below_normal_temp = passenger_with_below_normal_temp.count()
+                passenger_with_above_normal_temp = passenger_with_above_normal_temp.count()
+                male_passenger_with_above_normal_temp = male_passenger_with_above_normal_temp.count()
+                female_passenger_with_above_normal_temp = female_passenger_with_above_normal_temp.count()
+
+                # point of entries
+                for val in point_of_entries:
+                    poe_series_data.append(val.code)
+                    passengers_series_data.append(
+                        travellers.filter(point_of_entry_id=val.id).count())
+
+                # reported symptoms
+                for value in symptoms:
+                    symptom_series_data.append(value.title)
+                    symptom_occurrence_data.append(
+                        traveller_symptoms.filter(symptom_id=value.id).count())
+
     else:
         # total passengers
         total_passengers = total_passengers.count()
 
         # allowed to process and secondary screening
-        allowed_to_proceed = allowed_to_proceed.filter(action_taken_id=1).count()
-        secondary_screening = secondary_screening.filter(action_taken_id=2).count()
+        allowed_to_proceed = allowed_to_proceed.filter(
+            action_taken_id=1).count()
+        secondary_screening = secondary_screening.filter(
+            action_taken_id=2).count()
 
         # total passenger with normal temp
         passenger_with_normal_temp = passenger_with_normal_temp.count()

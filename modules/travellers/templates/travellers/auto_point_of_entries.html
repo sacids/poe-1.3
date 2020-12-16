@@ -1,4 +1,4 @@
-<select name="point_of_entry" id="point_of_entry">
+<select name="point_of_entry" id="point_of_entry" class="form-control point-of-entry-select">
     <option value="">-- --</option>
     {% for poe in point_of_entries %}
         <option value="{{ poe.id }}">{{ poe.title }}</option>

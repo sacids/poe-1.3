@@ -1,5 +1,7 @@
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
+from django.views.generic import View
 from django.utils import translation
+from django.shortcuts import get_object_or_404
 import datetime
 from datetime import timedelta
 from django.shortcuts import render, redirect
@@ -13,22 +15,64 @@ from django.db import connection
 from django.db.models import Q
 from modules.dashboard.views import dashboard
 
+# importing get_template from loader
+from django.template.loader import get_template
 
-def default(request):
-    """ 
-    Default page. 
+# import render_to_pdf from util.py
+from .utils import render_to_pdf
 
-    Function to display the default page. 
 
-    Parameters: 
-    None 
+def home(request):
+    """
+    Default page.
 
-    Returns: 
+    Function to display the default page.
+
+    Parameters:
+    None
+
+    Returns:
     None
     """
+
+    # redirect path
+    redirectpath = ""
+
+    # activate current language
+    translation.activate(translation.get_language())
+
+    # data
+    today = datetime.date.today().strftime("%Y-%m-%d")
+
+    # check if user authenticate
     if request.user.is_authenticated:
         return redirect(dashboard)
-    return render(request, 'travellers/home.html', {})
+    else:
+        if request.method == "POST":
+            travel_type = request.POST.get('travel_type')
+            passport_number = request.POST.get('id_number')
+            arrival_date = request.POST.get('arrival_date')
+
+            # query traveller
+            try:
+                traveller = Traveller.objects.get(
+                    category=travel_type, id_number=passport_number, arrival_date=arrival_date)
+
+                # check for language
+                if translation.get_language() == 'en-us':
+                    redirectpath = "/preview/" + str(traveller.id)
+                elif translation.get_language() == "sw":
+                    redirectpath = "/sw/preview/" + str(traveller.id)
+            except:
+                # check for language
+                if translation.get_language() == 'en-us':
+                    redirectpath = "/arrival"
+                elif translation.get_language() == "sw":
+                    redirectpath = "/sw/arrival"
+            # redirect
+            return redirect(redirectpath)
+        # render view
+        return render(request, 'travellers/home.html', {'today': today})
 
 
 def change_language_en(request):
@@ -101,9 +145,102 @@ def arrival(request):
                 'today': today, 'yesterday': yesterday, 'last_21_days': last_21_days}
 
         if form.is_valid():
+            # process form data
+            traveller = Traveller()  # gets new object
+            traveller.category = "arrival"
+            traveller.id_type = "passport-number"
+            traveller.surname = form.cleaned_data['surname']
+            traveller.other_names = form.cleaned_data['other_names']
+            traveller.age_category = form.cleaned_data['age_category']
+            traveller.age = form.cleaned_data['age']
+            traveller.sex = form.cleaned_data['sex']
+            traveller.nationality = form.cleaned_data['nationality']
+            traveller.id_number = form.cleaned_data['id_number']
+            traveller.arrival_date = form.cleaned_data['arrival_date']
+            traveller.point_of_entry = form.cleaned_data['point_of_entry']
+            traveller.mode_of_transport = form.cleaned_data['mode_of_transport']
+            traveller.name_of_transport = form.cleaned_data['name_of_transport']
+            traveller.seat_number = form.cleaned_data['seat_number']
 
-            u = form.save()
-            return render(request, 'travellers/arrival.html', attr)
+            traveller.visiting_purpose = form.cleaned_data['visiting_purpose']
+            traveller.other_purpose = form.cleaned_data['other_purpose']
+
+            if request.POST.get('duration_of_stay') != '':
+                traveller.duration_of_stay = request.POST.get(
+                    'duration_of_stay')
+
+            traveller.employment = form.cleaned_data['employment']
+            traveller.other_employment = form.cleaned_data['other_employment']
+
+            traveller.physical_address = form.cleaned_data['physical_address']
+            traveller.region = form.cleaned_data['region_id']
+
+            if request.POST.get('district') != '':
+                traveller.district = request.POST.get('district')
+
+            traveller.street_or_ward = form.cleaned_data['street_or_ward']
+            traveller.phone = form.cleaned_data['phone']
+            traveller.email = form.cleaned_data['email'].lower()
+
+            traveller.location_origin = form.cleaned_data['location_origin']
+            traveller.other_symptoms = form.cleaned_data['other_symptoms']
+            traveller.accept = form.cleaned_data['accept']
+
+            # finally save the traveller in db
+            traveller.save()
+
+            # insert into traveller visited sites
+            if request.POST.get('location'):
+                location = request.POST.getlist('location', '')
+                location_visited = request.POST.getlist('location_visited', '')
+                date = request.POST.getlist('date', '')
+                days = request.POST.getlist('days', '')
+
+                # zipped
+                zipped = zip(location, location_visited, date, days)
+
+                for location, location_visited, date, days in zipped:
+                    visited_area = TravellerVisitedArea()  # traveller visited area object
+                    visited_area.traveller_id = traveller.id
+                    visited_area.location_id = location
+                    visited_area.location_visited = location_visited
+                    visited_area.date = date
+                    visited_area.days = days
+
+                    # finally save traveller visited areas
+                    visited_area.save()
+
+            # insert into traveller symptoms
+            symptoms = request.POST.getlist('symptoms')
+
+            traveller_sym = Traveller.objects.get(pk=traveller.id)
+            for symptom_id in symptoms:
+                symptom = Symptom.objects.get(pk=symptom_id)
+                # finally save traveller symptoms
+                traveller_sym.symptoms.add(symptom)
+
+            # todo: call function to calculate score
+            score = calculate_score(traveller.id)
+            print("Score => " + str(score))
+
+            if score == 0:
+                action_taken = 1
+            else:
+                action_taken = 2
+
+            # update traveller
+            traveller_up = Traveller.objects.get(pk=traveller.id)
+            traveller_up.disease_to_screen = score
+            traveller_up.action_taken_id = action_taken
+            traveller_up.save()
+
+            if translation.get_language() == 'en-us':
+                redirectpath = "/preview/" + traveller.id
+            elif translation.get_language() == "sw":
+                redirectpath = "/sw/preview/" + traveller.id
+
+            return redirect(redirectpath)
+
     else:
         form_class = TravellerForm
         form_class.base_fields["nationality"].queryset = Location.objects.filter(
@@ -128,9 +265,63 @@ def departure(request):
 
 
 # preview data
-def preview(request):
-    form_class = TravellerForm
-    return render(request, 'travellers/preview.html', {'form': form_class})
+def preview(request, **kwargs):
+    traveller_id = kwargs['pk']  # traveller_id
+
+    # context
+    attr = {}
+
+    try:
+        traveller = Traveller.objects.select_related('nationality', 'region', 'district', 'location_origin',
+                                                     'point_of_entry').get(pk=traveller_id)
+        visited_countries = TravellerVisitedArea.objects.select_related('location').filter(
+            traveller_id=traveller_id).values("location__title", "location_visited", "days", "date")
+        symptoms = Traveller.symptoms.through.objects.filter(
+            traveller_id=traveller_id).values("symptom__title")
+
+        # context
+        attr = {"traveller": traveller,
+                "countries": visited_countries, "symptoms": symptoms}
+
+    except:
+        # check for language
+        redirectpath = ""
+        if translation.get_language() == 'en-us':
+            redirectpath = "/arrival"
+        elif translation.get_language() == "sw":
+            redirectpath = "/sw/arrival"
+        return redirect(redirectpath)
+
+    return render(request, 'travellers/preview.html', attr)
+
+# print pdf
+
+
+def generate_pdf(request, **kwargs):
+    traveller_id = kwargs['pk']  # traveller_id
+
+    # context
+    attr = {}
+
+    try:
+        traveller = Traveller.objects.select_related('nationality', 'region', 'district', 'location_origin',
+                                                     'point_of_entry').get(pk=traveller_id)
+        visited_countries = TravellerVisitedArea.objects.select_related('location').filter(
+            traveller_id=traveller_id).values("location__title", "location_visited", "days", "date")
+        symptoms = Traveller.symptoms.through.objects.filter(
+            traveller_id=traveller_id).values("symptom__title")
+
+        # context
+        attr = {"traveller": traveller,
+                "countries": visited_countries, "symptoms": symptoms}
+    except:
+        pass
+    # getting the template
+    #pdf = render_to_pdf('travellers/pdf.html', attr)
+
+    # rendering the template
+    # return HttpResponse(pdf, content_type='application/pdf')
+    return render(request, 'travellers/pdf.html', attr)
 
 
 def success(request):
@@ -149,7 +340,7 @@ def success(request):
     # activate current language
     translation.activate(translation.get_language())
 
-    return render(request, 'travellers/success.html', {})
+    return render(request, 'travellers/pdf.html', {})
 
 
 def calculate_score(traveller_id):

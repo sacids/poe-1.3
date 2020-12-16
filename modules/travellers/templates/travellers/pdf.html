@@ -1,0 +1,504 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Travellers Surveillance</title>
+    <!-- main bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <style>
+        .blue {
+            color: #1565C0;
+        }
+
+        .white {
+            color: #ffffff;
+        }
+
+        .black {
+            color: #000000;
+        }
+
+        .font-weight-bold {
+            font-weight: bold;
+        }
+
+        input[type=text],
+        input[type=email],
+        input[type=password],
+        input[type=number],
+        textarea {
+            width: 100%;
+            border: 1px solid #cacaca;
+            border-radius: 0 !important;
+            font-size: 14px;
+        }
+
+        .wrapper {
+            margin: 0 auto;
+            width: 70%;
+        }
+
+        .main-header {
+            text-align: center !important;
+        }
+
+        .main-wrapper {}
+
+        .main-wrapper-header {
+            background-color: #C5E1A5;
+            color: #000000;
+            padding: 4px;
+        }
+
+        .main-wrapper-header span {
+            font-weight: 700;
+        }
+
+        .main-wrapper-content {
+            padding: 8px 0 4px 0;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="main-header">
+            <h4>UNITED REPUBLIC OF TANZANIA</h4>
+            <h5>MINISTRY OF HEALTH, COMMUNITY DEVELOPMENT, GENDER, ELDERLY AND CHILDREN</h5>
+            <img src="{% static 'img/CoatofArms_Lg.png' %}" width="80" />
+
+            <h5 class="blue">TRAVELLERS’ SURVEILLANCE FORM</h5>
+            <h6 class="blue">We will appreciate if you respond to ALL questions.</h6>
+        </div>
+        <!--./header-->
+
+        <div class="main-wrapper">
+            <div class="main-wrapper-header">
+                <span>A. TRAVELLER’S INFORMATION</span>
+            </div>
+            <!--./main-wrapper-header-->
+
+            <div class="row pt-3">
+                <div class="col-md-6">
+                    <table width="100%">
+                        <tr align="left">
+                            <td width="30%"><span class="fname">Full Name</span> </td>
+                            <td>
+                                <input type="text" class="form-control"
+                                    value="{{ traveller.other_names|add:traveller.surname}}" />
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <!--./col-md-6-->
+
+                <div class="col-md-6">
+                    <table width="100%">
+                        <tr align="left">
+                            <td width="30%"><span class="fname">Age</span></td>
+                            <td>
+                                <input type="text" class="form-control" value="{{ traveller.age }}" />
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <!--./col-md-6-->
+            </div>
+            <!--./row-->
+
+            <div class="row pt-3">
+                <div class="col-md-6">
+                    <table width="100%">
+                        <tr align="left">
+                            <td width="30%"><span class="fname">Sex</span></td>
+                            <td>
+                                <input type="text" class="form-control" value="{{ traveller.sex }}" />
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <!--./col-md-6-->
+
+                <div class="col-md-6">
+                    <table width="100%">
+                        <tr align="left">
+                            <td width="30%"><span class="fname">Nationality</span></td>
+                            <td>
+                                <input type="text" class="form-control" value="{{ traveller.nationality.title }}" />
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <!--./col-md-6-->
+            </div>
+            <!--./row-->
+
+            <div class="row pt-3">
+                <div class="col-md-6">
+                    <table width="100%">
+                        <tr align="left">
+                            <td width="30%"><span class="fname">Passport No</span></td>
+                            <td>
+                                <input type="text" class="form-control" value="{{ traveller.id_number }}" />
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <!--./col-md-6-->
+
+                <div class="col-md-6">
+                    <table width="100%">
+                        <tr align="left">
+                            <td width="30%"><span class="fname">Point of Entry</span></td>
+                            <td>
+                                <input type="text" class="form-control" value="{{ traveller.point_of_entry.title }}" />
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <!--./col-md-6-->
+            </div>
+            <!--./row-->
+
+            <div class="row">
+                <div class="col-md-6">
+                    <table width="100%">
+                        <tr align="left">
+                            <td width="30%"><span class="fname">Mode of Transport</span></td>
+                            <td>
+                                <input type="text" class="form-control"
+                                    value="{{ traveller.mode_of_transport|capfirst }}" />
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <!--./col-md-6-->
+
+                <div class="col-md-6">
+                    <table width="100%">
+                        <tr align="left">
+                            <td width="30%"><span class="fname">Transport Name/No</span></td>
+                            <td>
+                                <input type="text" class="form-control" value="{{ traveller.name_of_transport }}" />
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <!--./col-md-6-->
+            </div>
+            <!--./row-->
+
+            <div class="row pt-3">
+                <div class="col-md-6">
+                    <table width="100%">
+                        <tr align="left">
+                            <td width="30%"><span class="fname">Arrival Date</span></td>
+                            <td>
+                                <input type="text" class="form-control" value="{{ traveller.arrival_date }}" />
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <!--./col-md-6-->
+
+                <div class="col-md-6">
+                    <table width="100%">
+                        <tr align="left">
+                            <td width="30%"><span class="fname">Seat Number</span></td>
+                            <td>
+                                <input type="text" class="form-control" value="{{ traveller.seat_number }}" />
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <!--./col-md-6-->
+            </div>
+            <!--./row-->
+
+            <div class="row mt-3 pt-3">
+                <div class="col-md-6">
+                    <table width="100%">
+                        <tr align="left">
+                            <td width="30%"><span class="fname">Purpose of Visit in Tanzania</span></td>
+                            <td>
+                                <input type="text" class="form-control"
+                                    value="{{ traveller.visiting_purpose|capfirst }}" />
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <!--./col-md-6-->
+
+                <div class="col-md-6">
+                    <table width="100%">
+                        <tr align="left">
+                            <td width="30%"><span class="fname">Duration of stay (days)</span></td>
+                            <td>
+                                <input type="text" class="form-control" value="{{ traveller.duration_of_stay }}" />
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <!--./col-md-6-->
+            </div>
+            <!--./row-->
+
+            <div class="row pt-3">
+                <div class="col-md-12">
+                    <table width="100%">
+                        <tr align="left">
+                            <td width="100%"><span class="fname">Other purpose of visit(Specify)</span>
+                                <textarea rows="3">{{ traveller.other_purpose }}</textarea>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <!--./col-md-12-->
+            </div>
+            <!--./row-->
+
+            <div class="row mt-3">
+                <div class="col-md-12">
+                    <h6 class="font-weight-bold">Contact while in Tanzania</h6>
+                </div>
+            </div>
+            <!--./row-->
+
+            <div class="row pt-3">
+                <div class="col-md-6">
+                    <table width="100%">
+                        <tr align="left">
+                            <td width="30%"><span class="fname">Physical Address/Hotel</span></td>
+                            <td>
+                                <input type="text" class="form-control" value="{{ traveller.physical_address }}" />
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <!--./col-md-6-->
+
+                <div class="col-md-6">
+                    <table width="100%">
+                        <tr align="left">
+                            <td width="30%"><span class="fname">Street/Ward</span></td>
+                            <td>
+                                <input type="text" class="form-control" value="{{ traveller.street_or_ward }}" />
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <!--./col-md-6-->
+            </div>
+            <!--./row-->
+
+            <div class="row pt-3">
+                <div class="col-md-6">
+                    <table width="100%">
+                        <tr align="left">
+                            <td width="30%"><span class="fname">Region</span></td>
+                            <td>
+                                <input type="text" class="form-control" value="{{ traveller.region.title }}" />
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <!--./col-md-6-->
+
+                <div class="col-md-6">
+                    <table width="100%">
+                        <tr align="left">
+                            <td width="30%"><span class="fname">District</span></td>
+                            <td>
+                                <input type="text" class="form-control" value="{{ traveller.district.title }}" />
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <!--./col-md-6-->
+            </div>
+            <!--./row-->
+
+            <div class="row pt-3">
+                <div class="col-md-6">
+                    <table width="100%">
+                        <tr align="left">
+                            <td width="30%"><span class="fname">Mobile No</span></td>
+                            <td>
+                                <input type="text" class="form-control" value="{{ traveller.phone }}" />
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <!--./col-md-6-->
+
+                <div class="col-md-6">
+                    <table width="100%">
+                        <tr align="left">
+                            <td width="30%"><span class="fname">Email</span></td>
+                            <td>
+                                <input type="text" class="form-control" value="{{ traveller.email }}" />
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <!--./col-md-6-->
+            </div>
+            <!--./row-->
+
+            <div class="row mt-4">
+                <div class="col-md-12">
+                    <h6 class="font-weight-bold">Country where the journey started</h6>
+                </div>
+            </div>
+            <!--./row-->
+
+            <div class="row">
+                <div class="col-md-6">
+                    <table width="100%">
+                        <tr align="left">
+                            <td width="30%"><span class="fname">Country</span></td>
+                            <td>
+                                <input type="text" class="form-control" value="{{ traveller.location_origin.title }}" />
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <!--./col-md-6-->
+            </div>
+            <!--./row-->
+
+            <div class="row mt-4">
+                <div class="col-md-12">
+                    <h6 class="font-weight-bold">Travel History(Country visited for the past 21 days)</h6>
+                </div>
+            </div>
+            <!--./row-->
+
+            {% for country in countries %}
+            <div class="row">
+                <div class="col-md-3">
+                    <table width="100%">
+                        <tr align="left">
+                            <td width="100%"><span class="fname">Country</span>
+                                <input type="text" class="form-control"
+                                    value="{{ country.location__title }}" />
+                            </td>
+
+                        </tr>
+                    </table>
+                </div>
+                <!--./col-md-6-->
+
+                <div class="col-md-3">
+                    <table width="100%">
+                        <tr align="left">
+                            <td width="100%"><span class="fname">Location visited/Province</span>
+                                <input type="text" class="form-control"
+                                    value="{{ country.location_visited }}" />
+                            </td>
+
+                        </tr>
+                    </table>
+                </div>
+                <!--./col-md-6-->
+
+                <div class="col-md-3">
+                    <table width="100%">
+                        <tr align="left">
+                            <td width="100%"><span class="fname">Date</span>
+                                <input type="text" class="form-control"
+                                    value="{{ country.date }}" />
+                            </td>
+
+                        </tr>
+                    </table>
+                </div>
+                <!--./col-md-6-->
+
+                <div class="col-md-3">
+                    <table width="100%">
+                        <tr align="left">
+                            <td width="100%"><span class="fname">No. of days</span>
+                                <input type="text" class="form-control"
+                                    value="{{ country.days }}" />
+                            </td>
+
+                        </tr>
+                    </table>
+                </div>
+                <!--./col-md-6-->
+            </div>
+            <!--./row-->
+            {% endfor %}
+
+            <div class="row mt-4">
+                <div class="col-md-12">
+                    <h6 class="font-weight-bold">Do you have the following conditions or experienced them during the
+                        last 7 days (1 weeks)?</h6>
+                </div><!--./col-md-12-->
+
+                <div class="col-md-12">
+                    <ol>
+                        {% for symptom in symptoms %}
+                        <li>{{ symptom.symptom__title }}</li>
+                        {% endfor %}
+                    </ol>
+                </div><!--./col-md-12-->
+            </div>
+            <!--./row-->
+
+            <div class="main-wrapper-header mt-3 mb-2">
+                <span>B. PUBLIC HEALTH MEASURES TAKEN (for official use only)</span>
+            </div>
+            <!--./main-wrapper-header-->
+
+            <div class="row">
+                <div class="col-md-4">
+                    ACTION TAKEN:
+                </div>
+                <!--./col-md-12-->
+
+                <div class="col-md-4">
+                    1. Allowed to proceed
+                </div>
+                <!--./col-md-12-->
+
+                <div class="col-md-4">
+                    2. Sent to secondary screening
+                </div>
+                <!--./col-md-12-->
+            </div>
+            <!--./row-->
+            <hr style="background-color: #000000;" />
+
+            <div class="row mb-4">
+                <div class="col-md-4">
+                    Name:
+                </div>
+                <!--./col-md-12-->
+
+                <div class="col-md-4">
+                    Signature:
+                </div>
+                <!--./col-md-12-->
+
+                <div class="col-md-4">
+                    Date:
+                </div>
+                <!--./col-md-12-->
+            </div>
+            <!--./row-->
+            <hr style="background-color: #000000;" />
+
+        </div>
+        <!--./main-wrapper-->
+    </div>
+    <!--./wrapper-->
+</body>
+
+</html>

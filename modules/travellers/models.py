@@ -5,6 +5,7 @@ from modules.common.models import BaseModel
 from django.contrib.auth.models import User
 from django.forms.models import model_to_dict
 from django.utils.translation import ugettext_lazy as _
+import uuid
 
 FORM_CATEGORY = (
     ('arrival', 'ARRIVAL'),
@@ -205,6 +206,8 @@ class ActionTaken(models.Model):
 # travellers
 class Traveller(BaseModel):
     """A class to create travellers table."""
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4,
+                          unique=True, editable=False)
     surname = models.CharField("Write..", max_length=50, null=True)
     other_names = models.CharField(max_length=100, null=True)
     category = models.CharField(

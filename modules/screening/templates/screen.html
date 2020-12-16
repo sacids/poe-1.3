@@ -1,9 +1,16 @@
 {% extends 'backend/base.html' %}
 {% load poe_tags %}
 
-{% block navarea %}
-
+{% block filter %}
+<div class="navopt border-right d-flex">
+    <div class="filter_box action_taken_x" f_class=" action_taken_x">&nbsp;</div>
+    <div class="filter_box action_taken_0" f_class=" action_taken_0">&nbsp;</div>
+    <div class="filter_box action_taken_1" f_class=" action_taken_1">&nbsp;</div>
+    <div class="filter_box action_taken_2" f_class=" action_taken_2">&nbsp;</div>
+</div>
 {% endblock %}
+
+
 {% block content %}
     <div class="row">
         <div class="col-md-12">
@@ -23,8 +30,9 @@
                 </thead>
                 <tbody>
                 {% for traveller in travellers %}
-                    <tr id="row_{{ traveller.id }}" {% ifnotequal '0' traveller.disease_to_screen %} class="screen"
-                    {% endifnotequal %} data='{ 
+                    <tr id="row_{{ traveller.id }}" 
+                        class="action_taken_{{ traveller.action_taken_id }}"
+                        data='{ 
                         "Sex":"{{ traveller.sex }}",
                         "Age category":"{{ traveller.age_category }}",
                         "Age":"{{ traveller.age }}",
@@ -142,6 +150,8 @@
 
 {% block script %}
     <script type="text/javascript" language="javascript" class="init">
+
+        
         $(document).ready(function () {
 
 
@@ -160,6 +170,18 @@
             $('#site_search').keyup(function () {
                 oTable.search($(this).val()).draw();
             })
+
+            $(document).on('click','.filter_box', function(event){
+                var f_class     = $(this).attr('f_class').trim();
+                
+                if(f_class == 'action_taken_x'){
+                    console.log('show all');
+                    $('#travellers_table tbody tr').show()
+                    return
+                }
+                $('#travellers_table tbody tr').hide();
+                $('.'+f_class).show();
+            });
 
             $(document).on('click', '#travellers_table tbody tr', function (event) {
                 // hide search
@@ -280,8 +302,13 @@
                         $('#form_' + id + ' input:checkbox').prop('disabled', true);
                         $('#' + id).val('Edit');
 
-                        if (data == 2) $('#row_' + tid).addClass('screen');
-                        if (data == 1) $('#row_' + tid).removeClass('screen');
+                        $('#row_'+tid).removeClass(function (index, className) {
+                            return (className.match (/(^|\s)action_taken_\S+/g) || []).join(' ');
+                        })
+                        $('#row_' + tid).addClass('action_taken_'+data);
+
+                        //if (data == 2) $('#row_' + tid).addClass('screen');
+                        //if (data == 1) $('#row_' + tid).removeClass('screen');
                         return
                     }
                 }).fail(function (jqXHR, textStatus, errorThrown) {
@@ -294,17 +321,24 @@
             $(document).on('click', '#set_temp', function (event) {
 
                 var temp = $('#temp_a').val() + '.' + $('#temp_b').val();
-                var id = $('#travellers_id').val();
-                var url = window.location.origin + '/screen/set_temp?id=' + id + '&temp=' + temp;
+                var tid = $('#travellers_id').val();
+                var url = window.location.origin + '/screen/set_temp?id=' + tid + '&temp=' + temp;
 
                 var jqXHR = $.ajax({
                     type: "GET",
                     url: url
                 }).done(function (data) {
                     //alert(data)
-                    if (data > 0) $('#row_' + id + ' .temp').html(temp);
-                    if (data == 2) $('#row_' + id).addClass('screen');
-                    if (data == 1) $('#row_' + id).removeClass('screen');
+                    if (data > 0) $('#row_' + tid + ' .temp').html(temp);
+
+                    $('#row_'+tid).removeClass(function (index, className) {
+                        return (className.match (/(^|\s)action_taken_\S+/g) || []).join(' ');
+                    })
+                    $('#row_' + tid).addClass('action_taken_'+data);
+
+
+                    //if (data == 2) $('#row_' + id).addClass('screen');
+                    //if (data == 1) $('#row_' + id).removeClass('screen');
 
                 }).fail(function (jqXHR, textStatus, errorThrown) {
                     alert('Failed to update temp');

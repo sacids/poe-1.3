@@ -37,6 +37,29 @@ def screen(request):
 
     return render(request, 'screen.html', context)
 
+@login_required
+def immigration(request):
+    poe_id = request.session.get('poe_id')
+
+    travellers = (Traveller.objects
+                  .select_related('location_origin', 'point_of_entry')
+                  .prefetch_related('visited_area')
+                  .filter(arrival_date=date.today()))
+
+    # check for poe
+    if poe_id is None or poe_id == 0:
+        travellers = travellers.all()
+    else:
+        travellers = travellers.filter(point_of_entry_id=poe_id)
+
+    # context
+    context = {
+        "travellers": travellers,
+    }
+
+    print('imiigi')
+    return render(request, 'immigration.html', context)
+
 
 def travellers_asJson(request):
     object_list = Traveller.objects.all()
@@ -68,6 +91,7 @@ def update_symptoms(request):
     else:
         Trav.disease_to_screen = score
         Trav.action_taken_id = 1
+        saved = 1
 
     Trav.save()
 
@@ -81,10 +105,10 @@ def set_temp(request):
         Temp = float(request.GET.get('temp'))
         Trav.temp = Temp
 
-        if Temp > 38:
+        if Temp > 37.8:
             res = 2
             screen = ',100'
-        elif Temp < 36:
+        elif Temp < 35.6:
             res = 2
             screen = ',100'
         else:
@@ -93,8 +117,9 @@ def set_temp(request):
 
         score = calculate_score(Trav.id)
 
-        if score != 0:
-            Trav.disease_to_screen = score + screen
+
+        if score != 0 | res == 2:
+            Trav.disease_to_screen = str(score) + screen
             Trav.action_taken_id = 2
         else:
             Trav.disease_to_screen = str(score) + screen

@@ -1,0 +1,173 @@
+{% extends 'backend/base.html' %}
+{% load poe_tags %}
+
+{% block navarea %}
+
+{% endblock %}
+{% block content %}
+    <div class="row">
+        <div class="col-md-12">
+            <table id="travellers_table" class="display" style="width:100%">
+                <thead>
+                <tr>
+                    <th width="20%">Traveller Name</th>
+                    <th width="12%">Nationality</th>
+                    <th width="12%">ID Number</th>
+                    <th width="15%">Point of Entry</th>
+                    <th width="15%">Transport No</th>
+                    <th width="15%">Origin Country</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for traveller in travellers %}
+                    <tr id="row_{{ traveller.id }}" class="action_taken_{{ traveller.action_taken_id }}"
+                    data='{ 
+                        "Age category":"{{ traveller.age_category }}",
+                        "Age":"{{ traveller.age }}",
+                        "Nationality":"{{ traveller.nationality.title }}",
+                        "Identification Type":"{{ traveller.id_type }}",
+                        "Identification Number":"{{ traveller.id_number }}",
+                        "Occupation":"{{ traveller.employment }}",
+                        "Other Occupation":"{{ traveller.other_employment }}",
+                        "Mode of transport":"{{ traveller.mode_of_transport }}",
+                        "Name of transport":"{{ traveller.name_of_transport }}",
+                        "Seat Number":"{{ traveller.seat_no }}",
+                        "Visiting purpose":"{{ traveller.visiting_purpose }}",
+                        "Other Purpose":"{{ traveller.other_purpose }}",
+                        "Duration of Stay":"{{ traveller.duration_of_stay }}",
+                        "Physical Address":"{{ traveller.physical_address|remove_newlines }}",
+                        "Region":"{{ traveller.region.title }}",
+                        "District":"{{ traveller.district_id.title }}",
+                        "Street/Ward":"{{ traveller.street_or_ward|remove_newlines }}",
+                        "Phone":"{{ traveller.phone }}",
+                        "Email":"{{ traveller.email }}"
+                        }'
+                        v_areas='{ {% for area in traveller.visited_area.all %} "{{ area.id }}":{ "location_visited":"{{ area.location_visited }}","date":"{{ area.date }}","days":"{{ area.days }}","location":"{{ area.location.title }}" } {% if not forloop.last %},{% endif %} {% endfor %} }'>
+                        <td class="full_name">{{ traveller.surname }} {{ traveller.other_names }}</td>
+                        <td class="nationality">{{ traveller.nationality.title }}</td>
+                        <td class="id_number">{{ traveller.id_number }}</td>
+                        <td class="point_of_entry">{{ traveller.point_of_entry.code }}</td>
+                        <td class="name_of_transport">{{ traveller.name_of_transport }}</td>
+                        <td class="location_origin_title">{{ traveller.location_origin.title }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div id="traveller_data">
+        <div id="close_traveller_data"><i class="fa fa-times text-danger"></i></div>
+        <div class="clearfix">
+            <div class="">
+                <div style="font-size: 1.2em" id="full_name" class="font-weight-bold"></div>
+                <div id="id_number" style="font-size: 0.8em"></div>
+                <div id="name_of_transport" style="font-size: 0.8em"></div>
+            </div>
+        </div>
+
+        <!--tabs-->      
+        <div class="tab-content">
+            <h5 class="mt-2">Travel History</h5>
+            <div id="travel_history">
+            </div>
+            <h5 class="mt-2">Travel Info</h5>
+            <div id="info">
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block script %}
+    <script type="text/javascript" language="javascript" class="init">
+        $(document).ready(function () {
+
+
+            oTable = $('#travellers_table').DataTable({
+                "columnDefs": [
+                    {
+                        "targets": [4],
+                        "visible": false,
+                        "searchable": false
+                    }
+                ],
+                "paging": false,
+                "info": false
+            });
+
+            $('#site_search').keyup(function () {
+                oTable.search($(this).val()).draw();
+            })
+
+            $(document).on('click', '#travellers_table tbody tr', function (event) {
+                // hide search
+                $(".site-search").removeClass('search-visible');
+
+                var row_id = $(this).attr('id');
+                var id = row_id.substring(4);
+
+                $('#full_name').html($('#' + row_id + ' .full_name').html());
+                $('#id_number').html($('#' + row_id + ' .id_number').html());
+                $('#location_origin_title').html($('#' + row_id + ' .location_origin_title').text());
+                $('#name_of_transport').html($('#' + row_id + ' .name_of_transport').text());
+
+                var l = $('#' + row_id + ' .location_origin_title').clone();
+                l.show();
+                var l_text = l.html();
+                l.remove();
+                $('#location_origin_title').html(l_text);
+
+                var v_areas = $(this).attr('v_areas');
+                var data = $(this).attr('data');
+
+               
+                $('#traveller_id').val(id);
+
+                // Manage travel history
+                var obj = jQuery.parseJSON(v_areas);
+                // empty travel history div
+                $('#travel_history').html('');
+                var tmp = "<table class='table table-bordered' width='80%'><thead><tr><td>Country</td><td>Area</td><td>Date</td><td>Days</td></tr></thead><tbody>"
+                $.each(obj, function (key, value) {
+                    // set specific sysmptoms only
+                    tmp += '<tr><td>' + value.location + '</td><td>' + value.location_visited + '</td><td>' + value.date + '</td><td>' + value.days + '</td></tr>';
+                });
+                tmp += "</tbody></table>"
+                $('#travel_history').html(tmp);
+
+                // Manage travell info
+                var obj = jQuery.parseJSON(data);
+                // empty travel history div
+                $('#info').html('');
+                var tmp = "<table class='table table-bordered' width='80%'><tbody>"
+                for (x in obj) {
+                    tmp += '<tr><td width="40%"><span class="font-weight-bold">' + x + '</span></td><td>' + obj[x] + '</td></tr>';
+                }
+                tmp += "</tbody></table>"
+
+                $('#info').html(tmp);
+
+                // set id
+                $('#travellers_id').val(id);
+
+                // show travellers data
+                $('#traveller_data').animate({
+                    marginRight: '0px'
+                }, 500);
+
+
+            });
+
+            $(document).on('click', '#close_traveller_data', function (e) {
+
+                $('#traveller_data').animate({
+                    marginRight: '-50%'
+                }, 500);
+            });
+
+
+           
+
+        });
+    </script>
+{% endblock %}

@@ -344,7 +344,6 @@ def success(request):
 
 
 def calculate_score(traveller_id):
-
     countries = get_travellers_countries(traveller_id)
     symptoms = get_travellers_symptoms(traveller_id)
     location = Traveller.objects.get(pk=traveller_id).location_origin.id
@@ -362,7 +361,7 @@ def calculate_score(traveller_id):
     active = Q(active=1)
     queryset = ScreenCriteria.objects.filter(
         (fc | fs) & active).values('disease_id').distinct()
-    print(queryset.query)
+    # print(queryset.query)
     # if count is more than one join otherwise set zero
     if queryset.count() > 0:
         score = ', '.join(str(id['disease_id']) for id in queryset)

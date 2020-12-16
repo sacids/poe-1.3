@@ -509,4 +509,12 @@
         }
         return dayCount
     }
+
+    function checkNumber(event) {
+        return event.charCode === 0 || /\d/.test(String.fromCharCode(event.charCode));
+    }
+
+    const input = document.getElementById('phone');
+    input.onkeypress = checkNumber;
+    input.onpaste = event => false;
 </script>

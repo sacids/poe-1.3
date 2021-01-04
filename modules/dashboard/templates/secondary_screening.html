@@ -1,0 +1,43 @@
+{% extends 'backend/base.html' %} {% load static %} {% block highcharts_js %}
+<script src="{% static 'js/highcharts.js' %}"></script>
+{% endblock %} {% block title %} Secondary Screening {% endblock %} {% block navarea %}
+
+{% endblock %} {% block content %}
+<div class="row mt-4 mb-4">
+    <div class="col-md-12 col-12">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Traveller Name</th>
+                    <th>Nationality</th>
+                    <th>ID Number</th>
+                    <th>Age</th>
+                    <th>Point of Entry</th>
+                    <th>Transport No</th>
+                    <th>Origin Country</th>
+                    <th>Temp</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for traveller in travellers %}
+                <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{ traveller.other_names }} {{ traveller.surname }}</td>
+                    <td>{{ traveller.nationality__title }}</td>
+                    <td>{{ traveller.id_number }}</td>
+                    <td>{{ traveller.age }}</td>
+                    <td>{{ traveller.point_of_entry.title }}</td>
+                    <td>{{ traveller.name_of_transport }}</td>
+                    <td>{{ traveller.location_origin__title }}</td>
+                    <td>{{ traveller.temp }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <!--./col-md-12 -->
+</div>
+<!--./row -->
+{% endblock %}

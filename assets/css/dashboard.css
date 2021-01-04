@@ -21,6 +21,7 @@
     font-size: 14px;
 }
 
+
 /*===========================================
   Page Header
 =============================================*/
@@ -72,6 +73,15 @@ card
 .info-box{
     width: 100%;
     border: 1px solid transparent;
+}
+
+.info-box a{
+    color: #fff;
+}
+
+.info-box a:hover{
+    color: #fff;
+    text-decoration: none;
 }
 
 /*Info class */

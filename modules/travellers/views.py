@@ -13,7 +13,7 @@ from django.contrib import messages
 from django.conf import settings
 from django.db import connection
 from django.db.models import Q
-from modules.dashboard.views import dashboard
+#from modules.dashboard.views import dashboard
 
 # importing get_template from loader
 from django.template.loader import get_template
@@ -43,10 +43,12 @@ def home(request):
 
     # data
     today = datetime.date.today().strftime("%Y-%m-%d")
+    tomorrow = (datetime.date.today() + timedelta(days=1)).strftime("%Y-%m-%d")
 
     # check if user authenticate
     if request.user.is_authenticated:
-        return redirect(dashboard)
+        print("Hello")
+        #return redirect(dashboard)
     else:
         if request.method == "POST":
             travel_type = request.POST.get('travel_type')
@@ -72,36 +74,28 @@ def home(request):
             # redirect
             return redirect(redirectpath)
         # render view
-        return render(request, 'travellers/home.html', {'today': today})
+        return render(request, 'travellers/home.html', {'today': today, 'tomorrow': tomorrow})
 
 
-def change_language_en(request):
-    language = "en-us"
+#change language
+def change_language(request, **kwargs):
+    # language code
+    language_code = kwargs['lang']
+
+    print(language_code)
+
+    language = "en-us"  # default language
+
+    # check language code
+    if language_code == 'en_us':
+        language = "en-us"
+    elif language_code == 'sw':
+        language = "sw"
+
+    # response
     response = HttpResponseRedirect('/')
     if language:
-        if language != settings.LANGUAGE_CODE and [lang for lang in settings.LANGUAGES if lang[0] == language]:
-            redirect_path = f'/{language}'
-        elif language == settings.LANGUAGE_CODE:
-            redirect_path = '/'
-        else:
-            return response
-
-        translation.activate(language)
-        response = HttpResponseRedirect(redirect_path)
-        response.set_cookie(settings.LANGUAGE_COOKIE_NAME, language)
-    return response
-
-
-def change_language_sw(request):
-    language = "sw"
-    response = HttpResponseRedirect('/')
-    if language:
-        if language != settings.LANGUAGE_CODE and [lang for lang in settings.LANGUAGES if lang[0] == language]:
-            redirect_path = f'/{language}'
-        elif language == settings.LANGUAGE_CODE:
-            redirect_path = '/'
-        else:
-            return response
+        redirect_path = '/'
 
         translation.activate(language)
         response = HttpResponseRedirect(redirect_path)

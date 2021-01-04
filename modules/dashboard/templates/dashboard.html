@@ -55,63 +55,78 @@
 <div class="row">
     <div class="col-lg-3 col-md-2">
         <div class="card info-box bg-primary-200">
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-md-3 col-xs-3">
-                        <i class="fa fa-reg-users"></i>
-                    </div>
-                    <div class="col-md-9 col-xs-9 text-right">
-                        <div class="text-medium">
-                            Travellers Filled Forms
+            <a href="{%url 'all_travellers' day start_at end_at %}">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-3 col-xs-3">
+                            <i class="fa fa-reg-users"></i>
                         </div>
-                        <br />
-                        <div class="text-large font-weight-600">
-                            {{ total_passengers }} </div>
+                        <div class="col-md-9 col-xs-9 text-right">
+                            <div class="text-medium">
+                                Travellers Filled Forms
+                            </div>
+                            <br />
+                            <div class="text-large font-weight-600">
+                                {{ total_passengers }} </div>
+                        </div>
+                        <!--./col-xs-9 -->
                     </div>
-                    <!--./col-xs-9 -->
+                    <!--./row-->
                 </div>
-                <!--./row-->
-            </div>
-            <!--./card-body-->
+                <!--./card-body-->
+            </a>
+        </div>
+        <!--./card-->
+
+    </div>
+    <!--./col-md-3 -->
+
+    <div class="col-lg-3 col-md-3">
+        <div class="card info-box bg-success">
+            <a href="/dashboard/allowed_proceed">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-3 col-xs-3">
+                            <i class="fa fa-normal-temp"></i>
+                        </div>
+                        <div class="col-md-9 col-xs-9 text-right">
+                            <div class="text-medium">Allowed To Proceed</div>
+                            <br />
+                            <div class="text-large font-weight-600">{{ allowed_to_proceed }}</div>
+                        </div>
+                        <!--./col-xs-9 -->
+                    </div>
+                    <!--./row-->
+                </div>
+                <!--./card-body-->
+            </a>
         </div>
         <!--./card-->
     </div>
     <!--./col-md-3 -->
 
     <div class="col-lg-3 col-md-3">
-        <div class="card info-box bg-success">
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-md-3 col-xs-3">
-                        <i class="fa fa-normal-temp"></i>
-                    </div>
-                    <div class="col-md-9 col-xs-9 text-right">
-                        <div class="text-medium">Allowed To Proceed</div>
-                        <br />
-                        <div class="text-large font-weight-600">{{ allowed_to_proceed }}</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--./col-md-3 -->
-
-    <div class="col-lg-3 col-md-3">
         <div class="card info-box bg-danger">
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-md-3 col-xs-3">
-                        <i class="fa fa-above-temp"></i>
+            <a href="/dashboard/secondary_screening">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-3 col-xs-3">
+                            <i class="fa fa-above-temp"></i>
+                        </div>
+                        <div class="col-md-9 col-xs-9 text-right">
+                            <div class="text-medium">Secondary Screening</div>
+                            <br />
+                            <div class="text-large font-weight-600">{{ secondary_screening }}</div>
+
+                        </div>
+                        <!--./col-xs-9 -->
                     </div>
-                    <div class="col-md-9 col-xs-9 text-right">
-                        <div class="text-medium">Secondary Screening</div>
-                        <br />
-                        <div class="text-large font-weight-600">{{ secondary_screening }}</div>
-                        
-                    </div><!--./col-md-9-->
-                </div><!--./row-->
-            </div>
+                    <!--./row-->
+                </div>
+                <!--./card-body-->
+            </a>
         </div>
+        <!--./card-->
     </div>
     <!--./col-md-3 -->
 

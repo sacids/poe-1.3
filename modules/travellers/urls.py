@@ -1,14 +1,13 @@
 from django.urls import path
 from .views import (
-    home, change_language_en, change_language_sw, arrival, departure, preview,
+    home, change_language, arrival, departure, preview,
     success, auto_districts, auto_point_of_entries, generate_pdf
 )
 
 app_name = 'travellers'
 urlpatterns = [
     path('', home, name='index'),
-    path('change_language_en', change_language_en, name='change_language_en'),
-    path('change_language_sw', change_language_sw, name='change_language_sw'),
+    path('change_language/<str:lang>', change_language, name='change_language'),
     path('arrival/', arrival, name='arrival'),
     path('preview/<int:pk>', preview, name='preview'),
     path('pdf/<int:pk>', generate_pdf, name='pdf'),

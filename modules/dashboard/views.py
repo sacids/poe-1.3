@@ -1,6 +1,6 @@
 import json
 import datetime
-from django.shortcuts import render
+from django.shortcuts import render, HttpResponse
 from modules.travellers.models import Traveller, PointOfEntry, Symptom
 from django.contrib.auth.decorators import login_required
 
@@ -65,6 +65,9 @@ def dashboard(request):
     symptoms = Symptom.objects.all()
 
     # filter
+    day = 'overall'
+    start_at = None
+    end_at = None
     if request.method == 'POST':
         day = request.POST.get('day')
 
@@ -355,10 +358,141 @@ def dashboard(request):
         'poe_data': json.dumps(poe_series_data),
         'passengers_data': json.dumps(passengers_series_data),
         'symptom_data': json.dumps(symptom_series_data),
-        'symptom_occurrence_data': json.dumps(symptom_occurrence_data)
+        'symptom_occurrence_data': json.dumps(symptom_occurrence_data),
+        # url parameters
+        'day': day,
+        'start_at': start_at,
+        'end_at': end_at
     }
 
+    #render view
     return render(request, 'dashboard.html', ctx)
+
+
+# all travellers
+def all_travellers(request, **kwarg):
+    # arguments
+    day = kwarg['day']
+
+    # poe_id
+    poe_id = request.session.get('poe_id')
+
+    travellers = (Traveller.objects
+                  .select_related('nationality', 'location_origin', 'point_of_entry'))
+
+    # today
+    today = datetime.datetime.now()
+
+    # check for a day
+    if day == 'today':
+        travellers = travellers.filter(arrival_date=today)
+    elif day == 'yesterday':
+        yesterday = datetime.datetime.now() - datetime.timedelta(days=1)
+
+        # travellers
+        travellers = travellers.filter(arrival_date=yesterday)
+
+    elif day == 'last_week':
+        start_at = datetime.date.today() - datetime.timedelta(days=6)
+        end_at = datetime.date.today() - datetime.timedelta(days=1)
+
+        # traveller
+        travellers = travellers.filter(arrival_date__range=[start_at, end_at])
+
+    elif day == 'last_month':
+        this_year = today.year
+        last_month = today.month - 1
+
+        # traveller
+        travellers = travellers.filter(traveller__arrival_date__month=last_month,
+                                       traveller__arrival_date__year=this_year)
+
+    elif day == 'custom':
+        start_at = kwarg['start_at']
+        end_at = kwarg['end_at']
+
+        if start_at is not None and end_at is not None:
+            # traveller
+            travellers = travellers.filter(
+                arrival_date__range=[start_at, end_at])
+        else:
+            travellers = travellers
+
+    # check for poe
+    if poe_id is None or poe_id == 0:
+        travellers = travellers.all()
+    else:
+        travellers = travellers.filter(point_of_entry_id=poe_id)
+
+    # context
+    context = {
+        "travellers": travellers,
+    }
+
+    # render view
+    return render(request, 'all_travellers.html', context)
+
+
+# allowed to proceed
+def allowed_proceed(request, **kwargs):
+    # arguments
+
+    # poe_id
+    poe_id = request.session.get('poe_id')
+
+    travellers = (Traveller.objects
+                  .select_related('nationality', 'location_origin', 'point_of_entry').filter(action_taken_id=1))
+
+    # check for poe
+    if poe_id is None or poe_id == 0:
+        travellers = travellers.all()
+    else:
+        travellers = travellers.filter(point_of_entry_id=poe_id)
+
+    temp_a = range(34, 41)
+    temp_b = range(0, 10)
+
+    # context
+    context = {
+        "travellers": travellers,
+        "symptoms": Symptom.objects.all(),
+        "temp_a": temp_a,
+        "temp_b": temp_b,
+    }
+
+    # render view
+    return render(request, 'allowed_proceed.html', context)
+
+
+# secondary screen
+def secondary_screen(request, **kwargs):
+    # arguments
+
+    # poe_id
+    poe_id = request.session.get('poe_id')
+
+    travellers = (Traveller.objects
+                  .select_related('nationality', 'location_origin', 'point_of_entry').filter(action_taken_id=2))
+
+    # check for poe
+    if poe_id is None or poe_id == 0:
+        travellers = travellers.all()
+    else:
+        travellers = travellers.filter(point_of_entry_id=poe_id)
+
+    temp_a = range(34, 41)
+    temp_b = range(0, 10)
+
+    # context
+    context = {
+        "travellers": travellers,
+        "symptoms": Symptom.objects.all(),
+        "temp_a": temp_a,
+        "temp_b": temp_b,
+    }
+
+    # render view
+    return render(request, 'secondary_screening.html', context)
 
 
 # calculate score

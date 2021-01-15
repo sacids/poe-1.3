@@ -234,7 +234,7 @@ class Traveller(BaseModel):
 
     visiting_purpose = models.CharField(
         choices=PURPOSE, max_length=50, default='None')  # to look around
-    other_purpose = models.TextField(null=True)
+    other_purpose = models.TextField(null=True, blank=True)
     duration_of_stay = models.PositiveIntegerField(null=True, blank=True)
     location_origin = models.ForeignKey(
         Location, related_name="location_origin", on_delete=models.DO_NOTHING)
@@ -253,8 +253,9 @@ class Traveller(BaseModel):
     action_taken = models.ForeignKey(
         ActionTaken, default=1, on_delete=models.DO_NOTHING)
     symptoms = models.ManyToManyField(Symptom, blank=True)
-    other_symptoms = models.TextField(null=True)
+    other_symptoms = models.TextField(null=True, blank=True)
     accept = models.IntegerField(default=0, null=True)
+    status = models.CharField(max_length=20,default="None", null=True)
     updated_at = models.DateTimeField(verbose_name="Updated date", null=True)
 
     class Meta(BaseModel.Meta):

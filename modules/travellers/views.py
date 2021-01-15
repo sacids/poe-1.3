@@ -183,6 +183,8 @@ def arrival(request):
             # finally save the traveller in db
             traveller.save()
 
+            print("traveller saved")
+
             # insert into traveller visited sites
             if request.POST.get('location'):
                 location = request.POST.getlist('location', '')
@@ -204,6 +206,8 @@ def arrival(request):
                     # finally save traveller visited areas
                     visited_area.save()
 
+            print("traveller history saved")
+
             # insert into traveller symptoms
             symptoms = request.POST.getlist('symptoms')
 
@@ -212,6 +216,8 @@ def arrival(request):
                 symptom = Symptom.objects.get(pk=symptom_id)
                 # finally save traveller symptoms
                 traveller_sym.symptoms.add(symptom)
+
+            print("traveller symptoms saved")
 
             # todo: call function to calculate score
             score = calculate_score(traveller.id)
@@ -228,23 +234,18 @@ def arrival(request):
             traveller_up.action_taken_id = action_taken
             traveller_up.save()
 
-            if translation.get_language() == 'en-us':
-                redirectpath = "/preview/" + traveller.id
-            elif translation.get_language() == "sw":
-                redirectpath = "/sw/preview/" + traveller.id
+            #redirect path
+            redirectpath = "/preview/" + traveller.id
 
             return redirect(redirectpath)
+        else:
+            messages.add_message(request, messages.WARNING,
+                                 'Warning! Please check all the fields!')
+        #render
+        return render(request, 'travellers/arrival.html', attr)    
 
     else:
         form_class = TravellerForm
-        form_class.base_fields["nationality"].queryset = Location.objects.filter(
-            parent=0).order_by('title')
-        form_class.base_fields["region"].queryset = Location.objects.filter(
-            code="TZR").order_by('title')
-        form_class.base_fields["district"].queryset = Location.objects.filter(
-            code="TZD").order_by('title')
-        form_class.base_fields["location_origin"].queryset = Location.objects.filter(
-            parent=0).order_by('title')
 
         # context
         attr = {'form': form_class, 'countries': countries, 'symptoms': symptoms,
@@ -278,19 +279,51 @@ def preview(request, **kwargs):
                 "countries": visited_countries, "symptoms": symptoms}
 
     except:
-        # check for language
-        redirectpath = ""
-        if translation.get_language() == 'en-us':
-            redirectpath = "/arrival"
-        elif translation.get_language() == "sw":
-            redirectpath = "/sw/arrival"
+        redirectpath = "/arrival"
+
+        #redirect to arrrival 
         return redirect(redirectpath)
+
+    #if save
+    # if cancel  
 
     return render(request, 'travellers/preview.html', attr)
 
+#cancel
+def cancel(request, **kwargs):
+    traveller_id = kwargs['pk']
+
+    try:
+        traveller = Traveller.objects.get(pk=traveller_id)
+
+        #delete traveller
+        traveller.delete()
+
+        #redirect to first page
+        return redirect('/')
+
+    except:
+        return redirect('/') 
+
+#save
+def save(request, **kwargs):
+    traveller_id = kwargs['pk']
+
+    try:
+        traveller = Traveller.objects.get(pk=traveller_id)
+
+        #update traveller status
+        traveller.status = "COMPLETE"
+        traveller.save()
+
+        #redirect
+        return redirect('/success')
+
+    except:
+        return redirect('/')    
+
+
 # print pdf
-
-
 def generate_pdf(request, **kwargs):
     traveller_id = kwargs['pk']  # traveller_id
 
@@ -310,12 +343,12 @@ def generate_pdf(request, **kwargs):
                 "countries": visited_countries, "symptoms": symptoms}
     except:
         pass
+
     # getting the template
-    #pdf = render_to_pdf('travellers/pdf.html', attr)
+    pdf = render_to_pdf('travellers/pdf.html', attr)
 
     # rendering the template
-    # return HttpResponse(pdf, content_type='application/pdf')
-    return render(request, 'travellers/pdf.html', attr)
+    return HttpResponse(pdf, content_type='application/pdf')
 
 
 def success(request):
@@ -334,7 +367,7 @@ def success(request):
     # activate current language
     translation.activate(translation.get_language())
 
-    return render(request, 'travellers/pdf.html', {})
+    return render(request, 'travellers/success.html', {})
 
 
 def calculate_score(traveller_id):

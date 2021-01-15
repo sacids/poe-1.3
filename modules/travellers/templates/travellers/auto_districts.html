@@ -1,5 +1,7 @@
-<select name="district_id" id="district_id">
-    <option value="">-- --</option>
+{% load i18n %}
+
+<select name="district_id" id="district_id" class="form-control">
+    <option value="">{% trans '-- Select --' %}</option>
     {% for district in districts %}
         <option value="{{ district.id }}">{{ district.title }}</option>
     {% endfor %}

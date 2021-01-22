@@ -28,7 +28,7 @@
         let x = document.getElementsByClassName("tab");
 
         // Exit the function if any field in the current tab is invalid:
-        //if (n === 1 && !validateForm()) return false;
+        if (n === 1 && !validateForm()) return false;
         // Hide the current tab:
         x[currentTab].style.display = "none";
         // Increase or decrease the current tab by 1:
@@ -87,7 +87,7 @@
         //validate per current tab
         //tab 1 validation
         if (currentTab === 0) {
-            let errorSurname = errorOtherNames = errorAgeCategory = errorAge = errorSex = errorNationality = errorIdNumber = errorModeOfTransport = errorNameOfTransport = errorArrivalDate = errorPointOfEntry = errorSeatNumber = true;
+            let errorSurname = errorOtherNames = errorAgeCategory = errorAge = errorSex = errorNationality = errorIdNumber = errorModeOfTransport = errorArrivalDate = errorPointOfEntry = errorSeatNumber = true;
 
             // Validate surname
             if (surname === "") {
@@ -193,6 +193,14 @@
                 }
             }
 
+            //validate pointOfEntry
+            if (pointOfEntry === "") {
+                printError("errorPointOfEntry", "{% trans 'Point of entry required' %}")
+            } else {
+                printError("errorPointOfEntry", "");
+                errorPointOfEntry = false;
+            }
+
             //validate mode of transport
             if (modeOfTransport === "") {
                 printError("errorModeOfTransport", "{% trans 'Mode of transport is required' %}")
@@ -202,20 +210,12 @@
             }
 
             //validate name of transport
-            if (nameOfTransport === "") {
-                printError("errorNameOfTransport", "{% trans 'Vessel/Flight/Vehicle name is required' %}")
-            } else {
-                printError("errorNameOfTransport", "");
-                errorNameOfTransport = false;
-            }
-
-            //validate pointOfEntry
-            if (pointOfEntry === "") {
-                printError("errorPointOfEntry", "{% trans 'Point of entry required' %}")
-            } else {
-                printError("errorPointOfEntry", "");
-                errorPointOfEntry = false;
-            }
+            // if (nameOfTransport === "") {
+            //     printError("errorNameOfTransport", "{% trans 'Vessel/Flight/Vehicle name is required' %}")
+            // } else {
+            //     printError("errorNameOfTransport", "");
+            //     errorNameOfTransport = false;
+            // }
 
             //seat number
             // if (modeOfTransport === "flight") {
@@ -231,7 +231,7 @@
             // }
 
             //check all data in tab one
-            return (errorSurname || errorOtherNames || errorAgeCategory || errorAge || errorSex || errorNationality || errorIdNumber || errorModeOfTransport || errorNameOfTransport || errorArrivalDate || errorPointOfEntry) !== true;
+            return (errorSurname || errorOtherNames || errorAgeCategory || errorAge || errorSex || errorNationality || errorIdNumber || errorModeOfTransport || errorArrivalDate || errorPointOfEntry) !== true;
 
             //tab 2 validation
         } else if (currentTab === 1) {
@@ -301,7 +301,7 @@
 
             //tab 3 validation
         } else if (currentTab === 2) {
-            let errorAddress = errorRegion = errorPhone = true;
+            let errorAddress = errorRegion = true;
 
             //validate physical address
             if (physical_address === "") {
@@ -320,17 +320,17 @@
             }
 
             //validate mobile
-            if (phone === "") {
-                printError("errorPhone", "{% trans 'Phone is required' %}");
-            } else {
-                let regex = /^\d{12}$/;
-                if (regex.test(phone) === false) {
-                    printError("errorPhone", "{% trans 'Invalid phone. e.g 255717000000' %}");
-                } else {
-                    printError("errorPhone", "");
-                    errorPhone = false;
-                }
-            }
+            // if (phone === "") {
+            //     printError("errorPhone", "{% trans 'Phone is required' %}");
+            // } else {
+            //     let regex = /^\d{12}$/;
+            //     if (regex.test(phone) === false) {
+            //         printError("errorPhone", "{% trans 'Invalid phone. e.g 255717000000' %}");
+            //     } else {
+            //         printError("errorPhone", "");
+            //         errorPhone = false;
+            //     }
+            // }
 
             // //validate email
             // if (nationality === '217') {
@@ -351,7 +351,7 @@
             // }
 
             //check all data in tab one
-            return (errorAddress || errorRegion || errorPhone) !== true;
+            return (errorAddress || errorRegion) !== true;
 
             //tab 3 validation
         } else if (currentTab === 3) {

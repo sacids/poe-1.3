@@ -38,6 +38,8 @@ def home(request):
     # redirect path
     redirectpath = ""
 
+    print(translation.get_language())
+
     # activate current language
     translation.activate(translation.get_language())
 
@@ -47,8 +49,8 @@ def home(request):
 
     # check if user authenticate
     if request.user.is_authenticated:
-        print("Hello")
-        #return redirect(dashboard)
+        # redirect to dashboard
+        return redirect('/dashboard')
     else:
         if request.method == "POST":
             travel_type = request.POST.get('travel_type')
@@ -77,12 +79,10 @@ def home(request):
         return render(request, 'travellers/home.html', {'today': today, 'tomorrow': tomorrow})
 
 
-#change language
+# change language
 def change_language(request, **kwargs):
     # language code
     language_code = kwargs['lang']
-
-    print(language_code)
 
     language = "en-us"  # default language
 
@@ -96,6 +96,10 @@ def change_language(request, **kwargs):
     response = HttpResponseRedirect('/')
     if language:
         redirect_path = '/'
+        if language == 'en-us':
+            redirect_path = '/'
+        elif language == 'sw':
+            redirect_path = '/sw'
 
         translation.activate(language)
         response = HttpResponseRedirect(redirect_path)
@@ -167,14 +171,14 @@ def arrival(request):
             traveller.other_employment = form.cleaned_data['other_employment']
 
             traveller.physical_address = form.cleaned_data['physical_address']
-            traveller.region = form.cleaned_data['region_id']
+            traveller.region = form.cleaned_data['region']
 
             if request.POST.get('district') != '':
                 traveller.district = request.POST.get('district')
 
             traveller.street_or_ward = form.cleaned_data['street_or_ward']
             traveller.phone = form.cleaned_data['phone']
-            traveller.email = form.cleaned_data['email'].lower()
+            traveller.email = form.cleaned_data['email']
 
             traveller.location_origin = form.cleaned_data['location_origin']
             traveller.other_symptoms = form.cleaned_data['other_symptoms']
@@ -182,8 +186,6 @@ def arrival(request):
 
             # finally save the traveller in db
             traveller.save()
-
-            print("traveller saved")
 
             # insert into traveller visited sites
             if request.POST.get('location'):
@@ -206,8 +208,6 @@ def arrival(request):
                     # finally save traveller visited areas
                     visited_area.save()
 
-            print("traveller history saved")
-
             # insert into traveller symptoms
             symptoms = request.POST.getlist('symptoms')
 
@@ -216,8 +216,6 @@ def arrival(request):
                 symptom = Symptom.objects.get(pk=symptom_id)
                 # finally save traveller symptoms
                 traveller_sym.symptoms.add(symptom)
-
-            print("traveller symptoms saved")
 
             # todo: call function to calculate score
             score = calculate_score(traveller.id)
@@ -234,21 +232,22 @@ def arrival(request):
             traveller_up.action_taken_id = action_taken
             traveller_up.save()
 
-            #redirect path
-            redirectpath = "/preview/" + traveller.id
+            # redirect path
+            redirectpath = "/preview/" + str(traveller.id)
 
             return redirect(redirectpath)
         else:
             messages.add_message(request, messages.WARNING,
                                  'Warning! Please check all the fields!')
-        #render
-        return render(request, 'travellers/arrival.html', attr)    
+        # render
+        return render(request, 'travellers/arrival.html', attr)
 
     else:
-        form_class = TravellerForm
+        # form
+        form = TravellerForm()
 
         # context
-        attr = {'form': form_class, 'countries': countries, 'symptoms': symptoms,
+        attr = {'form': form, 'countries': countries, 'symptoms': symptoms,
                 'today': today, 'yesterday': yesterday, 'last_21_days': last_21_days}
 
         # render view
@@ -281,46 +280,48 @@ def preview(request, **kwargs):
     except:
         redirectpath = "/arrival"
 
-        #redirect to arrrival 
+        # redirect to arrrival
         return redirect(redirectpath)
 
-    #if save
-    # if cancel  
+    # if save
+    # if cancel
 
     return render(request, 'travellers/preview.html', attr)
 
-#cancel
+
+# cancel => delete traveller data
 def cancel(request, **kwargs):
     traveller_id = kwargs['pk']
 
     try:
         traveller = Traveller.objects.get(pk=traveller_id)
 
-        #delete traveller
+        # delete traveller
         traveller.delete()
 
-        #redirect to first page
+        # redirect to first page
         return redirect('/')
 
     except:
-        return redirect('/') 
+        return redirect('/')
 
-#save
+
+# save  => change status to complete
 def save(request, **kwargs):
     traveller_id = kwargs['pk']
 
     try:
         traveller = Traveller.objects.get(pk=traveller_id)
 
-        #update traveller status
+        # update traveller status
         traveller.status = "COMPLETE"
         traveller.save()
 
-        #redirect
+        # redirect
         return redirect('/success')
 
     except:
-        return redirect('/')    
+        return redirect('/')
 
 
 # print pdf

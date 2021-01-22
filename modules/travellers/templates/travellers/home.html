@@ -64,10 +64,11 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label>Travel Type <span class="red">*</span></label>
-                                            <select class="form-control" name="travel_type" required>
-                                                <option value="">-- Select --</option>
-                                                <option value="arrival">Arrival</option>
+                                            <label>{% trans 'Travel Type' %} <span class="red">*</span></label>
+                                            <select class="form-control" name="travel_type">
+                                                <option value="">{% trans '-- Select --' %}</option>
+                                                <option value="arrival">{% trans 'Arrival' %}</option>
+                                                <option value="#">{% trans 'Departure' %}</option>
                                             </select>
                                         </div>
                                         <!--./form-group-->
@@ -79,9 +80,9 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label>Passport Number <span class="red">*</span></label>
+                                            <label>{% trans 'Passport Number' %} <span class="red">*</span></label>
                                             <input type="text" name="id_number" class="form-control" id="id_number"
-                                                placeholder="Write passport number..." maxlength="50" required>
+                                                placeholder="{% trans 'Write passport number...' %}" maxlength="50">
                                         </div>
                                         <!--./form-group-->
                                     </div>
@@ -92,9 +93,9 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label>Arrival Date <span class="red">*</span></label>
+                                            <label>{% trans 'Arrival Date' %} <span class="red">*</span></label>
                                             <input type="date" name="arrival_date" min="{{ today }}"
-                                                class="form-control dateinput form-control" required>
+                                                class="form-control dateinput form-control">
                                         </div>
                                         <!--./form-group-->
                                     </div>
@@ -106,7 +107,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <input type="submit" name="save" class="btn btn-secondary btn-xs"
-                                                value="Submit" />
+                                                value="{% trans 'Continue' %}" />
                                         </div>
                                         <!--./form-group-->
                                     </div>

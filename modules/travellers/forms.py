@@ -35,7 +35,7 @@ class TravellerForm(forms.ModelForm):
 
     class Meta:
         model = Traveller
-        exclude = ('active',)
+        exclude = ('active', 'temp', 'category', 'id_type', 'temp', 'disease_to_screen', 'action_taken', 'status', 'updated_at')
         fields = ('__all__')
         widgets = {
             'surname': forms.TextInput(attrs={'class': 'form-control', 'id': 'surname', 'placeholder': _('Write surname...'), }),
@@ -106,21 +106,17 @@ class TravellerForm(forms.ModelForm):
             'point_of_entry': _('Point of Entry'),
             'name_of_transport': _('Vessel/Flight/Vehicle Name/No'),
             'seat_number': _('Seat Number'),
-
             'visiting_purpose': _('Visiting Purpose'),
             'other_purpose': _('Other Purposes <span id="other_purpose_astr" class="asteriskField"></span>'),
             'duration_of_stay': _('Duration of stay (In days) <span id="dur_stay_astr" class="asteriskField"></span>'),
             'employment': _('Occupation'),
             'other_employment': _('Other occupation <span id="other_employment_astr" class="asteriskField"></span>'),
-
             'physical_address': _('Physical address/Hotel Name'),
             'region': _('Region'),
             'district': _('District'),
             'street_or_ward': _('Street/Ward'),
             'phone': _('Phone'),
             'email': _('Email'),
-
             'location_origin': _('Country where journey started'),
             'other_symptoms': _('Other Symptoms (comma separated)')
-
         }

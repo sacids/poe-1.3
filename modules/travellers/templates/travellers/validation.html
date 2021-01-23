@@ -301,7 +301,7 @@
 
             //tab 3 validation
         } else if (currentTab === 2) {
-            let errorAddress = errorRegion = true;
+            let errorAddress = errorRegion = errorPhone = true;
 
             //validate physical address
             if (physical_address === "") {
@@ -323,7 +323,7 @@
             if (phone === "") {
                 printError("errorPhone", "{% trans 'Phone is required' %}");
             } else {
-                let regex = /^\d{10,14}$/;
+                let regex = /^\d{10,16}$/;
                 if (regex.test(phone) === false) {
                     printError("errorPhone", "{% trans 'Invalid phone. e.g 255717000000' %}");
                 } else {
@@ -351,7 +351,7 @@
             // }
 
             //check all data in tab one
-            return (errorAddress || errorRegion) !== true;
+            return (errorAddress || errorRegion || errorPhone) !== true;
 
             //tab 3 validation
         } else if (currentTab === 3) {

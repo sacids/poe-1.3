@@ -79,6 +79,8 @@ class TravellerForm(forms.ModelForm):
 
             'street_or_ward': forms.TextInput(
                 attrs={'class': 'form-control', 'id': 'street_or_ward', 'placeholder': _('Write street or ward...')}),
+
+            'code': forms.TextInput(attrs={'class': 'form-control', 'id': 'phone', 'placeholder': _('Write code...')}),    
             'phone': forms.TextInput(attrs={'class': 'form-control', 'id': 'phone', 'placeholder': _('Write phone...'),
                                             'onKeyPress': 'checkNumber(event)'}),
             'email': forms.TextInput(attrs={'class': 'form-control', 'id': 'email',

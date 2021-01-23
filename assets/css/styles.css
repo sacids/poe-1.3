@@ -352,7 +352,6 @@ Background colors
 Buttons
 ===============================================*/
 .btn {
-    border-radius: 0 !important;
     font-size: 13px !important;
     font-weight: 600;
 }

@@ -38,13 +38,9 @@
 
                                         <a href="{% url 'travellers:arrival' %}"
                                            class="btn btn-success btn-block">{% trans "Yes" %}</a>
-                                        <div class="mt-3"></div>
-                                        {% get_current_language as LANGUAGE_CODE %}
-                                        {% if LANGUAGE_CODE == 'en-us' %}
-                                            <a href="/" class="btn btn-danger btn-block">{% trans "No" %}</a>
-                                        {% elif LANGUAGE_CODE == 'sw' %}
-                                            <a href="/sw" class="btn btn-danger btn-block">{% trans "No" %}</a>
-                                        {% endif %}
+                                        <div class="mt-3"></div>   
+                                        <a href="/" class="btn btn-danger btn-block">{% trans "No" %}</a>
+                                       
                                     </div>
                                 </div>
                                 <!--./card -->

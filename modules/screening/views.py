@@ -25,7 +25,7 @@ def screen(request):
         travellers = travellers.filter(point_of_entry_id=poe_id)
 
     temp_a = range(34, 41)
-    temp_b = range(1, 10)
+    temp_b = range(0, 10)
 
     # context
     context = {
@@ -36,6 +36,29 @@ def screen(request):
     }
 
     return render(request, 'screen.html', context)
+
+@login_required
+def immigration(request):
+    poe_id = request.session.get('poe_id')
+
+    travellers = (Traveller.objects
+                  .select_related('location_origin', 'point_of_entry')
+                  .prefetch_related('visited_area')
+                  .filter(arrival_date=date.today()))
+
+    # check for poe
+    if poe_id is None or poe_id == 0:
+        travellers = travellers.all()
+    else:
+        travellers = travellers.filter(point_of_entry_id=poe_id)
+
+    # context
+    context = {
+        "travellers": travellers,
+    }
+
+    print('imiigi')
+    return render(request, 'immigration.html', context)
 
 
 def travellers_asJson(request):
@@ -57,8 +80,22 @@ def update_symptoms(request):
     for symptom_id in symptoms:
         symptom = Symptom.objects.get(pk=symptom_id)
         Trav.symptoms.add(symptom)
+    
 
-    return JsonResponse(saved, safe=False)
+    score = calculate_score(tid)
+    print(score)
+    if score != 0:
+        Trav.disease_to_screen = score
+        Trav.action_taken_id = 2
+        saved = 2
+    else:
+        Trav.disease_to_screen = score
+        Trav.action_taken_id = 1
+        saved = 1
+
+    Trav.save()
+
+    return HttpResponse(saved)
 
 
 def set_temp(request):
@@ -68,10 +105,10 @@ def set_temp(request):
         Temp = float(request.GET.get('temp'))
         Trav.temp = Temp
 
-        if Temp > 38:
+        if Temp > 37.8:
             res = 2
             screen = ',100'
-        elif Temp < 36:
+        elif Temp < 35.6:
             res = 2
             screen = ',100'
         else:
@@ -80,12 +117,13 @@ def set_temp(request):
 
         score = calculate_score(Trav.id)
 
-        if score != 0:
-            Trav.disease_to_screen = score + screen
-            Trav.action_taken = ActionTaken.objects.get(pk=2)
+
+        if score != 0 | res == 2:
+            Trav.disease_to_screen = str(score) + screen
+            Trav.action_taken_id = 2
         else:
             Trav.disease_to_screen = str(score) + screen
-            Trav.action_taken = ActionTaken.objects.get(pk=1)
+            Trav.action_taken_id = 1
         # Trav.update(temp=Temp,disease_to_screen=Concat('disease_to_screen',V(','),screen))
         # Trav.update(disease_to_screen  = screen
         Trav.save()

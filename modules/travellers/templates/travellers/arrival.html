@@ -5,8 +5,6 @@
 {% load crispy_forms_filters %}
 {% load crispy_forms_tags %}
 {% load static %}
-{#{% load sweetify %}#}
-{#{% sweetify %}#}
 {% block title %} {% trans "Traveller's Surveillance Form" %} {% endblock %}
 
 {% block content %}
@@ -48,8 +46,6 @@
                                 <form id="regForm" action="" method="post" role="form" autocomplete="off">
                                     {% csrf_token %}
 
-                                    <input type="hidden" id="base_url" name="base_url" value="{{ request.get_host }}"/>
-
                                     <div class="tab" id="tab1">
                                         <div class="row">
                                             <div class="col-lg-12 col-md-12 col-sm-12 col-12">
@@ -73,15 +69,6 @@
                                         <div class="row">
                                             <div class="col-lg-6 col-md-6 col-sm-12 col-12">
                                                 <div class="form-group">
-                                                    {{ form.surname|as_crispy_field }}
-                                                    <span id="errorSurname" style="color: red;"></span>
-                                                </div>
-                                                <!--./form-group -->
-                                            </div>
-                                            <!--./col-lg-6 -->
-
-                                            <div class="col-lg-6 col-md-6 col-sm-12 col-12">
-                                                <div class="form-group">
                                                     {{ form.other_names|as_crispy_field }}
                                                     <span id="errorOtherNames" style="color: red;"></span>
                                                 </div>
@@ -89,6 +76,18 @@
                                             </div>
                                             <!--./col-lg-6 -->
 
+                                            <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                                                <div class="form-group">
+                                                    {{ form.surname|as_crispy_field }}
+                                                    <span id="errorSurname" style="color: red;"></span>
+                                                </div>
+                                                <!--./form-group -->
+                                            </div>
+                                            <!--./col-lg-6 -->
+                                        </div>
+                                        <!--./row -->
+
+                                        <div class="row">
                                             <div class="col-lg-6 col-md-6 col-sm-12 col-12">
                                                 <div class="form-group">
                                                     {{ form.age_category|as_crispy_field }}
@@ -255,6 +254,7 @@
                                     </div>
                                     <!--./tab -->
 
+
                                     <div class="tab" id="tab3">
                                         <div class="row">
                                             <div class="col-lg-12 col-md-12 col-sm-12 col-12">
@@ -281,7 +281,7 @@
                                         <div class="row">
                                             <div class="col-lg-6 col-md-6 col-sm-12 col-12">
                                                 <div class="form-group">
-                                                    {{ form.region_id|as_crispy_field }}
+                                                    {{ form.region|as_crispy_field }}
                                                     <span id="errorRegion" style="color: red;"></span>
                                                 </div>
                                                 <!--./form-group -->
@@ -290,7 +290,7 @@
 
                                             <div class="col-lg-6 col-md-6 col-sm-12 col-12">
                                                 <div class="form-group">
-                                                    {{ form.district_id|as_crispy_field }}
+                                                    {{ form.district|as_crispy_field }}
                                                 </div>
                                                 <!--./form-group -->
                                             </div>
@@ -358,7 +358,10 @@
                                         <div class="row">
                                             <div class="col-lg-12 col-md-12 col-sm-12 col-12">
                                                 <div class="form-group">
-                                                    {{ form.number_countries|as_crispy_field }}
+                                                    <label>{% trans 'Number of countries' %}</label>
+                                                    <input type="number" name="number_countries" id="number_countries"
+                                                           placeholder="{% trans 'Write number of countries...' %}"
+                                                           max="5" min="1" class="form-control"/>
                                                     <span id="errorNumberCountries" style="color: red;"></span>
                                                 </div>
                                                 <!--./form-group -->
@@ -469,7 +472,6 @@
                                     </div>
                                     <!--./tab-->
 
-
                                     <div class="row" style="overflow:auto;">
                                         <div class="col-md-12 col-12">
                                             <div class="form-group">
@@ -484,6 +486,7 @@
                                         <!--./col-md-12 -->
                                     </div>
                                     <!--./row -->
+
                                 </form>
                             </div>
                             <!--./col-md-12 -->

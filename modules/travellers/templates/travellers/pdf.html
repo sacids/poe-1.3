@@ -1,0 +1,528 @@
+{% load static %}
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+    <title>Travellers Surveillance</title>
+    <style type="text/css">
+        body {
+            font-weight: 200;
+            font-size: 14px;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .blue {
+            color: #1565C0;
+        }
+
+        .white {
+            color: #ffffff;
+        }
+
+        .black {
+            color: #000000;
+        }
+
+        .font-weight-bold {
+            font-weight: 400;
+        }
+
+        .table {
+            width: 100%;
+            margin: 4px 0;
+            padding: 1px 0;
+        }
+
+        .input {
+            width: 100%;
+            border: 1px solid #eeeeee;
+            padding: 6px 4px;
+            margin: 8px 0;
+            box-sizing: border-box;
+            font-size: 14px;
+        }
+
+        .wrapper {
+            margin: 0 auto;
+            width: 70%;
+        }
+
+        .main-header {
+            text-align: center !important;
+        }
+
+        .main-header h3,
+        h4,
+        h5,
+        h6 {
+            padding: 0;
+        }
+
+        .main-header h3 {
+            font-size: 20px;
+        }
+
+        .main-header h4 {
+            font-size: 18px;
+        }
+
+        .main-header h5 {
+            font-size: 16px;
+        }
+
+        .main-header h6 {
+            font-size: 14px;
+        }
+
+        .main-wrapper-header {
+            background-color: #C5E1A5;
+            text-align: center;
+            padding: 8px 0 0 0;
+        }
+
+        .main-wrapper-header>span {
+            color: #212121;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .main-wrapper-content {
+            padding: 8px 0 8px 0;
+        }
+
+        .mt-4 {
+            margin-top: .8em;
+        }
+
+        .mt-3 {
+            margin-top: .6em;
+        }
+
+        .mb-4 {
+            margin-bottom: .8em;
+        }
+
+        .mb-3 {
+            margin-bottom: .6em;
+        }
+
+        .p-2 {
+            padding: .8rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="main-header">
+            <h4>UNITED REPUBLIC OF TANZANIA</h4>
+            <h5>MINISTRY OF HEALTH, COMMUNITY DEVELOPMENT, GENDER, ELDERLY AND CHILDREN</h5>
+            <img src="{% static 'img/CoatofArms_Lg.png' %}" width="80" />
+
+            <h5 class="blue">TRAVELLERS' SURVEILLANCE FORM</h5>
+            <h6 class="blue">We will appreciate if you respond to ALL questions.</h6>
+        </div>
+        <!--./header-->
+
+        <div class="main-wrapper">
+            <div class="main-wrapper-header">
+                <span>A. TRAVELLER'S INFORMATION</span>
+            </div>
+            <!--./main-wrapper-header-->
+
+            <table width="100%" class="table">
+                <tr>
+                    <td width="50%">
+                        <table width="100%">
+                            <tr>
+                                <td width="25%"><span class="font-weight-bold">Full Name</span> </td>
+                                <td>
+                                    <span class="input">
+                                        {{ traveller.other_names|default:""}} {{ traveller.surname|default:"" }}
+                                    </span>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+
+                    <td width="50%">
+                        <table width="100%">
+                            <tr>
+                                <td width="25%"><span class="font-weight-bold">Age</span></td>
+                                <td>
+                                    {{ traveller.age }}
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+            <!--./table-->
+
+            <table width="100%" class="table">
+                <tr>
+                    <td width="50%">
+                        <table width="100%">
+                            <tr>
+                                <td width="25%"><span class="font-weight-bold">Sex</span></td>
+                                <td>
+                                    <span class="input">
+                                        {{ traveller.sex|capfirst }}
+                                    </span>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td width="50%">
+                        <table width="100%">
+                            <tr>
+                                <td width="25%"><span class="font-weight-bold">Nationality</span></td>
+                                <td>
+                                    <span class="input">
+                                        {{ traveller.nationality.title }}
+                                    </span>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table><!--./table-->
+
+            <table width="100%" class="table">
+                <tr>
+                    <td width="50%">
+                        <table width="100%">
+                            <tr>
+                                <td width="25%"><span class="font-weight-bold">Passport No</span></td>
+                                <td>
+                                    <span class="input">
+                                        {{ traveller.id_number }}
+                                    </span>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td width="50%">
+                        <table width="100%">
+                            <tr>
+                                <td width="25%"><span class="font-weight-bold">Point of Entry</span></td>
+                                <td>
+                                    <span class="input">
+                                        {{ traveller.point_of_entry.title }}
+                                    </span>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table><!--./table-->
+
+            <table width="100%" class="table">
+                <tr>
+                    <td width="50%">
+                        <table width="100%">
+                            <tr>
+                                <td width="25%"><span class="font-weight-bold">Mode of Transport</span></td>
+                                <td>
+                                    <span class="input">
+                                        {{ traveller.mode_of_transport|capfirst }}
+                                    </span>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td width="50%">
+                        <table width="100%">
+                            <tr>
+                                <td width="25%"><span class="font-weight-bold">Transport Name/No</span></td>
+                                <td>
+                                    <span class="input">
+                                        {{ traveller.name_of_transport }}
+                                    </span>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table><!--./table-->
+
+            <table width="100%" class="table">
+                <tr>
+                    <td width="50%">
+                        <table width="100%">
+                            <tr>
+                                <td width="25%"><span class="font-weight-bold">Arrival Date</span></td>
+                                <td>
+                                    <span class="input">
+                                        {{ traveller.arrival_date }}
+                                    </span>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td width="50%">
+                        <table width="100%">
+                            <tr>
+                                <td width="25%"><span class="font-weight-bold">Seat Number</span></td>
+                                <td>
+                                    <span class="input">
+                                        {{ traveller.seat_number }}
+                                    </span>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table><!--./table-->
+
+            <table width="100%" class="table">
+                <tr>
+                    <td width="50%">
+                        <table width="100%">
+                            <tr>
+                                <td width="25%"><span class="font-weight-bold">Duration of stay (days)</span></td>
+                                <td>
+                                    <span class="input">
+                                        {{ traveller.duration_of_stay }}
+                                    </span>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td width="50%">
+                        <table width="100%">
+                            <tr>
+                                <td width="25%"><span class="font-weight-bold">Purpose of Visit in Tanzania</span></td>
+                                <td>
+                                    <span class="input">
+                                        {{ traveller.visiting_purpose|capfirst }}
+                                    </span>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table><!--./table-->
+
+            <table width="100%" class="table">
+                <tr>
+                    <td width="100%">
+                        <table width="100%">
+                            <tr>
+                                <td width="100%">
+                                    <span class="font-weight-bold">Other purpose of visit(Specify)</span><br />
+                                    <span class="input">
+                                        {{ traveller.other_purpose }}
+                                    </span>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table><!--./table-->
+
+            <div class="main-wrapper-header mt-3">
+                <span>Contact while in Tanzania</span>
+            </div>
+            <!--./main-wrapper-header-->
+
+            <table width="100%" class="table">
+                <tr>
+                    <td width="100%">
+                        <table width="100%">
+                            <tr>
+                                <td width="100%"><span class="font-weight-bold">Physical Address/Hotel</span><br />
+                                    <span class="input">
+                                        {{ traveller.physical_address }}
+                                    </span>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table><!--./table-->
+
+            <table width="100%" class="table">
+                <tr>
+                    <td width="50%">
+                        <table width="100%">
+                            <tr>
+                                <td width="25%"><span class="font-weight-bold">Region</span></td>
+                                <td>
+                                    <span class="input">
+                                        {{ traveller.region.title }}
+                                    </span>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td width="50%">
+                        <table width="100%">
+                            <tr>
+                                <td width="25%"><span class="font-weight-bold">District</span></td>
+                                <td>
+                                    <span class="input">
+                                        {{ traveller.district.title }}
+                                    </span>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table><!--./table-->
+
+            <table width="100%" class="table">
+                <tr>
+                    <td width="50%">
+                        <table width="100%">
+                            <tr>
+                                <td width="25%"><span class="font-weight-bold">Street/Ward</span></td>
+                                <td>
+                                    <span class="input">
+                                        {{ traveller.street_or_ward }}
+                                    </span>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td width="50%">
+                        <table width="100%">
+                            <tr>
+                                <td width="25%"><span class="font-weight-bold">Phone</span></td>
+                                <td>
+                                    <span class="input">
+                                        {{ traveller.phone }}
+                                    </span>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table><!--./table-->
+
+            <table width="100%" class="table">
+                <tr>
+                    <td width="50%">
+                        <table width="100%">
+                            <tr>
+                                <td width="30%"><span class="font-weight-bold">Email</span></td>
+                                <td>
+                                    <span class="input">
+                                        {{ traveller.email }}
+                                    </span>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td width="50%"></td>
+                </tr>
+            </table><!--./table-->
+
+
+            <div class="main-wrapper-header mt-3">
+                <span>Country where the journey started</span>
+            </div>
+            <!--./main-wrapper-header-->
+
+            <table width="100%" class="table">
+                <tr>
+                    <td width="100%">
+                        <table width="100%">
+                            <tr>
+                                <td width="25%"><span class="fname">Country</span></td>
+                                <td>
+                                    <span class="input">
+                                        {{ traveller.location_origin.title }}
+                                    </span>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table><!--./table-->
+
+            <div class="main-wrapper-header mt-3">
+                <span>Travel History(Country visited for the past 21 days)</span>
+            </div>
+            <!--./main-wrapper-header-->
+
+            <table width="100%" class="table">
+                {% for country in countries %}
+                <tr>
+                    <td width=25%>
+                        <span class="font-weight-bold">Country</span>
+                        {{ country.location__title }}
+                    </td>
+
+                    <td width=25%>
+                        <span class="font-weight-bold">Location visited/Province</span>
+                        {{ country.location_visited }}
+                    </td>
+                    <td width=25%>
+                        <span class="font-weight-bold">Date</span>
+                        {{ country.date }}
+                    </td>
+                    <td width=25%>
+                        <span class="font-weight-bold">No. of days</span>
+                        {{ country.days }}
+                    </td>
+                </tr>
+                {% endfor %}
+            </table><!--./table-->
+
+
+            <div class="main-wrapper-header mt-3">
+                <span>Do you have the following conditions or experienced them during the
+                    last 7 days (1 weeks)?</span>
+            </div>
+            <!--./main-wrapper-header-->
+
+            <table width="100%" class="table">
+                <tr>
+                    <td>
+                        <ol>
+                            {% for symptom in symptoms %}
+                            <li>{{ symptom.symptom__title }}</li>
+                            {% endfor %}
+                        </ol>
+                    </td>
+                </tr>
+            </table><!--./table-->
+
+            <div class="main-wrapper-header mt-3 mb-2">
+                <span>B. PUBLIC HEALTH MEASURES TAKEN (for official use only)</span>
+            </div>
+            <!--./main-wrapper-header-->
+
+            <table class="table mt-3" width="100%">
+                <tr>
+                    <td width="33.3%">ACTION TAKEN:</td>
+                    <td width="33.3%">1. Allowed to proceed</td>
+                    <td width="33.3%">2. Sent to secondary screening</td>
+                </tr>
+            </table><!--./table-->
+
+            <hr style="background-color: #eeeeee;" />
+
+            <table class="table mt-3" width="100%">
+                <tr>
+                    <td width="33.3%">
+                        Name:
+                    </td>
+                    <td width="33.3%">
+                        Signature:
+                    </td>
+                    <td width="33.3%">
+                        Date:
+                    </td>
+                </tr>
+            </table><!--./table-->
+
+            <hr style="background-color: #eeeeee;" />
+        </div>
+        <!--./main-wrapper-->
+    </div>
+    <!--./wrapper-->
+</body>
+
+</html>

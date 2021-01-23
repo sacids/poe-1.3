@@ -19,7 +19,7 @@ class TravellerVisitedAreaAdmin(admin.ModelAdmin):
 
 @admin.register(Traveller)
 class TravellerAdmin(admin.ModelAdmin):
-    list_display = ['id', 'other_names', 'surname']
+    list_display = ['id', 'other_names']
 
 
 @admin.register(PointOfEntry)

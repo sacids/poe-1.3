@@ -122,12 +122,12 @@ dmypy.json
 .idea
 .vscode
 
+#migrations
+**/migrations/*
+
 makemigrations
 migrate
 run
-
-
-**/migrations/*
 
 modules/config/__pycache__/__init__.cpython-38.pyc
 modules/config/__pycache__/__init__.cpython-38.pyc

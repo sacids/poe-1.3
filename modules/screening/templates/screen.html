@@ -1,9 +1,16 @@
 {% extends 'backend/base.html' %}
 {% load poe_tags %}
 
-{% block navarea %}
-
+{% block filter %}
+<div class="navopt border-right d-flex">
+    <div class="filter_box action_taken_x" f_class=" action_taken_x">&nbsp;</div>
+    <div class="filter_box action_taken_0" f_class=" action_taken_0">&nbsp;</div>
+    <div class="filter_box action_taken_1" f_class=" action_taken_1">&nbsp;</div>
+    <div class="filter_box action_taken_2" f_class=" action_taken_2">&nbsp;</div>
+</div>
 {% endblock %}
+
+
 {% block content %}
 <div class="row">
     <div class="col-md-12">
@@ -23,8 +30,14 @@
             </thead>
             <tbody>
                 {% for traveller in travellers %}
+<<<<<<< HEAD
                 <tr id="row_{{ traveller.id }}" {% ifnotequal '0' traveller.disease_to_screen %} class="screen"
                     {% endifnotequal %} data='{ 
+=======
+                    <tr id="row_{{ traveller.id }}" 
+                        class="action_taken_{{ traveller.action_taken_id }}"
+                        data='{ 
+>>>>>>> devx
                         "Sex":"{{ traveller.sex }}",
                         "Age category":"{{ traveller.age_category }}",
                         "Age":"{{ traveller.age }}",
@@ -102,6 +115,7 @@
         </div>
     </div>
 
+<<<<<<< HEAD
     <!--tabs-->
     <ul class="nav nav-tabs" id="myTab" role="tablist">
         <li class="nav-item">
@@ -121,6 +135,30 @@
                         {% for s in symptoms %}
                         <div class="col-6"><label><input type="checkbox" id="chk_symptom_{{ s.id }}" value="{{ s.id }}"
                                     name="symptoms[]" disabled> {{ s.title }} </label>
+=======
+        <!--tabs-->
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" data-toggle="tab" href="#check">Primary Screening</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#info">Traveller Info</a>
+            </li>
+        </ul>
+        <div class="tab-content">
+            <div id="check" class="tab-pane fade in active show py-3">
+                <h5>Symptoms</h5>
+                <div class="border-bottom pb-3">
+                    <form id="form_edit_traveller_symptoms">
+                        <div class="row">
+                            {% for s in symptoms %}
+                                <div class="col-6"><label><input type="checkbox" id="chk_symptom_{{ s.id }}"
+                                                                 value="{{ s.id }}"
+                                                                 name="symptoms[]" disabled> {{ s.title }} </label>
+                                </div>
+                            {% endfor %}
+>>>>>>> devx
                         </div>
                         {% endfor %}
                     </div>
@@ -141,8 +179,102 @@
 {% endblock %}
 
 {% block script %}
-<script type="text/javascript" language="javascript" class="init">
-    $(document).ready(function () {
+    <script type="text/javascript" language="javascript" class="init">
+
+        
+        $(document).ready(function () {
+
+
+            oTable = $('#travellers_table').DataTable({
+                "columnDefs": [
+                    {
+                        "targets": [4],
+                        "visible": false,
+                        "searchable": false
+                    }
+                ],
+                "paging": false,
+                "info": false
+            });
+
+            $('#site_search').keyup(function () {
+                oTable.search($(this).val()).draw();
+            })
+
+            $(document).on('click','.filter_box', function(event){
+                var f_class     = $(this).attr('f_class').trim();
+                
+                if(f_class == 'action_taken_x'){
+                    console.log('show all');
+                    $('#travellers_table tbody tr').show()
+                    return
+                }
+                $('#travellers_table tbody tr').hide();
+                $('.'+f_class).show();
+            });
+
+            $(document).on('click', '#travellers_table tbody tr', function (event) {
+                // hide search
+                $(".site-search").removeClass('search-visible');
+
+                var row_id = $(this).attr('id');
+                var id = row_id.substring(4);
+
+                $('#full_name').html($('#' + row_id + ' .full_name').html());
+                $('#id_number').html($('#' + row_id + ' .id_number').html());
+                $('#location_origin_title').html($('#' + row_id + ' .location_origin_title').text());
+                $('#name_of_transport').html($('#' + row_id + ' .name_of_transport').text());
+
+                var l = $('#' + row_id + ' .location_origin_title').clone();
+                l.show();
+                var l_text = l.html();
+                l.remove();
+                $('#location_origin_title').html(l_text);
+
+                var symptoms = $(this).attr('symptoms');
+                var v_areas = $(this).attr('v_areas');
+                var data = $(this).attr('data');
+
+                // Manage Sysmptoms
+                // console.log(symptoms);
+                var arr = jQuery.parseJSON(symptoms);
+                // unselect all checkboxes in form
+                console.log('removing checked');
+                $('#form_edit_traveller_symptoms input:checkbox').prop('checked', false)
+                for (var item of arr) {
+                    $('#chk_symptom_' + item).prop('checked', true)
+                }
+                $('#traveller_id').val(id);
+
+                // Manage travel history
+                var obj = jQuery.parseJSON(v_areas);
+                // empty travel history div
+                $('#travel_history').html('');
+                var tmp = "<table class='table table-bordered' width='80%'><thead><tr><td>Country</td><td>Area</td><td>Date</td><td>Days</td></tr></thead><tbody>"
+                $.each(obj, function (key, value) {
+                    // set specific sysmptoms only
+                    tmp += '<tr><td>' + value.location + '</td><td>' + value.location_visited + '</td><td>' + value.date + '</td><td>' + value.days + '</td></tr>';
+                });
+                tmp += "</tbody></table>"
+                $('#travel_history').html(tmp);
+
+                // Manage travell info
+                var obj = jQuery.parseJSON(data);
+                // empty travel history div
+                $('#info').html('');
+                var tmp = "<table class='table table-bordered' width='80%'><tbody>"
+                for (x in obj) {
+                    tmp += '<tr><td width="40%"><span class="font-weight-bold">' + x + '</span></td><td>' + obj[x] + '</td></tr>';
+                }
+                tmp += "</tbody></table>"
+                $('#info').html(tmp);
+
+                // set temperature
+                var temp = $('#' + row_id + ' .temp').html();
+                var temp_b = temp.substring(3, 4);
+                var temp_a = temp.substring(0, 2);
+                $('#temp_a').val(temp_a);
+                $('#temp_b').val(temp_b);
 
 
         oTable = $('#travellers_table').DataTable({
@@ -233,8 +365,9 @@
             }, 500);
 
             $(document).on('click', '#close_traveller_data', function (e) {
+
                 $('#traveller_data').animate({
-                    marginRight: '-50vw'
+                    marginRight: '-50%'
                 }, 500);
             });
         });
@@ -280,29 +413,75 @@
                 alert(textStatus);
             }).always(function () {
 
+                // get checked symptoms
+                var symptoms = [];
+                $.each($("input[name='symptoms[]']:checked"), function () {
+                    symptoms.push($(this).val());
+                });
+                tmp = '[' + symptoms.join(",") + ']';
+                $('#row_' + tid).attr('symptoms', tmp);
+
+
+                var data = $('#form_' + id).serialize()
+                // submit data
+                var jqXHR = $.ajax({
+                    type: "GET",
+                    url: window.location.origin + '/screen/update_symptoms',
+                    data: data,
+                }).done(function (data) {
+                    if (data) {
+                        // success show
+                        // disable fields
+                        //alert(id)
+                        $('#form_' + id + ' input:checkbox').prop('disabled', true);
+                        $('#' + id).val('Edit');
+
+                        $('#row_'+tid).removeClass(function (index, className) {
+                            return (className.match (/(^|\s)action_taken_\S+/g) || []).join(' ');
+                        })
+                        $('#row_' + tid).addClass('action_taken_'+data);
+
+                        //if (data == 2) $('#row_' + tid).addClass('screen');
+                        //if (data == 1) $('#row_' + tid).removeClass('screen');
+                        return
+                    }
+                }).fail(function (jqXHR, textStatus, errorThrown) {
+                    alert(textStatus);
+                }).always(function () {
+
+                });
             });
         });
 
-        $(document).on('click', '#set_temp', function (event) {
+            $(document).on('click', '#set_temp', function (event) {
 
-            var temp = $('#temp_a').val() + '.' + $('#temp_b').val();
-            var id = $('#travellers_id').val();
-            var url = window.location.origin + '/screen/set_temp?id=' + id + '&temp=' + temp;
+                var temp = $('#temp_a').val() + '.' + $('#temp_b').val();
+                var tid = $('#travellers_id').val();
+                var url = window.location.origin + '/screen/set_temp?id=' + tid + '&temp=' + temp;
 
-            var jqXHR = $.ajax({
-                type: "GET",
-                url: url
-            }).done(function (data) {
-                //alert(data)
-                if (data > 0) $('#row_' + id + ' .temp').html(temp);
-                if (data == 2) $('#row_' + id).addClass('screen');
-                if (data == 1) $('#row_' + id).removeClass('screen');
+                var jqXHR = $.ajax({
+                    type: "GET",
+                    url: url
+                }).done(function (data) {
+                    //alert(data)
+                    if (data > 0) $('#row_' + tid + ' .temp').html(temp);
 
-            }).fail(function (jqXHR, textStatus, errorThrown) {
-                alert('Failed to update temp');
-                if (console && console.log) {
-                    console.log("Loading Ajax: " + textStatus + ", " + errorThrown);
-                }
+                    $('#row_'+tid).removeClass(function (index, className) {
+                        return (className.match (/(^|\s)action_taken_\S+/g) || []).join(' ');
+                    })
+                    $('#row_' + tid).addClass('action_taken_'+data);
+
+
+                    //if (data == 2) $('#row_' + id).addClass('screen');
+                    //if (data == 1) $('#row_' + id).removeClass('screen');
+
+                }).fail(function (jqXHR, textStatus, errorThrown) {
+                    alert('Failed to update temp');
+                    if (console && console.log) {
+                        console.log("Loading Ajax: " + textStatus + ", " + errorThrown);
+                    }
+
+                }).always(function () {
 
             }).always(function () {
 

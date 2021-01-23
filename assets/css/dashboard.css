@@ -1,4 +1,28 @@
 /*===========================================
+  General 
+=============================================*/
+.font-weight-bold{
+    font-weight: bold;
+}
+
+.font-weight-600{
+    font-weight: 600;
+}
+
+.text-large{
+    font-size: 18px;
+}
+
+.text-medium{
+    font-size: 16px;
+}
+
+.text-small{
+    font-size: 14px;
+}
+
+
+/*===========================================
   Page Header
 =============================================*/
 .page-header {
@@ -43,7 +67,21 @@
 card
 ===============================================*/
 .card {
-    border-radius: 0 !important;
+    border: 1px solid #cacaca;
+}
+
+.info-box{
+    width: 100%;
+    border: 1px solid transparent;
+}
+
+.info-box a{
+    color: #fff;
+}
+
+.info-box a:hover{
+    color: #fff;
+    text-decoration: none;
 }
 
 /*Info class */
@@ -131,12 +169,8 @@ background colors
 }
 
 /*=============================================
-BTN
+Button
 ============================================*/
-.btn {
-    border-radius: 0 !important;
-}
-
 .btn-primary {
     color: #ffffff;
     background-color: #088c4a;
@@ -156,20 +190,14 @@ BTN
     border-color: #088c4a;
 }
 
-
-/*===============================================
-    Forms
- ===============================================*/
-
-
 /*=============================================
 Icons
 ============================================*/
 i.fa-reg-users {
     content: "";
     background-image: url("../icons/passenger.png");
-    width: 64px;
-    height: 64px;
+    width: 48px;
+    height: 48px;
     display: inline-block;
     background-size: cover;
 }
@@ -177,8 +205,8 @@ i.fa-reg-users {
 i.fa-couple-users {
     content: "";
     background-image: url("../icons/male_female.png");
-    width: 64px;
-    height: 64px;
+    width: 48px;
+    height: 48px;
     display: inline-block;
     background-size: cover;
 }
@@ -186,8 +214,8 @@ i.fa-couple-users {
 i.fa-active-users {
     content: "";
     background-image: url("../icons/active_users.png");
-    width: 64px;
-    height: 64px;
+    width: 48px;
+    height: 48px;
     display: inline-block;
     background-size: cover;
 }
@@ -195,8 +223,8 @@ i.fa-active-users {
 i.fa-above-temp {
     content: "";
     background-image: url("../icons/fever.png");
-    width: 64px;
-    height: 64px;
+    width: 48px;
+    height: 48px;
     display: inline-block;
     background-size: cover;
 }
@@ -204,70 +232,9 @@ i.fa-above-temp {
 i.fa-normal-temp {
     content: "";
     background-image: url("../icons/normal_users.png");
-    width: 64px;
-    height: 64px;
+    width: 48px;
+    height: 48px;
     display: inline-block;
     background-size: cover;
 }
 
-/*form style*/
-.pure-form {
-    width: 100%;
-    margin: 10px 0 10px 0;
-    padding: 10px;
-    background: #ffffff;
-    border-radius: 0;
-    border: 1px solid #eeeeee;
-}
-
-.search-form {
-    width: 100%;
-    margin-bottom: 10px;
-    padding-top: 10px;
-    padding-left: 10px;
-    background: #F5F5F5;
-    border: 1px solid #eeeeee;
-}
-
-.form-group {
-    border-radius: 0 !important;
-}
-
-.form-group label {
-    font-weight: 700;
-    font-size: 13px;
-}
-
-.form-group span.red {
-    color: #CC0000;
-}
-
-.form-group input[type=text], input[type=email], input[type=password], textarea {
-    width: 100%;
-    border: 1px solid #cacaca;
-    border-radius: 0 !important;
-    line-height: 1;
-    font-size: 13px;
-}
-
-.form-group input[type=text]:focus, input[type=email]:focus, input[type=password]:focus, textarea:focus {
-    border-color: #c0c0c0 !important;
-    -webkit-box-shadow: none !important;
-    -moz-box-shadow: none !important;
-    box-shadow: none !important;
-}
-
-.form-group select {
-    width: 100%;
-    border: 1px solid #cacaca;
-    border-radius: 0 !important;
-    line-height: 1;
-    background: #ffffff;
-    font-size: 13px;
-}
-
-.form-group select:focus {
-    border-color: #c0c0c0 !important;
-    border-radius: 0 !important;
-    background: #ffffff;
-}

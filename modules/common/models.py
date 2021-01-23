@@ -6,6 +6,7 @@ class Module(models.Model):
     title = models.CharField(max_length=100)
     icon = models.CharField(max_length=100)
     link = models.CharField(max_length=255)
+    sort_order = models.IntegerField(null=True)
     # perms = models.TextField(default='')
 
     class Meta:

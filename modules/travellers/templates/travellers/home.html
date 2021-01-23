@@ -4,78 +4,129 @@
 
 {% block title %} {% trans "Traveller's Health Declaration" %} {% endblock %}
 {% block content %}
-    <!-- Page content -->
-    <div class="page-content bg-white">
-        <!-- Main content -->
-        <div class="content-wrapper">
-            <!-- Page header -->
-            {% include 'page-header.html' %}
-            <!-- /page header -->
+<!-- Page content -->
+<div class="page-content bg-white">
+    <!-- Main content -->
+    <div class="content-wrapper">
+        <!-- Page header -->
+        {% include 'page-header.html' %}
+        <!-- /page header -->
 
-            <!-- Content area -->
-            <div class="content">
-                <div class="text-center mt-2">
-                    <div class="dropdown">
-                        <button style="width: 200px;" class="btn btn-outline-primary dropdown-toggle" type="button"
-                                id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
-                                aria-expanded="false">
-                            {% trans "Change Language" %}
-                        </button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="{% url 'travellers:change_language_en' %}">
-                                <img width="32" src="{% static 'img/tz_flag.png' %}" alt=""/> ENG
-                            </a>
-                            <a class="dropdown-item" href="{% url 'travellers:change_language_sw' %}">
-                                <img width="32"
-                                                                                                           src="{% static 'img/tz_flag.png' %}"
-                                                                                                           alt=""/> SWA
-                            </a>
-                        </div>
+        <!-- Content area -->
+        <div class="content">
+            <div class="text-center mt-2">
+                <div class="dropdown">
+                    <button style="width: 200px;" class="btn btn-outline-primary dropdown-toggle" type="button"
+                        id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        {% trans "Change Language" %}
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="/change_language/en-us"><img width="32"
+                                src="{% static 'img/tz_flag.png' %}" alt="" /> ENG
+                        </a>
+                        <a class="dropdown-item" href="/change_language/sw"><img width="32"
+                                src="{% static 'img/tz_flag.png' %}" alt="" /> SWA
+                        </a>
                     </div>
-                    <!--./dropdown -->
                 </div>
-                <!--./text-center-->
-
-                <!-- Basic card -->
-                <div class="card mt-4">
-                    <div class="card-header">
-                        <h5 class="card-title text-uppercase text-center">{% trans "Traveller's Health Declaration" %}</h5>
-                    </div>
-                    <!--./card-header -->
-
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="text-intro">
-                                    <p class="text-justify">
-                                        {% trans "An online web based surveillance to gather traveller information pertaining to the purpose of improving public health. This is in accordance with public health act 2009, thus false information is an offence" %}
-                                    </p>
-
-                                    <p>{% trans "To fill either arrival or departure details, Click link below." %}</p>
-
-                                </div>
-                                <!--./text-intro-->
-
-                                <div class="text-center">
-                                    <a style="min-width: 120px;" href="{% url 'travellers:arrival' %}"
-                                       class="btn btn-secondary btn-sm p-2 text-uppercase">{% trans "Arrival" %}</a>
-                                    &nbsp;&nbsp;
-                                    <!--<a style="min-width: 120px;" href="#"
-                                       class="btn btn-primary btn-sm p-2 text-uppercase">{% trans "Departure" %}</a>-->
-                                </div>
-                                <!--./text-center-->
-                            </div>
-                            <!--./col-lg-12-->
-                        </div>
-                        <!--./row -->
-                    </div>
-                    <!--./card-body -->
-                </div>
-                <!-- /basic card -->
+                <!--./dropdown -->
             </div>
-            <!-- /content area -->
+            <!--./text-center-->
+
+            <!-- Basic card -->
+            <div class="card mt-4 mb-4">
+                <div class="card-header">
+                    <h5 class="card-title text-uppercase text-center">{% trans "Traveller's Health Declaration" %}</h5>
+                </div>
+                <!--./card-header -->
+
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="text-intro">
+                                <p class="text-justify">
+                                    {% trans "An online web based surveillance to gather traveller information pertaining to the purpose of improving public health. This is in accordance with public health act 2009, thus false information is an offence" %}
+                                </p>
+
+                                <p>{% trans "To fill either arrival or departure details, Fill details below." %}</p>
+                            </div>
+                            <!--./text-intro-->
+                        </div>
+                        <!--./col-lg-12-->
+                    </div>
+                    <!--./row -->
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <form action="" method="post" role="form" autocomplete="off">
+                                {% csrf_token %}
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>{% trans 'Travel Type' %} <span class="red">*</span></label>
+                                            <select class="form-control" name="travel_type">
+                                                <option value="">{% trans '-- Select --' %}</option>
+                                                <option value="arrival">{% trans 'Arrival' %}</option>
+                                                <option value="#">{% trans 'Departure' %}</option>
+                                            </select>
+                                        </div>
+                                        <!--./form-group-->
+                                    </div>
+                                    <!--./col-md-12-->
+                                </div>
+                                <!--./row-->
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>{% trans 'Passport Number' %} <span class="red">*</span></label>
+                                            <input type="text" name="id_number" class="form-control" id="id_number"
+                                                placeholder="{% trans 'Write passport number...' %}" maxlength="50">
+                                        </div>
+                                        <!--./form-group-->
+                                    </div>
+                                    <!--./col-md-12-->
+                                </div>
+                                <!--./row-->
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>{% trans 'Arrival Date' %} <span class="red">*</span></label>
+                                            <input type="date" name="arrival_date" min="{{ today }}"
+                                                class="form-control dateinput form-control">
+                                        </div>
+                                        <!--./form-group-->
+                                    </div>
+                                    <!--./col-md-12-->
+                                </div>
+                                <!--./row-->
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <input type="submit" name="save" class="btn btn-secondary btn-xs"
+                                                value="{% trans 'Continue' %}" />
+                                        </div>
+                                        <!--./form-group-->
+                                    </div>
+                                    <!--./col-md-12-->
+                                </div>
+                                <!--./row-->
+                            </form>
+                        </div>
+                        <!--./col-md-12-->
+                    </div>
+                    <!--./row -->
+                </div>
+                <!--./card-body -->
+            </div>
+            <!-- /basic card -->
         </div>
-        <!-- /main content -->
+        <!-- /content area -->
     </div>
-    <!-- /page content -->
+    <!-- /main content -->
+</div>
+<!-- /page content -->
 {% endblock %}

@@ -40,6 +40,7 @@ TRANSPORT_MODE = (
     ('vehicle', 'Vehicle'),
     ('vessel', 'Vessel'),
     ('train', 'Train'),
+    ('by-donkey', 'By Donkey'),
     ('by-foot', 'By Foot'),
 )
 TRANSPORT_CATEGORY = (

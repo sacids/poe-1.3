@@ -164,7 +164,7 @@ def arrival(request):
             traveller.other_purpose = form.cleaned_data['other_purpose']
 
             if request.POST.get('duration_of_stay') != '':
-                traveller.duration_of_stay = request.POST.get('duration_of_stay')
+                traveller.duration_of_stay = form.cleaned_data['duration_of_stay']
 
             traveller.employment = form.cleaned_data['employment']
             traveller.other_employment = form.cleaned_data['other_employment']

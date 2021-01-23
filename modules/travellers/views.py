@@ -525,9 +525,15 @@ def auto_point_of_entries(request):
     if request.method == 'GET':
         mode_of_transport = request.GET.get('mode_of_transport')
         # check for mode of transport
-        if (mode_of_transport == 'truck'):
+        if mode_of_transport == 'truck':
             mode_of_transport = 'vehicle'
-        elif (mode_of_transport == 'bus'):
+        elif mode_of_transport == 'bus':
+            mode_of_transport = 'vehicle'
+        elif mode_of_transport == 'motocycle':
+            mode_of_transport = 'vehicle'
+        elif mode_of_transport == 'bicycle':
+            mode_of_transport = 'vehicle'
+        elif mode_of_transport == 'by-foot':
             mode_of_transport = 'vehicle'
 
         point_of_entries = PointOfEntry.objects.filter(

@@ -164,8 +164,7 @@ def arrival(request):
             traveller.other_purpose = form.cleaned_data['other_purpose']
 
             if request.POST.get('duration_of_stay') != '':
-                traveller.duration_of_stay = request.POST.get(
-                    'duration_of_stay')
+                traveller.duration_of_stay = request.POST.get('duration_of_stay')
 
             traveller.employment = form.cleaned_data['employment']
             traveller.other_employment = form.cleaned_data['other_employment']
@@ -174,7 +173,7 @@ def arrival(request):
             traveller.region = form.cleaned_data['region']
 
             if request.POST.get('district') != '':
-                traveller.district = request.POST.get('district')
+                traveller.district = form.cleaned_data['district']
 
             traveller.street_or_ward = form.cleaned_data['street_or_ward']
             traveller.phone = form.cleaned_data['phone']
